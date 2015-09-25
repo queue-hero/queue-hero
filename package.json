@@ -1,0 +1,39 @@
+{
+  "name": "queue-hero",
+  "version": "1.0.0",
+  "description": "Find your hero",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp clean && gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/queue-hero/queue-hero.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/queue-hero/queue-hero/issues"
+  },
+  "homepage": "https://github.com/queue-hero/queue-hero",
+  "dependencies": {
+    "angular": "^1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "async": "^1.4.2",
+    "body-parser": "^1.5.2",
+    "express": "^4.13.3",
+    "formidable": "^1.0.17",
+    "gulp": "^3.8.5",
+    "gulp-if": "^1.2.5",
+    "gulp-jshint": "^1.11.2",
+    "gulp-karma": "0.0.4",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-shell": "^0.2.7",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-filesize": "0.0.6",
+    "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6"
+  }
+}
