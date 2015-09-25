@@ -1,16 +1,16 @@
-var gulp = require('gulp'),
-  nodemon = require('gulp-nodemon'),
-  karma = require('gulp-karma'),
-  bs = require('browser-sync'),
-  reload = bs.reload,
-  when = require('gulp-if'),
-  shell = require('gulp-shell'),
-  concat = require('gulp-concat'),
-  rename = require('gulp-rename'),
-  uglify = require('gulp-uglify'),
-  clean = require('gulp-clean'),
-  gutil = require('gulp-util'),
-  filesize = require('gulp-filesize');
+var gulp = require('gulp');
+var nodemon = require('gulp-nodemon');
+var karma = require('gulp-karma');
+var bs = require('browser-sync');
+var reload = bs.reload;
+var when = require('gulp-if');
+var shell = require('gulp-shell');
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify');
+var clean = require('gulp-clean');
+var gutil = require('gulp-util');
+var filesize = require('gulp-filesize');
 
 var jsScripts = [
   'client/bower_components/angular/angular.min.js',
@@ -45,31 +45,40 @@ gulp.task('karma', shell.task([
 gulp.task('convert-js', function() {
   //specifc order
   return gulp.src(jsScripts)
-    .pipe(concat('queueHero.min.js', {newLine: '\n'}))
+    .pipe(concat('queueHero.min.js', {
+      newLine: '\n'
+    }))
     .pipe(uglify())
     .pipe(gulp.dest('build/'))
     .pipe(filesize())
     .on('error', gutil.log);
 });
 
-gulp.task('copy-css', function(){
-    gulp.src(paths.styles, { base: './'})
-     .pipe(gulp.dest('./build/styles'));
+gulp.task('copy-css', function() {
+  gulp.src(paths.styles, {
+    base: './'
+  })
+    .pipe(gulp.dest('./build/styles'));
 });
 
-gulp.task('copy-html', function(){
-    gulp.src(paths.html, { base: './client/' })
-     .pipe(gulp.dest('./build/'));
+gulp.task('copy-html', function() {
+  gulp.src(paths.html, {
+    base: './client/'
+  })
+    .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('move-index', function(){
-    gulp.src('client/index_gulp.html')
-     .pipe(rename('index.html'))
-     .pipe(gulp.dest('./build/'));
+gulp.task('move-index', function() {
+  gulp.src('client/index_gulp.html')
+    .pipe(rename('index.html'))
+    .pipe(gulp.dest('./build/'));
 });
 
 gulp.task('serve', function() {
-  nodemon({script: 'index.js', ignore: 'node_modules/**/*.js'});
+  nodemon({
+    script: 'index.js',
+    ignore: 'node_modules/**/*.js'
+  });
 });
 
 gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'move-index']);

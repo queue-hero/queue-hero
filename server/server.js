@@ -7,7 +7,7 @@ app.use(express.static(__dirname + './../client'));
 
 
 app.listen(port, function() {
-  console.log('Listening on port ', port);
+  console.log('Listening on port', port);
 });
 
 module.exports = app;
