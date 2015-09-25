@@ -15,17 +15,17 @@
 
     $stateProvider
       .state('home', {
-        templateUrl: 'src/home/homeView.html',
+        templateUrl: 'src/home/home.html',
         url:'/',
         controller: 'HomeCtrl'
       })
       .state('signup', {
-        templateUrl: 'src/signup/signupView.html',
+        templateUrl: 'src/signup/signup.html',
         url:'/signup',
         controller: 'SignupCtrl'
       })
       .state('profile', {
-        templateUrl: 'src/profile/profileView.html',
+        templateUrl: 'src/profile/profile.html',
         url:'/profile/:username',
         controller: 'ProfileCtrl'
       });
