@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', [ function(){
+  .controller('RequesterTaskCtrl', [function() {
     var vm = this;
 
 

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app')
-  .factory('profileFactory', [ function() {
+  .factory('profileFactory', [function() {
     var profile = {};
 
     return {
@@ -10,11 +10,11 @@
       setProfile: setProfile
     };
 
-    function getProfile(){
+    function getProfile() {
       return order;
     }
 
-    function setProfile(updatedProfile){
+    function setProfile(updatedProfile) {
       profile = updatedProfile;
     }
 

@@ -6,7 +6,7 @@
     var serverUrl = 'http://127.0.0.1:3000';
     var ajaxObj = {};
 
-    ajaxObj.getProfileData = function(username){
+    ajaxObj.getProfileData = function(username) {
       return $http({
         method: 'GET',
         url: serverUrl + '/choice',
