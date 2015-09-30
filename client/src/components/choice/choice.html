@@ -1,4 +1,7 @@
 <div id="choice" ng-controller="ChoiceCtrl as ctrl">
   <nav-bar></nav-bar>
-  choice view
+  <div class="container choices">
+    <button class="hero" ng-click="ctrl.hero()">I am a Queue Hero!</button>
+    <button class="requester" ng-click="ctrl.requester()">I need a Queue Hero!</button>
+  </div>
 </div>

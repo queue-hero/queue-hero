@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.choice', [])
-  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', function(ajaxFactory, profileFactory) {
+  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', function(ajaxFactory, profileFactory, $state) {
     var vm = this;
 
     //**toDo - fix hardcoded "username" to take username from token
@@ -23,6 +23,13 @@
 
       });
 
+      vm.hero = function(){
+        $state.go('hero_location');
+      };
+
+      vm.requester = function(){
+        $state.go('requester_task');
+      };
 
   }]);
 
