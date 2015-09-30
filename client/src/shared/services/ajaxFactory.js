@@ -10,6 +10,7 @@
       return $http({
         method: 'GET',
         url: serverUrl + '/choice',
+        //params can be retrieved from server using req.query.username
         params: {username: username}
       });
     };
