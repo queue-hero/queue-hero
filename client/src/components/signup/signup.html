@@ -1,4 +1,27 @@
 <div id="signup" ng-controller="SignupCtrl as ctrl">
   <nav-bar></nav-bar>
-  signup view
+  Signup view
+  <form novalidate class="simple-form">
+    First Name: <input type="text" ng-model="ctrl.user.firstName" /><br />
+    Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br />
+    Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br />
+    Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
+    CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>
+    Expiration Date: <input type="text" ng-model="ctrl.user.expDate" /><br/>
+    Billing Address: <input type="text" ng-model="ctrl.user.billingAddress" /><br/>
+    City: <input type="text" ng-model="ctrl.user.city" /><br/>
+    <select name="URL" onchange="">
+      <option selected="selected" value="">Select State</option>
+      <option value="">Random value</option>
+    </select>
+    <select name="URL" onchange="">
+      <option selected="" value="">Select Country</option>
+      <option selected="selected" value="">USA</option>
+    </select><br/>
+    <input type="submit" ng-click="ctrl.update()" value="Save" />
+  </form>
+  <pre>user = {{user | json}}</pre>
+  <pre>master = {{master | json}}</pre>
 </div>
+    <!-- <input type="button" ng-click="reset()" value="Reset" /> -->
+
