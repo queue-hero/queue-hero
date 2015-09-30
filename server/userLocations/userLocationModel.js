@@ -15,7 +15,7 @@ var UserLocationSchema = new mongoose.Schema({
   }, 
   location: {
     type: "Point",
-    coordinates: [ <longitude>, <latitude> ], 
+    coordinates: [<longitude>, <latitude>], 
     required: true, 
   }, 
 
