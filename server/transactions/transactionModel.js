@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var TransactionsSchema = new mongoose.Schema({
+var TransactionSchema = new mongoose.Schema({
   queueHero: {
     type: String, 
     required: true
