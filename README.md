@@ -62,6 +62,4 @@ The technologies we are using to implement Queue Hero are:
 - Twilio API
 - Facebook API
 
-The basic architecture of the app is as follows:
-
 
