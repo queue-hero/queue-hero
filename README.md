@@ -6,6 +6,7 @@ applied to waiting in line.
 
 This is our app flow:
 
+![Alt text](/screenshots/appflow.png?raw=true "App Flow")
 
 Here are mockups for the various different views referenced in the above app flow:
 
