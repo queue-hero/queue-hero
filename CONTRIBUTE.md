@@ -17,7 +17,7 @@
 
     Keep the names short but descriptive. No need to include your name.
 
-5. **Hack away** (Opinions Wanted)
+5. **Hack away**
     ```sh
     # made changes to code
     git status
@@ -27,14 +27,51 @@
 
     Commit often. Break down your task into separate mini-tasks and commit each time.
 
-    Keep commit messages short. Convention is below 50 characters, if you need more do it on a separate line.
+    [Use the git commit style used by Karma team](https://karma-runner.github.io/0.13/dev/git-commit-msg.html)
 
-    ***Commit Format***
-    `(part of app you worked on) what you did`
+    ```sh
+    <type>(<scope>): <subject>
+
+    <body>
+    ```
+
+    **Message subject**
+
+    First line cannot be longer than 70 characters, second line is always blank and other lines should be wrapped at 80 characters. 
+
+    The *type* and *scope* should always be lowercase as shown below.
+
+    ***Allowed <type> values:***
+
+    **feat** (new feature for the user, not a new feature for build script)
+    **fix** (bug fix for the user, not a fix to a build script)
+    **docs** (changes to the documentation)
+    **style** (formatting, missing semi colons, etc; no production code change)
+    **refactor** (refactoring production code, eg. renaming a variable)
+    **test** (adding missing tests, refactoring tests; no production code change)
+    **chore** (updating grunt tasks etc; no production code change)
+
+    ***Example <scope> values:***
+
+    init
+    runner
+    watcher
+    config
+    web-server
+    proxy
+    etc.
+
+    The *scope* can be empty (eg. if the change is a global or difficult to assign to a single component), in which case the parentheses are omitted. In smaller projects such as Karma plugins, the <scope> is empty.
+
+    **Message body**
+
+    Use the imperative, present tense: "change" not "changed" nor “"changes"
+
+    Include motivation for the change and contrasts with previous behavior
 
     ***Commit message example***
     ```sh
-    (signup) button disabled if inputs are invalid
+    fix(signup): change button state if inputs are invalid
 
     - validation for e-mail, phonenumber
     - username, passwords and email are set as required
