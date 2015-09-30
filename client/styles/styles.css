@@ -12,3 +12,18 @@ button.requester {
   position: relative;
   top: 150px;
 }
+
+.home {
+  padding-top: 55px;
+  padding-left: 200px;
+}
+
+button.signp {
+  position: relative;
+  top: 100px;
+}
+
+button.login {
+  position: relative;
+  top: 50px;
+}

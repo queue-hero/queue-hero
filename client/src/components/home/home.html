@@ -1,4 +1,11 @@
 <div id="home" ng-controller="HomeCtrl as ctrl">
   <nav-bar></nav-bar>
-  home view
+  <div class="title">
+    Queue Hero
+  </div>
+
+  <div class="containter home">
+  <button class="signup" ng-click="ctrl.signUp()">Sign up with Facebook</button>
+  <button class="login" ng-click="ctrl.login()">Log in with Facebook</button>
+  </div>
 </div>
