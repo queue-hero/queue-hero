@@ -6,9 +6,21 @@ applied to waiting in line.
 
 This is our app flow:
 
+
 Here are mockups for the various different views referenced in the above app flow:
 
-This is our tech stack:
+The technologies we are using to implement Queue Hero are:
+- Mongodb / Mongoose
+- Express
+- Angular
+- Node
+- Ionic
+- SASS
+- Foursquare API
+- Mapbox API
+- Stripe API
+- Twilio API
+- Facebook API
 
 The basic architecture of the app is as follows:
 
