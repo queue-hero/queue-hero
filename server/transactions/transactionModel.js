@@ -23,7 +23,7 @@ var TransactionSchema = new mongoose.Schema({
   },    
   meetingLocation: { 
     type: "Point",
-    coordinates: [ <longitude>, <latitude> ], 
+    coordinates: [<longitude>, <latitude>], 
     required: true, 
   }, 
   vendor: {
