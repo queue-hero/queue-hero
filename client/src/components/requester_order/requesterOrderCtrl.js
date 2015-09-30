@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_order', [])
-  .controller('RequesterOrderCtrl', [ function(){
+  .controller('RequesterOrderCtrl', [function() {
     var vm = this;
 
 

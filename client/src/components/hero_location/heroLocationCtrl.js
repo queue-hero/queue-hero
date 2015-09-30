@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('heroLocationCtrl', [ function(){
+  .controller('heroLocationCtrl', [function() {
     var vm = this;
 
 
