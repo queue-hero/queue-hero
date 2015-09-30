@@ -3,13 +3,22 @@
 
   angular.module('app')
   .factory('ajaxFactory', ['$http', function($http) {
+    var serverUrl = 'http://127.0.0.1:3000';
+    var ajaxObj = {};
 
-    var factory = {};
+    ajaxObj.getProfileData = function(username) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/choice',
+        //params can be retrieved from server using req.query.username
+        params: {username: username}
+      });
+    };
 
-    factory.singUp = function (user) {
+    ajaxObj.singUp = function (user) {
       var req = {
        method: 'POST',
-       url: 'http://',
+       url: serverUrl,
        data: { 'user': user }
       };
       $http(req).then(
@@ -21,7 +30,8 @@
         });
     };
 
-    return factory;
+    return ajaxObj;
+
   }]);
 
 })();
