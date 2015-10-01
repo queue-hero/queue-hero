@@ -11,7 +11,7 @@
     };
 
     function getProfile() {
-      return order;
+      return profile;
     }
 
     function setProfile(updatedProfile) {
