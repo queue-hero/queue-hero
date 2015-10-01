@@ -1,7 +1,7 @@
 var authCtrl = require('./authCtrl.js');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var facebook_client_keys = require('./facebook_client_keys.js');
+var api_keys = require('./api_keys.js').facebook;
 
 passport.serializeUser(function(user, done){
   done(null, user);
@@ -12,8 +12,8 @@ passport.deserializeUser(function(obj, done){
 });
 
 passport.use(new FacebookStrategy({
-    clientID: facebook_client_keys.clientID,
-    clientSecret: facebook_client_keys.clientSecret,
+    clientID: api_keys.clientID,
+    clientSecret: api_keys.clientSecret,
     callbackURL: "http://localhost:3000/auth/facebook/callback",
     enableProof: false
   },
