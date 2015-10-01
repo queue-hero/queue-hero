@@ -2,12 +2,15 @@
   requester task location partial view:
   {{ ctrl.userProfile.location | Json }}
 
-  <h1> Pick Location </h1>
+  <h1> Pick Shop to make a request </h1>
   <div id="map">
-  this is a map
+    this is a map
+    <div id='shop' ng-repeat= 'shop in ctrl.activeShops' ng-click= 'ctrl.createMission(shop)' >
+      {{ shop | Json}}
+    </div>
   </div>
 </div>
-
+<!--Post MVP note: add a way to change the default area-->
 <!--This styling portion below will not stay here - it's just here for prototyping purposes-->
 <style>
   #map {

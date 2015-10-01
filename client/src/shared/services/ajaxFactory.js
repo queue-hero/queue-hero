@@ -41,6 +41,15 @@
       });
     };
 
+    ajaxObj.getActiveShops = function (area) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/requester/task',
+        //user data can be retrieved from server using req.data.area
+        data: {area: area}
+      });
+    };
+
 
 
     return ajaxObj;
