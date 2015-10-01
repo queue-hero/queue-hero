@@ -2,12 +2,14 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'ajaxFactory.js', function(profileFactory, ajaxFactory) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', $state, function(profileFactory, ajaxFactory, $state) {
 
+    var current = 'location';
     var vm = this;
     //assumes that the object has a location property
     vm.userProfile = profileFactory.getProfile();
     var defaultArea = userProfile.location;
+
 
     vm.loadActiveShops = function (){
 
@@ -26,8 +28,8 @@
     };
 
     vm.createMission = function (shop){
-      vm.missionLocation = shop;
-      state.go('');
+      requesterFactory.setOrderProperty('shop',shop);
+      current = 'item';
     };
 
     vm.loadActiveShops();
