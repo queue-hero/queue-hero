@@ -1,11 +1,7 @@
 var bodyParser = require('body-parser');
 
-module.exports = function (app, express) {
+module.exports = function(app, express) {
   var userRouter = express.Router();
-  var locationRouter = express.Router();
-  var transactionRouter = express.Router();
-  var checkinRouter = express.Router();
-  var arbitrationRouter = express.Router();
   var heroeRouter = express.Router();
   var requesterRouter = express.Router();
 
@@ -16,11 +12,21 @@ module.exports = function (app, express) {
   // Render client/index.html upon receiving request
   app.use(express.static(__dirname + './../../client'));
 
-  // need authRouter for facebook login
-  //app.use('/signup', userRouter);
+  // server expects url of 'auth/facebook' for facebook signin
+  // authRouter to have routes for all authentications
+  // i.e. facebook, github, or our own
+  app.use('/auth', authRouter);
+
+  // signup, choice, profile uses same router
+  // signup make POST request
+  // choice & profile both make GET request for user data
+  app.use('/signup', userRouter);
   app.use('/choice', userRouter);
   app.use('/profile', userRouter);
+
+  // all routes for hero set in heroRouter
   app.use('/hero', heroRouter);
+  // all routes for requester set in requesterRouter
   app.use('/requester', requesterRouter);
 
   require('../users/userRouter.js')(userRouter);
