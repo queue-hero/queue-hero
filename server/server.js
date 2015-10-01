@@ -1,10 +1,12 @@
 var http = require('http');
 var express = require('express');
+var middleware = require('./config/middleware.js');
 var app = express();
 var port = 3000;
 
 app.use(express.static(__dirname + './../client'));
 
+middleware(app, express);
 
 app.listen(port, function() {
   console.log('Listening on port', port);
