@@ -1,3 +1,6 @@
+<!-- all data from the form will be saved in the user object in the controller -->
+
+
 <div id="signup" ng-controller="SignupCtrl as ctrl">
   <nav-bar></nav-bar>
   Signup view
@@ -20,8 +23,7 @@
     </select><br/>
     <input type="submit" ng-click="ctrl.update()" value="Save" />
   </form>
-  <pre>user = {{user | json}}</pre>
-  <pre>master = {{master | json}}</pre>
+  <pre>user = {{ctrl.user | json}}</pre>
 </div>
     <!-- <input type="button" ng-click="reset()" value="Reset" /> -->
 

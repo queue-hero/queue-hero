@@ -15,19 +15,13 @@
       });
     };
 
-    ajaxObj.singUp = function (user) {
-      var req = {
-       method: 'POST',
-       url: serverUrl,
-       data: { 'user': user }
-      };
-      $http(req).then(
-        function successCallback(response) {
-          console.log('signUp:', 'success from the server');
-        },
-        function errorCallback(response) {
-          console.log('signUp:','ERROR from the server');
-        });
+    ajaxObj.postSignUp = function (user) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/signUp',
+        //user data can be retrieved from server using req.data.user
+        data: { 'user': user }
+      });
     };
 
     return ajaxObj;
@@ -35,3 +29,4 @@
   }]);
 
 })();
+
