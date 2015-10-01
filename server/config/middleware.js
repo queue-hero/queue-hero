@@ -9,9 +9,6 @@ module.exports = function(app, express) {
   app.use(bodyParser.urlencoded({extended: true}));
   app.use(bodyParser.json());
 
-  // Render client/index.html upon receiving request
-  app.use(express.static(__dirname + './../../client'));
-
   // server expects url of 'auth/facebook' for facebook signin
   // authRouter to have routes for all authentications
   // i.e. facebook, github, or our own
@@ -26,6 +23,7 @@ module.exports = function(app, express) {
 
   // all routes for hero set in heroRouter
   app.use('/hero', heroRouter);
+
   // all routes for requester set in requesterRouter
   app.use('/requester', requesterRouter);
 

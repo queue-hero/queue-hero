@@ -1,8 +1,8 @@
 var userCtrl = require('./userCtrl.js');
 
 module.exports = function(app) {
-  // Still need to add specific method to call for each route
-  // app.get('', userrCtrl.doThis())
+  // Need to add specific method to call for each route
+  // ex. app.get('', userCtrl.doThis())
 
   // req: username from token
   // res: userdata
