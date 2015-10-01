@@ -20,7 +20,7 @@
         method: 'POST',
         url: serverUrl + '/signUp',
         //user data can be retrieved from server using req.data.user
-        data: { 'user': user }
+        data: {'user': user}
       });
     };
 
