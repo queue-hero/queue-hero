@@ -3,12 +3,12 @@
   padding-left: 200px;
 }
 
-button.hero {
+button .hero {
   position: relative;
   top: 100px;
 }
 
-button.requester {
+button .requester {
   position: relative;
   top: 150px;
 }
@@ -18,12 +18,12 @@ button.requester {
   padding-left: 200px;
 }
 
-button.signp {
+button .signup {
   position: relative;
   top: 100px;
 }
 
-button.login {
+button .login {
   position: relative;
-  top: 50px;
+  top: 150px;
 }
