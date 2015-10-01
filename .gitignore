@@ -1,3 +1,8 @@
+### node etc ###
+
+# File stores
+.DS_Store
+
 # Logs
 logs
 *.log
@@ -24,4 +29,11 @@ build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git
-node_modules
+node_modules/
+client/bower_components/
+
+# Pictures
+server/assets/
+
+# Build files
+build/
