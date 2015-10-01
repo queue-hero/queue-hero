@@ -8,6 +8,8 @@
 
     //**place holders, this information should come from server
     //once server routes our enabled, this will provide order data
+    //**this information should actually be in the hero factory, 
+    //not gotten from the server (order data)
     vm.order = heroFactory.getOrder();
 
     vm.time = 20;
