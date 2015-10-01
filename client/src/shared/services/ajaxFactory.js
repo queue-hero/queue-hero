@@ -23,6 +23,15 @@
       });
     };
 
+
+    ajaxObj.isOrderComplete = function(transactionId){
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/order/details',
+        params: {id: transactionId}
+      });
+    };
+
     ajaxObj.postSignUp = function (user) {
       return $http({
         method: 'POST',
@@ -33,9 +42,9 @@
     };
 
 
+
     return ajaxObj;
 
   }]);
 
 })();
-
