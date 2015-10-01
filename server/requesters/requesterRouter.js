@@ -1,6 +1,6 @@
 var requesterCtrl = require('./requesterCtrl.js');
 
-module.exports = function (app) {
+module.exports = function(app) {
 
   // Still need to add specific method to call for each route
   // app.get('/location', requesterCtrl.doThis())

@@ -1,6 +1,6 @@
 var heroCtrl = require('./heroCtrl.js');
 
-module.exports = function (app) {
+module.exports = function(app) {
   // Still need to add specific method to call for each route
   // app.get('/location', heroCtrl.doThis())
 
