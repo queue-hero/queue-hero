@@ -1,7 +1,6 @@
 var requesterCtrl = require('./requesterCtrl.js');
 
 module.exports = function(app) {
-
   // Still need to add specific method to call for each route
   // app.get('/location', requesterCtrl.doThis())
 
@@ -12,7 +11,11 @@ module.exports = function(app) {
   // res: 201 or error
   app.post('/task');
 
+  // req: Polling. setInterval poll to server until match found
+  // res: Polling. return false until match found
+  app.post('/order/details');
+
   // req: order received + rating, queueheroId and requesterId
   // res: 201 or error
-  app.post('/order');
+  app.post('/order/complete');
 };

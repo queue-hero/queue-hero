@@ -18,12 +18,11 @@ module.exports = function(app) {
   // res: 201 or error
   app.post('/task');
 
-  // req: Polling
-  // res: Polling
-  app.post('/order');
+  // req: Polling. setInterval poll server to check if order complete
+  // res: Polling. return false until order complete
+  app.post('/order/details');
 
-  // Need to resolve how to direct two different POSTS from same url
-  // req: order received + rating, queuehero id and requester id
+  // req: rating, queueheroId, requesterId
   // res: 201 or error
-  app.post('/order');
+  app.post('/order/complete');
 };
