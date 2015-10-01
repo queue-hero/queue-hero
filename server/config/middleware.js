@@ -2,7 +2,7 @@ var bodyParser = require('body-parser');
 
 module.exports = function(app, express) {
   var userRouter = express.Router();
-  var heroeRouter = express.Router();
+  var heroRouter = express.Router();
   var requesterRouter = express.Router();
 
   // Middleware to parse request body
