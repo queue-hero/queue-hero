@@ -1,3 +1,28 @@
 <div id="requester-task-time_price">
-  requester task time_price partial view
+  <h1> Pick Time and Price </h1>
+  Location: <span> </span> <br/>
+  Item: <span> </span>
+  <form>
+    Time
+    <select name="hours">
+      <option value="3">3</option>
+      <option value="6">6</option>
+      <option value="9">9</option>
+      <option value="12">12</option>
+    </select>
+    <select name="minutes">
+      <option value="15">15</option>
+      <option value="30">30</option>
+      <option value="45">45</option>
+      <option value="60">60</option>
+    </select>
+    <select name="am/pm">
+      <option value="p.m.">p.m.</option>
+      <option value="a.m.">a.m.</option>
+    </select>
+    <br/>
+    Price
+    $<input type="text" placeholder="7"> <br/>
+    <button type="submit"> Confirm time and price </button>
+  </form>
 </div>

@@ -18,6 +18,7 @@
     "angular-ui-router": "~0.2.15",
     "angular-ui-router-tabs": "~1.5.1",
     "bootstrap": "~3.3.5",
-    "ng-file-upload": "~7.2.1"
+    "ng-file-upload": "~7.2.1",
+    "normalize-css": "normalize.css#~3.0.3"
   }
 }

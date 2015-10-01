@@ -15,12 +15,18 @@
       });
     };
 
-
-
-
+    ajaxObj.postSignUp = function (user) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/signUp',
+        //user data can be retrieved from server using req.data.user
+        data: {'user': user}
+      });
+    };
 
     return ajaxObj;
 
   }]);
 
 })();
+
