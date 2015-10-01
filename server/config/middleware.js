@@ -1,6 +1,7 @@
 var bodyParser = require('body-parser');
 
 module.exports = function(app, express) {
+  var authRouter = express.Router();
   var userRouter = express.Router();
   var heroRouter = express.Router();
   var requesterRouter = express.Router();
@@ -27,6 +28,7 @@ module.exports = function(app, express) {
   // all routes for requester set in requesterRouter
   app.use('/requester', requesterRouter);
 
+  require('../heroes/heroRouter.js')(heroRouter);
   require('../users/userRouter.js')(userRouter);
   require('../heroes/heroRouter.js')(heroRouter);
   require('../requesters/requesterRouter.js')(requesterRouter);

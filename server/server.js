@@ -1,5 +1,6 @@
 var http = require('http');
 var express = require('express');
+var middleware = require('./config/middleware.js');
 var app = express();
 var port = 3000;
 

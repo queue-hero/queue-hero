@@ -1,4 +1,4 @@
-var authCtrl = require('./userCtrl.js');
+var authCtrl = require('./authCtrl.js');
 
 module.exports = function(app) {
   // Still need to add specific method to call for each route
