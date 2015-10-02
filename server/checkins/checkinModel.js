@@ -3,11 +3,11 @@ var mongoose = require('mongoose');
 var CheckinSchema = new mongoose.Schema({
   queueHero: {
     type: String,
-    required: true,
+    required: true
   },
   vendor: {
     type: String,
-    required: true,
+    required: true
   },
   //[lat, long]
   meetingLocation: {

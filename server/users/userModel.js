@@ -30,15 +30,15 @@ var UserSchema = new mongoose.Schema({
   cardNumber: {
     type: Number,
     required: true,
-    unique: true,
+    unique: true
   },
   cvc: {
     type: Number,
-    required: true,
+    required: true
   },
   expirationDate: {
     type: String,
-    required: true,
+    required: true
   }
 });
 
