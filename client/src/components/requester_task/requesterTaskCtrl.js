@@ -10,17 +10,17 @@
     vm.timePrice = false;
     vm.confirm = false;
 
-    vm.pickItem = function () {
+    vm.pickLocation = function () {
       vm.location = false;
       vm.item = true;
     };
 
-    vm.pickTimePrice = function () {
+    vm.pickItem = function () {
       vm.item = false;
       vm.timePrice = true;
     }
 
-    vm.goToConfirm = function () {
+    vm.pickTimePrice = function () {
       vm.timePrice = false;
       vm.confirm = true;
     }
