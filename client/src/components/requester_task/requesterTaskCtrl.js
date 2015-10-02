@@ -33,7 +33,7 @@
       ajaxFactory.sendOrder({ item: 'Starbucks Frappucino', 
                               price: 6, 
                               time: Date.now() })
-        .then(function (response) {
+        .then(function(response) {
 
           console.log('order was submitted successfully');
 
