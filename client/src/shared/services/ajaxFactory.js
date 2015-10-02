@@ -32,7 +32,7 @@
       });
     };
 
-    ajaxObj.getOpenRequests = function(location){
+    ajaxObj.getOpenRequests = function(location) {
       return $http({
         method: 'GET',
         url: serverUrl + '/hero/task',
@@ -41,7 +41,7 @@
       });
     };
 
-    ajaxObj.confirmRequest = function(transactionId){
+    ajaxObj.confirmRequest = function(transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/task',
