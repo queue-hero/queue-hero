@@ -11,7 +11,7 @@
         method: 'GET',
         url: serverUrl + '/choice',
         //params can be retrieved from server using req.query.username
-        params: {username: username}
+        params: { username: username }
       });
     };
 
@@ -23,12 +23,11 @@
       });
     };
 
-
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
         method: 'GET',
         url: serverUrl + '/order/details',
-        params: {id: transactionId}
+        params: { id: transactionId }
       });
     };
 
@@ -37,7 +36,7 @@
         method: 'POST',
         url: serverUrl + '/signUp',
         //user data can be retrieved from server using req.data.user
-        data: {'user': user}
+        data: { user: user }
       });
     };
 
