@@ -5,6 +5,9 @@ var middleware = require('./config/middleware.js');
 var app = express();
 var port = 3000;
 
+// create test user
+var createTestUsers = require('./users/testUsers.js').createTestUsers;
+
 //starts up our mongo environment on either heroku or locathost
 //var database = process.env.MONGOLAB_URI || 'mongodb://localhost/queue-hero';
 
@@ -16,6 +19,8 @@ mongoose.connect(database, function(error) {
     console.log('mongo connected');
   }
 });
+
+createTestUsers();
 
 app.use(express.static(__dirname + './../client'));
 
