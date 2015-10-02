@@ -20,6 +20,11 @@
       vm.timePrice = true;
     }
 
+    vm.goToConfirm = function () {
+      vm.timePrice = false;
+      vm.confirm = true;
+    }
+
     vm.confirmOrder = function() {
       //TODO: get all order details from factory
       
