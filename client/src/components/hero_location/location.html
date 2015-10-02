@@ -1,4 +1,14 @@
 <div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
   <nav-bar></nav-bar>
   hero location view
+
+  <div ng-repeat="location in ctrl.locations">
+    <div class="radio">
+       <label>
+         <input type="radio" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> {{ location.restaurant }} on {{ location.address }}
+       </label>
+    </div>
+  </div>
+
+<button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
 </div>
