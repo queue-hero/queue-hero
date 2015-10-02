@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   // req: username from token
   // res: userdata
-  app.get('');
+  app.get('', userCtrl.getUserData);
 
   // req: object with signup details
   // res: 201 or error
