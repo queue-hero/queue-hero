@@ -45,7 +45,7 @@
         method: 'GET',
         url: serverUrl + '/requester/task',
         //user data can be retrieved from server using req.data.area
-        data: {area: area}
+        params: { area: area }
       });
     };
 
