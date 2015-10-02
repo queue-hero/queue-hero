@@ -51,15 +51,17 @@
 
       //make ajaxFactoryRequest
       //FIX: Hardcoded order for now
-      requesterFactory.setOrder({ status: 'complete' })
+      var order = requesterFactory.getOrder();
+
+      ajaxFactory.sendOrder(order)
         .then(function(response) {
-
           console.log('order was submitted successfully');
-
           //move to next state
           $state.go('requester_order');
+
         }, function(response) {
           console.log(response.status);
+          requesterFactory.setOrder({ status: 'complete' });
         });
     };
 
