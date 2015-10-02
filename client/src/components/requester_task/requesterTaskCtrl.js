@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['ajaxFactory', 'requesterFactory', function(ajaxFactory, requesterFactory) {
+  .controller('RequesterTaskCtrl', ['ajaxFactory', 'requesterFactory', '$state', function(ajaxFactory, requesterFactory, $state) {
     var vm = this;
 
     vm.location = true;
@@ -31,8 +31,8 @@
       //make ajaxFactoryRequest
       //FIX: Hardcoded order for now
       ajaxFactory.sendOrder({ item: 'Starbucks Frappucino', 
-                                     price: 6, 
-                                     time: Date.now() })
+                              price: 6, 
+                              time: Date.now() })
         .then(function (response) {
 
           console.log('order was submitted successfully');
