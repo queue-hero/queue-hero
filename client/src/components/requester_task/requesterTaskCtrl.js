@@ -12,10 +12,10 @@
     var defaultArea = userProfile.location;
 
 
-    vm.loadActiveShops = function (){
+    vm.loadActiveShops = function() {
 
       getActiveShops(defaultArea)
-        .then(function successCallback(response){
+        .then(function successCallback(response) {
           vm.activeShops = response.activeShops;
           vm.buildMap(defaultArea, vm.activeShops);
 
@@ -24,17 +24,17 @@
         });
     };
 
-    vm.buildMap = function (location, activeShops){
+    vm.buildMap = function(location, activeShops) {
     //the mapping library function should be call here:
     };
 
-    vm.createMission = function (shop){
+    vm.createMission = function(shop) {
       vm.shop = shop;
       requesterFactory.setOrderProperty('shop',shop);
       current = 'item';
     };
 
-    vm.setItem = function (item){
+    vm.setItem = function(item) {
       requesterFactory.setOrderProperty('item',item);
       current = 'price';
     };

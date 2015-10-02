@@ -23,7 +23,7 @@
       });
     };
 
-    ajaxObj.postSignUp = function (user) {
+    ajaxObj.postSignUp = function(user) {
       return $http({
         method: 'POST',
         url: serverUrl + '/signUp',
@@ -32,7 +32,7 @@
       });
     };
 
-    ajaxObj.getActiveShops = function (area) {
+    ajaxObj.getActiveShops = function(area) {
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
