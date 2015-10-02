@@ -2,7 +2,7 @@ var heroCtrl = require('./heroCtrl.js');
 
 module.exports = function(app) {
   // need to add specific method to call for each route
-  // app.get('/location', heroCtrl.doThis())
+  // app.get('/location', heroCtrl.doThis);
 
   // req: browser nav. location
   // res: map and location options
@@ -22,7 +22,7 @@ module.exports = function(app) {
 
   // req: Polling. setInterval poll server to check if order complete
   // res: Polling. return false until order complete
-  app.post('/order/details');
+  app.post('/order/details', heroCtrl.checkOrderComplete);
 
   // req: rating, queueheroId, requesterId
   // res: 201 or error
