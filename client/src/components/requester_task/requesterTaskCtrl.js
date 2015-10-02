@@ -2,14 +2,15 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
 
     var current = 'location';
     var vm = this;
     vm.mission = {};
     //assumes that the object has a location property
     vm.userProfile = profileFactory.getProfile();
-    var defaultArea = userProfile.location;
+    // change for userProfile.location
+    var defaultArea = 'san francisco';
 
 
 
@@ -31,12 +32,12 @@
 
     vm.createMission = function(shop) {
       vm.shop = shop;
-      requesterFactory.setOrderProperty('shop',shop);
+      requesterFactory.setOrder({ 'shop': shop });
       current = 'item';
     };
 
     vm.setItem = function(item) {
-      requesterFactory.setOrderProperty('item',item);
+      requesterFactory.setOrder({ 'item': item });
       current = 'price';
     };
 
