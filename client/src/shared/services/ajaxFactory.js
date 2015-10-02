@@ -15,6 +15,14 @@
       });
     };
 
+    ajaxObj.facebookAuth = function(type) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/auth/facebook',
+        params: {type: type}
+      });
+    };
+
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
         method: 'GET',

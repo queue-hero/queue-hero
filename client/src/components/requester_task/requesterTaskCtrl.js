@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', $state, function(profileFactory, ajaxFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, ajaxFactory, $state) {
 
     var current = 'location';
     var vm = this;
@@ -12,7 +12,8 @@
     var defaultArea = userProfile.location;
 
 
-    vm.loadActiveShops = function() {
+
+    vm.loadActiveShops = function(){
 
       getActiveShops(defaultArea)
         .then(function successCallback(response) {
