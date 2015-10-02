@@ -12,8 +12,7 @@ var database = 'mongodb://localhost/queue-hero';
 mongoose.connect(database, function(error) {
   if (error) {
     console.error(error);
-  }
-  else {
+  } else {
     console.log('mongo connected');
   }
 });
