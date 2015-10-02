@@ -1,10 +1,10 @@
 <div id="requester-task-confirm">
-  <h1> Confirm Order </h1>
-  Location: <span> </span> <br/>
-  Item: <span> </span> <br/>
-  Additional Requests: <span> </span> <br/>
-  Meeting time: <span> </span> <br/>
-  Price: <span> </span> <br/>
+  <h1> Please verify before Confirming Order </h1>
+  Location: <span> {{ ctrl.shop | json }} </span> <br/>
+  Item: <span> {{ ctrl.item | json }}</span> <br/>
+  Additional Requests: <span> {{ ctrl.details | json }} </span> <br/>
+  Meeting time: <span> {{ ctrl.time | json }}</span> <br/>
+  Price: <span> {{ ctrl.price | json }} </span> <br/>
   <button ng-click="ctrl.confirmOrder()"> Confirm Order </button>
+  <div>{{  }}</div>
 </div>
-

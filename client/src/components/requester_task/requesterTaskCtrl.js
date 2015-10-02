@@ -2,48 +2,68 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['ajaxFactory', 'requesterFactory', '$state', function(ajaxFactory, requesterFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
+
     var vm = this;
+    vm.current = 'location';
+    // vm.mission = {};
+    //assumes that the object has a location property
+    vm.userProfile = profileFactory.getProfile();
+    // change for userProfile.location
+    var defaultArea = 'san francisco';
 
-    vm.location = true;
-    vm.item = false;
-    vm.timePrice = false;
-    vm.confirm = false;
 
-    vm.pickLocation = function() {
-      vm.location = false;
-      vm.item = true;
+    vm.loadActiveShops = function() {
+
+      ajaxFactory.getActiveShops(defaultArea)
+        .then(function successCallback(response) {
+          vm.activeShops = response.activeShops;
+          vm.buildMap(defaultArea, vm.activeShops);
+
+        }, function errorCallback(response) {
+            var statusCode = response.status;
+        });
     };
 
-    vm.pickItem = function() {
-      vm.item = false;
-      vm.timePrice = true;
-    }
+    vm.buildMap = function(location, activeShops) {
+    //the mapping library function should be call here:
+    };
+
+    vm.createMission = function(shop) {
+      vm.shop = shop;
+      requesterFactory.setOrder({ shop: shop });
+      vm.current = 'item';
+    };
+
+    vm.setItem = function() {
+      requesterFactory.setOrder({ item: vm.item });
+      vm.current = 'time_price';
+    };
 
     vm.pickTimePrice = function() {
-      vm.timePrice = false;
-      vm.confirm = true;
-    }
+      requesterFactory.setOrder({ time: vm.time,
+                                  price: vm.price });
+      vm.current = 'confirm';
+    };
 
     vm.confirmOrder = function() {
       //TODO: get all order details from factory
-      
+
       //make ajaxFactoryRequest
       //FIX: Hardcoded order for now
-      ajaxFactory.sendOrder({ item: 'Starbucks Frappucino', 
-                              price: 6, 
-                              time: Date.now() })
+      requesterFactory.setOrder({ status: 'complete' })
         .then(function(response) {
 
           console.log('order was submitted successfully');
 
           //move to next state
           $state.go('requester_order');
-        }, function (response) {
+        }, function(response) {
           console.log(response.status);
-        })
+        });
     };
 
+    vm.loadActiveShops();
 
   }]);
 
