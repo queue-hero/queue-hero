@@ -10,6 +10,12 @@
     vm.timePrice = false;
     vm.confirm = false;
 
+    vm.pickItem = function () {
+      console.log('i was invoked?');
+      vm.location = false;
+      vm.item = true;
+    };
+
     vm.confirmOrder = function() {
       //TODO: get all order details from factory
       
