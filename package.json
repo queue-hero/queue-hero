@@ -24,6 +24,7 @@
     "bcryptjs": "2.2.1",
     "body-parser": "^1.5.2",
     "browser-sync": "^2.9.6",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "formidable": "^1.0.17",
     "gulp": "^3.8.5",

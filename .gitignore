@@ -37,3 +37,6 @@ server/assets/
 
 # Build files
 build/
+
+#Client API Keys
+server/auth/api_keys.js

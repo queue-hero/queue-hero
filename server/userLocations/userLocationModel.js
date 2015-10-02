@@ -3,21 +3,21 @@ var mongoose = require('mongoose');
 var UserLocationSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-  }, 
+    //required: true,
+  },
   time: {
     type: Date,
-    required: true,
-  }, 
+    //required: true,
+  },
   transactionId: {
-    type: ObjectId, 
-    required: true, 
-  }, 
+    type: ObjectId,
+    //required: true,
+  },
+  // [lat, long]
   location: {
-    type: "Point",
-    coordinates: [<longitude>, <latitude>], 
-    required: true, 
-  }, 
+    type: Array,
+    //required: true,
+  },
 
 });
 
