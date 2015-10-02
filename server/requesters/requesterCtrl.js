@@ -2,7 +2,7 @@ var Transaction = require('../transactions/transactionModel.js');
 var Q = require('q');
 
 module.exports = {
-  createTransaction: function (req, res, next) {
+  createTransaction: function(req, res, next) {
     
     //extract order from req
     var item = req.body.order.item;
