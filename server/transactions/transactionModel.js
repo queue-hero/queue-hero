@@ -2,38 +2,38 @@ var mongoose = require('mongoose');
 
 var TransactionSchema = new mongoose.Schema({
   queueHero: {
-    type: String, 
+    type: String,
     required: true
-  },    
+  },
   requester: {
-    type: String, 
+    type: String,
     required: true
-  }, 
+  },
   item: {
-    type: String, 
+    type: String,
     required: true
-  }, 
+  },
   moneyExchanged: {
-    type: Number, 
-    required: true, 
-  }, 
-  meetingTime: {
-    type: Date, 
+    type: Number,
     required: true
-  },    
-  meetingLocation: { 
-    type: "Point",
-    coordinates: [<longitude>, <latitude>], 
-    required: true, 
-  }, 
+  },
+  meetingTime: {
+    type: Date,
+    required: true
+  },
+  //[lat, long]
+  meetingLocation: {
+    type: Array,
+    required: true
+  },
   vendor: {
-    type: String, 
-    required: true,
-  }, 
+    type: String,
+    required: true
+  },
   status: {
-    type: String, 
-    required: true, 
-  }, 
+    type: String,
+    required: true
+  },
 });
 
-module.exports = mongoose.model('transactions', TransactionSchema);
+module.exports = mongoose.model('Transaction', TransactionSchema);
