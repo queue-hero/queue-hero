@@ -10,7 +10,7 @@ module.exports = function(app) {
 
   // req: obj with order details
   // res: 201 or error
-  app.post('/task');
+  app.post('/task', requesterCtrl.createTransaction);
 
   // req: Polling. setInterval poll to server until match found
   // res: Polling. return false until match found
