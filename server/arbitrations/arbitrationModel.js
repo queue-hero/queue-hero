@@ -3,19 +3,19 @@ var mongoose = require('mongoose');
 var ArbitrationSchema = new mongoose.Schema({
   transactionId: {
     type: String,
-    required: true
+    //required: true
   },
   queueHero: {
     type: String,
-    required: true
+    //required: true
   },
   requester: {
     type: String,
-    required: true
+    //required: true
   },
   resolved: {
     type: Boolean,
-    required: true,
+    //required: true,
     default: false
   }
 });

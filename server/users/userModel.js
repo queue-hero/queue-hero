@@ -8,37 +8,37 @@ var UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true
+    //required: true
   },
   profilePhoto: {
     type: String,
-    required: true,
+    //required: true,
     default: 'placeholder/image'
   },
   firstName: {
     type: String,
-    required: true
+    //required: true
   },
   lastName: {
     type: String,
-    required: true
+    //required: true
   },
   phoneNumber: {
     type: Number,
-    required: true
+    //required: true
   },
   cardNumber: {
     type: Number,
-    required: true,
-    unique: true
+    //required: true,
+    //unique: true
   },
   cvc: {
     type: Number,
-    required: true
+    //required: true
   },
   expirationDate: {
     type: String,
-    required: true
+    //required: true
   }
 });
 
