@@ -6,6 +6,7 @@
 
     var current = 'location';
     var vm = this;
+    vm.mission = {};
     //assumes that the object has a location property
     vm.userProfile = profileFactory.getProfile();
     var defaultArea = userProfile.location;
@@ -28,8 +29,14 @@
     };
 
     vm.createMission = function (shop){
+      vm.shop = shop;
       requesterFactory.setOrderProperty('shop',shop);
       current = 'item';
+    };
+
+    vm.setItem = function (item){
+      requesterFactory.setOrderProperty('item',item);
+      current = 'price';
     };
 
     vm.loadActiveShops();
