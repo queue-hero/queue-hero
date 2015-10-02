@@ -15,22 +15,40 @@
       });
     };
 
-    ajaxObj.isOrderComplete = function(transactionId) {
+    ajaxObj.facebookAuth = function(type) {
       return $http({
         method: 'GET',
-        url: serverUrl + '/order/details',
-        params: { id: transactionId }
+        url: serverUrl + '/auth/facebook',
+        params: {type: type}
       });
     };
 
-    ajaxObj.postSignUp = function (user) {
+    ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
         method: 'POST',
-        url: serverUrl + '/signUp',
+        url: serverUrl + '/hero/order/details',
+        data: { 'transactionId': transactionId }
+      });
+    };
+
+    ajaxObj.postSignUp = function(user) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/signup',
         //user data can be retrieved from server using req.data.user
         data: { user: user }
       });
     };
+
+    ajaxObj.getActiveShops = function(area) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/requester/task',
+        //user data can be retrieved from server using req.data.area
+        data: {area: area}
+      });
+    };
+
 
     ajaxObj.getOpenRequests = function(location) {
       return $http({
