@@ -1,4 +1,6 @@
 var bodyParser = require('body-parser');
+var cors = require('cors');
+
 
 module.exports = function(app, express) {
   var authRouter = express.Router();
@@ -7,8 +9,11 @@ module.exports = function(app, express) {
   var requesterRouter = express.Router();
 
   // Middleware to parse request body
-  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
   app.use(bodyParser.json());
+  app.use(cors());
 
   // server expects url of 'auth/facebook' for facebook signin
   // authRouter to have routes for all authentications
@@ -28,7 +33,7 @@ module.exports = function(app, express) {
   // all routes for requester set in requesterRouter
   app.use('/requester', requesterRouter);
 
-  require('../heroes/heroRouter.js')(heroRouter);
+  require('../auth/authRouter.js')(authRouter);
   require('../users/userRouter.js')(userRouter);
   require('../heroes/heroRouter.js')(heroRouter);
   require('../requesters/requesterRouter.js')(requesterRouter);

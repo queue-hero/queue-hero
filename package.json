@@ -24,6 +24,7 @@
     "bcryptjs": "2.2.1",
     "body-parser": "^1.5.2",
     "browser-sync": "^2.9.6",
+    "cors": "^2.7.1",
     "express": "^4.13.3",
     "formidable": "^1.0.17",
     "gulp": "^3.8.5",
@@ -41,6 +42,7 @@
     "jasmine-core": "^2.3.4",
     "karma": "0.13.9",
     "mongoose": "^4.1.8",
+    "passport": "^0.3.0",
     "passport-facebook": "^2.0.0"
   }
 }
