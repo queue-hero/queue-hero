@@ -19,7 +19,7 @@
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/order/details',
-        data: {'transactionId': transactionId}
+        data: { 'transactionId': transactionId }
       });
     };
 
