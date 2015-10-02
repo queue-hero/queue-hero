@@ -18,7 +18,7 @@
     vm.transactionId = 1;
 
 
-    var checkOrder = $interval(isOrderComplete, 2000, 0, false);
+    var checkOrder = $interval(isOrderComplete, 10000, 0, false);
 
 
     function isOrderComplete(){
