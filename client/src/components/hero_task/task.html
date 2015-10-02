@@ -1,4 +1,29 @@
 <div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
   <nav-bar></nav-bar>
-  hero task view
+  hero task view (accept request view)
+
+  <div>
+    <div>item: {{ ctrl.orders[ctrl.displayId].item }}</div>
+    <div>price: {{ ctrl.orders[ctrl.displayId].price }}</div>
+    <img src="" alt="{{ ctrl.orders[ctrl.displayId].requester }}">
+
+    <div>
+      <span>time: {{ ctrl.orders[ctrl.displayId].time | date : 'h:mm a' }} </span>
+    </div>
+
+      <button ng-click="ctrl.previous()" ng-disabled="ctrl.displayId === 0">Previous</button>
+      <button ng-click="ctrl.next()" ng-disabled="ctrl.displayId === ctrl.orders.length - 1 || ctrl.orders.length === 0">Next</button>
+
+    <div ng-hide="ctrl.confirm">
+      <button ng-click="ctrl.remove(ctrl.displayId)">No</button>
+      <button ng-click="ctrl.confirm = true">Yes</button>
+    </div>
+    <div ng-show="ctrl.confirm">
+      Are you sure you want to take this mission?
+      <button ng-click="ctrl.confirm = false">Cancel</button>
+      <button ng-click="ctrl.accept(ctrl.displayId)">Submit</button>
+    </div>
+  </div>
+
+
 </div>
