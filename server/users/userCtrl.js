@@ -3,7 +3,7 @@ var Q = require('q');
 
 module.exports = {
   getUserData: function(req, res, next) {
-    var username = req.body.username;
+    var username = req.query.username;
     User.findOne({
       username: username
     }, function(err, user) {
