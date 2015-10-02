@@ -38,5 +38,5 @@ server/assets/
 # Build files
 build/
 
-# Facebook Client Keys
-server/auth/facebook_client_keys.js
+#Client API Keys
+server/auth/api_keys.js

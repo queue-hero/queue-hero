@@ -3,11 +3,11 @@ var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var api_keys = require('./api_keys.js').facebook;
 
-passport.serializeUser(function(user, done){
+passport.serializeUser(function(user, done) {
   done(null, user);
 });
 
-passport.deserializeUser(function(obj, done){
+passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 

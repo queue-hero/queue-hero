@@ -19,9 +19,9 @@
     var checkOrder = $interval(isOrderComplete, 2000, 0, false);
 
 
-    function isOrderComplete(){
+    function isOrderComplete() {
       ajaxFactory.isOrderComplete(vm.transactionId)
-        .then(function(response){
+        .then(function(response) {
           if(response.data === true){
             //if order is complete, switch ui-views
             vm.complete = true;
@@ -36,7 +36,7 @@
             heroFactory.setOrder({});
 
           }
-        }, function(response){
+        }, function(response) {
           console.log(response.status);
         });
     }

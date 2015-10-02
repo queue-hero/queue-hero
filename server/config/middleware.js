@@ -9,7 +9,9 @@ module.exports = function(app, express) {
   var requesterRouter = express.Router();
 
   // Middleware to parse request body
-  app.use(bodyParser.urlencoded({extended: true}));
+  app.use(bodyParser.urlencoded({
+    extended: true
+  }));
   app.use(bodyParser.json());
   app.use(cors());
 

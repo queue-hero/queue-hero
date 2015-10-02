@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.home', [])
-  .controller('HomeCtrl', ['ajaxFactory', '$state', function(ajaxFactory, $state) {
+  .controller('HomeCtrl', [function() {
     var vm = this;
 
   }]);
