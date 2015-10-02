@@ -25,7 +25,7 @@
       ajaxFactory.isOrderComplete(vm.transactionId)
         .then(function(response) {
           console.log('Server said', response.data);
-          if(response.data === true){
+          if (response.data === true){
             //if order is complete, switch ui-views
             vm.complete = true;
 
