@@ -1,5 +1,4 @@
 var User = require('./userModel.js');
-var Q = require('q');
 
 module.exports = {
   getUserData: function(req, res, next) {
@@ -12,6 +11,5 @@ module.exports = {
       }
       res.status(201).send(user);
     });
-
   }
 };
