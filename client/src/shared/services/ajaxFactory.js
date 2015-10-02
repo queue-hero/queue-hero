@@ -25,9 +25,9 @@
 
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
-        method: 'GET',
-        url: serverUrl + '/order/details',
-        params: { id: transactionId }
+        method: 'POST',
+        url: serverUrl + '/hero/order/details',
+        data: { 'transactionId': transactionId }
       });
     };
 
