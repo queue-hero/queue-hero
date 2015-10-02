@@ -2,8 +2,8 @@
   <h1> Pick item </h1>
   Location:<span> {{ ctrl.shop | json }}</span>
   <form>
-    I want:<input type="text" placeholder="Product name" ng-model="ctrl.mission.item"> <br/>
-    Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.mission.item"> <br/>
+    I want:<input type="text" placeholder="Product name" ng-model="ctrl.item"> <br/>
+    Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.details"> <br/>
     <button type="submit" ng-click="ctrl.setItem()">Confirm item</button>
   </form>
 </div>

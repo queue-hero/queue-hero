@@ -7,7 +7,7 @@
     this is a map
     <div id="shop" ng-repeat="shop in ctrl.activeShops">
       <div ng-click= "ctrl.createMission(shop)">
-        {{ shop | json}}
+        {{ ctrl.shop | json }}
       </div>
     </div>
   </div>
