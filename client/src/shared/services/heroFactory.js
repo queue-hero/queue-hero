@@ -10,12 +10,46 @@
       setOrder: setOrder
     };
 
-    function getOrder() {
-      return order;
+    function getOrder(keys) {
+      if(keys === undefined){
+        return order;
+      }
+
+      if(angular.isArray(keys)){
+        var results = {};
+        for(var i = 0; i < keys.length; i++){
+          if(keys[i] in order){
+            results[keys[i]] = order[keys[i]];
+          }else{
+            results[keys[i]] = null;
+          }
+        }
+        return results;
+      }
+
+      if(angular.isString(keys)){
+        if(keys in order){
+          return order[keys];
+        }
+      }
+
+      return null;
     }
 
-    function setOrder(updatedOrder) {
-      order = updatedOrder;
+
+    function setOrder(obj) {
+      if(!angular.isObject(obj)){
+        return null;
+      }
+      var allValidKeys = true;
+      for(var key in obj){
+        if(key in order){
+          order[key] = obj[key];
+        }else{
+          allValidKeys = false;
+        }
+      }
+      return allValidKeys;
     }
 
   }]);
