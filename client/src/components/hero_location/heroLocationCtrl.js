@@ -28,11 +28,11 @@
 
 
 
-      vm.select = function(index){
+      vm.select = function(index) {
         vm.selection = index;
       };
 
-      vm.confirm = function(){
+      vm.confirm = function() {
         //set location of hero to vm.locations[vm.selection]
         heroFactory.setOrder(vm.locations[vm.selection]);
         $state.go('hero_task');
