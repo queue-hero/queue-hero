@@ -21,11 +21,11 @@ var TransactionSchema = new mongoose.Schema({
     type: Date, 
     required: true
   },    
-  meetingLocation: { 
-    type: "Point",
-    coordinates: [<longitude>, <latitude>], 
-    required: true, 
-  }, 
+  // meetingLocation: { 
+  //   type: "Point",
+  //   coordinates: [<longitude>, <latitude>], 
+  //   required: true, 
+  // }, 
   vendor: {
     type: String, 
     required: true,

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, ajaxFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
 
     var current = 'location';
     var vm = this;
@@ -15,7 +15,7 @@
 
     vm.loadActiveShops = function(){
 
-      getActiveShops(defaultArea)
+      ajaxFactory.getActiveShops(defaultArea)
         .then(function successCallback(response) {
           vm.activeShops = response.activeShops;
           vm.buildMap(defaultArea, vm.activeShops);
@@ -40,7 +40,31 @@
       current = 'price';
     };
 
+
     vm.loadActiveShops();
+
+    vm.pickTimePrice = function() {
+      vm.current = '';
+    };
+
+    vm.confirmOrder = function() {
+      //TODO: get all order details from factory
+
+      //make ajaxFactoryRequest
+      //FIX: Hardcoded order for now
+      ajaxFactory.sendOrder({ item: 'Starbucks Frappucino',
+                              price: 6,
+                              time: Date.now() })
+        .then(function(response) {
+
+          console.log('order was submitted successfully');
+
+          //move to next state
+          $state.go('requester_order');
+        }, function (response) {
+          console.log(response.status);
+        });
+    };
 
   }]);
 
