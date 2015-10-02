@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', $state, function(profileFactory, ajaxFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, ajaxFactory, $state) {
 
     var current = 'location';
     var vm = this;
@@ -11,10 +11,10 @@
     var defaultArea = userProfile.location;
 
 
-    vm.loadActiveShops = function (){
+    vm.loadActiveShops = function(){
 
       getActiveShops(defaultArea)
-        .then(function successCallback(response){
+        .then(function successCallback(response) {
           vm.activeShops = response.activeShops;
           vm.buildMap(defaultArea, vm.activeShops);
 
@@ -23,11 +23,11 @@
         });
     };
 
-    vm.buildMap = function (location, activeShops){
+    vm.buildMap = function(location, activeShops) {
     //the mapping library function should be call here:
     };
 
-    vm.createMission = function (shop){
+    vm.createMission = function(shop) {
       requesterFactory.setOrderProperty('shop',shop);
       current = 'item';
     };
