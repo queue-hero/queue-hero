@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', $state, function(profileFactory, ajaxFactory, $state) {
+  .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory.js', '$state', function(profileFactory, ajaxFactory, $state) {
 
     var current = 'location';
     var vm = this;
@@ -29,6 +29,7 @@
     };
 
     vm.createMission = function(shop) {
+
       vm.shop = shop;
       requesterFactory.setOrderProperty('shop',shop);
       current = 'item';

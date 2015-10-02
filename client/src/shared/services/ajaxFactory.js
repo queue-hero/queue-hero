@@ -15,6 +15,14 @@
       });
     };
 
+    ajaxObj.facebookAuth = function(type) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/auth/facebook',
+        params: {type: type}
+      });
+    };
+
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
         method: 'GET',
@@ -26,7 +34,7 @@
     ajaxObj.postSignUp = function(user) {
       return $http({
         method: 'POST',
-        url: serverUrl + '/signUp',
+        url: serverUrl + '/signup',
         //user data can be retrieved from server using req.data.user
         data: { user: user }
       });
@@ -37,7 +45,7 @@
         method: 'GET',
         url: serverUrl + '/requester/task',
         //user data can be retrieved from server using req.data.area
-        data: {area: area}
+        data: { area: area }
       });
     };
 
