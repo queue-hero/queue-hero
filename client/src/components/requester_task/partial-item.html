@@ -1,9 +1,9 @@
 <div id="requester-task-item">
   <h1> Pick item </h1>
-  Location: <span> <!-- the location chosen --> </span>
+  Location:<span> {{ ctrl.shop | json }}</span>
   <form>
-    <input type="text" placeholder="I want..."> <br/>
-    <input type="textarea" placeholder="Additional details..."> <br/>
-    <button type="submit">Confirm item</button>
+    I want:<input type="text" placeholder="Product name" ng-model="ctrl.mission.item"> <br/>
+    Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.mission.item"> <br/>
+    <button type="submit" ng-click="ctrl.setItem()">Confirm item</button>
   </form>
 </div>
