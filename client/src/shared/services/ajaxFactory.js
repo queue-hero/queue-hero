@@ -32,6 +32,14 @@
       });
     };
 
+    ajaxObj.sendOrder = function(order) {
+      return $http({
+        method: 'POST', 
+        url: serverUrl + '/requester/task', 
+        data: { order: order }
+      })
+    }
+
 
 
     return ajaxObj;
