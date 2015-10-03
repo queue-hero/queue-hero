@@ -4,13 +4,13 @@
 
   <div ng-repeat="location in ctrl.locations">
     <div class="radio">
-       <label>
-       </label>
-         <ul>
-           <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> <span ng-repeat="address in location.displayAddress">{{ address }} </span></li>
-           </ul>
+      <label>
+      </label>
+      <ul>
+        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> <span ng-repeat="address in location.displayAddress">{{ address }} </span></li>
+      </ul>
     </div>
   </div>
 
-<button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
+  <button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
 </div>
