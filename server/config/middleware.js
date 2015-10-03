@@ -1,5 +1,7 @@
 var bodyParser = require('body-parser');
 var cors = require('cors');
+var fbSessions = require('./fbSessions.js');
+
 
 
 module.exports = function(app, express) {
@@ -15,6 +17,9 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(cors());
 
+  //initializes client sessions and facebook login config
+  fbSessions.initialize(app);
+
   // server expects url of 'auth/facebook' for facebook signin
   // authRouter to have routes for all authentications
   // i.e. facebook, github, or our own
@@ -24,14 +29,16 @@ module.exports = function(app, express) {
   // signup make POST request
   // choice & profile both make GET request for user data
   app.use('/signup', userRouter);
-  app.use('/choice', userRouter);
-  app.use('/profile', userRouter);
+
+  //restrict middleware function is added to all routes requiring authentication
+  app.use('/choice', fbSessions.restrict, userRouter);
+  app.use('/profile', fbSessions.restrict, userRouter);
 
   // all routes for hero set in heroRouter
-  app.use('/hero', heroRouter);
+  app.use('/hero', fbSessions.restrict, heroRouter);
 
   // all routes for requester set in requesterRouter
-  app.use('/requester', requesterRouter);
+  app.use('/requester', fbSessions.restrict, requesterRouter);
 
   require('../auth/authRouter.js')(authRouter);
   require('../users/userRouter.js')(userRouter);
