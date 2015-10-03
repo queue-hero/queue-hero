@@ -1,44 +1,30 @@
 var authCtrl = require('./authCtrl.js');
 var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-var api_keys = require('./api_keys.js').facebook;
-
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(obj, done) {
-  done(null, obj);
-});
-
-passport.use(new FacebookStrategy({
-    clientID: api_keys.clientID,
-    clientSecret: api_keys.clientSecret,
-    callbackURL: "http://localhost:3000/auth/facebook/callback",
-    enableProof: false
-  },
-  function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-      return done(null, profile);
-    });
-  }
-));
+var User = require('./../users/userModel.js');
 
 module.exports = function(app) {
   // Still need to add specific method to call for each route
   // app.get('', authCtrl.doThis())
 
-
-  app.use(passport.initialize());
-
   app.get('/facebook', passport.authenticate('facebook'));
 
-  app.get('/facebook/callback', passport.authenticate('facebook', {
-      failureRedirect: '/login'
-    }),
+  app.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/#/' }),
     function(req, res) {
-      // Successful authentication, tell user login was successful
-      res.redirect('/#/choice');
-    });
+      var userId = req.session.passport.user.id;
+      res.cookie('com.queuehero', userId);
 
+      User.findOne({
+        facebookId: userId
+      }, function(err, user) {
+        if (err) {
+          req.logout();
+          res.redirect('/#/');
+        }
+        if (user && user.username !== null) {
+          res.redirect('/#/choice');
+        } else {
+          res.redirect('/#/signup');
+        }
+      });
+    });
 };
