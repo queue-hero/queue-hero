@@ -14,11 +14,11 @@ module.exports = function(app) {
 
   // req: browser nav. location
   // map and location options
-  app.get('/task');
+  app.get('/task', heroCtrl.getOpenRequests);
 
   // req: obj with order details from the controller
   // res: 201 or error
-  app.post('/task');
+  app.post('/task', heroCtrl.acceptRequest);
 
   // req: Polling. setInterval poll server to check if order complete
   // res: Polling. return false until order complete
@@ -26,5 +26,5 @@ module.exports = function(app) {
 
   // req: rating, queueheroId, requesterId
   // res: 201 or error
-  app.post('/order/complete');
+  app.post('/order/complete', heroCtrl.rateRequester);
 };
