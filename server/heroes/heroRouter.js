@@ -26,5 +26,5 @@ module.exports = function(app) {
 
   // req: rating, queueheroId, requesterId
   // res: 201 or error
-  app.post('/order/complete');
+  app.post('/order/complete', heroCtrl.rateRequester);
 };
