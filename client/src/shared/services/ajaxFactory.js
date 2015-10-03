@@ -44,7 +44,7 @@
       return $http({
         method: 'POST', 
         url: serverUrl + '/requester/order/details', 
-        data: { 'transactionId': transactionId };
+        data: { 'transactionId': transactionId }
       });
     }
 
