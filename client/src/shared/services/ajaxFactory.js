@@ -28,7 +28,7 @@
       return $http({
         method: 'POST', 
         url: serverUrl + '/requester/order/complete', 
-        data: { transactionId: transactionId }
+        data: { 'transactionId': transactionId }
       })
     }
 
@@ -39,6 +39,14 @@
         data: { 'transactionId': transactionId }
       });
     };
+
+    ajaxObj.isOrderAccepted = function(transactionId) {
+      return $http({
+        method: 'POST', 
+        url: serverUrl + '/requester/order/details', 
+        data: {'transactionId': transactionId }
+      });
+    }
 
     ajaxObj.postSignUp = function(user) {
       return $http({
