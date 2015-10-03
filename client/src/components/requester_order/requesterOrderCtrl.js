@@ -34,8 +34,8 @@
 
           }
         }, function(response) {
-
-        });
+            console.log(response.status);
+        })
     };
 
     /*Sends notice to server that exchange occurred*/
