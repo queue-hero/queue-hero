@@ -1,9 +1,13 @@
 (function() {
   'use strict';
 
-  angular.module('app.choice', [])
-  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', function(ajaxFactory, profileFactory, $state) {
+  angular.module('app.choice', ['ngCookies'])
+  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', function(ajaxFactory, profileFactory, $state, $cookies) {
     var vm = this;
+
+    if (profileFactory.getProfile('facebookId') === undefined) {
+      profileFactory.setProfile({ facebookId: $cookies.get('com.queuehero') });
+    }
 
     //**toDo - fix hardcoded "username" to take username from token
     var username = 'darrin';
@@ -23,11 +27,11 @@
 
       });
 
-      vm.hero = function(){
+      vm.hero = function() {
         $state.go('hero_location');
       };
 
-      vm.requester = function(){
+      vm.requester = function() {
         $state.go('requester_task');
       };
 

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_order', [])
-  .controller('HeroOrderCtrl', ['ajaxFactory', '$scope', '$interval', 'heroFactory', function(ajaxFactory, $scope, $interval, heroFactory) {
+  .controller('HeroOrderCtrl', ['ajaxFactory', '$scope', '$interval', 'heroFactory', '$state', function(ajaxFactory, $scope, $interval, heroFactory, $state) {
     var vm = this;
     vm.complete = false;
 
@@ -43,6 +43,23 @@
           console.log(response.status);
         });
     }
+
+    vm.rateRequester = function() {
+      var rating = vm.rating;
+      var requester = heroFactory.getOrder('requester');
+      ajaxFactory.rateRequester(rating, requester)
+        .then(function(response) {
+
+          //clear the factory containing transaction details
+          heroFactory.setOrder({});
+
+          //circle back to choice
+          $state.go('choice');
+
+        }, function(response) {
+          console.log(response.status);
+        })
+    };
 
   }]);
 

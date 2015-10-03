@@ -94,6 +94,14 @@
       });
     };
 
+    ajaxObj.rateRequester = function(rating, requester) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/hero/order/complete',
+        data: { rating: rating, requester: requester }
+      });
+    };
+
 
     return ajaxObj;
 
