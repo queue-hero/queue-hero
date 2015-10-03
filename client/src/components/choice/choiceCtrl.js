@@ -27,11 +27,11 @@
 
       });
 
-      vm.hero = function(){
+      vm.hero = function() {
         $state.go('hero_location');
       };
 
-      vm.requester = function(){
+      vm.requester = function() {
         $state.go('requester_task');
       };
 

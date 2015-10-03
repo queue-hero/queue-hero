@@ -97,8 +97,8 @@
         method: 'POST',
         url: serverUrl + '/hero/order/complete',
         data: { rating: rating, requester: requester }
-      })
-    }
+      });
+    };
 
 
     return ajaxObj;

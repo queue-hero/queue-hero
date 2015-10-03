@@ -8,9 +8,7 @@ module.exports = function(app) {
 
   app.get('/facebook', passport.authenticate('facebook'));
 
-  app.get('/facebook/callback', passport.authenticate('facebook', {
-      failureRedirect: '/#/'
-    }),
+  app.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/#/' }),
     function(req, res) {
       var userId = req.session.passport.user.id;
       res.cookie('com.queuehero', userId);
