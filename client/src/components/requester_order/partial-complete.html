@@ -1,3 +1,16 @@
 <div id="requester-order-complete">
-  requester order complete partial view
+  <h1> Queue hero to the rescue! </h1>
+
+  <div>
+    <div>Meet {{ ctrl.queueHero }}</div>
+    <img src="" alt="Queue Hero Pic">
+    <div>
+      <span>in {{ ctrl.remainingTime }} minutes</span>
+    </div>
+    <div>
+      <span>at {{ ctrl.location }} location</span>
+    </div>
+  </div>
+  <button ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
+
 </div>
