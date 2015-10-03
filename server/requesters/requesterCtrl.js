@@ -13,6 +13,23 @@ module.exports = {
     res.end();
 
     //TODO: insert a new transaction with order details into db
+  }, 
+  fulfillTransaction: function(req, res, next) {
+    //extract transaction id from req
+    var transactionId = req.body.transactionId;
+
+    //TODO: update the transaction status of above transaction
+
+    res.status(201).send('Transaction was fulfilled!'); 
+  }, 
+  checkOrderAccepted: function(req, res, next) {
+    //extract transaction id from req
+    var transactionId = req.body.transactionId;
+
+    //TODO: check the status of above transaction, return 
+    //true if status === 'fulfilled', false otherwise.
+    console.log('Transaction was accepted by a queue hero!');
+    res.status(201).send(true);
   }
 }
 
