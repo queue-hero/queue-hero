@@ -15,6 +15,7 @@
       navigator.geolocation.getCurrentPosition(success, error, options);
 
       vm.select = function(index) {
+
         vm.selection = index;
       };
       vm.confirm = function() {
@@ -29,7 +30,6 @@
         ajaxFactory.getVenuesAtHeroLocation(lat, long)
           //will be executed if status code is 200-299
           .then(function successCallback(response) {
-            console.log(response.data);
             vm.locations = response.data;
           });
       }

@@ -5,8 +5,10 @@
   <div ng-repeat="location in ctrl.locations">
     <div class="radio">
        <label>
-         <input type="radio" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> {{ location.name }} on {{ location.displayAddress }}
        </label>
+         <ul>
+           <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> <span ng-repeat="address in location.displayAddress">{{ address }} </span></li>
+           </ul>
     </div>
   </div>
 
