@@ -13,7 +13,10 @@ module.exports = {
     var lat = req.query.lat;
     var long = req.query.long;
     var location = lat + ',' + long;
-    console.log(location);
+
+    // store venue info from yelp
+    var venues = {};
+
     var yelp = Yelp.createClient({
       consumer_key: Auth.yelp.consumer_key,
       consumer_secret: Auth.yelp.consumer_secret,
@@ -21,9 +24,39 @@ module.exports = {
       token_secret: Auth.yelp.token_secret
     });
 
-    yelp.search({ll: location}, function(error, data) {
-      console.log(error);
-      console.log(data);
+    /*
+     * Yelp search parameters
+     *
+     * search method: ll = search by lat,long | location = search by address
+     * sort: 0 = Best Matched, 1 = Distance, 2 = Highest Rated
+     * category_filter: see http://bit.ly/1Lp7Mhr
+     * radius_filter: search radius in meters
+     * limit: number of results
+     */
+    yelp.search({ll: location, sort: 1, category_filter: 'food', radius_filter: 300, limit: 10}, function(error, data) {
+      var venuesFromYelp = data.businesses;
+      venuesFromYelp.forEach(function(value){
+        venues[value.name] = {
+          name: value.name,
+          address: value.location.address,
+          city: value.location.city,
+          state: value.location.state_code,
+          zip: value.location.postal_code,
+          // displayAddress in []. May include building name + full address
+          displayAddress: value.location.display_address,
+          lat: value.location.coordinate.latitude,
+          long: value.location.coordinate.longitude,
+          // ########## format
+          phone: value.phone,
+          // +1-###-###-#### format
+          displayPhone: value.display_phone,
+          // distance from hero in meters
+          distance: value.distance,
+          categories: value.categories,
+          image_url: value.image_url
+        };
+      });
+      res.send(venues);
     });
   },
 
