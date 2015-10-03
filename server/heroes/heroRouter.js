@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   // req: browser nav. location
   // res: map and location options
-  app.get('/location');
+  app.get('/location', heroCtrl.getLocationOptions);
 
   // req: option chosen / location of hero
   // res: 201 or error
