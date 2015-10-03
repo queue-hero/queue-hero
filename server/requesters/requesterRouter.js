@@ -16,7 +16,7 @@ module.exports = function(app) {
   // res: Polling. return false until match found
   app.post('/order/details');
 
-  // req: order received + rating, queueheroId and requesterId
+  // req: order received
   // res: 201 or error
-  app.post('/order/complete');
+  app.post('/order/complete', requesterCtrl.fulfillTransaction);
 };
