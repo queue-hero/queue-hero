@@ -5,7 +5,7 @@
   .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', function(ajaxFactory, profileFactory, $state, $cookies) {
     var vm = this;
 
-    if(profileFactory.getProfile('facebookId') === undefined){
+    if (profileFactory.getProfile('facebookId') === undefined) {
       profileFactory.setProfile({ facebookId: $cookies.get('com.queuehero') });
     }
 

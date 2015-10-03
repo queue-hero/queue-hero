@@ -6,7 +6,7 @@
     var vm = this;
     vm.user = {};
 
-    if(profileFactory.getProfile('facebookId') === undefined){
+    if (profileFactory.getProfile('facebookId') === undefined) {
       profileFactory.setProfile({ facebookId: $cookies.get('com.queuehero') });
     }
 

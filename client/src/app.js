@@ -111,7 +111,7 @@
           evt.preventDefault();
           $state.go('home');
         }
-      }else{
+      } else {
         if (toState.name === 'home') {
           evt.preventDefault();
           $state.go('choice');

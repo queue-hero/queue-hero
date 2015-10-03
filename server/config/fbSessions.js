@@ -1,5 +1,5 @@
 var passport = require('passport');
-var cookieParser = require("cookie-parser");
+var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var api_keys = require('./api_keys.js').facebook;
