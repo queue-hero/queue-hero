@@ -3,23 +3,7 @@
   Location: <span> {{ ctrl.shop }}</span> <br/>
   Item: <span> {{ ctrl.item }} </span>
   <form>
-    Time
-    <select name="hours" ng-model="ctrl.time.hour">
-      <option value="3">3</option>
-      <option value="6">6</option>
-      <option value="9">9</option>
-      <option value="12">12</option>
-    </select>
-    <select name="minutes" ng-model="ctrl.time.minutes">
-      <option value="15">15</option>
-      <option value="30">30</option>
-      <option value="45">45</option>
-      <option value="60">60</option>
-    </select>
-    <select name="am/pm" ng-model="ctrl.time.amPm">
-      <option value="p.m.">p.m.</option>
-      <option value="a.m.">a.m.</option>
-    </select>
+    Time: In <input type="text" placeholder="20" ng-model="ctrl.time" /> minutes
     <br/>
     Price
     $<input type="text" placeholder="7" ng-model="ctrl.price"> <br/>

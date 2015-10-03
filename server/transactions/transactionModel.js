@@ -10,6 +10,9 @@ var TransactionSchema = new mongoose.Schema({
   item: {
     type: String,
   },
+  additionalRequests: {
+    type: String,
+  },
   moneyExchanged: {
     type: Number,
   },

@@ -8,6 +8,7 @@
         queueHero: undefined,
         requester: undefined,
         item: undefined,
+        additionalRequests: undefined,
         moneyExchanged: undefined,
         vendor: undefined,
         meetingLocation: undefined,
