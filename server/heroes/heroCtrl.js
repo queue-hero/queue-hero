@@ -25,7 +25,10 @@ module.exports = {
     //     next(error);
     //   });
 
-    //TODO: interface with db, always sends true
+    //TODO: (db) check status of ^ transaction
+    //if fulfilled, send true, if in progress, send false
+
+    //FIX: change response status to be what the db says
     res.status(201).send(true);
 
   }, 
@@ -33,7 +36,7 @@ module.exports = {
     //get transaction id from request
     var transactionId = req.body.transactionId;
 
-    //TODO: update status of transaction in db
+    //TODO: (db) update status of transaction
     //from unfulfilled to in progress
 
     res.status(201).send('You have accepted a request');
@@ -42,9 +45,9 @@ module.exports = {
     //get location from request
     var location = req.query.location;
 
-    //TODO: find all transactions with location = ^
+    //TODO: (db) find all transactions with location = ^
 
-    //dummy data (needs to be gotten from the db)
+    //FIX: this is dummy data (needs to be gotten from the db)
     var orders = [{
         time: "2015-10-02T05:20:58.409Z",
         item: 'starbucks mocha frappe',
@@ -70,5 +73,15 @@ module.exports = {
     orders = JSON.stringify(orders);
     
     res.status(201).send(orders);
+  }, 
+  rateRequester: function(req, res, next) {
+    console.log('gets invoked');
+    //get rating and requester from request
+    var rating = req.body.rating;
+    var requester = req.body.requester;
+
+    //TODO: (db) update the ^ requester's rating with ^ rating
+
+    res.status(201).send('You rated your requester');
   }
 }
