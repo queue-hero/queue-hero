@@ -1,5 +1,5 @@
 var Transaction = require('../transactions/transactionModel.js');
-var Auth = require('../auth/api_keys.js');
+var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
 
