@@ -3,7 +3,7 @@
 
   angular.module('app.signup', [])
 
-  .controller('SignupCtrl', ['state', 'ajaxFactory', '$cookies', 'profileFactory', function($state, ajaxFactory, $cookies, profileFactory) {
+  .controller('SignupCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', function($state, ajaxFactory, $cookies, profileFactory) {
     var vm = this;
     vm.user = {};
 
