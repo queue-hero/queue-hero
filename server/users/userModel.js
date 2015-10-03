@@ -3,11 +3,17 @@ var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true,
-    unique: true
+    // required: true,
+    unique: true,
+    default: null
   },
   password: {
     type: String,
+    //required: true
+  },
+  facebookId: {
+    type: String,
+    unique: true
     //required: true
   },
   profilePhoto: {

@@ -5,6 +5,7 @@
     'ui.router',
     'ui.bootstrap',
     'ngFileUpload',
+    'ngCookies',
     'app.home',
     'app.profile',
     'app.signup',
@@ -15,7 +16,7 @@
     'app.requester_task',
     'app.requester_order'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');
 
@@ -101,8 +102,23 @@
           }
         }
       });
+  }])
+  .run(['$rootScope', '$state', '$cookies', function($rootScope, $state, $cookies) {
+    $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
+      var cookie = $cookies.get('com.queuehero');
+      if (!cookie) {
+        if (toState.name !== 'home' && toState.name !== 'signup') {
+          evt.preventDefault();
+          $state.go('home');
+        }
+      } else {
+        if (toState.name === 'home') {
+          evt.preventDefault();
+          $state.go('choice');
+        }
+      }
+    });
 
   }]);
-
 
 })();

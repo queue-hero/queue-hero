@@ -26,8 +26,8 @@
     ajaxObj.orderFulfilled = function(transactionId) {
       console.log('About to make post request that order was fulfilled');
       return $http({
-        method: 'POST', 
-        url: serverUrl + '/requester/order/complete', 
+        method: 'POST',
+        url: serverUrl + '/requester/order/complete',
         data: { 'transactionId': transactionId }
       });
     };
@@ -42,11 +42,11 @@
 
     ajaxObj.isOrderAccepted = function(transactionId) {
       return $http({
-        method: 'POST', 
-        url: serverUrl + '/requester/order/details', 
+        method: 'POST',
+        url: serverUrl + '/requester/order/details',
         data: { 'transactionId': transactionId }
       });
-    }
+    };
 
     ajaxObj.postSignUp = function(user) {
       return $http({
@@ -94,11 +94,11 @@
 
     ajaxObj.rateRequester = function(rating, requester) {
       return $http({
-        method: 'POST', 
-        url: serverUrl + '/hero/order/complete', 
+        method: 'POST',
+        url: serverUrl + '/hero/order/complete',
         data: { rating: rating, requester: requester }
-      })
-    }
+      });
+    };
 
 
     return ajaxObj;
