@@ -52,7 +52,7 @@
 
         }, function(response) {
           console.log(response.status);
-        });
+        })
     };
 
 
