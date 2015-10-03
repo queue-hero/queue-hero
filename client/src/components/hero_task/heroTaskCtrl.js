@@ -7,32 +7,9 @@
       vm.displayId = 0;
       vm.confirm = false;
 
-      // this will be a get request from server
-      vm.orders = [{
-        time: "2015-10-02T05:20:58.409Z",
-        item: 'starbucks mocha frappe',
-        requester: 'Darrin',
-        transactionId: 10923,
-        price: 6,
-      }, {
-        time: "2015-10-02T05:27:58.409Z",
-        item: 'Americano',
-        requester: 'Tatsumi',
-        transactionId: 12,
-        price: 3,
-      }, {
-        time: "2015-10-02T05:23:21.892Z",
-        item: 'cookie',
-        requester: 'Shreeya',
-        transactionId: 1223,
-        price: 2,
-
-      }];
-
       ajaxFactory.getOpenRequests(vm.location)
         .then(function(response) {
-          // vm.orders = response.data;
-
+          vm.orders = response.data;
         }, function(response) {
           console.log(response.status);
         });
