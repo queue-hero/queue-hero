@@ -18,7 +18,7 @@ module.exports = function(app) {
 
   // req: obj with order details from the controller
   // res: 201 or error
-  app.post('/task');
+  app.post('/task', heroCtrl.acceptRequest);
 
   // req: Polling. setInterval poll server to check if order complete
   // res: Polling. return false until order complete

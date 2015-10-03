@@ -44,7 +44,7 @@
       return $http({
         method: 'POST', 
         url: serverUrl + '/requester/order/details', 
-        data: { 'transactionId': transactionId };
+        data: { 'transactionId': transactionId }
       });
     }
 
@@ -80,7 +80,6 @@
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/task',
-        //this param should uniquely identify the restaurant
         data: { transactionId: transactionId }
       });
     };

@@ -3,7 +3,6 @@ var Q = require('q');
 
 module.exports = {
   checkOrderComplete: function(req, res, next) {
-    console.log('Executing checkOrderComplete');
     //get transaction id from request
     var transactionId = req.body.transactionId;
 
@@ -29,5 +28,14 @@ module.exports = {
     //TODO: interface with db, always sends true
     res.status(201).send(true);
 
+  }, 
+  acceptRequest: function(req, res, next) {
+    //ge transaction id from request
+    var transactionId = req.body.transactionId;
+
+    //TODO: update status of transaction in db
+    //from unfulfilled to in progress
+
+    res.status(201).send('You have accepted a request');
   }
 }
