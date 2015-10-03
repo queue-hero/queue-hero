@@ -29,8 +29,8 @@
         method: 'POST', 
         url: serverUrl + '/requester/order/complete', 
         data: { 'transactionId': transactionId }
-      })
-    }
+      });
+    };
 
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
