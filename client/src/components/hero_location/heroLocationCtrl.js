@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-    .controller('HeroLocationCtrl', ['$state', 'heroFactory', function($state, heroFactory) {
+    .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', function($state, ajaxFactory, heroFactory) {
       var vm = this;
       vm.selection = undefined;
 
@@ -14,42 +14,29 @@
 
       navigator.geolocation.getCurrentPosition(success, error, options);
 
-      //**toDo - dummy data should remove later
-      vm.locations = [{
-        restaurant: 'starbucks',
-        address: '123 main street'
-      }, {
-        restaurant: 'subway',
-        address: '456 mission street'
-      }, {
-        restaurant: 'chipotle',
-        address: '789 market street'
-      }];
-
-
-
       vm.select = function(index) {
         vm.selection = index;
       };
-
       vm.confirm = function() {
         //set location of hero to vm.locations[vm.selection]
         heroFactory.setOrder(vm.locations[vm.selection]);
         $state.go('hero_task');
       };
 
-
       function success(position) {
-        vm.lat = position.coords.latitude;
-        vm.long = position.coords.longitude;
+        var lat = position.coords.latitude;
+        var long = position.coords.longitude;
+        ajaxFactory.getVenuesAtHeroLocation(lat, long)
+          //will be executed if status code is 200-299
+          .then(function successCallback(response) {
+            console.log(response.data);
+            vm.locations = response.data;
+          });
       }
 
       function error(err) {
         console.warn('ERROR(' + err.code + '): ' + err.message);
       }
-
-
-
 
     }]);
 
