@@ -23,6 +23,15 @@
       });
     };
 
+    ajaxObj.orderFulfilled = function(transactionId) {
+      console.log('About to make post request that order was fulfilled');
+      return $http({
+        method: 'POST', 
+        url: serverUrl + '/requester/order/complete', 
+        data: { 'transactionId': transactionId }
+      });
+    };
+
     ajaxObj.isOrderComplete = function(transactionId) {
       return $http({
         method: 'POST',
@@ -30,6 +39,14 @@
         data: { 'transactionId': transactionId }
       });
     };
+
+    ajaxObj.isOrderAccepted = function(transactionId) {
+      return $http({
+        method: 'POST', 
+        url: serverUrl + '/requester/order/details', 
+        data: { 'transactionId': transactionId };
+      });
+    }
 
     ajaxObj.postSignUp = function(user) {
       return $http({

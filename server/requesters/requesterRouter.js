@@ -14,9 +14,9 @@ module.exports = function(app) {
 
   // req: Polling. setInterval poll to server until match found
   // res: Polling. return false until match found
-  app.post('/order/details');
+  app.post('/order/details', requesterCtrl.checkOrderAccepted);
 
-  // req: order received + rating, queueheroId and requesterId
+  // req: order received
   // res: 201 or error
-  app.post('/order/complete');
+  app.post('/order/complete', requesterCtrl.fulfillTransaction);
 };
