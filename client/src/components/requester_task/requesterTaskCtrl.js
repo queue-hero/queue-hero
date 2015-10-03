@@ -50,13 +50,17 @@
     };
 
     vm.confirmOrder = function() {
-      //TODO: get all order details from factory
 
+      //get order from factory
       vm.order = requesterFactory.getOrder();
 
       ajaxFactory.sendOrder(vm.order)
         .then(function(response) {
           console.log('order was submitted successfully:', vm.order);
+
+          //save transaction id from server to factory
+          requesterFactory.setOrder({ transactionId: response.data });
+
           //move to next state
           $state.go('requester_order');
 
