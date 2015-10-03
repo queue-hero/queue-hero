@@ -6,6 +6,7 @@
       var profile = {
         username: undefined,
         password: undefined,
+        facebookId: undefined,
         profilePhoto: undefined,
         firstName: undefined,
         lastName: undefined,

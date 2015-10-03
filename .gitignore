@@ -40,3 +40,4 @@ build/
 
 #Client API Keys
 server/auth/api_keys.js
+server/config/api_keys.js
