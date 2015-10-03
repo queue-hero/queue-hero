@@ -15,7 +15,7 @@ module.exports = {
 
     //TODO: (db) insert a new transaction with order details into transactions
 
-    //FIX: send transaction id of newly created transaction to client
+    //FIX: change response to be id of newly created transaction
     console.log('Transaction was created!');
     res.sendStatus(201).send(1);
   }, 
@@ -36,9 +36,19 @@ module.exports = {
     //TODO: (db) check the status of above transaction, return 
     //true if status === 'accepted', false otherwise.
 
-    //FIX: change response status to be whatever the db says
+    //FIX: change status to be whatever the db says
     console.log('Transaction was accepted by a queue hero!');
     res.status(201).send(true);
+  },
+  getActiveShops: function(req, res, next) {
+
+    //extract area from req
+    var area = req.query.area;
+
+    //TODO: (db) find all checkins that are close to ^ area
+
+    //FIX: change response to be array of checked in locations
+    res.status(200).send(['Starbucks', 'Subway']);
   }
 }
 
