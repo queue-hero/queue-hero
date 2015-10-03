@@ -33,9 +33,15 @@ module.exports = {
      * radius_filter: search radius in meters
      * limit: number of results
      */
-    yelp.search({ll: location, sort: 1, category_filter: 'food', radius_filter: 300, limit: 10}, function(error, data) {
+    yelp.search({
+      ll: location,
+      sort: 1,
+      category_filter: 'food',
+      radius_filter: 300,
+      limit: 10
+    }, function(error, data) {
       var venuesFromYelp = data.businesses;
-      venuesFromYelp.forEach(function(value){
+      venuesFromYelp.forEach(function(value) {
         venues[value.name] = {
           name: value.name,
           address: value.location.address,
