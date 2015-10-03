@@ -14,7 +14,7 @@ module.exports = function(app) {
 
   // req: browser nav. location
   // map and location options
-  app.get('/task');
+  app.get('/task', heroCtrl.getOpenRequests);
 
   // req: obj with order details from the controller
   // res: 201 or error
