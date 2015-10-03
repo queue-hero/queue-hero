@@ -4,7 +4,7 @@
   angular.module('app.requester_order', [])
   .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', function($interval, ajaxFactory, requesterFactory, $state) {
     var vm = this;
-    vm.complete = false;
+    vm.complete = 'details';
 
     //FIX: These values have to be procured from the factory
     vm.location = '2nd and Mission';
@@ -27,7 +27,7 @@
           if (response.data === true) {
 
             //order is accepted, switch ui-views
-            vm.complete = true;
+            vm.complete = 'complete';
 
             //cancel polling
             $interval.cancel(checkOrder);
@@ -47,13 +47,21 @@
           //clear factory
           requesterFactory.setOrder({});
 
-          //progress to choice
-          $state.go('choice');
+          //order is confirmed, switch ui-view to rate hero
+          vm.complete = 'rate';
 
         }, function(response) {
           console.log(response.status);
         })
     };
+
+    vm.rateHero = function() {
+      console.log('rating hero');
+      //ajax factory call
+
+      //progress to choice
+      $state.go('choice');
+    }
 
 
   }]);

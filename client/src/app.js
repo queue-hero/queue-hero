@@ -99,6 +99,9 @@
           },
           'complete@requester_order': {
             templateUrl: 'src/components/requester_order/partial-complete.html'
+          },
+          'rate@requester_order': {
+            templateUrl: 'src/components/requester_order/partial-rate.html'
           }
         }
       });
