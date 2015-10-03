@@ -31,8 +31,10 @@
 
     vm.createMission = function(shop) {
       vm.shop = shop;
-      requesterFactory.setOrder({ shop: shop });
-      vm.current = 'item';
+      requesterFactory.setOrder({ vendor: shop,
+                                  meetingLocation: shop
+                               });
+      vm.current ='item';
     };
 
     vm.setItem = function() {
@@ -41,25 +43,30 @@
     };
 
     vm.pickTimePrice = function() {
-      requesterFactory.setOrder({ time: vm.time,
-                                  price: vm.price });
+      requesterFactory.setOrder({ meetingTime: vm.time,
+                                  moneyExchanged: vm.price });
       vm.current = 'confirm';
+      vm.order = requesterFactory.getOrder();
     };
 
     vm.confirmOrder = function() {
-      //TODO: get all order details from factory
 
-      //make ajaxFactoryRequest
-      //FIX: Hardcoded order for now
-      requesterFactory.setOrder({ status: 'complete' })
+      //get order from factory
+      vm.order = requesterFactory.getOrder();
+
+      ajaxFactory.sendOrder(vm.order)
         .then(function(response) {
+          console.log('order was submitted successfully:', vm.order);
 
-          console.log('order was submitted successfully');
+          //save transaction id from server to factory
+          requesterFactory.setOrder({ transactionId: response.data });
 
           //move to next state
           $state.go('requester_order');
+
         }, function(response) {
           console.log(response.status);
+          requesterFactory.setOrder({ status: 'complete' });
         });
     };
 
