@@ -62,7 +62,7 @@ module.exports = {
           image_url: value.image_url
         });
       });
-      res.send(venues);
+      res.status(200).send(venues);
     });
   },
 
