@@ -9,7 +9,7 @@ module.exports.restrict = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/#/');
+  next();
 };
 
 module.exports.initialize = function(app) {
@@ -19,7 +19,8 @@ module.exports.initialize = function(app) {
   app.use(session({
     secret: 'inception',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: { httpOnly: false }
   }));
 
   app.use(passport.initialize());
