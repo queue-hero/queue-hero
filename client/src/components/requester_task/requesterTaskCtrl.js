@@ -17,7 +17,10 @@
 
       ajaxFactory.getActiveShops(defaultArea)
         .then(function successCallback(response) {
-          vm.activeShops = response.activeShops;
+
+          console.log(response);
+          vm.activeShops = response.data;
+          console.log(vm.activeShops);
           vm.buildMap(defaultArea, vm.activeShops);
 
         }, function errorCallback(response) {
@@ -29,7 +32,7 @@
     //the mapping library function should be call here:
     };
 
-    vm.createMission = function(shop) {
+    vm.selectLocation = function(shop) {
       vm.shop = shop;
       requesterFactory.setOrder({ vendor: shop,
                                   meetingLocation: shop
