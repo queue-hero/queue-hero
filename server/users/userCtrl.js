@@ -11,5 +11,8 @@ module.exports = {
       }
       res.status(201).send(user);
     });
+  },
+  postUserData: function(req, res, next) {
+    res.status(201).send('User created');
   }
 };
