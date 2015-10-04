@@ -24,7 +24,7 @@
     function isOrderAccepted() {
       ajaxFactory.isOrderAccepted(vm.transactionId)
         .then(function(response) {
-          if (response.data === true) {
+          if (response.data.accepted === true) {
 
             //order is accepted, switch ui-views
             vm.complete = 'complete';

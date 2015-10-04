@@ -19,4 +19,6 @@ module.exports = function(app) {
   // req: order received
   // res: 201 or error
   app.post('/order/complete', requesterCtrl.fulfillTransaction);
+
+  app.post('/order/rate', requesterCtrl.rateHero);
 };
