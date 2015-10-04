@@ -105,18 +105,14 @@
   }])
   .run(['$rootScope', '$state', '$cookies', function($rootScope, $state, $cookies) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
-      var cookie = $cookies.get('com.queuehero');
+      var cookie = $cookies.get('connect.sid');
       if (!cookie) {
         if (toState.name !== 'home' && toState.name !== 'signup') {
           evt.preventDefault();
           $state.go('home');
         }
-      } else {
-        if (toState.name === 'home') {
-          evt.preventDefault();
-          $state.go('choice');
-        }
       }
+
     });
 
   }]);

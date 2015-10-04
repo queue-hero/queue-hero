@@ -1,4 +1,4 @@
-var Transaction = require('../transactions/transactionModel.js');
+var TransactionCtrl = require('../transactions/transactionCtrl.js');
 var Q = require('q');
 
 module.exports = {
@@ -6,13 +6,28 @@ module.exports = {
         //extract order details from req
     var requester = req.body.order.requester;
     var item = req.body.order.item;
+    var additionalRequests = req.body.order.additionalRequests;
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
-    var meetingTime = req.body.order.meetingTime;
+    var meetingTime = Date.now() + req.body.order.meetingTime*60000;
     var status = 'unfulfilled';
 
+    var order = {
+      requester: requester,
+      item: item,
+      additionalRequests: additionalRequests,
+      moneyExchanged: moneyExchanged,
+      vendor: vendor,
+      meetingLocation: meetingLocation,
+      meetingTime: meetingTime,
+      status: status
+    };
+
     //TODO: (db) insert a new transaction with order details into transactions
+
+    TransactionCtrl.createTransaction(order);
+
     //FIX: change response to be id of newly created transaction
     console.log('Transaction was created!');
     res.sendStatus(201).send(1);
@@ -24,7 +39,7 @@ module.exports = {
 
     //TODO: (db) update the transaction status of above transaction to 'fulfilled'
 
-    console.log('Transaction was fulfilled!')
+    console.log('Transaction was fulfilled!');
     res.status(201).send('Transaction fulfilled!');
   },
   checkOrderAccepted: function(req, res, next) {

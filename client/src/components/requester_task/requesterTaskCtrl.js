@@ -34,14 +34,17 @@
 
     vm.selectLocation = function(shop) {
       vm.shop = shop;
-      requesterFactory.setOrder({ vendor: shop,
-                                  meetingLocation: shop
+      //FIX: vendor and meetingLocation are hardcoded
+      requesterFactory.setOrder({ vendor: 'Starbucks',
+                                  meetingLocation: [1, 1]
                                });
       vm.current ='item';
     };
 
     vm.setItem = function() {
-      requesterFactory.setOrder({ item: vm.item });
+      requesterFactory.setOrder({ item: vm.item,
+                                  additionalRequests: vm.details
+                                });
       vm.current = 'time_price';
     };
 
