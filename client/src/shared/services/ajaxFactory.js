@@ -66,6 +66,18 @@
       });
     };
 
+    ajaxObj.getVenuesAtHeroLocation = function(lat, long) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/hero/location',
+        // this param should identify the location (lat, long) of hero
+        // server returns list of vendors for hero to confirm
+        params: {
+          lat: lat,
+          long: long
+        }
+      });
+    };
 
     ajaxObj.getOpenRequests = function(location) {
       return $http({

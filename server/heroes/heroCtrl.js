@@ -7,7 +7,7 @@ module.exports = {
 
   /*
    * @param {Object} on req.query {lat: lat, long: long}
-   * @return {Object} Object with map and location options
+   * @return {Array} Array with map and location options
    */
   getLocationOptions: function(req, res, next) {
     var lat = req.query.lat;
@@ -15,7 +15,7 @@ module.exports = {
     var location = lat + ',' + long;
 
     // store venue info from yelp
-    var venues = {};
+    var venues = [];
 
     var yelp = Yelp.createClient({
       consumer_key: Auth.yelp.consumer_key,
@@ -42,7 +42,7 @@ module.exports = {
     }, function(error, data) {
       var venuesFromYelp = data.businesses;
       venuesFromYelp.forEach(function(value) {
-        venues[value.name] = {
+        venues.push({
           name: value.name,
           address: value.location.address,
           city: value.location.city,
@@ -60,9 +60,9 @@ module.exports = {
           distance: value.distance,
           categories: value.categories,
           image_url: value.image_url
-        };
+        });
       });
-      res.send(venues);
+      res.status(200).send(venues);
     });
   },
 
