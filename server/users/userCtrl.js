@@ -16,6 +16,8 @@ module.exports = {
     var reqUser = req.body.user;
     // console.log('reqUser:',reqUser);
     var newUser = new User({
+      username: reqUser.username,
+      facebookId: reqUser.facebookId,
       firstName: reqUser.firstName,
       lastName: reqUser.lastName,
       phoneNumber: reqUser.phoneNumber,
@@ -27,8 +29,14 @@ module.exports = {
       state: reqUser.state,
       country: reqUser.country
     });
-    // console.log('DB:',newUser);
-    res.status(201).send('User created');
+    newUser.save(function(err){
+      if(err){
+        console.log(err);
+      }
+    }).then(function() {
+      console.log('DB:', 'saved');
+      res.status(201).send('User created');
+    })
   }
 };
 
