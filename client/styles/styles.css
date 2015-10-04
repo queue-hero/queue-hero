@@ -1,5 +1,8 @@
+body > div:first-of-type {
+  padding-top: 60px;
+}
+
 .choices {
-  padding-top: 55px;
   padding-left: 200px;
 }
 
@@ -14,7 +17,6 @@ button .requester {
 }
 
 .home {
-  padding-top: 55px;
   padding-left: 200px;
 }
 
