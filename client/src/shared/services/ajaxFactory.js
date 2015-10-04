@@ -24,6 +24,7 @@
     };
 
     ajaxObj.orderFulfilled = function(transactionId) {
+      console.log(serverUrl);
       console.log('About to make post request that order was fulfilled');
       return $http({
         method: 'POST',
@@ -49,6 +50,7 @@
     };
 
     ajaxObj.postSignUp = function(user) {
+        console.log(serverUrl + '/signup', user);
       return $http({
         method: 'POST',
         url: serverUrl + '/signup',

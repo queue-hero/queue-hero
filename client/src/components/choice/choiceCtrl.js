@@ -17,6 +17,8 @@
       .then(function successCallback(response) {
         //will be executed if status code is 200-299
         var data = response.data;
+        console.log(data);
+
         //save profile information into factory for future use
         profileFactory.setProfile(data);
 

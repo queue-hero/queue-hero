@@ -5,6 +5,7 @@
   <nav-bar></nav-bar>
   Signup view
   <form novalidate class="simple-form">
+    Create username: <input type="text" ng-model="ctrl.user.username" /><br/>
     First Name: <input type="text" ng-model="ctrl.user.firstName" /><br/>
     Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br/>
     Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
@@ -13,17 +14,19 @@
     Expiration Date: <input type="text" ng-model="ctrl.user.expDate" /><br/>
     Billing Address: <input type="text" ng-model="ctrl.user.billingAddress" /><br/>
     City: <input type="text" ng-model="ctrl.user.city" /><br/>
-    <select name="URL" onchange="">
+    <select name="URL" ng-model="ctrl.user.state">
       <option selected="selected" value="">Select State</option>
-      <option value="">Random value</option>
+      <option  value="California">California</option>
+      <option value="Tabasco">Tabasco</option>
     </select>
-    <select name="URL" onchange="">
-      <option selected="" value="">Select Country</option>
-      <option selected="selected" value="">USA</option>
+    <select name="URL" ng-model="ctrl.user.country">
+      <option selected="selected" value="">Select Country</option>
+      <option  value="USA">USA</option>
+      <option  value="Mexico">Mexico</option>
     </select><br/>
     <input type="submit" ng-click="ctrl.update()" value="Save" />
   </form>
-  <pre>user = {{ctrl.user | json }}</pre>
+  <pre>user = {{ ctrl.user | json }}</pre>
 </div>
     <!-- <input type="button" ng-click="reset()" value="Reset" /> -->
 
