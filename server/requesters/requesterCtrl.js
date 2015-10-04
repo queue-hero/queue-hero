@@ -51,7 +51,7 @@ module.exports = {
 
     //FIX: change status to be whatever the db says
     console.log('Transaction was accepted by a queue hero!');
-    res.status(201).send(true);
+    res.status(201).send({ accepted: true} );
   },
   getActiveShops: function(req, res, next) {
 
@@ -62,6 +62,15 @@ module.exports = {
 
     //FIX: change response to be array of checked in locations
     res.status(200).send(['Starbucks', 'Subway']);
+  }, 
+  rateHero: function(req, res, next) {
+    //extract rating and queueHero from req
+    var rating = req.body.rating;
+    var queueHero = req.body.hero;
+
+    //TODO: (db) find queuehero and update rating
+
+    res.status(201).send('You rated your queue hero!');
   }
 };
 

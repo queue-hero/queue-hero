@@ -4,7 +4,7 @@
   angular.module('app.requester_order', [])
   .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', function($interval, ajaxFactory, requesterFactory, $state) {
     var vm = this;
-    vm.complete = false;
+    vm.complete = 'details';
 
     //FIX: These values have to be procured from the factory
     vm.location = '2nd and Mission';
@@ -24,10 +24,10 @@
     function isOrderAccepted() {
       ajaxFactory.isOrderAccepted(vm.transactionId)
         .then(function(response) {
-          if (response.data === true) {
+          if (response.data.accepted === true) {
 
             //order is accepted, switch ui-views
-            vm.complete = true;
+            vm.complete = 'complete';
 
             //cancel polling
             $interval.cancel(checkOrder);
@@ -44,16 +44,33 @@
       ajaxFactory.orderFulfilled(vm.transactionId)
         .then(function(response) {
 
-          //clear factory
-          requesterFactory.setOrder({});
-
-          //progress to choice
-          $state.go('choice');
+          //order is confirmed, switch ui-view to rate hero
+          vm.complete = 'rate';
 
         }, function(response) {
           console.log(response.status);
         })
     };
+
+    vm.rateHero = function() {
+      console.log('rating hero');
+      var rating = vm.rating;
+      var hero = requesterFactory.getOrder('queueHero');
+      ajaxFactory.rateHero(rating, hero)
+        .then(function(response) {
+
+          //clear factory
+          requesterFactory.setOrder({});
+
+          //circle back to choice
+          $state.go('choice');
+
+        }, function(response) {
+          console.log(response.status);
+        })
+
+      
+    }
 
 
   }]);
