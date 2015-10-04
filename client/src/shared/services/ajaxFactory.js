@@ -44,7 +44,7 @@
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/details',
-        data: { 'transactionId': transactionId }
+        data: { 'transactionId': 1 }
       });
     };
 
@@ -97,6 +97,14 @@
         method: 'POST',
         url: serverUrl + '/hero/order/complete',
         data: { rating: rating, requester: requester }
+      });
+    };
+
+    ajaxObj.rateHero = function(rating, hero) {
+      return $http({
+        method: 'POST', 
+        url: serverUrl + '/requester/order/rate', 
+        data: { rating: rating, hero: hero }
       });
     };
 

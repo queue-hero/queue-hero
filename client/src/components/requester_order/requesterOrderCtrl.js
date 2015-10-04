@@ -44,9 +44,6 @@
       ajaxFactory.orderFulfilled(vm.transactionId)
         .then(function(response) {
 
-          //clear factory
-          requesterFactory.setOrder({});
-
           //order is confirmed, switch ui-view to rate hero
           vm.complete = 'rate';
 
@@ -57,10 +54,22 @@
 
     vm.rateHero = function() {
       console.log('rating hero');
-      //ajax factory call
+      var rating = vm.rating;
+      var hero = requesterFactory.getOrder('queueHero');
+      ajaxFactory.rateHero(rating, hero)
+        .then(function(response) {
 
-      //progress to choice
-      $state.go('choice');
+          //clear factory
+          requesterFactory.setOrder({});
+
+          //circle back to choice
+          $state.go('choice');
+
+        }, function(response) {
+          console.log(response.status);
+        })
+
+      
     }
 
 
