@@ -83,7 +83,8 @@
         url: serverUrl + '/hero/location',
         data: {
           queueHero: queueHero,
-          location: location }
+          location: location
+        }
       });
     };
 
@@ -118,7 +119,8 @@
         url: serverUrl + '/hero/order/complete',
         data: {
           rating: rating,
-          requester: requester }
+          requester: requester
+        }
       });
     };
 
@@ -128,7 +130,8 @@
         url: serverUrl + '/requester/order/rate',
         data: {
           rating: rating,
-          hero: hero }
+          hero: hero
+        }
       });
     };
 
