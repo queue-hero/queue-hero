@@ -67,14 +67,14 @@ exports.createTestUsers = function() {
   });
 
   Checkin.findOne({
-    queueHero: '10153623461113905',
+    queueHero: 'johnsmith',
     vendor: 'Chipotle'
   })
   .then(function(checkin){
     if (checkin){
     } else {
       var testCheckIn1 = new Checkin ({
-        queueHero:'10153623461113905',
+        queueHero:'johnsmith',
         vendor:'Chipotle',
         meetingLocation:'126 New Montgomery St, San Francisco, CA 94105',
         standingInLine:true,
@@ -97,7 +97,7 @@ exports.createTestUsers = function() {
     if (checkin){
     } else {
       var testCheckIn2 = new Checkin({
-        queueHero:'10153623461113905',
+        queueHero:'NapoleonB',
         vendor:'sushirrito',
         meetingLocation:'59 New Montgomery St, San Francisco, CA 94105',
         standingInLine:true,
@@ -113,14 +113,14 @@ exports.createTestUsers = function() {
   });
 
     Checkin.findOne({
-      queueHero:'10153623461113907',
+      queueHero:'NapoleonB',
       vendor:'kebab'
   })
   .then(function(checkin){
     if (checkin){
     } else {
       var testCheckIn3 = new Checkin({
-        queueHero:'10153623461113907',
+        queueHero:'NapoleonB',
         vendor:'kebab',
         meetingLocation:'156 New Montgomery St, San Francisco, CA 94105',
         standingInLine:false,
@@ -137,7 +137,7 @@ exports.createTestUsers = function() {
 
   var testTransaction1 =  new Transaction({
     queueHero: '',
-    requester: '10153623461113905',
+    requester: 'NapoleonB',
     item: 'milk coffee',
     additionalRequests: 'siracha',
     moneyExchange:13,
@@ -153,8 +153,8 @@ exports.createTestUsers = function() {
     }
   });
   var testTransaction2 = new Transaction({
-    queueHero: '10153623461113907',
-    requester: '10153623461113905',
+    queueHero: 'NapoleonB',
+    requester: 'johnsmith',
     item: 'sweet coffee',
     additionalRequests: 'lots of splenda and 5 icecubs',
     moneyExchange:13,
