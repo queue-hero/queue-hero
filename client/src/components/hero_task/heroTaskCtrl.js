@@ -6,11 +6,12 @@
       var vm = this;
       vm.displayId = 0;
       vm.confirm = false;
+      console.log('heros order beginning', heroFactory.getOrder());
+
 
       ajaxFactory.getOpenRequests(vm.location)
         .then(function(response) {
           vm.orders = response.data;
-          console.log(vm.orders);
         }, function(response) {
           console.log(response.status);
         });
@@ -36,10 +37,11 @@
       };
 
       vm.accept = function(id) {
-        ajaxFactory.confirmRequest(vm.orders[id].transactionId, heroFactory.getOrder('queueHero'))
+        ajaxFactory.confirmRequest(vm.orders[id]._id, heroFactory.getOrder('queueHero'))
           .then(function(response) {
             //save current transaction to heroFactory
             heroFactory.setOrder(vm.orders[id]);
+            heroFactory.setOrder({ transactionId: vm.orders[id]._id });
             $state.go('hero_order');
           }, function(response) {
             console.log(response.status);

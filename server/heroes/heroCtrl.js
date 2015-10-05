@@ -144,8 +144,10 @@ module.exports = {
           }
           res.status(204).send();
         });
+
+      } else {
+        res.status(500).send();
       }
-      res.status(500).send();
 
     });
 
