@@ -23,8 +23,6 @@
     };
 
     ajaxObj.orderFulfilled = function(transactionId) {
-      console.log(serverUrl);
-      console.log('About to make post request that order was fulfilled');
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/complete',
@@ -125,13 +123,14 @@
       });
     };
 
-    ajaxObj.rateHero = function(rating, hero) {
+    ajaxObj.rateHero = function(rating, queueHero, transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/rate',
         data: {
           rating: rating,
-          hero: hero
+          queueHero: queueHero,
+          transactionId: transactionId
         }
       });
     };

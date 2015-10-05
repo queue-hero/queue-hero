@@ -59,12 +59,10 @@
 
     vm.rateHero = function() {
       console.log('rating hero');
-      var rating = vm.rating;
-      var hero = requesterFactory.getOrder('queueHero');
-      ajaxFactory.rateHero(rating, hero)
+      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
-          //clear factory
+          //**toDO modify factory API to allow order resets
           requesterFactory.setOrder({});
 
           //circle back to choice

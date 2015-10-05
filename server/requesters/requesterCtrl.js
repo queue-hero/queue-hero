@@ -37,12 +37,19 @@ module.exports = {
   fulfillTransaction: function(req, res, next) {
 
     //extract transaction id from req
-    var transactionId = req.params.transactionId;
+    var transactionId = req.body.transactionId;
+    Transaction.update({ _id: transactionId }, { status: 'complete' }, function(err, affected) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (affected.ok === 1) {
+        res.status(201).send();
+      }
+      res.status(500).send();
+    });
 
     //TODO: (db) update the transaction status of above transaction to 'fulfilled'
 
-    console.log('Transaction was fulfilled!');
-    res.status(201).send('Transaction fulfilled!');
   },
   checkOrderAccepted: function(req, res, next) {
     //extract transaction id from req
@@ -77,10 +84,33 @@ module.exports = {
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
-    var queueHero = req.body.hero;
+    var queueHero = req.body.queueHero;
+    var transactionId = req.body.transactionId;
 
-    //TODO: (db) find queuehero and update rating
+    User.findOne({ username: queueHero }, function(err, user) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (!user) {
+        res.status(401).send();
+      }
+      var ratings = user.ratings;
+      ratings.transactionId = rating;
+      User.update({
+        username: queueHero
+      }, {
+        ratings: ratings
+      }, function(err, rowsAffected) {
+        if (err) {
+          res.status(500).send();
+        }
+        if (rowsAffected.ok === 1) {
+          res.status(204).send();
+        }
+        res.status(500).send();
+      });
 
-    res.status(201).send('You rated your queue hero!');
+    });
+
   }
 };
