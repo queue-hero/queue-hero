@@ -47,15 +47,15 @@ module.exports = {
     //extract transaction id from req
     var transactionId = req.query.transactionId;
 
-    Transaction.findOne({ _id: transactionId }, function(err, user){
-      if(err){
+    Transaction.findOne({ _id: transactionId }, function(err, user) {
+      if (err) {
         res.status(500).send();
       }
-      if(!user){
+      if (!user) {
         res.status(401).send();
       }
 
-      if(user.queueHero){
+      if (user.queueHero) {
         res.status(200).send(user.queueHero);
       }
       console.log('here');
