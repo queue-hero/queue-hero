@@ -2,9 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl',
-              ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory',
-              function($state, ajaxFactory, heroFactory, profileFactory) {
+  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', function($state, ajaxFactory, heroFactory, profileFactory) {
 
     var vm = this;
     vm.selection = undefined;
