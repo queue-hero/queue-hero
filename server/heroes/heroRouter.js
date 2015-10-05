@@ -22,7 +22,7 @@ module.exports = function(app) {
 
   // req: Polling. setInterval poll server to check if order complete
   // res: Polling. return false until order complete
-  app.post('/order/details', heroCtrl.checkOrderComplete);
+  app.get('/order/details', heroCtrl.checkOrderComplete);
 
   // req: rating, queueheroId, requesterId
   // res: 201 or error
