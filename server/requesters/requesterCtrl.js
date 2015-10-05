@@ -1,5 +1,5 @@
 var TransactionCtrl = require('../transactions/transactionCtrl.js');
-var Transaction = require('./../transaction/transactionModel.js');
+var Transaction = require('./../transactions/transactionModel.js');
 var Q = require('q');
 
 module.exports = {
