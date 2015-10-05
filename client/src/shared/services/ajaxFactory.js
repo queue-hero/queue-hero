@@ -86,12 +86,12 @@
       });
     };
 
-    ajaxObj.getOpenRequests = function(location) {
+    ajaxObj.getOpenRequests = function(vendorYelpId) {
       return $http({
         method: 'GET',
         url: serverUrl + '/hero/task',
         //this param should uniquely identify the restaurant
-        params: { location: location }
+        params: { vendorYelpId: vendorYelpId }
       });
     };
 

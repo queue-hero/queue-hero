@@ -11,6 +11,7 @@
         additionalRequests: undefined,
         moneyExchanged: undefined,
         vendor: undefined,
+        vendorYelpId: undefined,
         meetingLocation: undefined,
         meetingTime: undefined,
         status: undefined
