@@ -66,6 +66,10 @@ module.exports = {
     });
   },
 
+  setLocation: function(req, res, next) {
+
+  },
+
   checkOrderComplete: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;

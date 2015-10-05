@@ -10,7 +10,7 @@ module.exports = function(app) {
 
   // req: option chosen / location of hero
   // res: 201 or error
-  app.post('/location');
+  app.post('/location', heroCtrl.setLocation);
 
   // req: browser nav. location
   // map and location options
