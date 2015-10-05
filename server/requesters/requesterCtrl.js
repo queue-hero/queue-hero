@@ -38,11 +38,11 @@ module.exports = {
 
     //extract transaction id from req
     var transactionId = req.body.transactionId;
-    Transaction.update({ _id: transactionId }, {status: 'complete'}, function(err, affected){
-      if(err){
+    Transaction.update({ _id: transactionId }, { status: 'complete' }, function(err, affected) {
+      if (err) {
         res.status(500).send();
       }
-      if(affected.ok === 1){
+      if (affected.ok === 1) {
         res.status(201).send();
       }
       res.status(500).send();
@@ -87,20 +87,24 @@ module.exports = {
     var queueHero = req.body.queueHero;
     var transactionId = req.body.transactionId;
 
-    User.findOne({ username: queueHero }, function(err, user){
-      if(err){
+    User.findOne({ username: queueHero }, function(err, user) {
+      if (err) {
         res.status(500).send();
       }
-      if(!user){
+      if (!user) {
         res.status(401).send();
       }
       var ratings = user.ratings;
       ratings.transactionId = rating;
-      User.update({ username: queueHero }, { ratings: ratings }, function(err, rowsAffected){
-        if(err){
+      User.update({
+        username: queueHero
+      }, {
+        ratings: ratings
+      }, function(err, rowsAffected) {
+        if (err) {
           res.status(500).send();
         }
-        if(rowsAffected.ok === 1){
+        if (rowsAffected.ok === 1) {
           res.status(204).send();
         }
         res.status(500).send();
