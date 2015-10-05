@@ -42,9 +42,9 @@
 
     ajaxObj.isOrderAccepted = function(transactionId) {
       return $http({
-        method: 'POST',
+        method: 'GET',
         url: serverUrl + '/requester/order/details',
-        data: { 'transactionId': 1 }
+        params: { transactionId: transactionId }
       });
     };
 
