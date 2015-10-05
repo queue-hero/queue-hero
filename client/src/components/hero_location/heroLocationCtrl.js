@@ -2,7 +2,10 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', function($state, ajaxFactory, heroFactory) {
+  .controller('HeroLocationCtrl',
+              ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory',
+              function($state, ajaxFactory, heroFactory, profileFactory) {
+
     var vm = this;
     vm.selection = undefined;
 
@@ -19,9 +22,10 @@
       vm.selection = index;
     };
     vm.confirm = function() {
+      var queueHero = profileFactory.getProfile('username');
       //set location of hero to vm.locations[vm.selection]
-      ajaxFactory.setHeroLocation(vm.locations[vm.selection])
-        //will be executed if status code is 200-299
+      ajaxFactory.setHeroLocation(queueHero, vm.locations[vm.selection])
+        //will be executed if status code is 200-299,
         .then(function successCallback(response) {
           console.log(vm.locations[vm.selection]);
           heroFactory.setOrder(vm.locations[vm.selection]);

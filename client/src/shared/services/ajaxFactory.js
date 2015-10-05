@@ -81,11 +81,11 @@
       });
     };
 
-    ajaxObj.setHeroLocation = function(location) {
+    ajaxObj.setHeroLocation = function(queueHero, location) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/location',
-        data: { location: location }
+        data: { queueHero: queueHero, location: location }
       });
     };
 
