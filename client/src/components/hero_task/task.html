@@ -4,11 +4,11 @@
 
   <div>
     <div>item: {{ ctrl.orders[ctrl.displayId].item }}</div>
-    <div>price: {{ ctrl.orders[ctrl.displayId].price }}</div>
+    <div>price: {{ ctrl.orders[ctrl.displayId].moneyExchanged }}</div>
     <img src="" alt="{{ ctrl.orders[ctrl.displayId].requester }}">
 
     <div>
-      <span>time: {{ ctrl.orders[ctrl.displayId].time | date : 'h:mm a' }} </span>
+      <span>time: {{ ctrl.orders[ctrl.displayId].meetingTime | date : 'h:mm a' }} </span>
     </div>
 
       <button ng-click="ctrl.previous()" ng-disabled="ctrl.displayId === 0">Previous</button>
