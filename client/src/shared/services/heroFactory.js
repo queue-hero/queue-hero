@@ -10,10 +10,13 @@
         item: undefined,
         moneyExchanged: undefined,
         vendor: undefined,
+        vendorYelpId: undefined,
         meetingLocation: undefined,
+        meetingLocationLatLong: undefined,
         currentLocation: undefined,
         meetingTime: undefined,
-        status: undefined
+        status: undefined,
+        additionalRequests: undefined
       };
 
       return {
