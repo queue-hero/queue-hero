@@ -105,7 +105,7 @@ module.exports = {
 
     // find transaction, and then check if status is complete
     var findTransaction = Q.nbind(Transaction.findOne, Transaction);
-    findTransaction({_id: transactionId})
+    findTransaction({ _id: transactionId })
       .then(function(transaction) {
         if (!transaction) {
           console.log('transaction does not exist');
@@ -159,7 +159,7 @@ module.exports = {
 
     //TODO: (db) find all transactions with location = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({status: { $ne: 'complete'} }, function(err, transactions) {
+    Transaction.find({ status: { $ne: 'complete' } }, function(err, transactions) {
       if (err) {
         res.status(500).send();
       }

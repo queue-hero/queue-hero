@@ -6,7 +6,6 @@
       var vm = this;
       vm.displayId = 0;
       vm.confirm = false;
-      console.log('heros order beginning', heroFactory.getOrder());
 
 
       ajaxFactory.getOpenRequests(vm.location)
