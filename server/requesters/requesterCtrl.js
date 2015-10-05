@@ -30,7 +30,7 @@ module.exports = {
 
     //FIX: change response to be id of newly created transaction
     console.log('Transaction was created!');
-    res.sendStatus(201).send(1);
+    res.sendStatus(201).send();
   },
   fulfillTransaction: function(req, res, next) {
 
@@ -62,7 +62,7 @@ module.exports = {
 
     //FIX: change response to be array of checked in locations
     res.status(200).send(['Starbucks', 'Subway']);
-  }, 
+  },
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
