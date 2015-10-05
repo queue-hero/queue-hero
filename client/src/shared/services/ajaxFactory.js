@@ -102,11 +102,15 @@
       });
     };
 
-    ajaxObj.rateRequester = function(rating, requester) {
+    ajaxObj.rateRequester = function(rating, requester, transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/order/complete',
-        data: { rating: rating, requester: requester }
+        data: {
+          rating: rating,
+          requester: requester,
+          transactionId: transactionId
+        }
       });
     };
 

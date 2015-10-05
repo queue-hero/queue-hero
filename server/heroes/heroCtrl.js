@@ -2,6 +2,7 @@ var Transaction = require('../transactions/transactionModel.js');
 var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
+var User = require('./../users/userModel.js');
 
 module.exports = {
 
@@ -136,13 +137,29 @@ module.exports = {
   },
 
   rateRequester: function(req, res, next) {
-    console.log('gets invoked');
     //get rating and requester from request
     var rating = req.body.rating;
     var requester = req.body.requester;
+    var transactionId = req.body.transactionId;
 
-    //TODO: (db) update the ^ requester's rating with ^ rating
+    User.findOne({username: requester}, function(err, user){
+      if(err){
+        res.status(500).send();
+      }
+      if(!user){
+        res.status(401).send();
+      }
+      var ratings = user.ratings;
+      ratings.transactionId = rating;
+      User.update({ username: requester }, {ratings: ratings}, function(err, rowsAffected){
+        if(err){
+          res.status(500).send();
+        }
+        res.status(204).send();
+      });
 
-    res.status(201).send('You rated your requester');
+
+    });
+
   }
 };
