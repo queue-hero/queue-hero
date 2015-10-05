@@ -70,7 +70,6 @@ module.exports = {
   /*
    * @param {Object} queuehero: queuehero, location: location
    * @return {String} checkin._id
-   * just in case checkin._id becomes necessary
    */
   setLocation: function(req, res, next) {
     var location = req.body.location;
@@ -86,7 +85,7 @@ module.exports = {
       if (err) {
         consoole.log(err);
       } else {
-        console.log(newCheckin._id);
+   // returning newCheckin._id, may use it in /hero/task
         res.status(201).send(newCheckin._id);
       }
     });

@@ -27,7 +27,6 @@
       ajaxFactory.setHeroLocation(queueHero, vm.locations[vm.selection])
         //will be executed if status code is 200-299,
         .then(function successCallback(response) {
-          console.log(vm.locations[vm.selection]);
           heroFactory.setOrder(vm.locations[vm.selection]);
       });
       $state.go('hero_task');
