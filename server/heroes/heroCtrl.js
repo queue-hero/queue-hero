@@ -138,7 +138,7 @@ module.exports = {
         res.status(500).send();
       }
       if (rowsAffected.ok === 1) {
-        Checkin.remove({ username: queueHero}, function(err){
+        Checkin.remove({ username: queueHero }, function(err){
           if (err) {
             res.status(500).send();
           }
