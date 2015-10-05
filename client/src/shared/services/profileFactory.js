@@ -13,7 +13,8 @@
         phoneNumber: undefined,
         cardNumber: undefined,
         cvc: undefined,
-        expirationDate: undefined
+        expirationDate: undefined,
+        ratings: undefined
 
       };
 

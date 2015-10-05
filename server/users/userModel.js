@@ -61,6 +61,11 @@ var UserSchema = new mongoose.Schema({
   country: {
     type: String,
     //required: true
+  },
+  ratings: {
+    type: {},
+    default: {}
+    //required: true
   }
 });
 
