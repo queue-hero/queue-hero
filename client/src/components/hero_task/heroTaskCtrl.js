@@ -7,6 +7,7 @@
       vm.displayId = 0;
       vm.confirm = false;
 
+
       ajaxFactory.getOpenRequests(vm.location)
         .then(function(response) {
           vm.orders = response.data;
@@ -35,10 +36,11 @@
       };
 
       vm.accept = function(id) {
-        ajaxFactory.confirmRequest(vm.orders[id].transactionId)
+        ajaxFactory.confirmRequest(vm.orders[id]._id, heroFactory.getOrder('queueHero'))
           .then(function(response) {
             //save current transaction to heroFactory
             heroFactory.setOrder(vm.orders[id]);
+            heroFactory.setOrder({ transactionId: vm.orders[id]._id });
             $state.go('hero_order');
           }, function(response) {
             console.log(response.status);

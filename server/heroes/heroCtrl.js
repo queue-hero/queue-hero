@@ -3,6 +3,7 @@ var Checkin = require('../checkins/checkinModel.js');
 var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
+var User = require('./../users/userModel.js');
 
 module.exports = {
 
@@ -104,7 +105,7 @@ module.exports = {
 
     // find transaction, and then check if status is complete
     var findTransaction = Q.nbind(Transaction.findOne, Transaction);
-    findTransaction({_id: transactionId})
+    findTransaction({ _id: transactionId })
       .then(function(transaction) {
         if (!transaction) {
           console.log('transaction does not exist');
@@ -126,11 +127,30 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
+    var queueHero = req.body.queueHero;
+    var update = {
+      queueHero: queueHero,
+      status: 'inprogress'
+    };
 
-    //TODO: (db) update status of transaction
-    //from unfulfilled to in progress
+    Transaction.update({ _id: transactionId }, update, function(err, rowsAffected) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (rowsAffected.ok === 1) {
+        Checkin.remove({ username: queueHero }, function(err) {
+          if (err) {
+            res.status(500).send();
+          }
+          res.status(204).send();
+        });
 
-    res.status(201).send('You have accepted a request');
+      } else {
+        res.status(500).send();
+      }
+
+    });
+
   },
 
   getOpenRequests: function(req, res, next) {
@@ -138,43 +158,44 @@ module.exports = {
     var location = req.query.location;
 
     //TODO: (db) find all transactions with location = ^
-
-    //FIX: this is dummy data (needs to be gotten from the db)
-    var orders = [{
-        time: "2015-10-02T05:20:58.409Z",
-        item: 'starbucks mocha frappe',
-        requester: 'Darrin',
-        transactionId: 10923,
-        price: 6,
-      }, {
-        time: "2015-10-02T05:27:58.409Z",
-        item: 'Americano',
-        requester: 'Tatsumi',
-        transactionId: 12,
-        price: 3,
-      }, {
-        time: "2015-10-02T05:23:21.892Z",
-        item: 'cookie',
-        requester: 'Shreeya',
-        transactionId: 1223,
-        price: 2,
-
+    //currently this query just gets all transactions that are not complete
+    Transaction.find({ status: { $ne: 'complete' } }, function(err, transactions) {
+      if (err) {
+        res.status(500).send();
       }
-    ];
+      res.status(200).send(transactions);
 
-    orders = JSON.stringify(orders);
+    });
 
-    res.status(201).send(orders);
   },
 
   rateRequester: function(req, res, next) {
-    console.log('gets invoked');
     //get rating and requester from request
     var rating = req.body.rating;
     var requester = req.body.requester;
+    var transactionId = req.body.transactionId;
 
-    //TODO: (db) update the ^ requester's rating with ^ rating
+    User.findOne({ username: requester }, function(err, user) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (!user) {
+        res.status(401).send();
+      }
+      var ratings = user.ratings;
+      ratings.transactionId = rating;
+      User.update({ username: requester }, { ratings: ratings }, function(err, rowsAffected) {
+        if (err) {
+          res.status(500).send();
+        }
+        if (rowsAffected.ok === 1) {
+          res.status(204).send();
+        }
+        res.status(500).send();
+      });
 
-    res.status(201).send('You rated your requester');
+
+    });
+
   }
 };

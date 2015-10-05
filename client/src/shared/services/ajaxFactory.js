@@ -23,8 +23,6 @@
     };
 
     ajaxObj.orderFulfilled = function(transactionId) {
-      console.log(serverUrl);
-      console.log('About to make post request that order was fulfilled');
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/complete',
@@ -42,9 +40,9 @@
 
     ajaxObj.isOrderAccepted = function(transactionId) {
       return $http({
-        method: 'POST',
+        method: 'GET',
         url: serverUrl + '/requester/order/details',
-        data: { 'transactionId': 1 }
+        params: { transactionId: transactionId }
       });
     };
 
@@ -97,11 +95,14 @@
       });
     };
 
-    ajaxObj.confirmRequest = function(transactionId) {
+    ajaxObj.confirmRequest = function(transactionId, queueHero) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/task',
-        data: { transactionId: transactionId }
+        data: {
+          transactionId: transactionId,
+          queueHero: queueHero
+        }
       });
     };
 
@@ -113,24 +114,26 @@
       });
     };
 
-    ajaxObj.rateRequester = function(rating, requester) {
+    ajaxObj.rateRequester = function(rating, requester, transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/order/complete',
         data: {
           rating: rating,
-          requester: requester
+          requester: requester,
+          transactionId: transactionId
         }
       });
     };
 
-    ajaxObj.rateHero = function(rating, hero) {
+    ajaxObj.rateHero = function(rating, queueHero, transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/rate',
         data: {
           rating: rating,
-          hero: hero
+          queueHero: queueHero,
+          transactionId: transactionId
         }
       });
     };

@@ -8,7 +8,7 @@
 
     //**place holders, this information should come from server
     //once server routes our enabled, this will provide order data
-    //**this information should actually be in the hero factory, 
+    //**this information should actually be in the hero factory,
     //not gotten from the server (order data)
     vm.order = heroFactory.getOrder();
 
@@ -36,7 +36,7 @@
             $interval.cancel(checkOrder);
 
             //remove current transaction from factory
-            heroFactory.setOrder({});
+            heroFactory.setOrder();
 
           }
         }, function(response) {
@@ -45,11 +45,9 @@
     }
 
     vm.rateRequester = function() {
-      var rating = vm.rating;
-      var requester = heroFactory.getOrder('requester');
-      ajaxFactory.rateRequester(rating, requester)
+      ajaxFactory.rateRequester(vm.rating, vm.order.requester, vm.order.transactionId)
         .then(function(response) {
-
+          console.log(response.status);
           //clear the factory containing transaction details
           heroFactory.setOrder({});
 
@@ -58,7 +56,7 @@
 
         }, function(response) {
           console.log(response.status);
-        })
+        });
     };
 
   }]);
