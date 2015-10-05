@@ -26,8 +26,8 @@
         //will be executed if status code is 200-299,
         .then(function successCallback(response) {
           heroFactory.setOrder(vm.locations[vm.selection]);
+          $state.go('hero_task');
       });
-      $state.go('hero_task');
     };
 
     function success(position) {
