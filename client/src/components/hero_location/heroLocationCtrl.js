@@ -25,7 +25,15 @@
       ajaxFactory.setHeroLocation(queueHero, vm.locations[vm.selection])
         //will be executed if status code is 200-299,
         .then(function successCallback(response) {
-          heroFactory.setOrder(vm.locations[vm.selection]);
+          var venue = vm.locations[vm.selection];
+          heroFactory.setOrder({
+            queueHero: queueHero,
+            vendor: venue.name,
+            vendorYelpId: venue.yelpId,
+            meetingLocation: venue.displayAddress,
+            meetingLocationLatLong: [venue.lat, venue.long],
+            status: 'checked in'
+          });
           $state.go('hero_task');
       });
     };
