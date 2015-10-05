@@ -20,7 +20,12 @@
     };
     vm.confirm = function() {
       //set location of hero to vm.locations[vm.selection]
-      heroFactory.setOrder(vm.locations[vm.selection]);
+      ajaxFactory.setHeroLocation(vm.locations[vm.selection])
+        //will be executed if status code is 200-299
+        .then(function successCallback(response) {
+          console.log(vm.locations[vm.selection]);
+          heroFactory.setOrder(vm.locations[vm.selection]);
+      });
       $state.go('hero_task');
     };
 
@@ -29,8 +34,8 @@
       var long = position.coords.longitude;
       ajaxFactory.getVenuesAtHeroLocation(lat, long)
       //will be executed if status code is 200-299
-      .then(function successCallback(response) {
-        vm.locations = response.data;
+        .then(function successCallback(response) {
+          vm.locations = response.data;
       });
     }
 

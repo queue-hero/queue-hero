@@ -81,6 +81,14 @@
       });
     };
 
+    ajaxObj.setHeroLocation = function(location) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/hero/location',
+        data: { location: location }
+      });
+    };
+
     ajaxObj.getOpenRequests = function(location) {
       return $http({
         method: 'GET',
