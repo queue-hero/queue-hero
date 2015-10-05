@@ -6,9 +6,10 @@
       var vm = this;
       vm.displayId = 0;
       vm.confirm = false;
+      vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
 
 
-      ajaxFactory.getOpenRequests(vm.location)
+      ajaxFactory.getOpenRequests(vm.vendorYelpId)
         .then(function(response) {
           vm.orders = response.data;
         }, function(response) {
