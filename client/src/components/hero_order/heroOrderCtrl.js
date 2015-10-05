@@ -36,7 +36,7 @@
             $interval.cancel(checkOrder);
 
             //remove current transaction from factory
-            heroFactory.setOrder({});
+            heroFactory.setOrder();
 
           }
         }, function(response) {

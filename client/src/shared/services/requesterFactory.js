@@ -49,6 +49,10 @@
 
 
       function setOrder(obj) {
+        if (obj === undefined){
+          order = {};
+          return true;
+        }
         if (!angular.isObject(obj)) {
           return null;
         }

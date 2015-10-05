@@ -63,7 +63,7 @@
         .then(function(response) {
 
           //**toDO modify factory API to allow order resets
-          requesterFactory.setOrder({});
+          requesterFactory.setOrder();
 
           //circle back to choice
           $state.go('choice');
