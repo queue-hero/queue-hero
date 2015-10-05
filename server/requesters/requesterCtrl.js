@@ -37,7 +37,7 @@ module.exports = {
   fulfillTransaction: function(req, res, next) {
 
     //extract transaction id from req
-    var transactionId = req.body.transactionId;
+    var transactionId = req.params.transactionId;
 
     //TODO: (db) update the transaction status of above transaction to 'fulfilled'
 
@@ -46,16 +46,23 @@ module.exports = {
   },
   checkOrderAccepted: function(req, res, next) {
     //extract transaction id from req
-    var transactionId = req.body.transactionId;
+    var transactionId = req.query.transactionId;
 
-    //TODO: (db) check the status of above transaction, return
-    //true if status === 'accepted', false otherwise.
+    Transaction.findOne({ _id: transactionId }, function(err, user) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (!user) {
+        res.status(401).send();
+      }
 
-    //FIX: change status to be whatever the db says
-    console.log('Transaction was accepted by a queue hero!');
-    res.status(201).send({
-      accepted: true
+      if (user.queueHero) {
+        res.status(200).send(user.queueHero);
+      }
+      console.log('here');
+      res.status(200).send(false);
     });
+
   },
   getActiveShops: function(req, res, next) {
 
