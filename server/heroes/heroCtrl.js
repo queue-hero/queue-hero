@@ -187,7 +187,10 @@ module.exports = {
         if(err){
           res.status(500).send();
         }
-        res.status(204).send();
+        if(rowsAffected.ok === 1){
+          res.status(204).send();
+        }
+        res.status(500).send();
       });
 
 
