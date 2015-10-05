@@ -29,7 +29,7 @@
             console.log(response.data);
 
             vm.order.queueHero = response.data;
-            requesterFactory.setOrder({queueHero: response.data});
+            requesterFactory.setOrder({ queueHero: response.data });
 
             //order is accepted, switch ui-views
             vm.complete = 'complete';

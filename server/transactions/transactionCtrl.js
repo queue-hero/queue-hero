@@ -4,13 +4,13 @@ var Transaction = require('./transactionModel.js');
 exports.createTransaction = function(order) {
 
   var transaction = new Transaction({
-    requester: order.requester, 
-    item: order.item, 
+    requester: order.requester,
+    item: order.item,
     additionalRequests: order.additionalRequests,
-    moneyExchanged: order.moneyExchanged, 
-    meetingTime: order.meetingTime, 
-    meetingLocation: [1, 1], 
-    vendor: order.vendor, 
+    moneyExchanged: order.moneyExchanged,
+    meetingTime: order.meetingTime,
+    meetingLocation: [1, 1],
+    vendor: order.vendor,
     status: order.status
   });
 
@@ -23,4 +23,4 @@ exports.createTransaction = function(order) {
   });
 
   console.log('Saved new transaction to db');
-}
+};

@@ -1,20 +1,20 @@
 var TransactionCtrl = require('../transactions/transactionCtrl.js');
-var Transaction = require('../transactions/transactionModel.js');
+var Transaction = require('./../transactions/transactionModel.js');
 var Q = require('q');
 
 module.exports = {
   createTransaction: function(req, res, next) {
-        //extract order details from req
+    //extract order details from req
     var requester = req.body.order.requester;
     var item = req.body.order.item;
     var additionalRequests = req.body.order.additionalRequests;
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
-    var meetingTime = Date.now() + req.body.order.meetingTime*60000;
+    var meetingTime = Date.now() + req.body.order.meetingTime * 60000;
     var status = 'unfulfilled';
 
-    var order = {
+    var transaction = new Transaction({
       requester: requester,
       item: item,
       additionalRequests: additionalRequests,
@@ -23,15 +23,16 @@ module.exports = {
       meetingLocation: meetingLocation,
       meetingTime: meetingTime,
       status: status
-    };
+    });
 
-    //TODO: (db) insert a new transaction with order details into transactions
+    transaction.save(function(err, transaction) {
+      if (err) {
+        res.status(500).send();
+      } else {
+        res.status(201).send(transaction._id);
+      }
+    });
 
-    TransactionCtrl.createTransaction(order);
-
-    //FIX: change response to be id of newly created transaction
-    console.log('Transaction was created!');
-    res.sendStatus(201).send(1);
   },
   fulfillTransaction: function(req, res, next) {
 
@@ -54,15 +55,15 @@ module.exports = {
     //extract transaction id from req
     var transactionId = req.query.transactionId;
 
-    Transaction.findOne({ _id: transactionId }, function(err, user){
-      if(err){
+    Transaction.findOne({ _id: transactionId }, function(err, user) {
+      if (err) {
         res.status(500).send();
       }
-      if(!user){
+      if (!user) {
         res.status(401).send();
       }
 
-      if(user.queueHero){
+      if (user.queueHero) {
         res.status(200).send(user.queueHero);
       }
       console.log('here');
@@ -109,4 +110,3 @@ module.exports = {
 
   }
 };
-
