@@ -24,7 +24,7 @@ module.exports = function(app) {
   // res: Polling. return false until order complete
   app.get('/order/details', heroCtrl.checkOrderComplete);
 
-  // req: rating, queueheroId, requesterId
+  // req: rating, requester, transactionId
   // res: 201 or error
   app.post('/order/complete', heroCtrl.rateRequester);
 };

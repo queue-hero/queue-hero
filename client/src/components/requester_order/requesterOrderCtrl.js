@@ -4,6 +4,7 @@
   angular.module('app.requester_order', [])
   .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', function($interval, ajaxFactory, requesterFactory, $state) {
     var vm = this;
+    vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
 
     //FIX: These values have to be procured from the factory
@@ -22,9 +23,13 @@
     /*Continuously polls server asking whether requester's
     /order has been accepted yet.*/
     function isOrderAccepted() {
-      ajaxFactory.isOrderAccepted(vm.transactionId)
+      ajaxFactory.isOrderAccepted(vm.order.transactionId)
         .then(function(response) {
-          if (response.data.accepted === true) {
+          if (response.data) {
+            console.log(response.data);
+
+            vm.order.queueHero = response.data;
+            requesterFactory.setOrder({ queueHero: response.data });
 
             //order is accepted, switch ui-views
             vm.complete = 'complete';
@@ -35,8 +40,8 @@
           }
         }, function(response) {
             console.log(response.status);
-        })
-    };
+        });
+    }
 
     /*Sends notice to server that exchange occurred*/
     vm.confirmReceipt = function() {
@@ -49,17 +54,15 @@
 
         }, function(response) {
           console.log(response.status);
-        })
+        });
     };
 
     vm.rateHero = function() {
       console.log('rating hero');
-      var rating = vm.rating;
-      var hero = requesterFactory.getOrder('queueHero');
-      ajaxFactory.rateHero(rating, hero)
+      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
-          //clear factory
+          //**toDO modify factory API to allow order resets
           requesterFactory.setOrder({});
 
           //circle back to choice
@@ -67,10 +70,10 @@
 
         }, function(response) {
           console.log(response.status);
-        })
+        });
 
-      
-    }
+
+    };
 
 
   }]);
