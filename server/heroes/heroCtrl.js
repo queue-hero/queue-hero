@@ -174,20 +174,20 @@ module.exports = {
     var requester = req.body.requester;
     var transactionId = req.body.transactionId;
 
-    User.findOne({username: requester}, function(err, user){
-      if(err){
+    User.findOne({ username: requester }, function(err, user) {
+      if (err) {
         res.status(500).send();
       }
-      if(!user){
+      if (!user) {
         res.status(401).send();
       }
       var ratings = user.ratings;
       ratings.transactionId = rating;
-      User.update({ username: requester }, {ratings: ratings}, function(err, rowsAffected){
-        if(err){
+      User.update({ username: requester }, { ratings: ratings }, function(err, rowsAffected) {
+        if (err) {
           res.status(500).send();
         }
-        if(rowsAffected.ok === 1){
+        if (rowsAffected.ok === 1) {
           res.status(204).send();
         }
         res.status(500).send();
