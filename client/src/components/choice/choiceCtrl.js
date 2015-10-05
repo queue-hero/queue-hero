@@ -8,8 +8,6 @@
     if (!profileFactory.getProfile('facebookId')) {
       vm.facebookId = $cookies.get('com.queuehero');
       profileFactory.setProfile({ facebookId: vm.facebookId });
-      heroFactory.setOrder({ queueHero: vm.facebookId });
-      requesterFactory.setOrder({ requester: vm.facebookId });
     } else {
       vm.facebookId = profileFactory.getProfile('facebookId');
     }
@@ -20,10 +18,11 @@
       .then(function successCallback(response) {
         //will be executed if status code is 200-299
         var data = response.data;
-        console.log(data);
 
         //save profile information into factory for future use
         profileFactory.setProfile(data);
+        heroFactory.setOrder({ queueHero: data.username });
+        requesterFactory.setOrder({ requester: data.username });
 
 
       }, function errorCallback(response) {
