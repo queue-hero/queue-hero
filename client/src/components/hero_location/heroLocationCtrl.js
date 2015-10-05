@@ -21,11 +21,12 @@
     };
     vm.confirm = function() {
       var queueHero = profileFactory.getProfile('username');
-      //set location of hero to vm.locations[vm.selection]
-      ajaxFactory.setHeroLocation(queueHero, vm.locations[vm.selection])
+      var venue = vm.locations[vm.selection];
+
+      //set location of hero to selected venue
+      ajaxFactory.setHeroLocation(queueHero, venue)
         //will be executed if status code is 200-299,
         .then(function successCallback(response) {
-          var venue = vm.locations[vm.selection];
           heroFactory.setOrder({
             queueHero: queueHero,
             vendor: venue.name,
