@@ -1,4 +1,5 @@
 var Transaction = require('../transactions/transactionModel.js');
+var Checkin = require('../checkins/checkinModel.js');
 var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
@@ -66,8 +67,25 @@ module.exports = {
     });
   },
 
+  /*
+   * @param {Object} location information
+   * @return {String} checkin._id
+   */
   setLocation: function(req, res, next) {
+    var location = req.body.location;
+    var newCheckin = new Checkin( {
+      vendor: location.name,
+      meetingLocation: [location.lat, location.long]
+    });
 
+    newCheckin.save(function(err) {
+      if (err) {
+        consoole.log(err);
+      } else {
+        console.log(newCheckin._id);
+        res.status(201).send(newCheckin._id);
+      }
+    });
   },
 
   checkOrderComplete: function(req, res, next) {
@@ -99,7 +117,7 @@ module.exports = {
     //FIX: change response status to be what the db says
     res.status(201).send(true);
 
-  }, 
+  },
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
@@ -108,7 +126,7 @@ module.exports = {
     //from unfulfilled to in progress
 
     res.status(201).send('You have accepted a request');
-  }, 
+  },
   getOpenRequests: function(req, res, next) {
     //get location from request
     var location = req.query.location;
@@ -139,9 +157,9 @@ module.exports = {
     ];
 
     orders = JSON.stringify(orders);
-    
+
     res.status(201).send(orders);
-  }, 
+  },
   rateRequester: function(req, res, next) {
     console.log('gets invoked');
     //get rating and requester from request
