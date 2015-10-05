@@ -49,7 +49,7 @@
 
 
       function setOrder(obj) {
-        if (obj === undefined){
+        if (obj === undefined) {
           order = {};
           return true;
         }
