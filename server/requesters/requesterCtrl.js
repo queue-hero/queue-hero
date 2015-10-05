@@ -36,12 +36,19 @@ module.exports = {
   fulfillTransaction: function(req, res, next) {
 
     //extract transaction id from req
-    var transactionId = req.params.transactionId;
+    var transactionId = req.body.transactionId;
+    Transaction.update({ _id: transactionId }, {status: 'complete'}, function(err, affected){
+      if(err){
+        res.status(500).send();
+      }
+      if(affected.ok === 1){
+        res.status(201).send();
+      }
+      res.status(500).send();
+    });
 
     //TODO: (db) update the transaction status of above transaction to 'fulfilled'
 
-    console.log('Transaction was fulfilled!');
-    res.status(201).send('Transaction fulfilled!');
   },
   checkOrderAccepted: function(req, res, next) {
     //extract transaction id from req
