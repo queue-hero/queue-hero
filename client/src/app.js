@@ -24,36 +24,29 @@
       .state('home', {
         templateUrl: 'src/components/home/home.html',
         url:'/',
-        controller: 'HomeCtrl'
       })
       .state('signup', {
         templateUrl: 'src/components/signup/signup.html',
         url:'/signup',
-        controller: 'SignupCtrl'
       })
       .state('profile', {
         templateUrl: 'src/components/profile/profile.html',
         url:'/profile',
-        controller: 'ProfileCtrl'
       })
       .state('choice', {
         templateUrl: 'src/components/choice/choice.html',
         url:'/choice',
-        controller: 'ChoiceCtrl'
       })
       .state('hero_location', {
         templateUrl: 'src/components/hero_location/location.html',
         url:'/hero/location',
-        controller: 'HeroLocationCtrl'
       })
       .state('hero_task', {
         templateUrl: 'src/components/hero_task/task.html',
         url: '/hero/task',
-        controller: 'HeroTaskCtrl'
       })
       .state('hero_order', {
         url: '/hero/order',
-        controller: 'HeroOrderCtrl',
         views: {
           '': {
             templateUrl: 'src/components/hero_order/order.html'
@@ -68,7 +61,6 @@
       })
       .state('requester_task', {
         url: '/requester/task',
-        controller: 'RequesterTaskCtrl',
         views: {
           '': {
             templateUrl: 'src/components/requester_task/task.html'
@@ -89,7 +81,6 @@
       })
       .state('requester_order', {
         url: '/requester/order',
-        controller: 'RequesterOrderCtrl',
         views: {
           '': {
             templateUrl: 'src/components/requester_order/order.html'
