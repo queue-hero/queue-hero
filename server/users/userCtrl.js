@@ -2,9 +2,9 @@ var User = require('./userModel.js');
 
 module.exports = {
   getUserData: function(req, res, next) {
-    var username = req.query.username;
+    var facebookId = req.query.facebookId;
     User.findOne({
-      username: username
+      facebookId: facebookId
     }, function(err, user) {
       if (err) {
         return next(err);
@@ -36,7 +36,7 @@ module.exports = {
     }).then(function() {
       console.log('DB:', 'saved');
       res.status(201).send('User created');
-    })
+    });
   }
 };
 
