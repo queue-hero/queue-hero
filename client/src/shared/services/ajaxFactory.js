@@ -95,11 +95,14 @@
       });
     };
 
-    ajaxObj.confirmRequest = function(transactionId) {
+    ajaxObj.confirmRequest = function(transactionId, queueHero) {
       return $http({
         method: 'POST',
         url: serverUrl + '/hero/task',
-        data: { transactionId: transactionId }
+        data: {
+          transactionId: transactionId,
+          queueHero: queueHero
+        }
       });
     };
 
