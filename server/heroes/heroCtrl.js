@@ -156,33 +156,16 @@ module.exports = {
     var location = req.query.location;
 
     //TODO: (db) find all transactions with location = ^
-
-    //FIX: this is dummy data (needs to be gotten from the db)
-    var orders = [{
-        time: "2015-10-02T05:20:58.409Z",
-        item: 'starbucks mocha frappe',
-        requester: 'Darrin',
-        transactionId: 10923,
-        price: 6,
-      }, {
-        time: "2015-10-02T05:27:58.409Z",
-        item: 'Americano',
-        requester: 'Tatsumi',
-        transactionId: 12,
-        price: 3,
-      }, {
-        time: "2015-10-02T05:23:21.892Z",
-        item: 'cookie',
-        requester: 'Shreeya',
-        transactionId: 1223,
-        price: 2,
-
+    //currently this query just gets all transactions that are not complete
+    Transaction.find({ status: { $not: 'complete'} }, function(err, transactions){
+      if (err) {
+        res.status(500).send();
       }
-    ];
 
-    orders = JSON.stringify(orders);
+      res.status(200).send(transactions);
 
-    res.status(201).send(orders);
+    });
+
   },
 
   rateRequester: function(req, res, next) {
