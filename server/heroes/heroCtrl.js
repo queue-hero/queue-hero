@@ -138,7 +138,7 @@ module.exports = {
         res.status(500).send();
       }
       if (rowsAffected.ok === 1) {
-        Checkin.remove({ username: queueHero }, function(err){
+        Checkin.remove({ username: queueHero }, function(err) {
           if (err) {
             res.status(500).send();
           }
@@ -157,7 +157,7 @@ module.exports = {
 
     //TODO: (db) find all transactions with location = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({status: { $ne: 'complete'} }, function(err, transactions){
+    Transaction.find({status: { $ne: 'complete'} }, function(err, transactions) {
       if (err) {
         res.status(500).send();
       }
