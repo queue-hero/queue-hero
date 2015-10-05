@@ -74,8 +74,9 @@ module.exports = {
    */
   setLocation: function(req, res, next) {
     var location = req.body.location;
-    var queueHero = req.body.queuehero;
-    var newCheckin = new Checkin( {
+    var queueHero = req.body.queueHero;
+
+    var newCheckin = new Checkin({
       queueHero: queueHero,
       vendor: location.name,
       meetingLocation: [location.lat, location.long]
