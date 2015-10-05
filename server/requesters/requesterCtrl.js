@@ -83,11 +83,30 @@ module.exports = {
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
-    var queueHero = req.body.hero;
+    var queueHero = req.body.queueHero;
+    var transactionId = req.body.transactionId;
 
-    //TODO: (db) find queuehero and update rating
+    User.findOne({ username: queueHero }, function(err, user){
+      if(err){
+        res.status(500).send();
+      }
+      if(!user){
+        res.status(401).send();
+      }
+      var ratings = user.ratings;
+      ratings.transactionId = rating;
+      User.update({ username: queueHero }, { ratings: ratings }, function(err, rowsAffected){
+        if(err){
+          res.status(500).send();
+        }
+        if(rowsAffected.ok === 1){
+          res.status(204).send();
+        }
+        res.status(500).send();
+      });
 
-    res.status(201).send('You rated your queue hero!');
+    });
+
   }
 };
 

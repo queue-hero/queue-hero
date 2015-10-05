@@ -122,13 +122,14 @@
       });
     };
 
-    ajaxObj.rateHero = function(rating, hero) {
+    ajaxObj.rateHero = function(rating, queueHero, transactionId) {
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/rate',
         data: {
           rating: rating,
-          hero: hero
+          queueHero: queueHero,
+          transactionId: transactionId
         }
       });
     };
