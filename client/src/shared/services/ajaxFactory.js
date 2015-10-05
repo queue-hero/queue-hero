@@ -77,6 +77,17 @@
       });
     };
 
+    ajaxObj.setHeroLocation = function(queueHero, location) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/hero/location',
+        data: {
+          queueHero: queueHero,
+          location: location
+        }
+      });
+    };
+
     ajaxObj.getOpenRequests = function(location) {
       return $http({
         method: 'GET',
@@ -118,7 +129,10 @@
       return $http({
         method: 'POST',
         url: serverUrl + '/requester/order/rate',
-        data: { rating: rating, hero: hero }
+        data: {
+          rating: rating,
+          hero: hero
+        }
       });
     };
 
