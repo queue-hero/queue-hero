@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', function($state, ajaxFactory, heroFactory) {
+  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', function($state, ajaxFactory, heroFactory, profileFactory) {
+
     var vm = this;
     vm.selection = undefined;
 
@@ -19,9 +20,23 @@
       vm.selection = index;
     };
     vm.confirm = function() {
-      //set location of hero to vm.locations[vm.selection]
-      heroFactory.setOrder(vm.locations[vm.selection]);
-      $state.go('hero_task');
+      var queueHero = profileFactory.getProfile('username');
+      var venue = vm.locations[vm.selection];
+
+      //set location of hero to selected venue
+      ajaxFactory.setHeroLocation(queueHero, venue)
+        //will be executed if status code is 200-299,
+        .then(function successCallback(response) {
+          heroFactory.setOrder({
+            queueHero: queueHero,
+            vendor: venue.name,
+            vendorYelpId: venue.yelpId,
+            meetingLocation: venue.displayAddress,
+            meetingLocationLatLong: [venue.lat, venue.long],
+            status: 'checked in'
+          });
+          $state.go('hero_task');
+      });
     };
 
     function success(position) {
@@ -29,8 +44,8 @@
       var long = position.coords.longitude;
       ajaxFactory.getVenuesAtHeroLocation(lat, long)
       //will be executed if status code is 200-299
-      .then(function successCallback(response) {
-        vm.locations = response.data;
+        .then(function successCallback(response) {
+          vm.locations = response.data;
       });
     }
 

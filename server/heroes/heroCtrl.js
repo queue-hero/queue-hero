@@ -1,4 +1,5 @@
 var Transaction = require('../transactions/transactionModel.js');
+var Checkin = require('../checkins/checkinModel.js');
 var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
@@ -43,26 +44,57 @@ module.exports = {
       var venuesFromYelp = data.businesses;
       venuesFromYelp.forEach(function(value) {
         venues.push({
+          yelpId: value.id,
           name: value.name,
-          address: value.location.address,
-          city: value.location.city,
-          state: value.location.state_code,
-          zip: value.location.postal_code,
+          //address: value.location.address,
+          //city: value.location.city,
+          //state: value.location.state_code,
+          //zip: value.location.postal_code,
+
           // displayAddress in []. May include building name + full address
-          displayAddress: value.location.display_address,
+          displayAddress: value.location.display_address.join(' '),
+
           lat: value.location.coordinate.latitude,
           long: value.location.coordinate.longitude,
+
           // ########## format
-          phone: value.phone,
+          //phone: value.phone,
+
           // +1-###-###-#### format
-          displayPhone: value.display_phone,
+          //displayPhone: value.display_phone,
+
           // distance from hero in meters
-          distance: value.distance,
-          categories: value.categories,
-          image_url: value.image_url
+          //distance: value.distance,
+
+          //categories: value.categories,
+          //image_url: value.image_url
         });
       });
       res.status(200).send(venues);
+    });
+  },
+
+  /*
+   * @param {Object} queuehero: queuehero, location: location
+   * @return {String} checkin._id
+   */
+  setLocation: function(req, res, next) {
+    var location = req.body.location;
+    var queueHero = req.body.queueHero;
+
+    var newCheckin = new Checkin({
+      queueHero: queueHero,
+      vendor: location.name,
+      meetingLocation: [location.lat, location.long]
+    });
+
+    newCheckin.save(function(err) {
+      if (err) {
+        consoole.log(err);
+      } else {
+   // returning newCheckin._id, may use it in /hero/task
+        res.status(201).send(newCheckin._id);
+      }
     });
   },
 

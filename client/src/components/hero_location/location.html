@@ -7,7 +7,7 @@
       <label>
       </label>
       <ul>
-        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> <span ng-repeat="address in location.displayAddress">{{ address }} </span></li>
+        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> {{ location.displayAddress }}</li>
       </ul>
     </div>
   </div>
