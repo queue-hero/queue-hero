@@ -6,12 +6,11 @@
     var serverUrl = 'http://localhost:3000';
     var ajaxObj = {};
 
-    ajaxObj.getProfileData = function(username) {
+    ajaxObj.getProfileData = function(facebookId) {
       return $http({
         method: 'GET',
         url: serverUrl + '/choice',
-        //params can be retrieved from server using req.query.username
-        params: { username: username }
+        params: { facebookId: facebookId }
       });
     };
 
@@ -50,11 +49,9 @@
     };
 
     ajaxObj.postSignUp = function(user) {
-        console.log(serverUrl + '/signup', user);
       return $http({
         method: 'POST',
         url: serverUrl + '/signup',
-        //user data can be retrieved from server using req.data.user
         data: { user: user }
       });
     };
@@ -63,7 +60,6 @@
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
-        //user data can be retrieved from server using req.data.area
         params: { area: area }
       });
     };
@@ -116,8 +112,8 @@
 
     ajaxObj.rateHero = function(rating, hero) {
       return $http({
-        method: 'POST', 
-        url: serverUrl + '/requester/order/rate', 
+        method: 'POST',
+        url: serverUrl + '/requester/order/rate',
         data: { rating: rating, hero: hero }
       });
     };
