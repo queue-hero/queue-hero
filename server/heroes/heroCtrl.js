@@ -126,11 +126,23 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
+    var queueHero = req.body.queueHero;
+    var update = {
+      queueHero: queueHero,
+      status: 'inprogress'
+    };
 
-    //TODO: (db) update status of transaction
-    //from unfulfilled to in progress
+    Transaction.update({ _id: transactionId }, update, function(err, rowsAffected) {
+      if (err) {
+        res.status(500).send();
+      }
+      if (rowsAffected.ok === 1) {
+        res.status(204).send();
+      }
+      res.status(500).send();
 
-    res.status(201).send('You have accepted a request');
+    });
+
   },
 
   getOpenRequests: function(req, res, next) {
