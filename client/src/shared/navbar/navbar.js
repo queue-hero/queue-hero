@@ -11,8 +11,8 @@
           $cookies.remove('connect.sid');
           $state.go('home');
         };
-        scope.isLogged = function(){
-          if ($state.is('home')||$state.is('signup')){
+        scope.isLoggedIn = function() {
+          if ($state.is('home') || $state.is('signup')){
             return false;
           } else {
             return true;
