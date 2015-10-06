@@ -88,5 +88,5 @@ gulp.task('serve', function() {
 });
 
 gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'move-index']);
-gulp.task('deploy', ['bower', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
+gulp.task('deploy', ['bower']);
 // gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
