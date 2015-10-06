@@ -97,7 +97,7 @@
         }
       });
   }])
-  .run(['$rootScope', '$state', '$cookies', function($rootScope, $state, $cookies) {
+  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
       if (!cookie) {
@@ -108,6 +108,26 @@
       }
 
     });
+
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      // use cached coordinates if previous call was within 30 seconds
+      maximumAge: 30000
+    };
+
+    navigator.geolocation.getCurrentPosition(success, error, options);
+
+    function success(position) {
+      var lat = position.coords.latitude;
+      var long = position.coords.longitude;
+      heroFactory.setOrder({ currentLocation: [lat, long] });
+      requesterFactory.setOrder({ currentLocation: [lat, long] });
+    }
+
+    function error(err) {
+      console.warn('ERROR(' + err.code + '): ' + err.message);
+    }
 
   }]);
 

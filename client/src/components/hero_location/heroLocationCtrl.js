@@ -7,18 +7,21 @@
     var vm = this;
     vm.selection = undefined;
 
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
+    // currentLocation: [lat, long]
+    var location = heroFactory.getOrder('currentLocation');
+    var lat = location[0];
+    var long = location[1];
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    ajaxFactory.getVenuesAtHeroLocation(lat, long)
+      //will be executed if status code is 200-299
+      .then(function successCallback(response) {
+        vm.locations = response.data;
+    });
 
     vm.select = function(index) {
-
       vm.selection = index;
     };
+
     vm.confirm = function() {
       var queueHero = profileFactory.getProfile('username');
       var venue = vm.locations[vm.selection];
@@ -38,20 +41,6 @@
           $state.go('hero_task');
       });
     };
-
-    function success(position) {
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      ajaxFactory.getVenuesAtHeroLocation(lat, long)
-      //will be executed if status code is 200-299
-        .then(function successCallback(response) {
-          vm.locations = response.data;
-      });
-    }
-
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    }
 
   }]);
 

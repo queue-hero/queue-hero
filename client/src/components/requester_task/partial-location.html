@@ -1,13 +1,11 @@
 <div id="requester-task-location">
-  requester task location partial view:
-  {{ ctrl.userProfile.location | json }}
 
   <h1> Pick Shop to make a request </h1>
   <div id="map">
   </div>
   <div id="shop" ng-repeat="shop in ctrl.activeShops">
     <div ng-click= "ctrl.selectLocation(shop)">
-     Select Location: {{ shop | json }}
+     Select Location: {{ shop }}
     </div>
   </div>
 </div>

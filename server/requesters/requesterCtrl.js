@@ -11,7 +11,7 @@ module.exports = {
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
-    var meetingTime = Date.now() + req.body.order.meetingTime * 60000;
+    var meetingTime = req.body.order.meetingTime;
     var status = 'unfulfilled';
 
     var transaction = new Transaction({
@@ -61,12 +61,10 @@ module.exports = {
       }
       if (!user) {
         res.status(401).send();
+      } else if (user.queueHero){
+          res.status(200).send(user.queueHero);
       }
 
-      if (user.queueHero) {
-        res.status(200).send(user.queueHero);
-      }
-      console.log('here');
       res.status(200).send(false);
     });
 

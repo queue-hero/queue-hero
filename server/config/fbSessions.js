@@ -5,7 +5,6 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 var api_keys = require('./api_keys.js').facebook;
 
 module.exports.restrict = function(req, res, next) {
-  console.log(req.isAuthenticated());
   if (req.isAuthenticated()) {
     return next();
   }

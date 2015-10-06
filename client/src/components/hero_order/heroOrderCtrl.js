@@ -6,37 +6,21 @@
     var vm = this;
     vm.complete = false;
 
-    //**place holders, this information should come from server
-    //once server routes our enabled, this will provide order data
-    //**this information should actually be in the hero factory,
-    //not gotten from the server (order data)
     vm.order = heroFactory.getOrder();
-
-    vm.time = 20;
-    vm.order.item = 'starbucks mocha frappe';
-    vm.requester = 'Darrin';
-    vm.transactionId = 1;
-
 
     var checkOrder = $interval(isOrderComplete, 5000, 0, false);
 
 
     function isOrderComplete() {
-      ajaxFactory.isOrderComplete(vm.transactionId)
+      ajaxFactory.isOrderComplete(vm.order.transactionId)
         .then(function(response) {
           console.log('Server said', response.data);
           if (response.data === true){
             //if order is complete, switch ui-views
             vm.complete = true;
 
-            //tell angular to run the digest cycle
-            // $scope.$apply();
-
             //stop in recurring ajax request from occuring
             $interval.cancel(checkOrder);
-
-            //remove current transaction from factory
-            heroFactory.setOrder();
 
           }
         }, function(response) {
@@ -45,11 +29,11 @@
     }
 
     vm.rateRequester = function() {
-      ajaxFactory.rateRequester(vm.rating, vm.order.requester, vm.order.transactionId)
+      var rating = parseInt(vm.rating, 10);
+      ajaxFactory.rateRequester(rating, vm.order.requester, vm.order.transactionId)
         .then(function(response) {
-          console.log(response.status);
           //clear the factory containing transaction details
-          heroFactory.setOrder({});
+          heroFactory.setOrder();
 
           //circle back to choice
           $state.go('choice');
