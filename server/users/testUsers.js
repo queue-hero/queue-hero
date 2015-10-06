@@ -149,7 +149,7 @@ exports.createTestUsers = function() {
     meetingTime: new Date(),
     meetingLocation: ['59 New Montgomery St, San Francisco, CA 94105', 37.776740, -122.416371],
     vendor: 'sushirrito',
-    status: 'fulfilled'
+    status: 'complete'
   });
   testTransaction2.save(function(err) {
     if (err) {

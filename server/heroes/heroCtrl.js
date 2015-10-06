@@ -171,7 +171,7 @@ module.exports = {
 
     //TODO: (db) find all transactions with yelpId = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({ status: { $ne: 'complete' } }, function(err, transactions) {
+    Transaction.find({ status: { $nin: ['complete', 'closed'] } }, function(err, transactions) {
       if (err) {
         res.status(500).send();
       }

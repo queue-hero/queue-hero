@@ -9,27 +9,26 @@
 
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
 
-    /*Continuously polls server asking whether requester's
-    /order has been accepted yet.*/
-    function isOrderAccepted() {
-      ajaxFactory.isOrderAccepted(vm.order.transactionId)
+    vm.cancelOrder = function() {
+      ajaxFactory.cancelOrder(vm.order.transactionId)
         .then(function(response) {
-          if (response.data) {
-
-            vm.order.queueHero = response.data;
-            requesterFactory.setOrder({ queueHero: response.data });
-
-            //order is accepted, switch ui-views
-            vm.complete = 'complete';
-
-            //cancel polling
-            $interval.cancel(checkOrder);
-
-          }
-        }, function(response) {
+          requesterFactory.setOrder({
+            additionalRequests: undefined,
+            item: undefined,
+            meetingTime: undefined,
+            meetingLocation: undefined,
+            moneyExchanged: undefined,
+            status: undefined,
+            transactionId: undefined,
+            vendor: undefined,
+            vendorYelpId: undefined
+          });
+          $state.go('requester_task');
+          }, function(response) {
             console.log(response.status);
-        });
-    }
+          });
+
+    };
 
     /*Sends notice to server that exchange occurred*/
     vm.confirmReceipt = function() {
@@ -57,8 +56,29 @@
           console.log(response.status);
         });
 
-
     };
+
+    /*Continuously polls server asking whether requester's
+    /order has been accepted yet.*/
+    function isOrderAccepted() {
+      ajaxFactory.isOrderAccepted(vm.order.transactionId)
+        .then(function(response) {
+          if (response.data) {
+
+            vm.order.queueHero = response.data;
+            requesterFactory.setOrder({ queueHero: response.data });
+
+            //order is accepted, switch ui-views
+            vm.complete = 'complete';
+
+            //cancel polling
+            $interval.cancel(checkOrder);
+
+          }
+        }, function(response) {
+            console.log(response.status);
+        });
+    }
 
 
   }]);
