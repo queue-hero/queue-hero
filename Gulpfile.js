@@ -76,7 +76,7 @@ gulp.task('move-index', function() {
 });
 
 gulp.task('bower', function() {
-  return bower('./')
+  return bower('./build/bower_components')
     .pipe(gulp.dest('lib/'));
 });
 
