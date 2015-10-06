@@ -1,6 +1,6 @@
 <div id="requester-task-confirm">
   <h1> Please verify before Confirming Order </h1>
-  Location: <span> {{ ctrl.shop }} </span> <br/>
+  Location: <span> {{ ctrl.order.vendor }} </span> <br/>
   Item: <span> {{ ctrl.item }}</span> <br/>
   Additional Requests: <span> {{ ctrl.details }} </span> <br/>
   Meeting time: <span> {{ ctrl.time | date : 'h:mm a' }}</span> <br/>

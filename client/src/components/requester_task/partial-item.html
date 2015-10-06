@@ -1,6 +1,6 @@
 <div id="requester-task-item">
   <h1> Pick item </h1>
-  Location:<span> {{ ctrl.shop | json }}</span>
+  Location:<span> {{ ctrl.order.vendor }}</span>
   <form>
     I want:<input type="text" placeholder="Product name" ng-model="ctrl.item"> <br/>
     Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.details"> <br/>

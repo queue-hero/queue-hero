@@ -4,11 +4,11 @@
   angular.module('app.requester_task', [])
     .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
       var vm = this;
-      vm.current = 'location';
-      // vm.mission = {};
-      //assumes that the object has a location property
-      vm.userProfile = profileFactory.getProfile();
-      // change for userProfile.location
+      vm.currentView = 'location';
+
+      vm.order = requesterFactory.getOrder();
+
+      //**toDo make this take requesters currentView location
       var defaultArea = 'san francisco';
 
 
@@ -16,7 +16,6 @@
 
         ajaxFactory.getActiveShops(defaultArea)
           .then(function successCallback(response) {
-
             vm.activeShops = response.data;
             vm.buildMap(defaultArea, vm.activeShops);
 
@@ -25,18 +24,21 @@
           });
       };
 
+      vm.loadActiveShops();
+
       vm.buildMap = function(location, activeShops) {
         //the mapping library function should be call here:
       };
 
       vm.selectLocation = function(shop) {
-        vm.shop = shop;
         //FIX: vendor and meetingLocation are hardcoded
+        vm.order.vendor = shop;
+        vm.order.meetingLocation = [1, 1];
         requesterFactory.setOrder({
-          vendor: 'Starbucks',
+          vendor: vm.order.vendor,
           meetingLocation: [1, 1]
         });
-        vm.current = 'item';
+        vm.currentView = 'item';
       };
 
       vm.setItem = function() {
@@ -44,7 +46,7 @@
           item: vm.item,
           additionalRequests: vm.details
         });
-        vm.current = 'time_price';
+        vm.currentView = 'time_price';
       };
 
       vm.pickTimePrice = function() {
@@ -54,14 +56,11 @@
           moneyExchanged: vm.price,
           status: 'unfulfilled'
         });
-        vm.current = 'confirm';
         vm.order = requesterFactory.getOrder();
+        vm.currentView = 'confirm';
       };
 
       vm.confirmOrder = function() {
-
-        //get order from factory
-        vm.order = requesterFactory.getOrder();
 
         ajaxFactory.sendOrder(vm.order)
           .then(function(response) {
@@ -82,7 +81,6 @@
           });
       };
 
-      vm.loadActiveShops();
 
     }
   ]);
