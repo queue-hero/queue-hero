@@ -27,7 +27,7 @@
               vendor: undefined,
               vendorYelpId: undefined
             });
-            $state.go('choice');
+            $state.go('hero_location');
           }, function(response) {
             console.log(response.status);
           });
