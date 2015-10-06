@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp clean && gulp",
-    "postinstall": "bower install && gulp clean && gulp default"
+    "postinstall": "gulp clean && gulp deploy"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "express-session": "^1.11.3",
     "formidable": "^1.0.17",
     "gulp": "^3.8.5",
+    "gulp-bower": "0.0.10",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-filesize": "0.0.6",

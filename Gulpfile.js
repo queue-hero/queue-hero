@@ -11,6 +11,7 @@ var uglify = require('gulp-uglify');
 var clean = require('gulp-clean');
 var gutil = require('gulp-util');
 var filesize = require('gulp-filesize');
+var bower = require('gulp-bower');
 
 var jsScripts = [
   'client/bower_components/angular/angular.min.js',
@@ -74,6 +75,11 @@ gulp.task('move-index', function() {
     .pipe(gulp.dest('./build/'));
 });
 
+gulp.task('bower', function() {
+  return bower('./')
+    .pipe(gulp.dest('lib/'));
+});
+
 gulp.task('serve', function() {
   nodemon({
     script: 'index.js',
@@ -82,4 +88,5 @@ gulp.task('serve', function() {
 });
 
 gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'move-index']);
+gulp.task('deploy', ['bower', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
 // gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
