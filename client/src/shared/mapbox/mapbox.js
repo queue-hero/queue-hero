@@ -4,7 +4,7 @@ angular.module('app').directive('mapbox', [
            restrict: 'EA',
            replace: true,
            scope: {
-               callback: "&"
+               callback: "="
            },
            template: '<div></div>',
            link: function (scope, element, attributes) {

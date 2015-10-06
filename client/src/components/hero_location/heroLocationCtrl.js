@@ -6,7 +6,6 @@
 
     var vm = this;
     vm.selection = undefined;
-    var mboxToken = 'pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ';
 
     // currentLocation: [lat, long]
     var location = heroFactory.getOrder('currentLocation');
@@ -17,6 +16,7 @@
       //will be executed if status code is 200-299
       .then(function successCallback(response) {
         vm.locations = response.data;
+        populatePins();
     });
 
     vm.select = function(index) {
@@ -42,6 +42,23 @@
           $state.go('hero_task');
       });
     };
+
+    vm.callback = function(map) {
+      console.log('callback was called');
+      vm.map = map;
+      map.setView([lat, long], 15);
+    }
+
+    var populatePins = function(locations) {
+      console.log('populate pins was called');
+      for (var i = 0; i < vm.locations.length; i++) {
+        var location = vm.locations[i];
+        var locationName = location.name;
+        var locationAddress = location.displayAddress;
+        console.log(locationName, locationAddress);
+        
+      }
+    }
 
   }]);
 
