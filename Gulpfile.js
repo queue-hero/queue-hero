@@ -14,11 +14,11 @@ var filesize = require('gulp-filesize');
 var bower = require('gulp-bower');
 
 var jsScripts = [
-  'bower_components/angular/angular.min.js',
-  'bower_components/angular-ui-router/release/angular-ui-router.min.js',
-  'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
-  'bower_components/ng-file-upload/ng-file-upload.min.js',
-  'bower_components/angular-cookies/angular-cookies.min.js',
+  'client/bower_components/angular/angular.min.js',
+  'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+  'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+  'client/bower_components/ng-file-upload/ng-file-upload.min.js',
+  'client/bower_components/angular-cookies/angular-cookies.min.js',
   'client/src/app.js',
   'client/src/**/*.js'
 ];
