@@ -109,6 +109,13 @@
 
     });
 
+    var options = {
+      enableHighAccuracy: true,
+      timeout: 5000,
+      // use cached coordinates if previous call was within 30 seconds
+      maximumAge: 30000
+    };
+
     navigator.geolocation.getCurrentPosition(success, error, options);
 
     function success(position) {
@@ -117,13 +124,6 @@
       heroFactory.setOrder({ currentLocation: [lat, long] });
       requesterFactory.setOrder({ currentLocation: [lat, long] });
     }
-
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      // use cached coordinates if previous call was within 30 seconds
-      maximumAge: 30000
-    };
 
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
