@@ -4,7 +4,8 @@
   "description": "Find your hero",
   "main": "index.js",
   "scripts": {
-    "build": "gulp clean && gulp"
+    "build": "gulp clean && gulp",
+    "postinstall": "bower install && gulp clean && gulp default"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "async": "^1.4.2",
     "bcryptjs": "2.2.1",
     "body-parser": "^1.5.2",
+    "bower": "^1.5.3",
     "browser-sync": "^2.9.6",
     "cookie-parser": "^1.4.0",
     "cors": "^2.7.1",
