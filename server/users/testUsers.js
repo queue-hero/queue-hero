@@ -28,7 +28,7 @@ exports.createTestUsers = function() {
         testUser.save(function(err) {
           if (err) {
             console.log(err);
-          } else {}
+          }
         });
       }
     });
@@ -56,7 +56,7 @@ exports.createTestUsers = function() {
         newTestUser.save(function(err) {
           if (err) {
             console.log(err);
-          } else {}
+          }
         });
       }
     });
@@ -77,7 +77,7 @@ exports.createTestUsers = function() {
         testCheckIn1.save(function(err) {
           if (err) {
             console.log(err);
-          } else {}
+          }
         });
       }
     });
@@ -98,7 +98,7 @@ exports.createTestUsers = function() {
         testCheckIn2.save(function(err) {
           if (err) {
             console.log(err);
-          } else {}
+          }
         });
       }
     });
@@ -119,7 +119,7 @@ exports.createTestUsers = function() {
         testCheckIn3.save(function(err) {
           if (err) {
             console.log(err);
-          } else {}
+          }
         });
       }
     });
@@ -138,7 +138,7 @@ exports.createTestUsers = function() {
   testTransaction1.save(function(err) {
     if (err) {
       console.log(err);
-    } else {}
+    }
   });
   var testTransaction2 = new Transaction({
     queueHero: 'NapoleonB',
@@ -154,6 +154,6 @@ exports.createTestUsers = function() {
   testTransaction2.save(function(err) {
     if (err) {
       console.log(err);
-    } else {}
+    }
   });
 };
