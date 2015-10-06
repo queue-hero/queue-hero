@@ -3,8 +3,9 @@
   hero task view (accept request view)
 
   <div>
+    <div>location: {{ ctrl.vendor }}</div>
     <div>item: {{ ctrl.orders[ctrl.displayId].item }}</div>
-    <div>price: {{ ctrl.orders[ctrl.displayId].moneyExchanged }}</div>
+    <div>price: {{ ctrl.orders[ctrl.displayId].moneyExchanged | currency }}</div>
     <img src="" alt="{{ ctrl.orders[ctrl.displayId].requester }}">
 
     <div>
@@ -14,13 +15,13 @@
       <button ng-click="ctrl.previous()" ng-disabled="ctrl.displayId === 0">Previous</button>
       <button ng-click="ctrl.next()" ng-disabled="ctrl.displayId === ctrl.orders.length - 1 || ctrl.orders.length === 0">Next</button>
 
-    <div ng-hide="ctrl.confirm">
+    <div ng-hide="ctrl.confirmView">
       <button ng-click="ctrl.remove(ctrl.displayId)">No</button>
-      <button ng-click="ctrl.confirm = true">Yes</button>
+      <button ng-click="ctrl.confirmView = true">Yes</button>
     </div>
-    <div ng-show="ctrl.confirm">
+    <div ng-show="ctrl.confirmView">
       Are you sure you want to take this mission?
-      <button ng-click="ctrl.confirm = false">Cancel</button>
+      <button ng-click="ctrl.confirmView = false">Cancel</button>
       <button ng-click="ctrl.accept(ctrl.displayId)">Submit</button>
     </div>
   </div>

@@ -4,10 +4,10 @@
   </div>
 
   <div>
-    <div>Meet Armin</div>
+    <div>Meet {{ ctrl.order.requester }}</div>
     <img src="" alt="Requester Pic">
     <div>
-      <span>in {{ ctrl.time }} minutes</span>
+      <span>at {{ ctrl.order.meetingTime | date : 'h:mm a' }}</span>
     </div>
 
     <div>with a {{ ctrl.order.item }}</div>

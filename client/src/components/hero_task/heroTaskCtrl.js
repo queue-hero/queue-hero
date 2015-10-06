@@ -5,8 +5,9 @@
     .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', function(ajaxFactory, $state, heroFactory) {
       var vm = this;
       vm.displayId = 0;
-      vm.confirm = false;
+      vm.confirmView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
+      vm.vendor = heroFactory.getOrder('vendor');
 
 
       ajaxFactory.getOpenRequests(vm.vendorYelpId)
@@ -19,13 +20,13 @@
       //show previous order in orders array
       vm.previous = function() {
         vm.displayId--;
-        vm.confirm = false;
+        vm.confirmView = false;
       };
 
       //show previous order in orders array
       vm.next = function() {
         vm.displayId++;
-        vm.confirm = false;
+        vm.confirmView = false;
       };
 
       //remove order from orders array, and decrement displayId unless there is only one order left
