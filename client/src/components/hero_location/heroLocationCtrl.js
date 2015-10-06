@@ -6,6 +6,7 @@
 
     var vm = this;
     vm.selection = undefined;
+    var mboxToken = 'pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ';
 
     var options = {
       enableHighAccuracy: true,
@@ -46,6 +47,10 @@
       //will be executed if status code is 200-299
         .then(function successCallback(response) {
           vm.locations = response.data;
+
+          L.mapbox.accessToken = mboxToken;
+          var map = L.mapbox.map('map', 'shreeyagoel.cif7csqcv0eews4lznq9rpu2b')
+          .setView([37.7874963,-122.3999087], 20);
       });
     }
 
