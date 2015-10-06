@@ -17,6 +17,22 @@
           console.log(response.status);
         });
 
+      vm.removeFromQueue = function() {
+        ajaxFactory.removeFromQueue(heroFactory.getOrder('username'))
+          .then(function(response) {
+            heroFactory.setOrder({
+              meetingLocation: undefined,
+              meetingLocationLatLong: undefined,
+              status: undefined,
+              vendor: undefined,
+              vendorYelpId: undefined
+            });
+            $state.go('choice');
+          }, function(response) {
+            console.log(response.status);
+          });
+      };
+
       //show previous order in orders array
       vm.previous = function() {
         vm.displayId--;
