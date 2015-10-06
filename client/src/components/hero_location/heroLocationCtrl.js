@@ -8,18 +8,21 @@
     vm.selection = undefined;
     var mboxToken = 'pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ';
 
-    var options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0
-    };
+    // currentLocation: [lat, long]
+    var location = heroFactory.getOrder('currentLocation');
+    var lat = location[0];
+    var long = location[1];
 
-    navigator.geolocation.getCurrentPosition(success, error, options);
+    ajaxFactory.getVenuesAtHeroLocation(lat, long)
+      //will be executed if status code is 200-299
+      .then(function successCallback(response) {
+        vm.locations = response.data;
+    });
 
     vm.select = function(index) {
-
       vm.selection = index;
     };
+
     vm.confirm = function() {
       var queueHero = profileFactory.getProfile('username');
       var venue = vm.locations[vm.selection];
@@ -39,24 +42,6 @@
           $state.go('hero_task');
       });
     };
-
-    function success(position) {
-      var lat = position.coords.latitude;
-      var long = position.coords.longitude;
-      ajaxFactory.getVenuesAtHeroLocation(lat, long)
-      //will be executed if status code is 200-299
-        .then(function successCallback(response) {
-          vm.locations = response.data;
-
-          L.mapbox.accessToken = mboxToken;
-          var map = L.mapbox.map('map', 'shreeyagoel.cif7csqcv0eews4lznq9rpu2b')
-          .setView([37.7874963,-122.3999087], 20);
-      });
-    }
-
-    function error(err) {
-      console.warn('ERROR(' + err.code + '): ' + err.message);
-    }
 
   }]);
 

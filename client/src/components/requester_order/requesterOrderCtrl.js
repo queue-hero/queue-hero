@@ -7,18 +7,56 @@
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
 
-    //FIX: These values have to be procured from the factory
-    vm.location = '2nd and Mission';
-    vm.orderItem = 'Starbucks mocha frappe';
-    vm.additionalRequests = 'With whipped cream!';
-    vm.meetingTime = Date.now() + 30*60000;
-    vm.price = 6;
-    vm.remainingTime = 20;
-    vm.transactionId = 1;
-
-    vm.queueHero = '';
-
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
+
+    vm.cancelOrder = function() {
+      ajaxFactory.cancelOrder(vm.order.transactionId)
+        .then(function(response) {
+          requesterFactory.setOrder({
+            additionalRequests: undefined,
+            item: undefined,
+            meetingTime: undefined,
+            meetingLocation: undefined,
+            moneyExchanged: undefined,
+            status: undefined,
+            transactionId: undefined,
+            vendor: undefined,
+            vendorYelpId: undefined
+          });
+          $state.go('requester_task');
+          }, function(response) {
+            console.log(response.status);
+          });
+
+    };
+
+    /*Sends notice to server that exchange occurred*/
+    vm.confirmReceipt = function() {
+      ajaxFactory.orderFulfilled(vm.order.transactionId)
+        .then(function(response) {
+
+          //order is confirmed, switch ui-view to rate hero
+          vm.complete = 'rate';
+
+        }, function(response) {
+          console.log(response.status);
+        });
+    };
+
+    vm.rateHero = function() {
+      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
+        .then(function(response) {
+
+          requesterFactory.setOrder();
+
+          //circle back to choice
+          $state.go('choice');
+
+        }, function(response) {
+          console.log(response.status);
+        });
+
+    };
 
     /*Continuously polls server asking whether requester's
     /order has been accepted yet.*/
@@ -26,7 +64,6 @@
       ajaxFactory.isOrderAccepted(vm.order.transactionId)
         .then(function(response) {
           if (response.data) {
-            console.log(response.data);
 
             vm.order.queueHero = response.data;
             requesterFactory.setOrder({ queueHero: response.data });
@@ -42,38 +79,6 @@
             console.log(response.status);
         });
     }
-
-    /*Sends notice to server that exchange occurred*/
-    vm.confirmReceipt = function() {
-      console.log('confirming receipt');
-      ajaxFactory.orderFulfilled(vm.transactionId)
-        .then(function(response) {
-
-          //order is confirmed, switch ui-view to rate hero
-          vm.complete = 'rate';
-
-        }, function(response) {
-          console.log(response.status);
-        });
-    };
-
-    vm.rateHero = function() {
-      console.log('rating hero');
-      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
-        .then(function(response) {
-
-          //**toDO modify factory API to allow order resets
-          requesterFactory.setOrder();
-
-          //circle back to choice
-          $state.go('choice');
-
-        }, function(response) {
-          console.log(response.status);
-        });
-
-
-    };
 
 
   }]);

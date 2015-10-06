@@ -1,14 +1,13 @@
 <div id="requester-task" ng-controller="RequesterTaskCtrl as ctrl">
   <nav-bar></nav-bar>
-  requester task view
 <!--   <div ui-view="location" ng-show="true">location div</div>
   <div ui-view="item" ng-show="true">item div</div>
   <div ui-view="time_price" ng-show="true">time & price div</div>
   <div ui-view="confirm" ng-show="true">confirm button</div> -->
 
-  <div ui-view="location" ng-show="ctrl.current === 'location'">location div</div>
-  <div ui-view="item" ng-show="ctrl.current === 'item'">item div</div>
-  <div ui-view="time_price" ng-show="ctrl.current === 'time_price'">time & price div</div>
-  <div ui-view="confirm" ng-show="ctrl.current === 'confirm'">confirm button</div>
+  <div ui-view="location" ng-show="ctrl.currentView === 'location'">location div</div>
+  <div ui-view="item" ng-show="ctrl.currentView === 'item'">item div</div>
+  <div ui-view="time_price" ng-show="ctrl.currentView === 'time_price'">time & price div</div>
+  <div ui-view="confirm" ng-show="ctrl.currentView === 'confirm'">confirm button</div>
 </div>
 <!-- Save for later -->
