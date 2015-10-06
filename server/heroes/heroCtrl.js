@@ -153,6 +153,18 @@ module.exports = {
 
   },
 
+  removeFromCheckin: function(req, res) {
+    var queueHero = req.body.username;
+
+    Checkin.remove({ username: queueHero }, function(err) {
+      if (err) {
+        res.status(500).send();
+      }
+      res.status(204).send();
+    });
+
+  },
+
   getOpenRequests: function(req, res, next) {
     //get location from request
     var vendorYelpId = req.query.vendorYelpId;

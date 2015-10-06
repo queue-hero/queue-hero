@@ -138,6 +138,14 @@
       });
     };
 
+    ajaxObj.removeFromQueue = function(username) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/hero/task/removal',
+        data: { username: username }
+      });
+    };
+
 
     return ajaxObj;
 
