@@ -155,9 +155,9 @@ module.exports = {
 
   getOpenRequests: function(req, res, next) {
     //get location from request
-    var location = req.query.location;
+    var vendorYelpId = req.query.vendorYelpId;
 
-    //TODO: (db) find all transactions with location = ^
+    //TODO: (db) find all transactions with yelpId = ^
     //currently this query just gets all transactions that are not complete
     Transaction.find({ status: { $ne: 'complete' } }, function(err, transactions) {
       if (err) {
