@@ -28,7 +28,7 @@ var paths = {
   // all our client app js files, not including 3rd party js files
   scripts: ['client/src/**/*.js'],
   html: ['client/src/**/*.html'],
-  styles: ['client/bower_components/bootstrap/dist/css/bootstrap.min.css', 'client/styles/*.css'],
+  styles: ['client/styles/*.css'],
   test: ['specs/**/*.js']
 };
 
@@ -57,7 +57,7 @@ gulp.task('convert-js', function() {
 
 gulp.task('copy-css', function() {
   gulp.src(paths.styles, {
-    base: './'
+    base: './client/styles'
   })
     .pipe(gulp.dest('./build/styles'));
 });
@@ -76,8 +76,8 @@ gulp.task('move-index', function() {
 });
 
 gulp.task('bower', function() {
-  return bower('./build/bower_components')
-    .pipe(gulp.dest('lib/'));
+  return bower('./client/bower_components')
+    .pipe(gulp.dest('./build/bower_components'));
 });
 
 gulp.task('serve', function() {
