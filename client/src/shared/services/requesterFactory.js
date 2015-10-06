@@ -12,6 +12,7 @@
         moneyExchanged: undefined,
         vendor: undefined,
         vendorYelpId: undefined,
+        currentLocation: undefined,
         meetingLocation: undefined,
         meetingTime: undefined,
         status: undefined
