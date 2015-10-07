@@ -8,16 +8,14 @@
 
       vm.order = requesterFactory.getOrder();
 
-      //**toDo make this take requesters currentView location
-      var defaultArea = 'san francisco';
-
+      var location = requesterFactory.getOrder('currentLocation');
 
       vm.loadActiveShops = function() {
 
-        ajaxFactory.getActiveShops(defaultArea)
+        ajaxFactory.getActiveShops(location)
           .then(function successCallback(response) {
             vm.activeShops = response.data;
-            vm.buildMap(defaultArea, vm.activeShops);
+            vm.buildMap(location, vm.activeShops);
 
           }, function errorCallback(response) {
             var statusCode = response.status;

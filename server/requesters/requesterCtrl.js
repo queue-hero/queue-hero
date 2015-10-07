@@ -71,12 +71,12 @@ module.exports = {
   },
   getActiveShops: function(req, res, next) {
 
-    //extract area from req
-    var area = req.query.area;
+    //extract location from req
+    var location = req.query.location;
 
-    //TODO: (db) find all checkins that are close to ^ area
+    //TODO: (db) find all checkins that are not assigned and close to ^ area
 
-    //FIX: change response to be array of checked in locations
+    //FIXME: change response to be array of checked in locations from ^
     res.status(200).send(['Starbucks', 'Subway']);
   },
   rateHero: function(req, res, next) {
