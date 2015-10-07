@@ -23,8 +23,15 @@ var TransactionSchema = new mongoose.Schema({
   meetingLocation: {
     type: Array,
   },
+  meetingAddress: {
+    type: String,
+  },
   vendor: {
     type: String,
+  },
+  vendorYelpId: {
+    type: String,
+    //required: true
   },
   status: {
     type: String,
