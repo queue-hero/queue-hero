@@ -19,6 +19,7 @@ var jsScripts = [
   'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
   'client/bower_components/ng-file-upload/ng-file-upload.min.js',
   'client/bower_components/angular-cookies/angular-cookies.min.js',
+  'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',
   'client/src/app.js',
   'client/src/**/*.js'
 ];
@@ -29,7 +30,8 @@ var paths = {
   scripts: ['client/src/**/*.js'],
   html: ['client/src/**/*.html'],
   styles: ['client/styles/*.css'],
-  test: ['specs/**/*.js']
+  test: ['specs/**/*.js'],
+  images: ['client/images/*']
 };
 
 gulp.task('clean', function() {
@@ -62,6 +64,13 @@ gulp.task('copy-css', function() {
     .pipe(gulp.dest('./build/styles'));
 });
 
+gulp.task('copy-images', function() {
+  gulp.src(paths.images, {
+    base: './client/images'
+  })
+    .pipe(gulp.dest('./build/images'));
+});
+
 gulp.task('copy-html', function() {
   gulp.src(paths.html, {
     base: './client/'
@@ -87,6 +96,6 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'move-index']);
+gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index']);
 gulp.task('deploy', ['bower']);
 // gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
