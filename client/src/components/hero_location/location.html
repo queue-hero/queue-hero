@@ -1,6 +1,14 @@
 <div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
   <nav-bar></nav-bar>
-  hero location view
+  <mapbox id="map" callback="ctrl.callback"></mapbox>
+  <style>
+  #map {
+    width: 600px;
+    height: 700px;
+    /*left: 750px;*/
+    float: right;
+  }
+  </style>
 
   <div ng-repeat="location in ctrl.locations">
     <div class="radio">
@@ -11,6 +19,7 @@
       </ul>
     </div>
   </div>
+  
 
   <button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
 </div>
