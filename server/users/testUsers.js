@@ -70,7 +70,7 @@ exports.createTestUsers = function() {
         var testCheckIn1 = new Checkin({
           queueHero: 'johnsmith',
           vendor: 'Chipotle',
-          meetingLocation: [ 37.776740, -122.416371],
+          meetingLocation: [37.776740, -122.416371],
           standingInLine: true,
           assigned: false
         });
@@ -129,51 +129,51 @@ exports.createTestUsers = function() {
     item: 'milk coffee',
     additionalRequests: 'siracha'
   })
-  .then(function(transaction){
-    if (transaction){} else {
-      var testTransaction1 = new Transaction({
-        queueHero: '',
-        requester: 'NapoleonB',
-        item: 'milk coffee',
-        additionalRequests: 'siracha',
-        moneyExchanged: 13,
-        meetingTime: new Date(),
-        meetingLocation: [37.776740, -122.416371],
-        vendor: 'starbucks',
-        status: 'open'
-      });
-      testTransaction1.save(function(err) {
-        if (err) {
-          console.log(err);
-        }
-      });
-    }
-  });
+    .then(function(transaction) {
+      if (transaction) {} else {
+        var testTransaction1 = new Transaction({
+          queueHero: '',
+          requester: 'NapoleonB',
+          item: 'milk coffee',
+          additionalRequests: 'siracha',
+          moneyExchanged: 13,
+          meetingTime: new Date(),
+          meetingLocation: [37.776740, -122.416371],
+          vendor: 'starbucks',
+          status: 'open'
+        });
+        testTransaction1.save(function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+    });
 
   Transaction.findOne({
     queueHero: 'NapoleonB',
     requester: 'johnsmith',
     item: 'sweet coffee'
   })
-  .then(function(transaction){
-    if(transaction) {} else {
-      var testTransaction2 = new Transaction({
-        queueHero: 'NapoleonB',
-        requester: 'johnsmith',
-        item: 'sweet coffee',
-        additionalRequests: 'lots of splenda and 5 icecubs',
-        moneyExchanged: 13,
-        meetingTime: new Date(),
-        meetingLocation: [ 37.776740, -122.416371],
-        vendor: 'sushirrito',
-        status: 'complete'
-      });
-      testTransaction2.save(function(err) {
-        if (err) {
-          console.log(err);
-        }
-      });
-    }
-  });
+    .then(function(transaction) {
+      if (transaction) {} else {
+        var testTransaction2 = new Transaction({
+          queueHero: 'NapoleonB',
+          requester: 'johnsmith',
+          item: 'sweet coffee',
+          additionalRequests: 'lots of splenda and 5 icecubs',
+          moneyExchanged: 13,
+          meetingTime: new Date(),
+          meetingLocation: [37.776740, -122.416371],
+          vendor: 'sushirrito',
+          status: 'complete'
+        });
+        testTransaction2.save(function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+    });
 
 };
