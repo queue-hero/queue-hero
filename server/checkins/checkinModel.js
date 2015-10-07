@@ -9,7 +9,7 @@ var CheckinSchema = new mongoose.Schema({
     type: String,
     //required: true
   },
-  //[lat, long]
+  //[address, lat, long]
   meetingLocation: {
     type: Array,
     //required: true

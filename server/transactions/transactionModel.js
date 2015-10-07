@@ -19,7 +19,7 @@ var TransactionSchema = new mongoose.Schema({
   meetingTime: {
     type: Date,
   },
-  //[lat, long]
+  //[address, lat, long]
   meetingLocation: {
     type: Array,
   },
