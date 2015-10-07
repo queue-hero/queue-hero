@@ -76,8 +76,8 @@ gulp.task('move-index', function() {
 });
 
 gulp.task('bower', function() {
-  return bower('./client/bower_components')
-    .pipe(gulp.dest('./build/bower_components'));
+  return bower()
+    .pipe(gulp.dest('build/bower_components'));
 });
 
 gulp.task('serve', function() {

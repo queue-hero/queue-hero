@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp clean && gulp",
-    "start": "gulp clean && gulp deploy && gulp && node server/server.js"
+    "postinstall": "bower install && gulp clean && gulp deploy && gulp default"
   },
   "repository": {
     "type": "git",
