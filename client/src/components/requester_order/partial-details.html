@@ -1,6 +1,10 @@
 <div id="requester-order-details">
   <h1> Sit tight, you will have a queue hero soon! </h1>
 
+  <div>
+    <button ng-click="ctrl.cancelOrder()">Cancel Order</button>
+  </div>
+
   <h3> Your order </h3>
   Location: <span> {{ ctrl.order.vendor }}</span> <br/>
   Item: <span> {{ ctrl.order.item }}</span> <br/>

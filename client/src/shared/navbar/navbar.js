@@ -8,8 +8,18 @@
       templateUrl: 'src/shared/navbar/navbar.html',
       link: function(scope, elem, attrs) {
         scope.logout = function() {
-          $cookies.remove('com.queuehero');
+          $cookies.remove('connect.sid');
           $state.go('home');
+        };
+        scope.isLoggedIn = function() {
+          if ($state.is('home') || $state.is('signup')){
+            return false;
+          } else {
+            return true;
+          }
+        };
+        scope.isHome = function(){
+          return $state.is('home');
         };
       }
     };

@@ -110,5 +110,16 @@ module.exports = {
 
     });
 
+  },
+
+  cancelTransaction: function(req, res) {
+    var _id = req.body.transactionId;
+
+    Transaction.update({ _id: _id }, { status: 'closed' },  function(err) {
+      if (err) {
+        res.status(500).send();
+      }
+      res.status(204).send();
+    });
   }
 };
