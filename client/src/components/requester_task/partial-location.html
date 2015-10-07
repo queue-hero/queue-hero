@@ -1,22 +1,18 @@
 <div id="requester-task-location">
 
   <h1> Pick Shop to make a request </h1>
-  <div id="map">
-  </div>
+  <mapbox id="map" callback="ctrl.callback"></mapbox>
+  <style>
+  #map {
+    width: 600px;
+    height: 700px;
+    /*left: 750px;*/
+    float: right;
+  }
+  </style>
+
   <div id="shop" ng-repeat="shop in ctrl.activeShops">
     <div ng-click= "ctrl.selectLocation(shop)">
      Select Location: {{ shop }}
     </div>
   </div>
-</div>
-<!--Post MVP note: add a way to change the default area-->
-<!--This styling portion below will not stay here - it's just here for prototyping purposes-->
-<style>
-  #map {
-    height: 300px;
-    width: 300px;
-    border-style: dashed;
-    border-width: 1px;
-    border-color: gray;
-  }
-</style>

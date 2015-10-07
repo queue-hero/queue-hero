@@ -74,7 +74,7 @@ module.exports = {
     //extract area from req
     var area = req.query.area;
 
-    //TODO: (db) find all checkins that are close to ^ area
+    //TODO: (db) find all checkins that are not assigned and close to ^ area
 
     //FIX: change response to be array of checked in locations
     res.status(200).send(['Starbucks', 'Subway']);
