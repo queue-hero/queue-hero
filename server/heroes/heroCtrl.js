@@ -153,13 +153,25 @@ module.exports = {
 
   },
 
+  removeFromCheckin: function(req, res) {
+    var queueHero = req.body.username;
+
+    Checkin.remove({ username: queueHero }, function(err) {
+      if (err) {
+        res.status(500).send();
+      }
+      res.status(204).send();
+    });
+
+  },
+
   getOpenRequests: function(req, res, next) {
     //get location from request
     var vendorYelpId = req.query.vendorYelpId;
 
     //TODO: (db) find all transactions with yelpId = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({ status: { $ne: 'complete' } }, function(err, transactions) {
+    Transaction.find({ status: { $nin: ['complete', 'closed'] } }, function(err, transactions) {
       if (err) {
         res.status(500).send();
       }

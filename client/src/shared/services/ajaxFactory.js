@@ -146,6 +146,22 @@
       });
     };
 
+    ajaxObj.removeFromQueue = function(username) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/hero/task/removal',
+        data: { username: username }
+      });
+    };
+
+    ajaxObj.cancelOrder = function(transactionId) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/requester/order/details/cancel',
+        data: { transactionId: transactionId }
+      });
+    };
+
 
     return ajaxObj;
 

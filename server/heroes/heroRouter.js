@@ -20,6 +20,9 @@ module.exports = function(app) {
   // res: 201 or error
   app.post('/task', heroCtrl.acceptRequest);
 
+
+  app.post('/task/removal', heroCtrl.removeFromCheckin);
+
   // req: Polling. setInterval poll server to check if order complete
   // res: Polling. return false until order complete
   app.get('/order/details', heroCtrl.checkOrderComplete);
