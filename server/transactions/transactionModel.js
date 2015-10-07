@@ -19,7 +19,7 @@ var TransactionSchema = new mongoose.Schema({
   meetingTime: {
     type: Date,
   },
-  //[address, lat, long]
+  //[lat, long]
   meetingLocation: {
     type: Array,
   },
@@ -33,6 +33,7 @@ var TransactionSchema = new mongoose.Schema({
     type: String,
     //required: true
   },
+  //unfulfilled, inprogress, complete, closed
   status: {
     type: String,
   },

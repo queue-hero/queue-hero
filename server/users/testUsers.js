@@ -140,7 +140,7 @@ exports.createTestUsers = function() {
           meetingTime: new Date(),
           meetingLocation: [37.776740, -122.416371],
           vendor: 'starbucks',
-          status: 'open'
+          status: 'unfulfilled'
         });
         testTransaction1.save(function(err) {
           if (err) {
