@@ -14,7 +14,6 @@ module.exports = {
   },
   postUserData: function(req, res, next) {
     var reqUser = req.body.user;
-    // console.log('reqUser:',reqUser);
     var newUser = new User({
       username: reqUser.username,
       facebookId: reqUser.facebookId,
@@ -36,6 +35,17 @@ module.exports = {
     }).then(function() {
       console.log('DB:', 'saved');
       res.status(201).send('User created');
+    });
+  },
+  postUserUpdate: function(req, res, next) {
+    var reqUser = req.body.user;
+    var facebookId = req.body.user.facebookId;
+    var query = { facebookId: facebookId };
+    User.update(query, reqUser)
+    .then(function(err, num) {
+      console.log('updateCallback:', err || num);
+      console.log('DB:', 'update');
+      res.status(201).send('User updated');
     });
   }
 };
