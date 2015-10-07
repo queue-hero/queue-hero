@@ -14,8 +14,11 @@
         cardNumber: undefined,
         cvc: undefined,
         expirationDate: undefined,
-        ratings: undefined
-
+        ratings: undefined,
+        billingAddress: undefined,
+        city: undefined,
+        state: undefined,
+        country: undefined
       };
 
       return {

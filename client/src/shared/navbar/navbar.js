@@ -18,7 +18,7 @@
             return true;
           }
         };
-        scope.isHome = function(){
+        scope.isHome = function() {
           return $state.is('home');
         };
       }
