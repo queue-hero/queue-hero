@@ -1,7 +1,9 @@
 <div id="requester-order" ng-controller="RequesterOrderCtrl as ctrl">
   <nav-bar></nav-bar>
-  
+
   <div ng-show="ctrl.complete === 'details'" ui-view="details"></div>
   <div ng-show="ctrl.complete === 'complete'" ui-view="complete"></div>
   <div ng-show="ctrl.complete === 'rate'" ui-view="rate"></div>
+  <pre> order = {{ ctrl.order | json }}</pre>
+
 </div>
