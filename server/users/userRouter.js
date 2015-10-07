@@ -8,7 +8,11 @@ module.exports = function(app) {
   // res: userdata
   app.get('/', userCtrl.getUserData);
   // req: object with signup details
-// res: 201 or error
-  app.post('/', userCtrl.postUserUpdate);
+  // res: 201 or error
+  app.post('/', userCtrl.postUserData);
+
+  // req: object with updated profile info
+  // res: 201 or error
+  app.post('/update', userCtrl.postUserUpdate);
 
 };
