@@ -16,6 +16,7 @@
       //will be executed if status code is 200-299
       .then(function successCallback(response) {
         vm.locations = response.data;
+        console.log(vm.locations);
         populatePins();
     });
 
@@ -63,7 +64,7 @@
           '<p>' + locationAddress + '</p>';
         L.marker([location.lat, location.long], {
           icon: pinIcon
-        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);  
+        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
       }
     };
 

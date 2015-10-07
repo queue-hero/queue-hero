@@ -9,10 +9,17 @@ var CheckinSchema = new mongoose.Schema({
     type: String,
     //required: true
   },
-  //[lat, long]
+  vendorYelpId: {
+    type: String,
+    //required: true
+  },
+  //[address, lat, long]
   meetingLocation: {
     type: Array,
     //required: true
+  },
+  meetingAddress: {
+    type: String,
   },
   standingInLine: {
     type: Boolean,
