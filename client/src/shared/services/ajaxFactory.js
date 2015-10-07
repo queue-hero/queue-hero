@@ -54,6 +54,14 @@
       });
     };
 
+    ajaxObj.postUpdatedProfile = function(user) {
+      return $http({
+        method: 'POST',
+        url: serverUrl + '/profile',
+        data: { user: user }
+      });
+    };
+
     ajaxObj.getActiveShops = function(location) {
       return $http({
         method: 'GET',

@@ -13,6 +13,7 @@
     }
     $cookies.remove('com.queuehero');
 
+
     //when controller loads, fire GET request for user info
     ajaxFactory.getProfileData(vm.facebookId)
       .then(function successCallback(response) {

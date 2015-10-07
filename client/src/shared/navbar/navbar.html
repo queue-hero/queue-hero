@@ -4,6 +4,8 @@
       <a class="login" href="/auth/facebook">
         <button class="btn btn-primary navbar-btn navbar-right" ng-show="isHome()">Log In</button>
       </a>
-      <button class="btn btn-default navbar-btn navbar-right" ng-show="isLoggedIn()">Profile</button>
+      <a ui-sref="profile">
+        <button class="btn btn-default navbar-btn navbar-right" ng-show="isLoggedIn()">Profile</button>
+      </a>
   </div>
 </nav>
