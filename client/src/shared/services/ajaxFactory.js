@@ -3,7 +3,10 @@
 
   angular.module('app')
   .factory('ajaxFactory', ['$http', function($http) {
-    var serverUrl = 'http://localhost:3000';
+
+    // use herokuUrl if deployed, else use localhost:3000
+    var herokuUrl = 'https://queue-hero.herokuapp.com';
+    var serverUrl = process.env.DEPLOYED ? herokuUrl : 'http://localhost:3000';
     var ajaxObj = {};
 
     ajaxObj.getProfileData = function(facebookId) {
