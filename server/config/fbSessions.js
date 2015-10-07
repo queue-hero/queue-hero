@@ -40,13 +40,14 @@ module.exports.initialize = function(app) {
   });
 
   // use herokuUrl if deployed, else use localhost:3000
-  var herokuUrl = 'https://queue-hero.herokuapp.com';
-  var serverUrl = process.env.DEPLOYED ? herokuUrl : 'http://localhost:3000';
+  var herokuUrl = 'https://queue-hero.herokuapp.com/callback';
+  var localUrl = 'http://localhost:3000/auth/facebook/callback';
+  var serverUrl = process.env.DEPLOYED ? herokuUrl : localUrl;
   // use environment variable set in heroku if deployed, api_keys.js if local
   passport.use(new FacebookStrategy({
       clientID: process.env.FB_CLIENT_ID || api_keys.clientID,
       clientSecret: process.env.FB_CLIENT_SECRET || api_keys.clientSecret,
-      callbackURL: serverUrl + '/auth/facebook/callback',
+      callbackURL: serverUrl,
       enableProof: false,
       profileFields: ['id', 'displayName', 'email']
     },
