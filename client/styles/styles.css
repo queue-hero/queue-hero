@@ -29,3 +29,25 @@ button .login {
   position: relative;
   top: 150px;
 }
+
+.title {
+  font-size: 72px;
+  text-align: center;
+
+}
+
+a .signupbutton {
+  height: 150px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+a .loginbutton {
+  height: 150px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
