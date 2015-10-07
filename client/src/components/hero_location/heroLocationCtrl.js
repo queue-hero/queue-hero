@@ -63,7 +63,7 @@
           '<p>' + locationAddress + '</p>';
         L.marker([location.lat, location.long], {
           icon: pinIcon
-        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);  
+        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
       }
     };
 
