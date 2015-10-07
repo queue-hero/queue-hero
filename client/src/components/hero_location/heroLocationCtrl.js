@@ -16,6 +16,7 @@
       //will be executed if status code is 200-299
       .then(function successCallback(response) {
         vm.locations = response.data;
+        populatePins();
     });
 
     vm.select = function(index) {
@@ -40,6 +41,30 @@
           });
           $state.go('hero_task');
       });
+    };
+
+    vm.callback = function(map) {
+      vm.map = map;
+      map.setView([lat, long], 20);
+    };
+
+    var pinIcon = L.icon({
+      iconUrl: '/images/pin.png',
+      iconRetinaUrl: '/images/pin.png',
+      iconSize: [30,41]
+    });
+
+    var populatePins = function(locations) {
+      for (var i = 0; i < vm.locations.length; i++) {
+        var location = vm.locations[i];
+        var locationName = location.name;
+        var locationAddress = location.displayAddress;
+        var popupContent = '<p><strong>' + locationName + '</strong></p>' +
+          '<p>' + locationAddress + '</p>';
+        L.marker([location.lat, location.long], {
+          icon: pinIcon
+        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);  
+      }
     };
 
   }]);

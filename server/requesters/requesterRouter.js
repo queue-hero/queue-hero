@@ -16,6 +16,9 @@ module.exports = function(app) {
   // res: Polling. return false until match found
   app.get('/order/details', requesterCtrl.checkOrderAccepted);
 
+
+  app.post('/order/details/cancel', requesterCtrl.cancelTransaction);
+
   // req: order received
   // res: 201 or error
   app.post('/order/complete', requesterCtrl.fulfillTransaction);
