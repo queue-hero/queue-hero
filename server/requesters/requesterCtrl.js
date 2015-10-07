@@ -55,17 +55,17 @@ module.exports = {
     //extract transaction id from req
     var transactionId = req.query.transactionId;
 
-    Transaction.findOne({ _id: transactionId }, function(err, user) {
+    Transaction.findOne({ _id: transactionId }, function(err, doc) {
       if (err) {
         res.status(500).send();
       }
-      if (!user) {
+      if (!doc) {
         res.status(401).send();
-      } else if (user.queueHero){
-          res.status(200).send(user.queueHero);
-      }
-
+      } else if (doc.queueHero){
+          res.status(200).send(doc.queueHero);
+      } else {
       res.status(200).send(false);
+      }
     });
 
   },
@@ -79,6 +79,7 @@ module.exports = {
     //FIX: change response to be array of checked in locations
     res.status(200).send(['Starbucks', 'Subway']);
   },
+
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
