@@ -16,7 +16,6 @@
       //will be executed if status code is 200-299
       .then(function successCallback(response) {
         vm.locations = response.data;
-        console.log(response.data);
         populatePins();
     });
 
@@ -45,10 +44,9 @@
     };
 
     vm.callback = function(map) {
-      console.log('callback was called');
       vm.map = map;
       map.setView([lat, long], 20);
-    }
+    };
 
     var pinIcon = L.icon({
       iconUrl: '/images/pin.png',
@@ -57,19 +55,17 @@
     });
 
     var populatePins = function(locations) {
-      console.log('populate pins was called');
       for (var i = 0; i < vm.locations.length; i++) {
         var location = vm.locations[i];
         var locationName = location.name;
         var locationAddress = location.displayAddress;
-        console.log(locationName, locationAddress);
         var popupContent = '<p><strong>' + locationName + '</strong></p>' +
           '<p>' + locationAddress + '</p>';
         L.marker([location.lat, location.long], {
           icon: pinIcon
-        }).bindPopup(popupContent, {offset: L.point(0, -20)}).openPopup().addTo(vm.map);  
+        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);  
       }
-    }
+    };
 
   }]);
 
