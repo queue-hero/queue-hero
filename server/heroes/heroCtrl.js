@@ -86,7 +86,10 @@ module.exports = {
     var newCheckin = new Checkin({
       queueHero: queueHero,
       vendor: location.name,
-      meetingLocation: [location.lat, location.long]
+      meetingLocation: [location.lat, location.long],
+      vendorYelpId: location.yelpId,
+      meetingAddress: location.meetingAddress
+
     });
 
     newCheckin.save(function(err) {
