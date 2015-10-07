@@ -21,7 +21,7 @@ mongoose.connect(database, function(error) {
 createTestUsers();
 
 // serve './../build if deployed, './../client' if local
-var servePath = (process.env.DEPLOYED) ? './../build' : './../client';
+var servePath = process.env.DEPLOYED ? './../build' : './../client';
 app.use(express.static(__dirname + servePath));
 
 middleware(app, express);
