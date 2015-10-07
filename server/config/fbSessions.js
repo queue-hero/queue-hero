@@ -2,7 +2,13 @@ var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var api_keys = require('./api_keys.js').facebook;
+
+var api_keys;
+
+// load apikeys if localhost. process.env.DEPLOYED set in heroku
+if (!process.env.DEPLOYED) {
+  api_keys = require('../config/api_keys.js').facebook;
+}
 
 module.exports.restrict = function(req, res, next) {
   if (req.isAuthenticated()) {
@@ -33,10 +39,14 @@ module.exports.initialize = function(app) {
     done(null, obj);
   });
 
+  // use herokuUrl if deployed, else use localhost:3000
+  var herokuUrl = 'https://queue-hero.herokuapp.com';
+  var serverUrl = process.env.DEPLOYED ? herokuUrl : 'http://localhost:3000';
+  // use environment variable set in heroku if deployed, api_keys.js if local
   passport.use(new FacebookStrategy({
-      clientID: api_keys.clientID,
-      clientSecret: api_keys.clientSecret,
-      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      clientID: process.env.FB_CLIENT_ID || api_keys.clientID,
+      clientSecret: process.env.FB_CLIENT_SECRET || api_keys.clientSecret,
+      callbackURL: serverUrl + '/auth/facebook/callback',
       enableProof: false,
       profileFields: ['id', 'displayName', 'email']
     },

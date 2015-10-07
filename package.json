@@ -4,7 +4,8 @@
   "description": "Find your hero",
   "main": "index.js",
   "scripts": {
-    "build": "gulp clean && gulp"
+    "build": "gulp clean && gulp",
+    "postinstall": "gulp clean && gulp deploy && gulp"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,7 @@
     "async": "^1.4.2",
     "bcryptjs": "2.2.1",
     "body-parser": "^1.5.2",
+    "bower": "^1.5.3",
     "browser-sync": "^2.9.6",
     "cookie-parser": "^1.4.0",
     "cors": "^2.7.1",
@@ -30,6 +32,7 @@
     "express-session": "^1.11.3",
     "formidable": "^1.0.17",
     "gulp": "^3.8.5",
+    "gulp-bower": "0.0.10",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.6.0",
     "gulp-filesize": "0.0.6",
