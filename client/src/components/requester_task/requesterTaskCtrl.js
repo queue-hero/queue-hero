@@ -8,7 +8,6 @@
 
       vm.order = requesterFactory.getOrder();
 
-      //**toDo make this take requesters currentView location
       var defaultArea = requesterFactory.getOrder('currentLocation');
 
       vm.loadActiveShops = function() {
@@ -49,13 +48,13 @@
       };
 
       vm.selectLocation = function(shop) {
-        //FIX: vendor and meetingLocation are hardcoded
-        vm.order.vendor = shop;
-        vm.order.meetingLocation = [1, 1];
+        vm.vendor = shop.vendor;
+        vm.meetingLocation = [shop.meetingLocation[0], shop.meetingLocation[1]];
         requesterFactory.setOrder({
-          vendor: vm.order.vendor,
-          meetingLocation: [1, 1]
+          vendor: vm.vendor,
+          meetingLocation: vm.meetingLocation
         });
+        console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingLocation);
         vm.currentView = 'item';
       };
 
