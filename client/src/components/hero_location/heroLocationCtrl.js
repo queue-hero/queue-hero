@@ -16,6 +16,7 @@
       //will be executed if status code is 200-299
       .then(function successCallback(response) {
         vm.locations = response.data;
+        console.log(vm.locations);
         populatePins();
     });
 
