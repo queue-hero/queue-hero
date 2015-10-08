@@ -1,15 +1,14 @@
 <div id="requester-order-details">
-  <h1> Sit tight, you will have a queue hero soon! </h1>
+  <div class="container">
+    <h1 class="requester-task-stage"> Sit tight, you will have a queue hero soon! </h1>
 
-  <div>
-    <button ng-click="ctrl.cancelOrder()">Cancel Order</button>
+    <!-- <h3> Your order </h3> -->
+    <h4 class="requester-choice"> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
+    <h4 class="requester-choice"> <small> Item: </small> {{ ctrl.item }} </h4>
+    <h4 class="requester-choice"> <small> Additional Requests: </small> {{ ctrl.details }} </h4>
+    <h4 class="requester-choice"> <small> Meeting time: </small> {{ ctrl.time }} </h4>
+    <h4 class="requester-choice"> <small> Price: </small> {{ ctrl.price | currency }} </h4>
+
+    <button class="btn btn-md btn-danger" ng-click="ctrl.cancelOrder()">Cancel Order</button>
   </div>
-
-  <h3> Your order </h3>
-  Location: <span> {{ ctrl.order.vendor }}</span> <br/>
-  Item: <span> {{ ctrl.order.item }}</span> <br/>
-  Additional Requests: <span> {{ ctrl.order.additionalRequests }} </span> <br/>
-  Meeting time: <span> {{ ctrl.order.meetingTime | date : 'h:mm a' }} </span> <br/>
-  Price: <span> {{ ctrl.order.moneyExchanged | currency }} </span> <br/>
-
 </div>

@@ -56,7 +56,27 @@ a .loginbutton {
   height: 500px;
 }
 
-.confirm-item {
-  margin-top: 10px;
+.requester-task-stage {
+  font-size: 84px;
+  margin-bottom: 30px;
+}
+
+.requester-choice {
+  font-size: 32px;
+}
+
+.requester-task-label {
+  font-size: 48px;
+}
+
+.requester-item {
+  width: 500px;
+  height: 60px;
+  font-size: 48px;
+  padding: 4px;
+}
+
+.confirm-choice-button {
+  margin-top: 25px;
   margin-bottom: 10px;
 }

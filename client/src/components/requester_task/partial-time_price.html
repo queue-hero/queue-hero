@@ -1,13 +1,13 @@
 <div id="requester-task-time_price">
   <div class="container">
-    <h1> Pick Time and Price </h1>
-    <h4> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
-    <h4> <small> Item: </small> {{ ctrl.item }} </h4>
+    <h1 class="requester-task-stage"> Pick Time and Price </h1>
+    <h4 class="requester-choice"> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
+    <h4 class="requester-choice"> <small> Item: </small> {{ ctrl.item }} </h4>
     <form>
       <div class="form-group">
-        <h5> In <input type="number" placeholder="20" ng-model="ctrl.time" /> minutes </h5>
-        <h5> for <input type="number" placeholder="$7" ng-model="ctrl.price"> </h5>
-        <button class="btn btn-sm btn-primary" ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
+        <h5> <span class="requester-task-label"> In </span> <input class="requester-item" type="number" placeholder="20" ng-model="ctrl.time" /> minutes </h5>
+        <h5> <span class="requester-task-label"> for </span> <input class="requester-item" type="number" placeholder="$7" ng-model="ctrl.price"> <span class="requester-task-label"> dollars </span> </h5>
+        <button class="btn btn-lg btn-primary confirm-choice-button" ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
       </div>
     </form>
   </div>
