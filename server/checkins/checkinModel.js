@@ -3,21 +3,20 @@
 var CheckinSchema = new mongoose.Schema({
   queueHero: {
     type: String,
-    //required: true
   },
   vendor: {
     type: String,
-    //required: true
+  },
+  vendorYelpId: {
+    type: String,
   },
   //[lat, long]
   meetingLocation: {
     type: Array,
     //required: true
   },
-  standingInLine: {
-    type: Boolean,
-    //required: true,
-    default: true
+  meetingAddress: {
+    type: String,
   },
   assigned: {
     type: Boolean,

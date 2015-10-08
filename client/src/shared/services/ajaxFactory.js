@@ -57,7 +57,7 @@
     ajaxObj.postUpdatedProfile = function(user) {
       return $http({
         method: 'POST',
-        url: serverUrl + '/profile',
+        url: serverUrl + '/profile/update',
         data: { user: user }
       });
     };
@@ -66,7 +66,10 @@
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
-        params: { area: area }
+        params: {
+          lat: area.lat,
+          long: area.long
+         }
       });
     };
 

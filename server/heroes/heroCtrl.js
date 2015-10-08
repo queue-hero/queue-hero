@@ -86,7 +86,10 @@ module.exports = {
     var newCheckin = new Checkin({
       queueHero: queueHero,
       vendor: location.name,
-      meetingLocation: [location.lat, location.long]
+      meetingLocation: [location.lat, location.long],
+      vendorYelpId: location.yelpId,
+      meetingAddress: location.meetingAddress
+
     });
 
     newCheckin.save(function(err) {
@@ -171,7 +174,7 @@ module.exports = {
 
     //TODO: (db) find all transactions with yelpId = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({ status: { $nin: ['complete', 'closed'] } }, function(err, transactions) {
+    Transaction.find({ status: 'unfulfilled', vendorYelpId: vendorYelpId }, function(err, transactions) {
       if (err) {
         res.status(500).send();
       }

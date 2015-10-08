@@ -23,6 +23,9 @@
             vendor: undefined,
             vendorYelpId: undefined
           });
+          //cancel interval:
+          $interval.cancel(checkOrder);
+          //the user may want to put a new order after cancelling
           $state.go('requester_task');
           }, function(response) {
             console.log(response.status);

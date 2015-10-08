@@ -9,7 +9,7 @@
       vm.order = requesterFactory.getOrder();
 
       //**toDo make this take requesters currentView location
-      var defaultArea = 'san francisco';
+      var defaultArea = [37.7877500,-122.4002400];
 
 
       vm.loadActiveShops = function() {
@@ -64,23 +64,18 @@
       };
 
       vm.confirmOrder = function() {
-
         ajaxFactory.sendOrder(vm.order)
-          .then(function(response) {
-
+          .then(function successCallback(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({
-              transactionId: response.data
+              transactionId: response.data,
+              status: 'complete'
             });
 
             //move to next state
             $state.go('requester_order');
 
-          }, function(response) {
-            console.log(response.status);
-            requesterFactory.setOrder({
-              status: 'complete'
-            });
+          }, function errorCallback(response) {
           });
       };
 
