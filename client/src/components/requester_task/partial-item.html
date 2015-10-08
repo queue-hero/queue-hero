@@ -1,14 +1,14 @@
 <div id="requester-task-item">
-  <div class="container-fluid">
+  <div class="container">
     <h1> Pick item </h1>
     <h4> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
     <form>
       <div class="form-group">
-        <h5> I want a<br/> 
-        <input type="text" placeholder="e.g. Mocha Frappucino" ng-model="ctrl.item"> </h5> 
+        <h5> I want a <br/> 
+        <input type="text" placeholder="Mocha Frappucino" ng-model="ctrl.item"> </h5> 
         <h5> with <br/>
-        <input type="textarea" placeholder="whipped cream" ng-model="ctrl.details"> </h5> <br/>
-        <button class="btn btn-sm btn-success" type="submit" ng-click="ctrl.setItem()">Confirm item</button>
+        <input type="textarea" placeholder="Whipped cream" ng-model="ctrl.details"> </h5>
+        <button class="btn btn-sm btn-primary confirm-item" type="submit" ng-click="ctrl.setItem()">Confirm item</button>
       </div>
     </form>
   </div>

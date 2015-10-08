@@ -1,9 +1,11 @@
 <div id="requester-task-confirm">
-  <h1> Please verify before Confirming Order </h1>
-  Location: <span> {{ ctrl.order.vendor }} </span> <br/>
-  Item: <span> {{ ctrl.item }}</span> <br/>
-  Additional Requests: <span> {{ ctrl.details }} </span> <br/>
-  Meeting time: <span> {{ ctrl.time | date : 'h:mm a' }}</span> <br/>
-  Price: <span> {{ ctrl.price | currency }} </span> <br/>
-  <button ng-click="ctrl.confirmOrder()"> Confirm Order </button>
+  <div class="container">
+    <h1> Confirm Order </h1>
+    <h4> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
+    <h4> <small> Item: </small> {{ ctrl.item }} </h4>
+    <h4> <small> Additional Requests: </small> {{ ctrl.details }} </h4>
+    <h4> <small> Meeting time: </small> {{ ctrl.time }} </h4>
+    <h4> <small> Price: </small> {{ ctrl.price | currency }} </h4>
+    <button class="btn btn-md btn-success" ng-click="ctrl.confirmOrder()"> Confirm Order </button>
+  </div>
 </div>

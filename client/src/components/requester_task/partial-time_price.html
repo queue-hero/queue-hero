@@ -1,12 +1,14 @@
 <div id="requester-task-time_price">
-  <h1> Pick Time and Price </h1>
-  Location: <span> {{ ctrl.order.vendor }}</span> <br/>
-  Item: <span> {{ ctrl.item }} </span>
-  <form>
-    Time: In <input type="number" placeholder="20" ng-model="ctrl.time" /> minutes
-    <br/>
-    Price
-    $<input type="number" placeholder="7" ng-model="ctrl.price"> <br/>
-    <button ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
-  </form>
+  <div class="container">
+    <h1> Pick Time and Price </h1>
+    <h4> <small> Location: </small> {{ ctrl.order.vendor }} </h4>
+    <h4> <small> Item: </small> {{ ctrl.item }} </h4>
+    <form>
+      <div class="form-group">
+        <h5> In <input type="number" placeholder="20" ng-model="ctrl.time" /> minutes </h5>
+        <h5> for <input type="number" placeholder="$7" ng-model="ctrl.price"> </h5>
+        <button class="btn btn-sm btn-primary" ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
+      </div>
+    </form>
+  </div>
 </div>

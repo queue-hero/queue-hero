@@ -51,3 +51,12 @@ a .loginbutton {
   margin-right: auto;
   display: block;
 }
+
+#map {
+  height: 500px;
+}
+
+.confirm-item {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

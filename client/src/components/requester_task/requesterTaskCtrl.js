@@ -30,13 +30,16 @@
         //the mapping library function should be call here:
       };
 
-      vm.selectLocation = function(shop) {
-        //FIX: vendor and meetingLocation are hardcoded
+      vm.select = function(shop) {
         vm.order.vendor = shop;
+        //FIXME: hardcoded
         vm.order.meetingLocation = [1, 1];
+      };
+
+      vm.pickLocation = function(shop) {
         requesterFactory.setOrder({
           vendor: vm.order.vendor,
-          meetingLocation: [1, 1]
+          meetingLocation: vm.order.meetingLocation
         });
         vm.currentView = 'item';
       };
