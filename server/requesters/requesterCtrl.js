@@ -41,6 +41,7 @@ module.exports = {
     transaction.save(function(err, transaction) {
       if (err) {
         res.status(500).send();
+        return;
       } else {
         res.status(201).send(transaction._id);
       }
@@ -58,9 +59,11 @@ module.exports = {
     }, function(err, affected) {
       if (err) {
         res.status(500).send();
+        return;
       }
       if (affected.ok === 1) {
         res.status(201).send();
+        return;
       }
       res.status(500).send();
     });
@@ -77,13 +80,14 @@ module.exports = {
     }, function(err, transaction) {
       if (err) {
         res.status(500).send();
+        return;
       }
       if (!transaction) {
         res.status(401).send();
-      } else if (transaction.queueHero){
+      } else if (transaction.queueHero) {
         res.status(200).send(transaction.queueHero);
       } else {
-      res.status(200).send(false);
+        res.status(200).send(false);
       }
     });
 
@@ -91,6 +95,7 @@ module.exports = {
   getActiveShops: function(req, res, next) {
     if (req.query.location === undefined) {
       res.status(400).send();
+      return;
     }
     var lat1 = req.query.location[0];
     var long1 = req.query.location[1];
@@ -98,6 +103,7 @@ module.exports = {
     Checkin.find({}, function(err, checkins) {
       if (err) {
         res.status(500).send();
+        return;
       }
 
       //filters for checkins within a 1 mile radius
@@ -122,9 +128,11 @@ module.exports = {
     }, function(err, user) {
       if (err) {
         res.status(500).send();
+        return;
       }
       if (!user) {
         res.status(401).send();
+        return;
       }
       var ratings = user.ratings;
       ratings.transactionId = rating;
@@ -135,9 +143,11 @@ module.exports = {
       }, function(err, rowsAffected) {
         if (err) {
           res.status(500).send();
+          return;
         }
         if (rowsAffected.ok === 1) {
           res.status(204).send();
+          return;
         }
         res.status(500).send();
       });
@@ -156,6 +166,7 @@ module.exports = {
     }, function(err) {
       if (err) {
         res.status(500).send();
+        return;
       }
       res.status(204).send();
     });
