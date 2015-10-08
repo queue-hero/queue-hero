@@ -13,9 +13,9 @@ var testCheckins = tests.testCheckins;
 exports.createTestUsers = function() {
   User.findOne({
     username: 'rachel'
-  }).then(function(user){
-    if(!user){
-      _.each(testUsers, function(testUser){
+  }).then(function(user) {
+    if (!user) {
+      _.each(testUsers, function(testUser) {
         var newUser = new User(testUser);
         newUser.save(function(err) {
           if (err) {
@@ -24,7 +24,7 @@ exports.createTestUsers = function() {
         });
       });
 
-      _.each(testTransactions, function(testTransaction){
+      _.each(testTransactions, function(testTransaction) {
         var newTransaction = new Transaction(testTransaction);
         newTransaction.save(function(err) {
           if (err) {
@@ -33,7 +33,7 @@ exports.createTestUsers = function() {
         });
       });
 
-      _.each(testCheckins, function(testCheckin){
+      _.each(testCheckins, function(testCheckin) {
         var newCheckin = new Checkin(testCheckin);
         newCheckin.save(function(err) {
           if (err) {

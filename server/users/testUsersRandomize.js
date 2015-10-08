@@ -81,16 +81,24 @@ var pool = {
   'tatsumi': '90903',
   'jake': '92442',
   'mike': '34535',
-  'rachel': '3453543'
+  'rachel': '3453543',
+  'sarah': '11111',
+  'paul': '222222',
+  'yomama': '999999',
+  'fred': '54644564',
+  'george': '8888888',
+  'cindy': '4444444',
+  'norm': '29292929',
+  'lindsey': '300303'
 };
 
 //pick random user in "pool" not equal to username parameter
-function pickRandomUser(username){
+function pickRandomUser(username) {
   var userPool = Object.keys(pool);
   var pickedUser = userPool[_.random(0, userPool.length - 1)];
-  if(username !== pickedUser){
+  if (username !== pickedUser) {
     return pickedUser;
-  }else{
+  } else {
     pickRandomUser(username);
   }
 }
@@ -108,7 +116,7 @@ var status = ['unfulfilled', 'inprogress', 'complete', 'closed'];
 var assigned = [true, false];
 
 //look through each user listed in "pool" object
-for(var key in pool){
+for (var key in pool) {
   var username = key;
   var facebookId = pool[key];
 
@@ -129,14 +137,14 @@ for(var key in pool){
   checkin.queueHero = username;
   checkin.assigned = assigned[_.random(0, assigned.length - 1)];
   transaction.status = status[_.random(0, status.length - 1)];
-  if(transaction.status === 'inprogress' || 'complete'){
+  if (transaction.status === 'inprogress' || 'complete') {
     transaction.queueHero = pickRandomUser(username);
-  }else{
+  } else {
     transaction.queueHero = undefined;
   }
   var myLocation = validLocations[_.random(0, validLocations.length - 1)];
 
-  if(_.random(0, 3) > 1){
+  if (_.random(0, 3) > 0) {
     transaction.vendorYelpId = myLocation.vendorYelpId;
     transaction.vendor = myLocation.vendor;
     transaction.meetingAddress = myLocation.meetingAddress;
@@ -149,7 +157,7 @@ for(var key in pool){
     checkin.meetingAddress = myLocation.meetingAddress;
     checkin.vendorYelpId = myLocation.vendorYelpId;
     checkin.meetingLocation = [myLocation.lat, myLocation.long];
-  }else{
+  } else {
     transaction.vendorYelpId = 'far away bar';
     transaction.vendor = 'far away bar';
     transaction.meetingAddress = '123 far away st';
