@@ -1,0 +1,31 @@
+body > div:first-of-type {
+  padding-top: 60px;
+}
+
+.choices {
+  padding-left: 200px;
+}
+
+button .hero {
+  position: relative;
+  top: 100px;
+}
+
+button .requester {
+  position: relative;
+  top: 150px;
+}
+
+.home {
+  padding-left: 200px;
+}
+
+button .signup {
+  position: relative;
+  top: 100px;
+}
+
+button .login {
+  position: relative;
+  top: 150px;
+}

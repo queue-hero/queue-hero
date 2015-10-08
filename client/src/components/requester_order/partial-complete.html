@@ -1,0 +1,16 @@
+<div id="requester-order-complete">
+  <h1> Queue hero to the rescue! </h1>
+
+  <div>
+    <div>Meet {{ ctrl.order.queueHero }}</div>
+    <img src="" alt="Queue Hero Pic">
+    <div>
+      <span>at {{ ctrl.order.meetingTime | date : 'h:mm a' }}</span>
+    </div>
+    <div>
+      <span>at {{ ctrl.order.meetingLocation }} location</span>
+    </div>
+  </div>
+  <button ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
+
+</div>

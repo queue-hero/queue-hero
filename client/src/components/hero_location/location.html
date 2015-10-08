@@ -1,0 +1,27 @@
+<div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
+  <nav-bar></nav-bar>
+  <mapbox id="map" callback="ctrl.callback"></mapbox>
+  <style>
+  #map {
+    width: 600px;
+    height: 700px;
+    /*left: 750px;*/
+    float: right;
+  }
+  </style>
+
+  <div ng-repeat="location in ctrl.locations">
+    <div class="radio">
+      <label>
+      </label>
+      <ul>
+        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> {{ location.displayAddress }}</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
+    <pre> Possible Locations = {{ ctrl.locations | json }}</pre>
+  </div>
+</div>

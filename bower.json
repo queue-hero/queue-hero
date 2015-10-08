@@ -1,0 +1,26 @@
+{
+  "name": "queue-hero",
+  "version": "0.0.0",
+  "homepage": "https://github.com/queue-hero/queue-hero",
+  "authors": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.4.6",
+    "angular-bootstrap": "~0.13.4",
+    "angular-cookies": "~1.4.7",
+    "angular-mapbox": "~0.1.5",
+    "angular-ui-router": "~0.2.15",
+    "angular-ui-router-tabs": "~1.5.1",
+    "bootstrap": "~3.3.5",
+    "ng-file-upload": "~7.2.1",
+    "normalize-css": "normalize.css#~3.0.3"
+  }
+}

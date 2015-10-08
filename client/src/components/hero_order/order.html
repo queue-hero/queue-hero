@@ -1,0 +1,7 @@
+<div id="hero-order" ng-controller="HeroOrderCtrl as ctrl">
+  <nav-bar></nav-bar>
+
+  <div ng-hide="ctrl.complete" ui-view="details"></div>
+  <div ng-show="ctrl.complete" ui-view="complete"></div>
+
+</div>
