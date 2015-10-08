@@ -8,36 +8,53 @@
 
       vm.order = requesterFactory.getOrder();
 
-      //**toDo make this take requesters currentView location
-      var defaultArea = [37.7877500,-122.4002400];
-
+      var defaultArea = requesterFactory.getOrder('currentLocation');
 
       vm.loadActiveShops = function() {
-
+        console.log(defaultArea);
         ajaxFactory.getActiveShops(defaultArea)
           .then(function successCallback(response) {
             vm.activeShops = response.data;
-            vm.buildMap(defaultArea, vm.activeShops);
+            console.log(vm.activeShops);
+            populatePins();
 
           }, function errorCallback(response) {
             var statusCode = response.status;
           });
       };
 
+      vm.callback = function(map) {
+        vm.map = map;
+        map.setView([defaultArea[0], defaultArea[1]], 20);
+      };
+
       vm.loadActiveShops();
 
-      vm.buildMap = function(location, activeShops) {
-        //the mapping library function should be call here:
+      var heroIcon = L.icon({
+        iconUrl: '/images/hero.png',
+        iconRetinaUrl: '/images/hero.png',
+        iconSize: [30,30]
+      });
+
+      var populatePins = function() {
+        for (var i = 0; i < vm.activeShops.length; i++) {
+        var activeShop = vm.activeShops[i];
+        var activeShopName = activeShop.vendor;
+        var popupContent = '<p><strong>' + activeShopName + '</strong></p>';
+        L.marker([activeShop.meetingLocation[0], activeShop.meetingLocation[1]], {
+          icon: heroIcon
+        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
+      }
       };
 
       vm.selectLocation = function(shop) {
-        //FIX: vendor and meetingLocation are hardcoded
-        vm.order.vendor = shop;
-        vm.order.meetingLocation = [1, 1];
+        vm.vendor = shop.vendor;
+        vm.meetingLocation = [shop.meetingLocation[0], shop.meetingLocation[1]];
         requesterFactory.setOrder({
-          vendor: vm.order.vendor,
-          meetingLocation: [1, 1]
+          vendor: vm.vendor,
+          meetingLocation: vm.meetingLocation
         });
+        console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingLocation);
         vm.currentView = 'item';
       };
 

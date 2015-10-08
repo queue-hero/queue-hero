@@ -70,8 +70,8 @@
         method: 'GET',
         url: serverUrl + '/requester/task',
         params: {
-          lat: area.lat,
-          long: area.long
+          lat: area[0],
+          long: area[1]
          }
       });
     };

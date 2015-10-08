@@ -93,12 +93,12 @@ module.exports = {
 
   },
   getActiveShops: function(req, res, next) {
-    if (req.query.location === undefined) {
+    if (req.query.lat === undefined || req.query.long === undefined) {
       res.status(400).send();
       return;
     }
-    var lat1 = req.query.location[0];
-    var long1 = req.query.location[1];
+    var lat1 = req.query.lat;
+    var long1 = req.query.long;
 
     Checkin.find({}, function(err, checkins) {
       if (err) {
