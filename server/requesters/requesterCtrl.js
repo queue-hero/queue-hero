@@ -72,17 +72,17 @@ module.exports = {
 
     Transaction.findOne({
       _id: transactionId
-    }, function(err, user) {
+    }, function(err, transaction) {
       if (err) {
         res.status(500).send();
       }
-      if (!user) {
+      if (!transaction) {
         res.status(401).send();
-      } else if (user.queueHero) {
-        res.status(200).send(user.queueHero);
-      }
-
+      } else if (transaction.queueHero){
+        res.status(200).send(transaction.queueHero);
+      } else {
       res.status(200).send(false);
+      }
     });
 
   },
@@ -108,6 +108,7 @@ module.exports = {
     });
 
   },
+
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
