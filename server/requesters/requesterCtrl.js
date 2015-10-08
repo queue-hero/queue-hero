@@ -24,16 +24,18 @@ module.exports = {
     var meetingLocation = req.body.order.meetingLocation;
     var meetingTime = req.body.order.meetingTime;
     var status = 'unfulfilled';
+    var vendorYelpId = req.body.order.vendorYelpId;
 
     var transaction = new Transaction({
       requester: requester,
       item: item,
       additionalRequests: additionalRequests,
       moneyExchanged: moneyExchanged,
-      vendor: vendor,
       meetingLocation: meetingLocation,
       meetingTime: meetingTime,
-      status: status
+      status: status,
+      vendor: vendor,
+      vendorYelpId: vendorYelpId
     });
 
     transaction.save(function(err, transaction) {
