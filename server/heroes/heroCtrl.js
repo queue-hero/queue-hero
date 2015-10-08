@@ -102,8 +102,9 @@ module.exports = {
     newCheckin.save(function(err) {
       if (err) {
         consoole.log(err);
+        res.status(500).send();
       } else {
-   // returning newCheckin._id, may use it in /hero/task
+        // returning newCheckin._id, may use it in /hero/task
         res.status(201).send(newCheckin._id);
       }
     });
@@ -115,11 +116,13 @@ module.exports = {
 
     // find transaction, and then check if status is complete
     var findTransaction = Q.nbind(Transaction.findOne, Transaction);
-    findTransaction({ _id: transactionId })
+    findTransaction({
+      _id: transactionId
+    })
       .then(function(transaction) {
         if (!transaction) {
           console.log('transaction does not exist');
-          res.status(401).send();
+          res.status(400).send();
         } else {
           if (transaction.status === 'complete') {
             res.status(200).send(true);
@@ -128,7 +131,7 @@ module.exports = {
           }
         }
       })
-      .fail(function (error) {
+      .fail(function(error) {
         res.status(401).send();
       });
 
@@ -143,14 +146,20 @@ module.exports = {
       status: 'inprogress'
     };
 
-    Transaction.update({ _id: transactionId }, update, function(err, rowsAffected) {
+    Transaction.update({
+      _id: transactionId
+    }, update, function(err, rowsAffected) {
       if (err) {
         res.status(500).send();
+        return;
       }
       if (rowsAffected.ok === 1) {
-        Checkin.remove({ username: queueHero }, function(err) {
+        Checkin.remove({
+          username: queueHero
+        }, function(err) {
           if (err) {
             res.status(500).send();
+            return;
           }
           res.status(204).send();
         });
@@ -166,9 +175,12 @@ module.exports = {
   removeFromCheckin: function(req, res) {
     var queueHero = req.body.username;
 
-    Checkin.remove({ username: queueHero }, function(err) {
+    Checkin.remove({
+      username: queueHero
+    }, function(err) {
       if (err) {
         res.status(500).send();
+        return;
       }
       res.status(204).send();
     });
@@ -181,9 +193,13 @@ module.exports = {
 
     //TODO: (db) find all transactions with yelpId = ^
     //currently this query just gets all transactions that are not complete
-    Transaction.find({ status: 'unfulfilled', vendorYelpId: vendorYelpId }, function(err, transactions) {
+    Transaction.find({
+      status: 'unfulfilled',
+      vendorYelpId: vendorYelpId
+    }, function(err, transactions) {
       if (err) {
         res.status(500).send();
+        return;
       }
       res.status(200).send(transactions);
 
@@ -197,21 +213,31 @@ module.exports = {
     var requester = req.body.requester;
     var transactionId = req.body.transactionId;
 
-    User.findOne({ username: requester }, function(err, user) {
+    User.findOne({
+      username: requester
+    }, function(err, user) {
       if (err) {
         res.status(500).send();
+        return;
       }
       if (!user) {
         res.status(401).send();
+        return;
       }
       var ratings = user.ratings;
       ratings.transactionId = rating;
-      User.update({ username: requester }, { ratings: ratings }, function(err, rowsAffected) {
+      User.update({
+        username: requester
+      }, {
+        ratings: ratings
+      }, function(err, rowsAffected) {
         if (err) {
           res.status(500).send();
+          return;
         }
         if (rowsAffected.ok === 1) {
           res.status(204).send();
+          return;
         }
         res.status(500).send();
       });
