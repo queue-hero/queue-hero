@@ -28,10 +28,7 @@
   <div ng-show="ctrl.isEdit">
     <span>Edit Profile</span>
     <form novalidate class="simple-form">
-      Username:  <input name="username" type="text" ng-model="ctrl.user.username" required minlength="6" maxlength="20"/><br/>
-      <div ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
-        <div ng-messages-include="./src/shared/validation/messages.html"></div>
-      </div>
+      Username: <span> {{ ctrl.user.username }} </span> <br/>
 
       First Name:<input name="first" type="text" ng-model="ctrl.user.firstName" required /><br/>
       <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
