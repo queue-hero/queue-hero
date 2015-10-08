@@ -72,14 +72,14 @@ module.exports = {
 
     Transaction.findOne({
       _id: transactionId
-    }, function(err, doc) {
+    }, function(err, transaction) {
       if (err) {
         res.status(500).send();
       }
-      if (!doc) {
+      if (!transaction) {
         res.status(401).send();
-      } else if (doc.queueHero){
-        res.status(200).send(doc.queueHero);
+      } else if (transaction.queueHero){
+        res.status(200).send(transaction.queueHero);
       } else {
       res.status(200).send(false);
       }

@@ -28,7 +28,7 @@
           //the user may want to put a new order after cancelling
           $state.go('requester_task');
           }, function(response) {
-            console.log('cancelOrder Error, response status:', response.status);
+            console.log(response.status);
           });
 
     };

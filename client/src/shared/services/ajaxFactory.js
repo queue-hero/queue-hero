@@ -66,7 +66,10 @@
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
-        params: { area: area }
+        params: {
+          lat: area.lat,
+          long: area.long
+         }
       });
     };
 

@@ -9,7 +9,7 @@
       vm.order = requesterFactory.getOrder();
 
       //**toDo make this take requesters currentView location
-      var defaultArea = 'san francisco';
+      var defaultArea = [37.7877500,-122.4002400];
 
 
       vm.loadActiveShops = function() {
