@@ -57,7 +57,7 @@
     ajaxObj.postUpdatedProfile = function(user) {
       return $http({
         method: 'POST',
-        url: serverUrl + '/profile',
+        url: serverUrl + '/profile/update',
         data: { user: user }
       });
     };
