@@ -5,7 +5,7 @@
   .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', function($interval, ajaxFactory, requesterFactory, $state) {
     var vm = this;
     vm.order = requesterFactory.getOrder();
-    vm.complete = 'details';
+    vm.complete = 'complete';
 
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
 

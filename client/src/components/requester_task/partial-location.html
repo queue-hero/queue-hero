@@ -1,20 +1,29 @@
 <div id="requester-task-location">
-
-  <h1> Pick Shop to make a request </h1>
-  <div id="map">
-  </div>
-  <div id="shop" ng-repeat="shop in ctrl.activeShops">
-    <div ng-click= "ctrl.selectLocation(shop)">
-     Select Location: {{ shop }}
+  <div class="container">
+    <h1 class="requester-task-stage"> Pick Location </h1>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-md-6" id="map"></div>
+        <div class="col-md-6" ng-repeat="shop in ctrl.activeShops">
+          <div class="radio">
+            <label>
+            </label>
+            <ul>
+              <li class="btn btn-default" name="radioOptions" value="shop" ng-click="ctrl.select(shop)"> <strong>{{ shop }} </strong> </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <button class="btn btn-lg btn-primary confirm-choice-button" type="submit" ng-click="ctrl.pickLocation()">Confirm item</button>
+      </div>
     </div>
-  </div>
 </div>
-<!--Post MVP note: add a way to change the default area-->
+
 <!--This styling portion below will not stay here - it's just here for prototyping purposes-->
 <style>
   #map {
-    height: 300px;
-    width: 300px;
     border-style: dashed;
     border-width: 1px;
     border-color: gray;

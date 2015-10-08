@@ -1,16 +1,16 @@
 <div id="requester-order-complete">
-  <h1> Queue hero to the rescue! </h1>
-
-  <div>
-    <div>Meet {{ ctrl.order.queueHero }}</div>
-    <img src="" alt="Queue Hero Pic">
-    <div>
+  <div class="container">
+    <h1 class="requester-task-stage"> Queue hero to the rescue! </h1>
+    <h4 class="requester-choice"> 
+    <div class="text-center">Meet {{ ctrl.order.queueHero }}</div>
+    <!-- <img src="" alt="Queue Hero Pic"> -->
+    <div class="text-center">
       <span>at {{ ctrl.order.meetingTime | date : 'h:mm a' }}</span>
     </div>
-    <div>
+    <div class="text-center">
       <span>at {{ ctrl.order.meetingLocation }} location</span>
     </div>
+    </h4>
+    <button class="btn btn-lg btn-success confirm-choice-button" ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
   </div>
-  <button ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
-
 </div>

@@ -29,3 +29,54 @@ button .login {
   position: relative;
   top: 150px;
 }
+
+.title {
+  font-size: 72px;
+  text-align: center;
+
+}
+
+a .signupbutton {
+  height: 150px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+a .loginbutton {
+  height: 150px;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#map {
+  height: 500px;
+}
+
+.requester-task-stage {
+  font-size: 84px;
+  margin-bottom: 30px;
+}
+
+.requester-choice {
+  font-size: 32px;
+}
+
+.requester-task-label {
+  font-size: 48px;
+}
+
+.requester-item {
+  width: 500px;
+  height: 60px;
+  font-size: 48px;
+  padding: 4px;
+}
+
+.confirm-choice-button {
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
