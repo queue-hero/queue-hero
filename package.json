@@ -1,0 +1,56 @@
+{
+  "name": "queue-hero",
+  "version": "1.0.0",
+  "description": "Find your hero",
+  "main": "index.js",
+  "scripts": {
+    "build": "gulp clean && gulp",
+    "postinstall": "bower install && gulp clean && gulp deploy && gulp default"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/queue-hero/queue-hero.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/queue-hero/queue-hero/issues"
+  },
+  "homepage": "https://github.com/queue-hero/queue-hero",
+  "dependencies": {
+    "angular": "^1.4.6",
+    "angular-mocks": "^1.4.6",
+    "angular-ui-router": "~0.2.15",
+    "async": "^1.4.2",
+    "bcryptjs": "2.2.1",
+    "body-parser": "^1.5.2",
+    "bower": "^1.5.3",
+    "browser-sync": "^2.9.6",
+    "cookie-parser": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "formidable": "^1.0.17",
+    "gulp": "^3.8.5",
+    "gulp-bower": "0.0.10",
+    "gulp-clean": "^0.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-filesize": "0.0.6",
+    "gulp-if": "^1.2.5",
+    "gulp-jshint": "^1.11.2",
+    "gulp-karma": "0.0.4",
+    "gulp-nodemon": "^1.0.4",
+    "gulp-rename": "^1.2.2",
+    "gulp-shell": "^0.2.7",
+    "gulp-uglify": "^1.4.1",
+    "gulp-util": "^3.0.6",
+    "jasmine-core": "^2.3.4",
+    "karma": "0.13.9",
+    "mongoose": "^4.1.8",
+    "passport": "^0.3.0",
+    "passport-facebook": "^2.0.0",
+    "q": "^1.4.1",
+    "underscore": "^1.8.3",
+    "yelp": "^0.2.0"
+  }
+}
