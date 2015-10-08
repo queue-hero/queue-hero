@@ -111,7 +111,7 @@
 
     var options = {
       enableHighAccuracy: true,
-      timeout: 5000,
+      timeout: 15000,
       // use cached coordinates if previous call was within 30 seconds
       maximumAge: 30000
     };

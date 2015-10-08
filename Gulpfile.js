@@ -11,15 +11,17 @@ var uglify = require('gulp-uglify');
 var clean = require('gulp-clean');
 var gutil = require('gulp-util');
 var filesize = require('gulp-filesize');
+var bower = require('gulp-bower');
 
 var jsScripts = [
   'client/bower_components/angular/angular.min.js',
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
   'client/bower_components/ng-file-upload/ng-file-upload.min.js',
+  'client/bower_components/angular-cookies/angular-cookies.min.js',
+  'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',
   'client/src/app.js',
   'client/src/**/*.js'
-
 ];
 
 // the paths to our app files
@@ -27,8 +29,9 @@ var paths = {
   // all our client app js files, not including 3rd party js files
   scripts: ['client/src/**/*.js'],
   html: ['client/src/**/*.html'],
-  styles: ['client/bower_components/bootstrap/dist/css/bootstrap.min.css', 'client/styles/*.css'],
-  test: ['specs/**/*.js']
+  styles: ['client/styles/*.css'],
+  test: ['specs/**/*.js'],
+  images: ['client/images/*']
 };
 
 gulp.task('clean', function() {
@@ -56,9 +59,16 @@ gulp.task('convert-js', function() {
 
 gulp.task('copy-css', function() {
   gulp.src(paths.styles, {
-    base: './'
+    base: './client/styles'
   })
     .pipe(gulp.dest('./build/styles'));
+});
+
+gulp.task('copy-images', function() {
+  gulp.src(paths.images, {
+    base: './client/images'
+  })
+    .pipe(gulp.dest('./build/images'));
 });
 
 gulp.task('copy-html', function() {
@@ -74,6 +84,11 @@ gulp.task('move-index', function() {
     .pipe(gulp.dest('./build/'));
 });
 
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('build/bower_components'));
+});
+
 gulp.task('serve', function() {
   nodemon({
     script: 'index.js',
@@ -81,5 +96,6 @@ gulp.task('serve', function() {
   });
 });
 
-gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'move-index']);
+gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index']);
+gulp.task('deploy', ['bower']);
 // gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);

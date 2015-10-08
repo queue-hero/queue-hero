@@ -1,9 +1,15 @@
 var Transaction = require('../transactions/transactionModel.js');
 var Checkin = require('../checkins/checkinModel.js');
-var Auth = require('../config/api_keys.js');
 var Yelp = require("yelp");
 var Q = require('q');
 var User = require('./../users/userModel.js');
+
+var Auth;
+
+// load apikeys if localhost. process.env.DEPLOYED set in heroku
+if (!process.env.DEPLOYED) {
+  Auth = require('../config/api_keys.js');
+}
 
 module.exports = {
 
@@ -19,11 +25,12 @@ module.exports = {
     // store venue info from yelp
     var venues = [];
 
+    // use environment variable in heroku if deployed, api_keys.js if local
     var yelp = Yelp.createClient({
-      consumer_key: Auth.yelp.consumer_key,
-      consumer_secret: Auth.yelp.consumer_secret,
-      token: Auth.yelp.token,
-      token_secret: Auth.yelp.token_secret
+      consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
+      consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
+      token: process.env.YELP_TOKEN || Auth.yelp.token,
+      token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
     });
 
     /*
