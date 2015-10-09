@@ -49,10 +49,12 @@
 
       vm.selectLocation = function(shop) {
         vm.vendor = shop.vendor;
+        vm.vendorYelpId = shop.vendorYelpId;
         vm.meetingLocation = [shop.meetingLocation[0], shop.meetingLocation[1]];
         requesterFactory.setOrder({
           vendor: vm.vendor,
-          meetingLocation: vm.meetingLocation
+          meetingLocation: vm.meetingLocation, 
+          vendorYelpId: vm.vendorYelpId
         });
         console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingLocation);
         vm.currentView = 'item';

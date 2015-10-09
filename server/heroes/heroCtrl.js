@@ -212,6 +212,7 @@ module.exports = {
     var rating = req.body.rating;
     var requester = req.body.requester;
     var transactionId = req.body.transactionId;
+    console.log('rating requester for transaction ', transactionId);
 
     User.findOne({
       username: requester
@@ -225,7 +226,7 @@ module.exports = {
         return;
       }
       var ratings = user.ratings;
-      ratings.transactionId = rating;
+      ratings[transactionId] = rating;
       User.update({
         username: requester
       }, {
