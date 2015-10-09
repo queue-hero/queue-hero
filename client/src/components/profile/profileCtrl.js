@@ -7,6 +7,17 @@
     vm.user = profileFactory.getProfile();
     vm.isEdit = false;
 
+    var getTransactionHistory = function(username) {
+      ajaxFactory.getTransactionHistory(username) 
+        .then(function(response) {
+          vm.userTransactions = response.data;
+        }, function(response) {
+          console.log(response.status);
+        });
+    };
+
+    getTransactionHistory(vm.user.username);
+
     vm.toggleEdit = function() {
       vm.isEdit = !vm.isEdit;
     };
