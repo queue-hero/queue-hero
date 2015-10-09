@@ -49,6 +49,22 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
+.choice-hero {
+  padding: 20px;
+}
+
+.choice-requester {
+  padding: 20px;
+}
+
+.button-hero {
+  height: 200px;
+}
+
+.button-requester {
+  height: 200px;
+}
+
 @media (max-width:768px) {
   .main {
     background-color: #fafafa;
