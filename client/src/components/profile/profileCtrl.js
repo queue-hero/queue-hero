@@ -26,6 +26,26 @@
         });
     };
 
+    vm.uploadFiles = function(file) {
+      vm.f = file;
+
+      if (file && !file.$error) {
+        vm.hideProfilePic = true;
+
+        file.upload = Upload.upload({
+          url: '/profile/pic/' + vm.user.username,
+          file: file,
+          method: 'POST'
+        });
+
+        file.upload.then(function(response) {
+          //should send back src url for img
+        }, function(response) {
+          vm.errorMsg = response.status;
+        });
+      }
+    };
+
   }]);
 
 })();

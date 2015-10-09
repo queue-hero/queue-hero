@@ -29,3 +29,8 @@ button .login {
   position: relative;
   top: 150px;
 }
+
+.profile-pic {
+  height: 200px;
+  width: 100px;
+}
