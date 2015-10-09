@@ -100,14 +100,14 @@
       $httpProvider.interceptors.push('redirect');
 
   }])
-  .factory('redirect', ['$q', '$location', function($q, $location) {
-
+  .factory('redirect', ['$q', '$location', '$cookies', function($q, $location, $cookies) {
     var attach = {
       response: function(response) {
         return response || $q.when(response);
       },
       responseError: function(rejection){
         if(rejection.status === 403) {
+          $cookies.remove('connect.sid');
           $location.path('/');
         }
         return $q.reject(rejection);
