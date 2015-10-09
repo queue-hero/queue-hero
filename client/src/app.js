@@ -100,15 +100,17 @@
       $httpProvider.interceptors.push('redirect');
 
   }])
-  .factory('redirect', ['$window', '$location', function($window, $location) {
+  .factory('redirect', ['$q', '$location', function($q, $location) {
 
     var attach = {
-      response: function(object) {
-        console.log(object.status, object.status === 401);
-        if (object.status === 401) {
+      response: function(response) {
+        return response || $q.when(response);
+      },
+      responseError: function(rejection){
+        if(rejection.status === 403) {
           $location.path('/');
         }
-        return object;
+        return $q.reject(rejection);
       }
     };
     return attach;
@@ -116,18 +118,13 @@
   .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
-      if (toState.name === 'signup' && fromState.name === '' && !cookie) {
-        evt.preventDefault();
-        $cookies.remove('connect.sid');
-        $state.go('home');
-        return;
-      }
 
-      if (!cookie) {
-        if (toState.name !== 'home' && toState.name !== 'signup') {
-          evt.preventDefault();
-          $state.go('home');
-        }
+      if(cookie && toState.name === 'home'){
+        evt.preventDefault();
+        $state.go('choice');
+      } else if (!cookie && toState.name !== 'home' && toState.name !== 'signup') {
+        evt.preventDefault();
+        $state.go('home');
       }
 
     });

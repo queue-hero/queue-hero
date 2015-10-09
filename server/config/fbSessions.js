@@ -18,18 +18,18 @@ module.exports.restrict = function(req, res, next) {
       facebookId: userId
     }, 'username', function(err, user) {
       if (err) {
-        res.redirect('/#/');
+        res.status(403).send();
         return;
       }
       if (user && user.username !== null) {
         next();
       } else {
         req.logout();
-        res.status(401).send();
+        res.status(403).send();
       }
     });
   }else{
-    return res.status(401).send();
+    return res.status(403).send();
   }
 };
 
