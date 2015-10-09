@@ -105,8 +105,8 @@
       response: function(response) {
         return response || $q.when(response);
       },
-      responseError: function(rejection){
-        if(rejection.status === 403) {
+      responseError: function(rejection) {
+        if (rejection.status === 403) {
           $cookies.remove('connect.sid');
           $location.path('/');
         }
@@ -119,7 +119,7 @@
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
 
-      if(cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')){
+      if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
         evt.preventDefault();
         $state.go('choice');
       } else if (!cookie && toState.name !== 'home' && toState.name !== 'signup') {
