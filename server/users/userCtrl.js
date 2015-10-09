@@ -3,8 +3,6 @@ var formidable = require('formidable');
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var moment = require('moment');
-
 
 module.exports = {
   getUserData: function(req, res, next) {
@@ -40,7 +38,7 @@ module.exports = {
       }
     }).then(function() {
       console.log('DB:', 'saved');
-      res.status(201).send('User created');
+      res.status(201).send();
     });
   },
   postUserUpdate: function(req, res, next) {
@@ -50,39 +48,14 @@ module.exports = {
       facebookId: facebookId
     };
     User.update(query, reqUser)
-      .then(function(err, num) {
-        console.log('updateCallback:', err || num);
-        console.log('DB:', 'update');
-        res.status(201).send('User updated');
+      .then(function(rowsAffected) {
+        if(rowsAffected.ok !== 1){
+          return res.status(500).send();
+        }
+        res.status(201).send();
       });
   },
-  // loadProfilePic: function(req, res, next) {
-  //   console.log("requesting profile pic from database...");
-  //   var username = req.params.username;
-  //   console.log('user', username);
-  //   User.findOne({
-  //     username: username
-  //   }, 'profilePhoto', function(err, filePath) {
-  //     if (err) {
-  //       return res.status(500).send();
-  //     }
-  //     if (filePath.profilePhoto === 'placeholder/image') {
-  //       return res.status(200).send('placeholder');
-  //     } else {
-  //       console.log(filePath.profilePhoto);
-  //       res.sendFile('C:/Users/Darrin/Desktop/queue-hero/server/assets/profile-pic/darrinmn10-08-15.jpg', function(err) {
-  //         if (err) {
-  //           console.log("failed to get profile pic...");
-  //           console.error(err);
-  //           res.status(err.status).end();
-  //         } else {
-  //           console.log("sent file: ", filePath);
-  //           res.status(200).end();
-  //         }
-  //       });
-  //     }
-  //   });
-  // },
+
   saveProfilePic: function(req, res) {
     var username = req.params.username;
     console.log(username);
@@ -90,14 +63,9 @@ module.exports = {
     var form = new formidable.IncomingForm();
     form.parse(req, function(err, fields, files) {
       var file = files.file;
-      setProfilePic([username, file], function(err) {
-        if (err) {
-          console.log("Could not save to server");
-          return res.status(500).send();
-        } else {
-          console.log("Saved profile pic to server");
-          res.status(201).send("Profile pic saved");
-        }
+      setProfilePic([username, file], function() {
+        console.log("Saved profile pic to server");
+        res.status(201).send();
       });
     });
   }
@@ -110,8 +78,7 @@ function setProfilePic(params, callback) {
   var username = params[0];
   var file = params[1];
   var fileExtension = path.extname(file.name);
-  var date = moment().format('MM-DD-YY');
-  var fileName = username + date + fileExtension;
+  var fileName = username + fileExtension;
   var cwd = process.cwd();
   // path to directory where profile-pic is saved
   var targetPath = path.resolve(cwd + "/server/assets/profile-pic/");
@@ -124,7 +91,6 @@ function setProfilePic(params, callback) {
     if (err) {
       console.error(err);
     }
-
     // move and rename image from temp location to filePathServer
     fs.rename(file.path, filePathServer, function(err) {
       if (err) {
@@ -134,7 +100,6 @@ function setProfilePic(params, callback) {
   });
 
   var picFilePath = "./profile-pic/" + fileName;
-
   User.update({
     username: username
   }, {

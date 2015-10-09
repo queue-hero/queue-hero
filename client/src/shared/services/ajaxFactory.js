@@ -20,13 +20,6 @@
           });
         };
 
-        // ajaxObj.getProfilePic = function(username){
-        //   return $http({
-        //     method: 'GET',
-        //     url: serverUrl + '/profile/pic/' + username
-        //   });
-        // };
-
         ajaxObj.facebookAuth = function(type) {
           return $http({
             method: 'GET',
