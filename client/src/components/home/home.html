@@ -1,11 +1,17 @@
 <div id="home" ng-controller="HomeCtrl as ctrl">
   <nav-bar></nav-bar>
-  <div class="title">
-    Queue Hero
-  </div>
+  <div class="container">
+    <div class="main col-lg-4 col-lg-offset-4 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-12 text-center">
+      <div class="title row">
+        <h1 class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">Queue Hero</h1>
+      </div> <!-- /title row -->
 
-  <div class="containter home">
-  <a class="signup" href="/auth/facebook">Sign up with Facebook</a>
-  <a class="login" href="/auth/facebook">Log in with Facebook</a>
-  </div>
-</div>
+      <div class="continue-fb row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
+          <a href="/auth/facebook"><span class="btn btn-default continue-fb">Continue with Facebook</span></a>
+        </div>
+      </div> <!-- /signup row -->
+
+    </div> <!-- /main -->
+  </div> <!-- /container -->
+</div> <!-- /home -->

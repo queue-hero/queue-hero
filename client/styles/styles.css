@@ -1,5 +1,53 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'helvetica neue', sans-serif;
+  background-color: #fafafa;
+}
+
 body > div:first-of-type {
   padding-top: 60px;
+}
+
+/* show bootstrap grids */
+/*
+.container {
+  background-color: rgba(173, 200, 121, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
+}
+
+.row {
+  background-color: rgba(200, 121, 121, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
+}
+
+*[class^='col'] {
+  background-color: rgba(121, 200, 198, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
+}
+*/
+
+.main {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+
+.continue-fb.row {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.btn.continue-fb {
+  background-color: #3b5998;
+  color: #ffffff;
 }
 
 .choices {
@@ -16,10 +64,6 @@ button .requester {
   top: 150px;
 }
 
-.home {
-  padding-left: 200px;
-}
-
 button .signup {
   position: relative;
   top: 100px;
@@ -29,3 +73,4 @@ button .login {
   position: relative;
   top: 150px;
 }
+
