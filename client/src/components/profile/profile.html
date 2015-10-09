@@ -62,7 +62,10 @@
   Transaction history
   <ul>
     <li ng-repeat="transaction in ctrl.userTransactions">
-      {{ transaction }}
+      Requester: {{ transaction.requester }} | Queue Hero: {{ transaction.queueHero }} <br/>
+      Vendor {{ transaction.vendor }} | Item: {{ transaction.item }} <br/>
+      Meeting time: {{ transaction.meetingTime }} | Money exchanged: {{ transaction.moneyExchanged }} <br/>
+      Status: {{ transaction.status }} <br/>
     </li>
   </ul>
   <!-- <pre>user = {{ ctrl.user | json }}</pre> -->
