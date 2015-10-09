@@ -9,6 +9,7 @@
 
     vm.user.facebookId = profileFactory.getProfile('facebookId') || $cookies.get('com.queuehero');
     profileFactory.setProfile({ facebookId: vm.user.facebookId });
+    vm.welcomeView = false;
 
 
     vm.update = function() {
@@ -19,14 +20,16 @@
           profileFactory.setProfile(vm.user);
           heroFactory.setOrder({ queueHero: vm.user.facebookId });
           requesterFactory.setOrder({ requester: vm.user.facebookId });
-
-          $state.go('choice');
+          vm.welcomeView = true;
         //will be exectcuted if status code is 300+
         }, function errorCallback(response) {
           var statusCode = response.status;
-
         });
     };
+
+    vm.goToChoice = function() {
+      $state.go('choice');
+    }
 
   }]);
 

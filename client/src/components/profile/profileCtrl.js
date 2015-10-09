@@ -28,7 +28,7 @@
         //will be executed if status code is 200-299
         .then(function successCallback(response) {
           profileFactory.setProfile(vm.user);
-          $state.go('choice');
+          vm.isEdit = false;
         //will be exectcuted if status code is 300+
         }, function errorCallback(response) {
           console.log('errorCallback', 'error');
