@@ -8,14 +8,14 @@
     vm.isEdit = false;
     vm.hideProfilePic = false;
 
-    if(vm.user.profilePhoto === 'placeholder/image' || vm.user.profilePhoto === undefined){
+    if (vm.user.profilePhoto === 'placeholder/image' || vm.user.profilePhoto === undefined) {
       vm.user.myProfilePhoto = 'http://lorempixel.com/100/200/';
-    }else{
+    } else {
       vm.user.myProfilePhoto = vm.user.profilePhoto;
     }
 
     var getTransactionHistory = function(username) {
-      ajaxFactory.getTransactionHistory(username) 
+      ajaxFactory.getTransactionHistory(username)
         .then(function(response) {
           vm.userTransactions = response.data;
         }, function(response) {
@@ -57,14 +57,14 @@
 
         file.upload.then(function(response) {
           var period;
-          for(var i = myfile.length - 1; i >= 0; i--){
-            if(myfile[i] === '.'){
+          for (var i = myfile.length - 1; i >= 0; i--) {
+            if (myfile[i] === '.') {
               period = i;
               break;
             }
           }
           var extension = myfile.slice(period);
-          profileFactory.setProfile({profilePhoto: './profile-pic/' + vm.user.username + extension});
+          profileFactory.setProfile({ profilePhoto: './profile-pic/' + vm.user.username + extension });
         }, function(response) {
           vm.errorMsg = response.status;
         });

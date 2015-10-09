@@ -24,7 +24,7 @@
     <span>Edit Profile</span>
     <img class="col-md-4 profile-pic" ng-show="ctrl.f" ngf-src="ctrl.f">
     <button ng-hide="ctrl.hideProfilePic" type="file" ng-model="ctrl.file" ngf-select="ctrl.uploadFiles($file)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">Choose File</button>
-    <div>{{ctrl.errorMsg}}</div>
+    <div>{{ ctrl.errorMsg }}</div>
 
 
     <form novalidate class="simple-form">
