@@ -3,48 +3,66 @@
 
 <div id="signup" ng-controller="SignupCtrl as ctrl">
   <nav-bar></nav-bar>
-  Signup view
-  <form novalidate class="simple-form" name="signup">
-    Create username: <input name="username" type="text" ng-model="ctrl.user.username" required minlength="6" maxlength="20"/><br/>
-    <div ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
-      <div ng-messages-include="./src/shared/validation/messages.html"></div>
+  <div class="container">
+
+    <form class="form-horizontal" name="signup" novalidate>
+      <div class="form-group">
+        <label for="input-username" class="col-sm-2 col-sm-offset-3 control-label">Create username</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-username" name="username" ng-model="ctrl.user.username" required minlength="6" maxlength="20">
+        </div>
+        <div ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
+      </div> <!-- /form-gorup -->
+
+
+      <div class="form-group">
+        <label for="input-firstname" class="col-sm-2 col-sm-offset-3 control-label">First Name</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-firstname" name="first" ng-model="ctrl.user.firstName" required>
+        </div>
+        <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-lastname" class="col-sm-2 col-sm-offset-3 control-label">Last Name</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-lastname" name="last" ng-model="ctrl.user.lastName" required>
+          </div>
+      <div ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
     </div>
 
-    First Name: <input name="first" type="text" ng-model="ctrl.user.firstName" required /><br/>
-    <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
-      <div ng-messages-include="./src/shared/validation/messages.html"></div>
-    </div>
+      Phone Number: <input name="phone" type="text" ng-model="ctrl.user.phoneNumber" /><br/>
 
-    Last Name: <input name="last" type="text" ng-model="ctrl.user.lastName" required/><br/>
-    <div ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
-      <div ng-messages-include="./src/shared/validation/messages.html"></div>
-    </div>
+      Credit/Debit Card Number: <input name="card" type="text" ng-model="ctrl.user.creditCard" /><br/>
 
-    Phone Number: <input name="phone" type="text" ng-model="ctrl.user.phoneNumber" /><br/>
+      CVC Code: <input name="cvc" type="text" ng-model="ctrl.user.cvc" /><br/>
 
-    Credit/Debit Card Number: <input name="card" type="text" ng-model="ctrl.user.creditCard" /><br/>
+      Expiration Date: <input name="exp" type="text" ng-model="ctrl.user.expDate" /><br/>
 
-    CVC Code: <input name="cvc" type="text" ng-model="ctrl.user.cvc" /><br/>
-
-    Expiration Date: <input name="exp" type="text" ng-model="ctrl.user.expDate" /><br/>
-
-    Billing Address: <input name="address" type="text" ng-model="ctrl.user.billingAddress" /><br/>
+      Billing Address: <input name="address" type="text" ng-model="ctrl.user.billingAddress" /><br/>
 
 
-    City: <input name="city" type="text" ng-model="ctrl.user.city" /><br/>
-    <select name="state" ng-model="ctrl.user.state">
-      <option selected="selected" value="">Select State</option>
-      <option  value="California">California</option>
-      <option value="Tabasco">Tabasco</option>
-    </select>
-    <select name="country" ng-model="ctrl.user.country">
-      <option selected="selected" value="">Select Country</option>
-      <option  value="USA">USA</option>
-      <option  value="Mexico">Mexico</option>
-    </select><br/>
-    <input type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid"/>
-  </form>
+      City: <input name="city" type="text" ng-model="ctrl.user.city" /><br/>
+      <select name="state" ng-model="ctrl.user.state">
+        <option selected="selected" value="">Select State</option>
+        <option  value="California">California</option>
+        <option value="Tabasco">Tabasco</option>
+      </select>
+      <select name="country" ng-model="ctrl.user.country">
+        <option selected="selected" value="">Select Country</option>
+        <option  value="USA">USA</option>
+        <option  value="Mexico">Mexico</option>
+      </select><br/>
+      <input type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid"/>
+    </form>
   <pre>user = {{ ctrl.user | json }}</pre>
-</div>
+  </div> <!-- /container -->
+</div> <!-- /signup ctrl -->
 
 
