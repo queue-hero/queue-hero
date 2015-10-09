@@ -172,7 +172,7 @@
     ajaxObj.getTransactionHistory = function(username) {
       return $http({
         method: 'GET',
-        url: serverUrl + '/user/transactions', 
+        url: serverUrl + '/transactions', 
         params: { username: username }
       });
     };
