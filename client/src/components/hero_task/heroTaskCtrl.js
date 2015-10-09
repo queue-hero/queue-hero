@@ -6,6 +6,7 @@
       var vm = this;
       vm.displayId = 0;
       vm.confirmView = false;
+      vm.noOrdersView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
       vm.vendor = heroFactory.getOrder('vendor');
 
@@ -13,7 +14,9 @@
       ajaxFactory.getOpenRequests(vm.vendorYelpId)
         .then(function(response) {
           vm.orders = response.data;
-          console.log(vm.orders);
+          if (vm.orders.length === 0) {
+            vm.noOrdersView = true;
+          }
         }, function(response) {
           console.log(response.status);
         });
