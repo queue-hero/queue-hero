@@ -23,6 +23,8 @@ createTestUsers();
 // serve './../build if deployed, './../client' if local
 var servePath = process.env.DEPLOYED ? './../build' : './../client';
 app.use(express.static(__dirname + servePath));
+app.use(express.static(__dirname + './assets'));
+
 
 middleware(app, express);
 

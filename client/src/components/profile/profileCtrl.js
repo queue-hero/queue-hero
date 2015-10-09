@@ -2,10 +2,25 @@
   'use strict';
 
   angular.module('app.profile', [])
-  .controller('ProfileCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory) {
+  .controller('ProfileCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', 'Upload', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory, Upload) {
     var vm = this;
     vm.user = profileFactory.getProfile();
     vm.isEdit = false;
+    vm.hideProfilePic = false;
+
+    if(vm.user.profilePhoto === 'placeholder/image' || vm.user.profilePhoto === undefined){
+      vm.user.myProfilePhoto = 'http://lorempixel.com/100/200/';
+    }else{
+      vm.user.myProfilePhoto = vm.user.profilePhoto;
+    }
+
+    // ajaxFactory.getProfilePic(vm.user.username)
+    //   .then(function(response) {
+    //     console.log('got pic', response);
+    //   }, function(response){
+    //     console.log('errorCallback', 'error');
+
+    // });
 
     vm.toggleEdit = function() {
       vm.isEdit = !vm.isEdit;
@@ -15,11 +30,11 @@
       console.log('update', 'ran', vm.user);
       ajaxFactory.postUpdatedProfile(vm.user)
         //will be executed if status code is 200-299
-        .then(function successCallback(response) {
+        .then(function(response) {
           profileFactory.setProfile(vm.user);
           $state.go('choice');
         //will be exectcuted if status code is 300+
-        }, function errorCallback(response) {
+        }, function(response) {
           console.log('errorCallback', 'error');
           var statusCode = response.status;
 

@@ -18,6 +18,8 @@ module.exports = function(app) {
 
   app.post('/pic/:username', userCtrl.saveProfilePic);
 
+  // app.get('/pic/:username', userCtrl.loadProfilePic);
+
 
 
 

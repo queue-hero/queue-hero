@@ -2,7 +2,8 @@
   <nav-bar></nav-bar>
   Profile
   <div ng-hide="ctrl.isEdit">
-    <div>Profile Photo:<img src="ctrl.user.profilePhoto"></div>
+    <img class="col-md-4 profile-pic" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}">
+
     <img class="col-md-4" ng-show="ctrl.f" ngf-src="ctrl.f">
     Username: <span> {{ ctrl.user.username }} </span> <br/>
 
