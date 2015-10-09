@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_task', [])
-    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', function(ajaxFactory, $state, heroFactory) {
+    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', function(ajaxFactory, $state, heroFactory, $interval) {
       var vm = this;
       vm.displayId = 0;
       vm.confirmView = false;
@@ -10,18 +10,27 @@
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
       vm.vendor = heroFactory.getOrder('vendor');
 
+      var refreshTasks = $interval(getRequests, 1000, 0, false);
 
-      ajaxFactory.getOpenRequests(vm.vendorYelpId)
-        .then(function(response) {
-          vm.orders = response.data;
-          if (vm.orders.length === 0) {
-            vm.noOrdersView = true;
-          }
-        }, function(response) {
-          console.log(response.status);
-        });
+      function getRequests() {
+        console.log('getRequests invoked');
+        ajaxFactory.getOpenRequests(vm.vendorYelpId)
+          .then(function(response) {
+            vm.orders = response.data;
+            console.log('there are ' + vm.orders.length + ' for this location right now');
+            if (vm.orders.length === 0) {
+              vm.noOrdersView = true;
+            } else {
+              vm.noOrdersView = false;
+            }
+          }, function(response) {
+            console.log(response.status);
+          });
+      };
 
       vm.removeFromQueue = function() {
+        //stop refreshing the page for new requests
+        $interval.cancel(refreshTasks);
         ajaxFactory.removeFromQueue(heroFactory.getOrder('username'))
           .then(function(response) {
             heroFactory.setOrder({
@@ -60,6 +69,8 @@
       vm.accept = function(id) {
         ajaxFactory.confirmRequest(vm.orders[id]._id, heroFactory.getOrder('queueHero'))
           .then(function(response) {
+            //stop refreshing the page for new requests
+            $interval.cancel(refreshTasks);
             //save current transaction to heroFactory
             heroFactory.setOrder(vm.orders[id]);
             heroFactory.setOrder({ transactionId: vm.orders[id]._id });
