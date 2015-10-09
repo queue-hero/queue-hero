@@ -12,7 +12,6 @@
     };
 
     vm.update = function() {
-      console.log('update', 'ran', vm.user);
       ajaxFactory.postUpdatedProfile(vm.user)
         //will be executed if status code is 200-299
         .then(function successCallback(response) {
@@ -20,9 +19,8 @@
           $state.go('choice');
         //will be exectcuted if status code is 300+
         }, function errorCallback(response) {
-          console.log('errorCallback', 'error');
           var statusCode = response.status;
-
+          console.log('Profile update: server errorCallback', statusCode);
         });
     };
 
