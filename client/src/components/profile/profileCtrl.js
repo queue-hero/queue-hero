@@ -10,7 +10,7 @@
     var getTransactionHistory = function(username) {
       ajaxFactory.getTransactionHistory(username) 
         .then(function(response) {
-          //populate vm.userTransactions with response from server
+          vm.userTransactions = response.data;
         }, function(response) {
           console.log(response.status);
         });
