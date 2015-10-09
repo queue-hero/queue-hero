@@ -40,12 +40,12 @@ body > div:first-of-type {
 }
 
 
-.signup.row, .login.row {
+.continue-fb.row {
   margin-top: 15px;
   margin-bottom: 15px;
 }
 
-.signup.btn, .login.btn {
+.btn.continue-fb {
   background-color: #3b5998;
   color: #ffffff;
 }
