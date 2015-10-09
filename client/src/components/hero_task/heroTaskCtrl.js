@@ -13,6 +13,7 @@
       ajaxFactory.getOpenRequests(vm.vendorYelpId)
         .then(function(response) {
           vm.orders = response.data;
+          console.log(vm.orders);
         }, function(response) {
           console.log(response.status);
         });
