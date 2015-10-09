@@ -44,7 +44,12 @@
     </select><br/>
     <input type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid"/>
   </form>
-  <pre>user = {{ ctrl.user | json }}</pre>
+
+  <div ng-show="ctrl.welcomeView">
+  Congratulations! You're all signed up.
+  <button ng-click="ctrl.goToChoice()"> Click here to continue </button>
+  </div>
+
 </div>
 
 
