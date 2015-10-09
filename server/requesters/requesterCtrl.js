@@ -1,5 +1,6 @@
 var TransactionCtrl = require('../transactions/transactionCtrl.js');
 var Transaction = require('./../transactions/transactionModel.js');
+var User = require('./../users/userModel.js');
 var Checkin = require('./../checkins/checkinModel.js');
 var Q = require('q');
 
@@ -122,6 +123,7 @@ module.exports = {
     var rating = req.body.rating;
     var queueHero = req.body.queueHero;
     var transactionId = req.body.transactionId;
+    console.log('rating hero for transaction ', transactionId);
 
     User.findOne({
       username: queueHero
@@ -135,7 +137,7 @@ module.exports = {
         return;
       }
       var ratings = user.ratings;
-      ratings.transactionId = rating;
+      ratings[transactionId] = rating;
       User.update({
         username: queueHero
       }, {

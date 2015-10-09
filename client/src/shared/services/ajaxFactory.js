@@ -129,9 +129,10 @@
     };
 
     ajaxObj.rateRequester = function(rating, requester, transactionId) {
+      console.log('ajax request sending ', transactionId);
       return $http({
         method: 'POST',
-        url: serverUrl + '/hero/order/complete',
+        url: serverUrl + '/hero/order/rate',
         data: {
           rating: rating,
           requester: requester,

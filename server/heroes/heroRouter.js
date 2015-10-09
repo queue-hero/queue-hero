@@ -29,5 +29,5 @@ module.exports = function(app) {
 
   // req: rating, requester, transactionId
   // res: 201 or error
-  app.post('/order/complete', heroCtrl.rateRequester);
+  app.post('/order/rate', heroCtrl.rateRequester);
 };
