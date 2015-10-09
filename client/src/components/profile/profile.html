@@ -28,9 +28,18 @@
   <div ng-show="ctrl.isEdit">
     <span>Edit Profile</span>
     <form novalidate class="simple-form">
-      Username:  <input type="text" ng-model="ctrl.user.username" /><br/>
-      First Name:<input type="text" ng-model="ctrl.user.firstName" /><br/>
-      Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br/>
+      Username: <span> {{ ctrl.user.username }} </span> <br/>
+
+      First Name:<input name="first" type="text" ng-model="ctrl.user.firstName" required /><br/>
+      <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
+      Last Name: <input name="last" type="text" ng-model="ctrl.user.lastName" required /><br/>
+      <div ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
       Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
       Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
       CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>

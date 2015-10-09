@@ -6,6 +6,7 @@
     'ui.bootstrap',
     'ngFileUpload',
     'ngCookies',
+    'ngMessages',
     'app.home',
     'app.profile',
     'app.signup',
