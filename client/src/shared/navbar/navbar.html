@@ -1,11 +1,11 @@
- <nav id="navbar" class="navbar navbar-custom navbar-fixed-top">
+<nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-      <button class="btn btn-primary navbar-btn navbar-right" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
-      <a class="login" href="/auth/facebook">
-        <button class="btn btn-primary navbar-btn navbar-right" ng-show="isHome()">Log In</button>
-      </a>
-      <a ui-sref="profile">
-        <button class="btn btn-default navbar-btn navbar-right" ng-show="isLoggedIn()">Profile</button>
-      </a>
+
+    <div class="pull-right">
+      <a ui-sref="profile" type="button" class="btn btn-default navbar-btn" ng-show="isLoggedIn()">Profile</a>
+      <a href="/auth/facebook" type="button" class="btn btn-default navbar-btn" ng-show="isHome()">Log In</a>
+      <button type="button" class="btn btn-default navbar-btn" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
+    </div>
+
   </div>
 </nav>
