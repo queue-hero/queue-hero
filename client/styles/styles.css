@@ -39,7 +39,6 @@ body > div:first-of-type {
   border-radius: 10px;
 }
 
-
 .continue-fb.row {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -50,11 +49,10 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
-@media (max-width:750px) {
+@media (max-width:768px) {
   .main {
     background-color: #fafafa;
     border: none;
   }
 }
-
 
