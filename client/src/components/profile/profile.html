@@ -59,5 +59,11 @@
       <input type="submit" ng-click="ctrl.update()" value="Save" />
     </form>
   </div>
-  <pre>user = {{ ctrl.user | json }}</pre>
+  Transaction history
+  <ul>
+    <li ng-repeat="transactions in ctrl.userTransactions">
+      {{ transaction }}
+    </li>
+  </ul>
+  <!-- <pre>user = {{ ctrl.user | json }}</pre> -->
 </div>
