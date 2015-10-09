@@ -169,6 +169,14 @@
       });
     };
 
+    ajaxObj.getTransactionHistory = function(username) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/user/transactions', 
+        params: { username: username }
+      });
+    };
+
 
     return ajaxObj;
 
