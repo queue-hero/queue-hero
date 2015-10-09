@@ -119,7 +119,7 @@
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
 
-      if(cookie && toState.name === 'home'){
+      if(cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')){
         evt.preventDefault();
         $state.go('choice');
       } else if (!cookie && toState.name !== 'home' && toState.name !== 'signup') {
