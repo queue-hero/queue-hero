@@ -118,7 +118,6 @@
   .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
-
       if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
         evt.preventDefault();
         $state.go('choice');

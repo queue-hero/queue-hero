@@ -28,7 +28,7 @@ module.exports.restrict = function(req, res, next) {
         res.status(403).send();
       }
     });
-  }else{
+  } else {
     return res.status(403).send();
   }
 };
@@ -41,7 +41,9 @@ module.exports.initialize = function(app) {
     secret: 'inception',
     resave: false,
     saveUninitialized: true,
-    cookie: { httpOnly: false }
+    cookie: {
+      httpOnly: false
+    }
   }));
 
   app.use(passport.initialize());
