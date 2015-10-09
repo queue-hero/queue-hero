@@ -9,10 +9,10 @@
 
     vm.user.facebookId = profileFactory.getProfile('facebookId') || $cookies.get('com.queuehero');
     profileFactory.setProfile({ facebookId: vm.user.facebookId });
-    $cookies.remove('com.queuehero');
 
 
     vm.update = function() {
+      $cookies.remove('com.queuehero');
       ajaxFactory.postSignUp(vm.user)
         //will be executed if status code is 200-299
         .then(function successCallback(response) {
