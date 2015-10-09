@@ -4,23 +4,16 @@
   <div ng-hide="ctrl.isEdit">
     <div>Profile Photo:<img src="ctrl.user.profilePhoto"></div>
     Username: <span> {{ ctrl.user.username }} </span> <br/>
-
     First Name: <span> {{ ctrl.user.firstName }} </span>
-
     Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
-
-    Phone Number: <span> {{ ctrl.user.lastName }} </span><br/>
-    Credit/Debit Card Number: <span>{{ ctrl.user.creditCard }}</span><br/>
+    Phone Number: <span> {{ ctrl.user.phoneNumber }} </span><br/>
+    Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
     CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
-    Expiration Date: <span> {{ ctrl.user.expDate }} </span><br/>
+    Expiration Date: <span> {{ ctrl.user.expirationDate }} </span><br/>
     Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
-
     City: <span> {{ ctrl.user.city }} </span><br/>
-
     State: <span> {{ ctrl.user.state }} </span> <br/>
-
-    Country: <span> {{ ctrl.user.state }} </span> <br/>
-
+    Country: <span> {{ ctrl.user.country }} </span> <br/>
     <button ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
       Edit Profile
     </button>
