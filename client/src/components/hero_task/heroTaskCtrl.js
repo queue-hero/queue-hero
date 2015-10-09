@@ -13,11 +13,9 @@
       var refreshTasks = $interval(getRequests, 1000, 0, false);
 
       function getRequests() {
-        console.log('getRequests invoked');
         ajaxFactory.getOpenRequests(vm.vendorYelpId)
           .then(function(response) {
             vm.orders = response.data;
-            console.log('there are ' + vm.orders.length + ' for this location right now');
             if (vm.orders.length === 0) {
               vm.noOrdersView = true;
             } else {
