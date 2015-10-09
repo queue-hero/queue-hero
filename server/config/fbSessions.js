@@ -2,6 +2,7 @@ var passport = require('passport');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var User = require('./../users/userModel.js');
 
 var api_keys;
 
@@ -12,9 +13,24 @@ if (!process.env.DEPLOYED) {
 
 module.exports.restrict = function(req, res, next) {
   if (req.isAuthenticated()) {
-    return next();
+    var userId = req.session.passport.user.id;
+    User.findOne({
+      facebookId: userId
+    }, 'username', function(err, user) {
+      if (err) {
+        res.status(403).send();
+        return;
+      }
+      if (user && user.username !== null) {
+        next();
+      } else {
+        req.logout();
+        res.status(403).send();
+      }
+    });
+  }else{
+    return res.status(403).send();
   }
-  next();
 };
 
 module.exports.initialize = function(app) {
