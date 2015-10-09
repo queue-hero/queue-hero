@@ -105,7 +105,7 @@
     var attach = {
       response: function(object) {
         console.log(object.status, object.status === 401);
-        if(object.status === 401){
+        if (object.status === 401) {
           $location.path('/');
         }
         return object;
@@ -116,7 +116,7 @@
   .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
-      if(toState.name === 'signup' && fromState.name === '' && !cookie){
+      if (toState.name === 'signup' && fromState.name === '' && !cookie) {
         evt.preventDefault();
         $cookies.remove('connect.sid');
         $state.go('home');
