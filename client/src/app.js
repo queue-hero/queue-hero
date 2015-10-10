@@ -163,17 +163,17 @@
     $rootScope.$watch(function() {
       return heroFactory.getOrder();
     }, function watchCallback (newVal, oldVal){
-      var stringObject = $window.JSON.stringify(newval);
+      var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('heroOrder',stringObject);
-      console.log(newval);
+      console.log(newVal);
     }, true);
 
     $rootScope.$watch(function() {
       return requesterFactory.getOrder();
-    }, function watchCallback (newval, oldval){
-      var stringObject = $window.JSON.stringify(newval);
+    }, function watchCallback (newVal, oldVal){
+      var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('requesterOrder',stringObject);
-      console.log(newval);
+      console.log(newVal);
     }, true);
 
 
