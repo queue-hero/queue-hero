@@ -6,7 +6,7 @@ module.exports = function(app) {
 
   // req: nav. location
   // res: map and location options)
-  app.get('/task', requesterCtrl.getActiveShops);
+  app.get('/task', requesterCtrl.getLocationOptions);
 
   // req: obj with order details
   // res: 201 or error

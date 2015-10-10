@@ -65,13 +65,13 @@
       });
     };
 
-    ajaxObj.getActiveShops = function(area) {
+    ajaxObj.getVenuesAtRequesterLocation = function(lat, long) {
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
         params: {
-          lat: area[0],
-          long: area[1]
+          lat: lat,
+          long: long
          }
       });
     };
