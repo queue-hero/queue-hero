@@ -42,10 +42,10 @@
         }
       };
 
-      vm.selectLocation = function(shop) {
-        vm.vendor = shop.vendor;
-        vm.vendorYelpId = shop.vendorYelpId;
-        vm.meetingLocation = [shop.meetingLocation[0], shop.meetingLocation[1]];
+      vm.selectLocation = function(venue) {
+        vm.vendor = venue.name;
+        vm.vendorYelpId = venue.yelpId;
+        vm.meetingLocation = [venue.lat, venue.long];
         requesterFactory.setOrder({
           vendor: vm.vendor,
           meetingLocation: vm.meetingLocation,
