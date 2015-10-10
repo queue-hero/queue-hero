@@ -11,9 +11,9 @@
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-username" name="username" ng-model="ctrl.user.username" required minlength="6" maxlength="20">
         </div>
-        <div ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
-          <div ng-messages-include="./src/shared/validation/messages.html"></div>
-        </div>
+      </div>
+      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div> <!-- /form-gorup -->
 
 
@@ -22,33 +22,63 @@
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-firstname" name="first" ng-model="ctrl.user.firstName" required>
         </div>
-        <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
-          <div ng-messages-include="./src/shared/validation/messages.html"></div>
-        </div>
+      </div>
+      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div>
 
       <div class="form-group">
         <label for="input-lastname" class="col-sm-2 col-sm-offset-3 control-label">Last Name</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-lastname" name="last" ng-model="ctrl.user.lastName" required>
-          </div>
-      <div ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+        </div>
+      </div>
+      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
         <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div>
-    </div>
 
-      Phone Number: <input name="phone" type="text" ng-model="ctrl.user.phoneNumber" /><br/>
+      <div class="form-group">
+        <label for="input-phonenumber" class="col-sm-2 col-sm-offset-3 control-label">Phone Number</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-phonenumber" name="phone" ng-model="ctrl.user.phoneNumber" required>
+        </div>
+      </div>
 
-      Credit/Debit Card Number: <input name="card" type="text" ng-model="ctrl.user.creditCard" /><br/>
+      <div class="form-group">
+        <label for="input-creditcard" class="col-sm-2 col-sm-offset-3 control-label">Credit/Debit Card</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-creditcard" name="card" ng-model="ctrl.user.creditCard" required>
+        </div>
+      </div>
 
-      CVC Code: <input name="cvc" type="text" ng-model="ctrl.user.cvc" /><br/>
+      <div class="form-group">
+        <label for="input-cvc" class="col-sm-2 col-sm-offset-3 control-label">CVC Code</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-cvc" name="cvc" ng-model="ctrl.user.creditCard" required>
+        </div>
+      </div>
 
-      Expiration Date: <input name="exp" type="text" ng-model="ctrl.user.expDate" /><br/>
+      <div class="form-group">
+        <label for="input-exp" class="col-sm-2 col-sm-offset-3 control-label">Expiration Date</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-exp" name="exp" ng-model="ctrl.user.expDate" required>
+        </div>
+      </div>
 
-      Billing Address: <input name="address" type="text" ng-model="ctrl.user.billingAddress" /><br/>
+      <div class="form-group">
+        <label for="input-address" class="col-sm-2 col-sm-offset-3 control-label">Billing Address</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-address" name="address" ng-model="ctrl.user.billingAddress" required>
+        </div>
+      </div>
 
+      <div class="form-group">
+        <label for="input-city" class="col-sm-2 col-sm-offset-3 control-label">City</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-city" name="city" ng-model="ctrl.user.city" required>
+        </div>
+      </div>
 
-      City: <input name="city" type="text" ng-model="ctrl.user.city" /><br/>
       <select name="state" ng-model="ctrl.user.state">
         <option selected="selected" value="">Select State</option>
         <option  value="California">California</option>
