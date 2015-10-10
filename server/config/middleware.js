@@ -8,29 +8,24 @@ var authToken = "fe1aba99308ed506d126b80310f92f55";
 var twilio = require('twilio');
 var client = new twilio.RestClient(accountSid, authToken);
 
+var messages = {
+  welcome: "Ahoy from Qhero! Welcome to San Francisco's Queueless adventure!<3",
+  instruction: "Queue Hero would only send you SMS when one of your request gets picked by a Hero. Have Fun!"
+};
 
-function welcomeSms(phonenumber) {
+function sendSms(phonenumber, text) {
   client.messages.create({
       to: "+1" + phonenumber,
       from: "+12057917998",
-      body: "Ahoy from Qhero! Welcome to San Francisco's Queueless adventure!<3"
+      body: text,
   }, function(err, message) {
       console.log(err, message.sid);
-      // process.stdout.write(message.sid);
+      //process.stdout.write(message.sid);
   });
-  function InstructionsSms() {
-    client.messages.create({
-        to: "+1" + phonenumber,
-        from: "+12057917998",
-        body: "Queue Hero would only send you SMS when one of your request gets picked by a Hero. Have Fun!"
-    }, function(err, message) {
-        console.log(err, message.sid);
-    });
-  }
-  setTimeout(InstructionsSms, 500000);
 }
 
-welcomeSms('6692269013');
+sendSms('6692269013', messages.welcome);
+setTimeout( function(){sendSms('6692269013', messages.instruction);}, 500000);
 
 module.exports = function(app, express) {
   var authRouter = express.Router();
