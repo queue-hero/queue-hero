@@ -10,7 +10,7 @@ body > div:first-of-type {
 }
 
 /* show bootstrap grids */
-
+/*
 .container {
   background-color: rgba(173, 200, 121, 0.1);
   -moz-box-shadow:    inset 0 0 1px #000000;
@@ -31,7 +31,7 @@ body > div:first-of-type {
   -webkit-box-shadow: inset 0 0 1px #000000;
   box-shadow:         inset 0 0 1px #000000;
 }
-
+*/
 
 .main {
   background-color: #ffffff;
