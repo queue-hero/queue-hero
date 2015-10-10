@@ -162,7 +162,7 @@
 
     $rootScope.$watch(function() {
       return heroFactory.getOrder();
-    }, function watchCallback (newVal, oldVal){
+    }, function watchCallback(newVal, oldVal) {
       var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('heroOrder',stringObject);
       console.log(newVal);
@@ -170,7 +170,7 @@
 
     $rootScope.$watch(function() {
       return requesterFactory.getOrder();
-    }, function watchCallback (newVal, oldVal){
+    }, function watchCallback(newVal, oldVal) {
       var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('requesterOrder',stringObject);
       console.log(newVal);
