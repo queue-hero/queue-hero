@@ -65,13 +65,13 @@
       });
     };
 
-    ajaxObj.getActiveShops = function(area) {
+    ajaxObj.getVenuesAtRequesterLocation = function(lat, long) {
       return $http({
         method: 'GET',
         url: serverUrl + '/requester/task',
         params: {
-          lat: area[0],
-          long: area[1]
+          lat: lat,
+          long: long
          }
       });
     };
@@ -129,9 +129,10 @@
     };
 
     ajaxObj.rateRequester = function(rating, requester, transactionId) {
+      console.log('ajax request sending ', transactionId);
       return $http({
         method: 'POST',
-        url: serverUrl + '/hero/order/complete',
+        url: serverUrl + '/hero/order/rate',
         data: {
           rating: rating,
           requester: requester,
@@ -168,9 +169,18 @@
       });
     };
 
+    ajaxObj.getTransactionHistory = function(username) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/transactions',
+        params: { username: username }
+      });
+    };
+
 
     return ajaxObj;
 
   }]);
+
 
 })();

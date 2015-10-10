@@ -2,35 +2,44 @@
   <nav-bar></nav-bar>
   Profile
   <div ng-hide="ctrl.isEdit">
-    <div>Profile Photo:<img src="ctrl.user.profilePhoto"></div>
+    <img class="col-md-4 profile-pic" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}">
+
+    <img class="col-md-4" ng-show="ctrl.f" ngf-src="ctrl.f">
     Username: <span> {{ ctrl.user.username }} </span> <br/>
-
     First Name: <span> {{ ctrl.user.firstName }} </span>
-
     Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
-
-    Phone Number: <span> {{ ctrl.user.lastName }} </span><br/>
-    Credit/Debit Card Number: <span>{{ ctrl.user.creditCard }}</span><br/>
+    Phone Number: <span> {{ ctrl.user.phoneNumber }} </span><br/>
+    Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
     CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
-    Expiration Date: <span> {{ ctrl.user.expDate }} </span><br/>
+    Expiration Date: <span> {{ ctrl.user.expirationDate }} </span><br/>
     Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
-
     City: <span> {{ ctrl.user.city }} </span><br/>
-
     State: <span> {{ ctrl.user.state }} </span> <br/>
-
-    Country: <span> {{ ctrl.user.state }} </span> <br/>
-
+    Country: <span> {{ ctrl.user.country }} </span> <br/>
     <button ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
       Edit Profile
     </button>
   </div>
   <div ng-show="ctrl.isEdit">
     <span>Edit Profile</span>
+    <img class="col-md-4 profile-pic" ng-show="ctrl.f" ngf-src="ctrl.f">
+    <button ng-hide="ctrl.hideProfilePic" type="file" ng-model="ctrl.file" ngf-select="ctrl.uploadFiles($file)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">Choose File</button>
+    <div>{{ ctrl.errorMsg }}</div>
+
+
     <form novalidate class="simple-form">
-      Username:  <input type="text" ng-model="ctrl.user.username" /><br/>
-      First Name:<input type="text" ng-model="ctrl.user.firstName" /><br/>
-      Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br/>
+      Username: <span> {{ ctrl.user.username }} </span> <br/>
+
+      First Name:<input name="first" type="text" ng-model="ctrl.user.firstName" required /><br/>
+      <div ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
+      Last Name: <input name="last" type="text" ng-model="ctrl.user.lastName" required /><br/>
+      <div ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
       Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
       Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
       CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>
@@ -50,5 +59,14 @@
       <input type="submit" ng-click="ctrl.update()" value="Save" />
     </form>
   </div>
-  <pre>user = {{ ctrl.user | json }}</pre>
+  Transaction history
+  <ul>
+    <li ng-repeat="transaction in ctrl.userTransactions">
+      Requester: {{ transaction.requester }} | Queue Hero: {{ transaction.queueHero }} <br/>
+      Vendor {{ transaction.vendor }} | Item: {{ transaction.item }} <br/>
+      Meeting time: {{ transaction.meetingTime }} | Money exchanged: {{ transaction.moneyExchanged }} <br/>
+      Status: {{ transaction.status }} <br/>
+    </li>
+  </ul>
+  <!-- <pre>user = {{ ctrl.user | json }}</pre> -->
 </div>

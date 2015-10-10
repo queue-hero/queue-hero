@@ -1,31 +1,149 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'helvetica neue', sans-serif;
+  background-color: #fafafa;
+}
+
 body > div:first-of-type {
   padding-top: 60px;
 }
 
-.choices {
-  padding-left: 200px;
+/* show bootstrap grids */
+/*
+.container {
+  background-color: rgba(173, 200, 121, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
 }
 
-button .hero {
+.row {
+  background-color: rgba(200, 121, 121, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
+}
+
+*[class^='col'] {
+  background-color: rgba(121, 200, 198, 0.1);
+  -moz-box-shadow:    inset 0 0 1px #000000;
+  -webkit-box-shadow: inset 0 0 1px #000000;
+  box-shadow:         inset 0 0 1px #000000;
+}
+*/
+
+.main {
+  background-color: #ffffff;
+  border: 1px solid #dddddd;
+  border-radius: 10px;
+}
+
+.continue-fb.row {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.btn.continue-fb {
+  background-color: #3b5998;
+  color: #ffffff;
+}
+
+.choice-hero {
+  padding: 20px;
+}
+
+.choice-requester {
+  padding: 20px;
+}
+
+.button-hero {
+  height: 200px;
+}
+
+.button-requester {
+  height: 200px;
+}
+
+.profile-pic {
+  height: 200px;
+  width: 100px;
+}
+
+.select-state,
+.select-country,
+.submit-button,
+.status-good {
+  margin-bottom: 15px;
+}
+
+.validation-alert {
+  font-weight: bold;
+  color: red;
+}
+
+.submit-button > button {
+  background-color: #dcedc8;
+}
+
+.status-good {
+  font-weight: bold;
+  color: #689f38;
+}
+
+.vendor {
+  font-weight: bold;
+}
+
+.meeting-address {
+  font-size: 0.8em;
+}
+
+.col-shops,
+.col-map {
+  padding: 15px;
+  height: 100%;
+}
+
+#map {
   position: relative;
-  top: 100px;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
 }
 
-button .requester {
-  position: relative;
-  top: 150px;
+/* bootstrap's xs is 768px or less */
+@media (max-width:768px) {
+  .main {
+    background-color: #fafafa;
+    border: none;
+  }
+
+  .col-map {
+    display: none;
+  }
 }
 
-.home {
-  padding-left: 200px;
+/* bootstrap sm = 768px or more */
+@media (min-width: 768px) {
+  #map {
+    width: 400px;
+    height: 450px;
+  }
 }
 
-button .signup {
-  position: relative;
-  top: 100px;
+/* bootstrap md = 992px or more */
+@media (min-width: 992px) {
+  #map {
+    width: 455px;
+    height: 455px;
+  }
 }
 
-button .login {
-  position: relative;
-  top: 150px;
+/* bootstrap lg = everything 1200px or more */
+@media (min-width: 1200px) {
+  #map {
+    width: 540px;
+    height: 540px;
+  }
 }

@@ -3,30 +3,113 @@
 
 <div id="signup" ng-controller="SignupCtrl as ctrl">
   <nav-bar></nav-bar>
-  Signup view
-  <form novalidate class="simple-form">
-    Create username: <input type="text" ng-model="ctrl.user.username" /><br/>
-    First Name: <input type="text" ng-model="ctrl.user.firstName" /><br/>
-    Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br/>
-    Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
-    Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
-    CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>
-    Expiration Date: <input type="text" ng-model="ctrl.user.expDate" /><br/>
-    Billing Address: <input type="text" ng-model="ctrl.user.billingAddress" /><br/>
-    City: <input type="text" ng-model="ctrl.user.city" /><br/>
-    <select name="URL" ng-model="ctrl.user.state">
-      <option selected="selected" value="">Select State</option>
-      <option  value="California">California</option>
-      <option value="Tabasco">Tabasco</option>
-    </select>
-    <select name="URL" ng-model="ctrl.user.country">
-      <option selected="selected" value="">Select Country</option>
-      <option  value="USA">USA</option>
-      <option  value="Mexico">Mexico</option>
-    </select><br/>
-    <input type="submit" ng-click="ctrl.update()" value="Save" />
-  </form>
-  <pre>user = {{ ctrl.user | json }}</pre>
+  <div class="container">
+
+    <form class="form-horizontal" name="signup" novalidate>
+      <div class="form-group">
+        <label for="input-username" class="col-sm-2 col-sm-offset-3 control-label">Create username</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-username" name="username" ng-model="ctrl.user.username" required minlength="6" maxlength="20">
+        </div>
+      </div>
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div> <!-- /form-gorup -->
+
+
+      <div class="form-group">
+        <label for="input-firstname" class="col-sm-2 col-sm-offset-3 control-label">First Name</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-firstname" name="first" ng-model="ctrl.user.firstName" required>
+        </div>
+      </div>
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-lastname" class="col-sm-2 col-sm-offset-3 control-label">Last Name</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-lastname" name="last" ng-model="ctrl.user.lastName" required>
+        </div>
+      </div>
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-phonenumber" class="col-sm-2 col-sm-offset-3 control-label">Phone Number</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-phonenumber" name="phone" ng-model="ctrl.user.phoneNumber" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-creditcard" class="col-sm-2 col-sm-offset-3 control-label">Credit/Debit Card</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-creditcard" name="card" ng-model="ctrl.user.creditCard" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-cvc" class="col-sm-2 col-sm-offset-3 control-label">CVC Code</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-cvc" name="cvc" ng-model="ctrl.user.cvc" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-exp" class="col-sm-2 col-sm-offset-3 control-label">Expiration Date</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-exp" name="exp" ng-model="ctrl.user.expDate" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-address" class="col-sm-2 col-sm-offset-3 control-label">Billing Address</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-address" name="address" ng-model="ctrl.user.billingAddress" required>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="input-city" class="col-sm-2 col-sm-offset-3 control-label">City</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="input-city" name="city" ng-model="ctrl.user.city" required>
+        </div>
+      </div>
+
+      <div class="select-state col-sm-4 col-sm-offset-5">
+        <select class="form-control" name="state" ng-model="ctrl.user.state">
+          <option selected="selected" value="">Select State</option>
+          <option value="California">California</option>
+          <option value="Tabasco">Tabasco</option>
+        </select>
+      </div>
+
+      <div class="select-country col-sm-4 col-sm-offset-5">
+        <select class="form-control" name="country" ng-model="ctrl.user.country">
+          <option selected="selected" value="">Select Country</option>
+          <option value="USA">USA</option>
+          <option value="Mexico">Mexico</option>
+        </select>
+      </div>
+
+      <div class="submit-button col-sm-4 col-sm-offset-5">
+        <input class="btn btn-default" type="submit" value="Save" ng-click="ctrl.update()" ng-disabled="signup.$invalid">
+        <button class="btn btn-default" ng-show="ctrl.welcomeView" ng-click="ctrl.goToChoice()"> Click here to continue </button>
+      </div>
+
+      <div class="status-good col-sm-4 col-sm-offset-5" ng-show="ctrl.welcomeView">
+        Congratulations! You're all signed up.
+      </div>
+    </form>
+
+  </div>
+  <div class="col-sm-6 col-sm-offset-3">
+      <pre>user = {{ ctrl.user | json }}</pre>
 </div>
+</div> <!-- /container -->
+
 
 
