@@ -20,7 +20,17 @@ function distanceMiles(lat1, long1, lat2, long2) {
     (1 - c((long2 - long1) * p)) / 2;
 
   return 7917.8788 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-}
+};
+
+function findOccurenceInCheckins(yelpID, checkins) {
+  var occurence = 0;
+  for (var i = 0; i < checkins.length; i++) {
+    if (checkins[i].vendorYelpId === yelpID) {
+      occurence++;
+    }
+  }
+  return occurence;
+};
 
 module.exports = {
   createTransaction: function(req, res, next) {
@@ -109,6 +119,7 @@ module.exports = {
     var lat = req.query.lat;
     var long = req.query.long;
     var location = lat + ',' + long;
+    var context = this;
 
     var venues = [];
     var checkins = [];
@@ -120,7 +131,6 @@ module.exports = {
         return distanceMiles(lat, long, coords[0], coords[1]) < 1;
       });
 
-      // use env variable in heroku if deployed, api_keys.js if local
       var yelp = Yelp.createClient({
         consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
         consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
@@ -136,23 +146,23 @@ module.exports = {
         radius_filter: 1610, //1 mile
         limit: 10
       }, function(error, data) {
-        var venuesFromYelp = data.businesses;
-        venuesFromYelp.forEach(function(venue) {
-          //check whether a checkin exists with this venue's yelpID, and how many are there
-          venues.push({
-            yelpId: venue.id, 
-            name: venue.name, 
-            displayAddress: venue.location.display_address.join(' '),
-            lat: venue.location.coordinate.latitude,
-            long: venue.location.coordinate.longitude,
-            heroes: //0 or whatever number is in above variable
+          var venuesFromYelp = data.businesses;
+          venuesFromYelp.forEach(function(venue) {
+            //check whether a checkin exists with this venue's yelpID, and how many are there
+            var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
+            venues.push({
+              yelpId: venue.id, 
+              name: venue.name, 
+              displayAddress: venue.location.display_address.join(' '),
+              lat: venue.location.coordinate.latitude,
+              long: venue.location.coordinate.longitude,
+              heroes: noOfHeroes
+            });
           });
-        });
         res.status(200).send(venues);
       });
     });
   },
-
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
