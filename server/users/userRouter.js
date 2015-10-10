@@ -15,4 +15,7 @@ module.exports = function(app) {
   // res: 201 or error
   app.post('/update', userCtrl.postUserUpdate);
 
+
+  app.post('/pic/:username', userCtrl.saveProfilePic);
+
 };

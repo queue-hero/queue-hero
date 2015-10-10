@@ -49,10 +49,15 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
+
+.profile-pic {
+  height: 200px;
+  width: 100px;
+}
+
 @media (max-width:768px) {
   .main {
     background-color: #fafafa;
     border: none;
   }
 }
-
