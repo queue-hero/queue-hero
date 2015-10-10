@@ -39,7 +39,6 @@ body > div:first-of-type {
   border-radius: 10px;
 }
 
-
 .continue-fb.row {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -50,23 +49,17 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
-.choices {
-  padding-left: 200px;
+
+.profile-pic {
+  height: 200px;
+  width: 100px;
 }
 
-button .hero {
-  position: relative;
-  top: 100px;
-}
-
-button .requester {
-  position: relative;
-  top: 150px;
-}
-
-button .signup {
-  position: relative;
-  top: 100px;
+@media (max-width:768px) {
+  .main {
+    background-color: #fafafa;
+    border: none;
+  }
 }
 
 button .login {
