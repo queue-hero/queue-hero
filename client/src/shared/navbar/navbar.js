@@ -7,20 +7,34 @@
       restrict: 'E',
       templateUrl: 'src/shared/navbar/navbar.html',
       link: function(scope, elem, attrs) {
+
+        scope.isLoggedIn = function() {
+          return ($state.is('home') || $state.is('signup')) ? false : true;
+        };
+
+        scope.isCurrentState = function(state) {
+          return $state.is(state);
+        };
+
         scope.logout = function() {
           $cookies.remove('connect.sid');
+          removeSessionStorage();
           $state.go('home');
+
         };
-        scope.isLoggedIn = function() {
-          if ($state.is('home') || $state.is('signup')){
-            return false;
-          } else {
-            return true;
-          }
+
+        scope.goToState = function(state) {
+          $state.go(state);
         };
-        scope.isHome = function() {
-          return $state.is('home');
+
+        var removeSessionStorage = function() {
+          var items = Object.keys(sessionStorage);
+          items.forEach(function(item) {
+            sessionStorage.removeItem(item);
+          });
+
         };
+
       }
     };
   }]);
