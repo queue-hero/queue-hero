@@ -149,7 +149,7 @@
 
     //Inits factories data for page refresh from SessionStorage:
     var sessionHeroOrder = $window.JSON.parse($window.sessionStorage.getItem('heroOrder'));
-    if( sessionHeroOrder !== null ) {
+    if(sessionReqOrder !== null) {
       heroFactory.setOrder(sessionHeroOrder);
       // console.log('default hero order loaded');
     }
@@ -162,7 +162,7 @@
     }, true);
 
     var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
-    if( sessionReqOrder !== null ) {
+    if(sessionReqOrder !== null) {
       requesterFactory.setOrder(sessionReqOrder);
       // console.log('default req order loaded');
     }
@@ -175,7 +175,7 @@
     }, true);
 
     var sessionProfile = $window.JSON.parse($window.sessionStorage.getItem('profile'));
-    if( sessionProfile !== null ) {
+    if(sessionReqOrder !== null) {
       profileFactory.setProfile(sessionProfile);
       // console.log('profile init from sessionStorage', sessionProfile);
     }
