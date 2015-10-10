@@ -20,7 +20,7 @@ function distanceMiles(lat1, long1, lat2, long2) {
     (1 - c((long2 - long1) * p)) / 2;
 
   return 7917.8788 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
-};
+}
 
 function findOccurenceInCheckins(yelpID, checkins) {
   var occurence = 0;
@@ -30,7 +30,7 @@ function findOccurenceInCheckins(yelpID, checkins) {
     }
   }
   return occurence;
-};
+}
 
 module.exports = {
   createTransaction: function(req, res, next) {
