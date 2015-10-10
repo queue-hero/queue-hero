@@ -12,7 +12,7 @@
           <input type="text" class="form-control" id="input-username" name="username" ng-model="ctrl.user.username" required minlength="6" maxlength="20">
         </div>
       </div>
-      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.username.$error" ng-show="signup.username.$error && signup.username.$touched">
         <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div> <!-- /form-gorup -->
 
@@ -23,7 +23,7 @@
           <input type="text" class="form-control" id="input-firstname" name="first" ng-model="ctrl.user.firstName" required>
         </div>
       </div>
-      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.first.$error" ng-show="signup.first.$error && signup.first.$touched">
         <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div>
 
@@ -33,7 +33,7 @@
           <input type="text" class="form-control" id="input-lastname" name="last" ng-model="ctrl.user.lastName" required>
         </div>
       </div>
-      <div class="col-sm-4 col-sm-offset-5" ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
+      <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.last.$error" ng-show="signup.last.$error && signup.last.$touched">
         <div ng-messages-include="./src/shared/validation/messages.html"></div>
       </div>
 
@@ -54,7 +54,7 @@
       <div class="form-group">
         <label for="input-cvc" class="col-sm-2 col-sm-offset-3 control-label">CVC Code</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="input-cvc" name="cvc" ng-model="ctrl.user.creditCard" required>
+          <input type="text" class="form-control" id="input-cvc" name="cvc" ng-model="ctrl.user.cvc" required>
         </div>
       </div>
 
@@ -79,20 +79,31 @@
         </div>
       </div>
 
-      <select name="state" ng-model="ctrl.user.state">
-        <option selected="selected" value="">Select State</option>
-        <option  value="California">California</option>
-        <option value="Tabasco">Tabasco</option>
-      </select>
-      <select name="country" ng-model="ctrl.user.country">
-        <option selected="selected" value="">Select Country</option>
-        <option  value="USA">USA</option>
-        <option  value="Mexico">Mexico</option>
-      </select><br/>
-      <input type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid"/>
+      <div class="select-state col-sm-4 col-sm-offset-5">
+        <select class="form-control" name="state" ng-model="ctrl.user.state">
+          <option selected="selected" value="">Select State</option>
+          <option value="California">California</option>
+          <option value="Tabasco">Tabasco</option>
+        </select>
+      </div>
+
+      <div class="select-country col-sm-4 col-sm-offset-5">
+        <select class="form-control" name="country" ng-model="ctrl.user.country">
+          <option selected="selected" value="">Select Country</option>
+          <option value="USA">USA</option>
+          <option value="Mexico">Mexico</option>
+        </select>
+      </div>
+
+      <div class="submit-button col-sm-4 col-sm-offset-5">
+        <input class="btn btn-default" type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid">
+      </div>
+
     </form>
+    <div class="col-sm-6 col-sm-offset-3">
   <pre>user = {{ ctrl.user | json }}</pre>
-  </div> <!-- /container -->
+  </div>
+</div> <!-- /container -->
 </div> <!-- /signup ctrl -->
 
 
