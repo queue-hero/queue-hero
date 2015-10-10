@@ -3,6 +3,14 @@ var Transaction = require('./../transactions/transactionModel.js');
 var User = require('./../users/userModel.js');
 var Checkin = require('./../checkins/checkinModel.js');
 var Q = require('q');
+var Yelp = require("yelp");
+
+var Auth;
+
+//load apikeys if local host. process.env.DEPLOYED set in heroku
+if (!process.env.DEPLOYED) {
+  Auth = require('../config/api_keys.js');
+}
 
 function distanceMiles(lat1, long1, lat2, long2) {
   var p = 0.017453292519943295; // Math.PI / 180
@@ -93,33 +101,61 @@ module.exports = {
     });
 
   },
-  getActiveShops: function(req, res, next) {
+  getLocationOptions: function(req, res, next) {
     if (req.query.lat === undefined || req.query.long === undefined) {
       res.status(400).send();
       return;
     }
-    var lat1 = req.query.lat;
-    var long1 = req.query.long;
+    var lat = req.query.lat;
+    var long = req.query.long;
+    var location = lat + ',' + long;
 
+    var venues = [];
 
-    //needs to be refactored to first make a call to the yelp api for closeby venues
-      //then needs to make this checkin query to checkins db
+    // use env variable in heroku if deployed, api_keys.js if local
+    var yelp = Yelp.createClient({
+      consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
+      consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
+      token: process.env.YELP_TOKEN || Auth.yelp.token,
+      token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
+    });
+
+    yelp.search({
+      ll: location,
+      sort: 1,
+      category_filter: 'food', 
+      radius_filter: 1610, //1 mile
+      limit: 10
+    }, function(error, data) {
+      var venuesFromYelp = data.businesses;
+      venuesFromYelp.forEach(function(value) {
+        venues.push({
+          yelpId: value.id, 
+          name: value.name, 
+          displayAddress: value.location.display_address.join(' '),
+          lat: value.location.coordinate.latitude,
+          long: value.location.coordinate.longitude
+        });
+      });
+      res.status(200).send(venues);
+    })
+      
         //then needs to mark elements from first set based on whether they exist in 2nd set
           //then send this back to client
-    Checkin.find({}, function(err, checkins) {
-      if (err) {
-        res.status(500).send();
-        return;
-      }
+    // Checkin.find({}, function(err, checkins) {
+    //   if (err) {
+    //     res.status(500).send();
+    //     return;
+    //   }
 
-      //filters for checkins within a 1 mile radius
-      var activeShops = checkins.filter(function(checkin) {
-        var coords = checkin.meetingLocation;
-        return distanceMiles(lat1, long1, coords[0], coords[1]) < 1;
-      });
+    //   //filters for checkins within a 1 mile radius
+    //   var activeShops = checkins.filter(function(checkin) {
+    //     var coords = checkin.meetingLocation;
+    //     return distanceMiles(lat, long, coords[0], coords[1]) < 1;
+    //   });
 
-      res.status(200).send(activeShops);
-    });
+    //   res.status(200).send(activeShops);
+    // });
 
   },
 

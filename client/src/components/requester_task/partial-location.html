@@ -4,9 +4,9 @@
 
   <mapbox id="map" callback="ctrl.callback"></mapbox>
 
-  <div id="shop" ng-repeat="shop in ctrl.activeShops">
-    <div ng-click= "ctrl.selectLocation(shop)">
-     {{ shop.vendor }}
+  <div id="shop" ng-repeat="venue in ctrl.venues">
+    <div ng-click= "ctrl.selectLocation(venue)">
+     {{ venue.name }}
     </div>
   </div>
 

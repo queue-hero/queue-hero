@@ -13,6 +13,7 @@
       ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
         .then(function(response) {
           vm.venues = response.data;
+          console.log(vm.venues);
           populatePins();
         }, function(err) {
           console.log(err.status);
@@ -31,13 +32,14 @@
 
       var populatePins = function() {
         for (var i = 0; i < vm.venues.length; i++) {
-        var venue = vm.venues[i];
-        var venueName = venue.vendor;
-        var popupContent = '<p><strong>' + venueName + '</strong></p>';
-        L.marker([venue.meetingLocation[0], venue.meetingLocation[1]], {
-          icon: pinIcon
-        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
-      }
+          var venue = vm.venues[i];
+          var venueName = venue.name;
+          var venueAddress = venue.displayAddress;
+          var popupContent = '<p><strong>' + venueName + '</strong></p>';
+          L.marker([venue.lat, venue.long], {
+            icon: pinIcon
+          }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
+        }
       };
 
       vm.selectLocation = function(shop) {
