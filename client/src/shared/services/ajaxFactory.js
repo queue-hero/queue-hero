@@ -182,9 +182,9 @@
         method: 'POST',
         url:'https://api.twilio.com//2010-04-01/Accounts/{'+ AccountSid + '}/Messages',
         body: msg,
-        params:
-      })
-    }
+        params:''
+      });
+    };
 
 
     return ajaxObj;

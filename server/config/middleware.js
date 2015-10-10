@@ -3,17 +3,34 @@ var cors = require('cors');
 var fbSessions = require('./fbSessions.js');
 var twilioNotifications = require('../Twilio/twilioNotifications.js');
 var accountSid = 'AC09e0bdb9b277603f113a06390620196a';
-var authToken = "{{ fe1aba99308ed506d126b80310f92f55 }}";
-var client = require('twilio')(accountSid, authToken);
+var authToken = "fe1aba99308ed506d126b80310f92f55";
+//var client = require('twilio')(accountSid, authToken);
+var twilio = require('twilio');
+var client = new twilio.RestClient(accountSid, authToken);
 
-client.messages.create({
-    body: "Jenny please?! I love you <3",
-    to: "+16692269013",
-    from: "+12057917998",
-    mediaUrl: "http://www.example.com/hearts.png"
-}, function(err, message) {
-    process.stdout.write(message.sid);
-});
+
+function welcomeSms(phonenumber) {
+  client.messages.create({
+      to: "+1" + phonenumber,
+      from: "+12057917998",
+      body: "Ahoy from Qhero! Welcome to San Francisco's Queueless adventure!<3"
+  }, function(err, message) {
+      console.log(err, message.sid);
+      // process.stdout.write(message.sid);
+  });
+  function InstructionsSms() {
+    client.messages.create({
+        to: "+1" + phonenumber,
+        from: "+12057917998",
+        body: "Queue Hero would only send you SMS when one of your request gets picked by a Hero. Have Fun!"
+    }, function(err, message) {
+        console.log(err, message.sid);
+    });
+  }
+  setTimeout(InstructionsSms, 500000);
+}
+
+welcomeSms('6692269013');
 
 module.exports = function(app, express) {
   var authRouter = express.Router();
