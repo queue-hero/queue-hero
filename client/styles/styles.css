@@ -61,3 +61,29 @@ body > div:first-of-type {
     border: none;
   }
 }
+
+button .login {
+  position: relative;
+  top: 150px;
+}
+
+.select-state,
+.select-country,
+.submit-button,
+.status-good {
+  margin-bottom: 15px;
+}
+
+.validation-alert {
+  font-weight: bold;
+  color: red;
+}
+
+.submit-button > button {
+  background-color: #dcedc8;
+}
+
+.status-good {
+  font-weight: bold;
+  color: #689f38;
+}
