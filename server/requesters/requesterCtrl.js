@@ -111,52 +111,46 @@ module.exports = {
     var location = lat + ',' + long;
 
     var venues = [];
+    var checkins = [];
 
-    // use env variable in heroku if deployed, api_keys.js if local
-    var yelp = Yelp.createClient({
-      consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
-      consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
-      token: process.env.YELP_TOKEN || Auth.yelp.token,
-      token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
-    });
-
-    yelp.search({
-      ll: location,
-      sort: 1,
-      category_filter: 'food', 
-      radius_filter: 1610, //1 mile
-      limit: 10
-    }, function(error, data) {
-      var venuesFromYelp = data.businesses;
-      venuesFromYelp.forEach(function(value) {
-        venues.push({
-          yelpId: value.id, 
-          name: value.name, 
-          displayAddress: value.location.display_address.join(' '),
-          lat: value.location.coordinate.latitude,
-          long: value.location.coordinate.longitude
-        });
+    //find checkins within a 1 mile radius
+    Checkin.find({}, function(err, checkins) {
+      checkins = checkins.filter(function(checkin) {
+        var coords = checkin.meetingLocation;
+        return distanceMiles(lat, long, coords[0], coords[1]) < 1;
       });
-      res.status(200).send(venues);
-    })
-      
-        //then needs to mark elements from first set based on whether they exist in 2nd set
-          //then send this back to client
-    // Checkin.find({}, function(err, checkins) {
-    //   if (err) {
-    //     res.status(500).send();
-    //     return;
-    //   }
 
-    //   //filters for checkins within a 1 mile radius
-    //   var activeShops = checkins.filter(function(checkin) {
-    //     var coords = checkin.meetingLocation;
-    //     return distanceMiles(lat, long, coords[0], coords[1]) < 1;
-    //   });
+      // use env variable in heroku if deployed, api_keys.js if local
+      var yelp = Yelp.createClient({
+        consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
+        consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
+        token: process.env.YELP_TOKEN || Auth.yelp.token,
+        token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
+      });
 
-    //   res.status(200).send(activeShops);
-    // });
-
+      //find venues within a 1 mile radius
+      yelp.search({
+        ll: location,
+        sort: 1,
+        category_filter: 'food', 
+        radius_filter: 1610, //1 mile
+        limit: 10
+      }, function(error, data) {
+        var venuesFromYelp = data.businesses;
+        venuesFromYelp.forEach(function(venue) {
+          //check whether a checkin exists with this venue's yelpID, and how many are there
+          venues.push({
+            yelpId: venue.id, 
+            name: venue.name, 
+            displayAddress: venue.location.display_address.join(' '),
+            lat: venue.location.coordinate.latitude,
+            long: venue.location.coordinate.longitude,
+            heroes: //0 or whatever number is in above variable
+          });
+        });
+        res.status(200).send(venues);
+      });
+    });
   },
 
   rateHero: function(req, res, next) {
