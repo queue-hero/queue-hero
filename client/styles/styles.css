@@ -63,6 +63,11 @@ body > div:first-of-type {
 
 .button-requester {
   height: 200px;
+
+.profile-pic {
+  height: 200px;
+  width: 100px;
+
 }
 
 @media (max-width:768px) {
@@ -71,4 +76,3 @@ body > div:first-of-type {
     border: none;
   }
 }
-
