@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   angular.module('app', [
     'ui.router',
     'ui.bootstrap',
@@ -15,7 +14,7 @@
     'app.hero_task',
     'app.hero_order',
     'app.requester_task',
-    'app.requester_order'
+    'app.requester_order',
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -115,7 +114,7 @@
     };
     return attach;
   }])
-  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
+  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
       if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
@@ -147,6 +146,37 @@
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
     }
+
+
+    var sessionHeroOrder = $window.JSON.parse($window.sessionStorage.getItem('heroOrder'));
+    if( sessionHeroOrder !== null ) {
+      heroFactory.setOrder(sessionHeroOrder);
+      console.log('default hero order loaded');
+    }
+
+    var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
+    if( sessionReqOrder !== null ) {
+      requesterFactory.setOrder(sessionReqOrder);
+      console.log('default req order loaded');
+    }
+
+    $rootScope.$watch(function() {
+      return heroFactory.getOrder();
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+      $window.sessionStorage.setItem('heroOrder',stringObject);
+      console.log(newVal);
+    }, true);
+
+    $rootScope.$watch(function() {
+      return requesterFactory.getOrder();
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+      $window.sessionStorage.setItem('requesterOrder',stringObject);
+      console.log(newVal);
+    }, true);
+
+
 
   }]);
 

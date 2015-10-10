@@ -36,9 +36,10 @@
           profileFactory.setProfile(vm.user);
           vm.isEdit = false;
         //will be exectcuted if status code is 300+
+
         }, function(response) {
           var statusCode = response.status;
-
+          console.log('Profile update: server errorCallback', statusCode);
         });
     };
 
