@@ -96,11 +96,11 @@
       </div>
 
       <div class="submit-button col-sm-4 col-sm-offset-5">
-        <input class="btn btn-default" type="submit" ng-click="ctrl.update()" value="Save" ng-disabled="signup.$invalid">
+        <input class="btn btn-default" type="submit" value="Save" ng-click="ctrl.update()" ng-disabled="signup.$invalid">
         <button class="btn btn-default" ng-show="ctrl.welcomeView" ng-click="ctrl.goToChoice()"> Click here to continue </button>
       </div>
 
-      <div class="col-sm-4 col-sm-offset-5" ng-show="ctrl.welcomeView">
+      <div class="status-good col-sm-4 col-sm-offset-5" ng-show="ctrl.welcomeView">
         Congratulations! You're all signed up.
       </div>
     </form>
