@@ -70,18 +70,6 @@ body > div:first-of-type {
   width: 100px;
 }
 
-@media (max-width:768px) {
-  .main {
-    background-color: #fafafa;
-    border: none;
-  }
-}
-
-button .login {
-  position: relative;
-  top: 150px;
-}
-
 .select-state,
 .select-country,
 .submit-button,
@@ -101,4 +89,61 @@ button .login {
 .status-good {
   font-weight: bold;
   color: #689f38;
+}
+
+.vendor {
+  font-weight: bold;
+}
+
+.meeting-address {
+  font-size: 0.8em;
+}
+
+.col-shops,
+.col-map {
+  padding: 15px;
+  height: 100%;
+}
+
+#map {
+  position: relative;
+  margin: 0 auto;
+  width: 400px;
+  height: 400px;
+}
+
+/* bootstrap's xs is 768px or less */
+@media (max-width:768px) {
+  .main {
+    background-color: #fafafa;
+    border: none;
+  }
+
+  .col-map {
+    display: none;
+  }
+}
+
+/* bootstrap sm = 768px or more */
+@media (min-width: 768px) {
+  #map {
+    width: 400px;
+    height: 450px;
+  }
+}
+
+/* bootstrap md = 992px or more */
+@media (min-width: 992px) {
+  #map {
+    width: 455px;
+    height: 455px;
+  }
+}
+
+/* bootstrap lg = everything 1200px or more */
+@media (min-width: 1200px) {
+  #map {
+    width: 540px;
+    height: 540px;
+  }
 }
