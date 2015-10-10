@@ -7,7 +7,7 @@
       <div class="col-shops col-md-6 col-sm-5 col-xs-12 list-group">
         <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
           <div ng-click="ctrl.selectLocation(venue)">
-            <span class="badge pull-right">{{ 'venue.heroes' }}</span>
+            <span class="badge pull-right">{{ venue.heroes }}</span>
             <div class="vendor">{{ venue.name }}</div>
             <div class="meeting-address">{{ venue.displayAddress }}</div>
           </div>
