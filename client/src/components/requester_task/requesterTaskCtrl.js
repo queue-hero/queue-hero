@@ -10,6 +10,8 @@
 
       var defaultArea = requesterFactory.getOrder('currentLocation');
 
+      //rename this function to getVenuesAtRequesterLocation, mirror heroLocation structure
+        //response should be a list of locations, some of which have heroes checked in, some not
       vm.loadActiveShops = function() {
         ajaxFactory.getActiveShops(defaultArea)
           .then(function successCallback(response) {
@@ -21,12 +23,12 @@
           });
       };
 
+      vm.loadActiveShops();
+
       vm.callback = function(map) {
         vm.map = map;
         map.setView([defaultArea[0], defaultArea[1]], 20);
       };
-
-      vm.loadActiveShops();
 
       var heroIcon = L.icon({
         iconUrl: '/images/hero.png',

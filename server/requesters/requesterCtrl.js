@@ -101,6 +101,11 @@ module.exports = {
     var lat1 = req.query.lat;
     var long1 = req.query.long;
 
+
+    //needs to be refactored to first make a call to the yelp api for closeby venues
+      //then needs to make this checkin query to checkins db
+        //then needs to mark elements from first set based on whether they exist in 2nd set
+          //then send this back to client
     Checkin.find({}, function(err, checkins) {
       if (err) {
         res.status(500).send();
