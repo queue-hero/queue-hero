@@ -23,7 +23,7 @@
 
       vm.callback = function(map) {
         vm.map = map;
-        map.setView([defaultArea[0], defaultArea[1]], 20);
+        map.setView([defaultArea[0], defaultArea[1]], 19);
       };
 
       vm.loadActiveShops();

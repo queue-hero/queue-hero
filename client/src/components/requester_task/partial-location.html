@@ -1,23 +1,25 @@
 <div id="requester-task-location">
 
+
+  <div class="requester-location container">
   <h1> Pick Shop to make a request </h1>
+    <div class="row">
+      <div class="col-shops col-md-6 col-sm-5 col-xs-12 list-group">
+        <button type="button" id="shop" class="list-group-item" ng-repeat="shop in ctrl.activeShops">
+          <div ng-click="ctrl.selectLocation(shop)">
+            <span class="badge pull-right">{{ '# heroes' }}</span>
+            <div class="vendor">{{ shop.vendor }}</div>
+            <div class="meeting-address">{{ shop.meetingAddress }}</div>
+          </div>
+        </button>
+      </div> <!-- /col-shops -->
 
-  <mapbox id="map" callback="ctrl.callback"></mapbox>
+      <div class="col-map col-md-6 col-sm-7 col-xs-0">
+        <mapbox id="map" callback="ctrl.callback"></mapbox>
+      </div>
 
-  <div id="shop" ng-repeat="shop in ctrl.activeShops">
-    <div ng-click= "ctrl.selectLocation(shop)">
-     {{ shop.vendor }}
-    </div>
-  </div>
-
-</div>
+    </div> <!-- /row -->
+  </div> <!-- /requester-location container -->
+</div> <!-- /requester-task-location -->
 
 <!--This styling portion below will not stay here - it's just here for prototyping purposes-->
-<style>
-  #map {
-    width: 600px;
-    height: 700px;
-    /*left: 750px;*/
-    float: right;
-  }
-</style>
