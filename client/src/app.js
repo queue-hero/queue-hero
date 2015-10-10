@@ -15,7 +15,7 @@
     'app.hero_task',
     'app.hero_order',
     'app.requester_task',
-    'app.requester_order'
+    'app.requester_order',
   ])
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
@@ -98,7 +98,7 @@
         }
       });
   }])
-  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
+  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
       if (!cookie) {
@@ -129,6 +129,37 @@
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
     }
+
+
+    var sessionHeroOrder = $window.JSON.parse($window.sessionStorage.getItem('heroOrder'));
+    if( sessionHeroOrder !== null ) {
+      heroFactory.setOrder(sessionHeroOrder);
+      console.log('default hero order loaded');
+    }
+
+    var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
+    if( sessionReqOrder !== null ) {
+      requesterFactory.setOrder(sessionReqOrder);
+      console.log('default req order loaded');
+    }
+
+    $rootScope.$watch(function(){
+      return heroFactory.getOrder();
+    }, function watchCallback(newval, oldval){
+      var stringObject = $window.JSON.stringify(newval);
+      $window.sessionStorage.setItem('heroOrder',stringObject);
+      console.log(newval);
+    }, true);
+
+    $rootScope.$watch(function(){
+      return requesterFactory.getOrder();
+    }, function watchCallback(newval, oldval){
+      var stringObject = $window.JSON.stringify(newval);
+      $window.sessionStorage.setItem('requesterOrder',stringObject);
+      console.log(newval);
+    }, true);
+
+
 
   }]);
 

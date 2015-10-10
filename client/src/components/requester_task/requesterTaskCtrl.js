@@ -11,11 +11,9 @@
       var defaultArea = requesterFactory.getOrder('currentLocation');
 
       vm.loadActiveShops = function() {
-        console.log(defaultArea);
         ajaxFactory.getActiveShops(defaultArea)
           .then(function successCallback(response) {
             vm.activeShops = response.data;
-            console.log(vm.activeShops);
             populatePins();
 
           }, function errorCallback(response) {
@@ -53,7 +51,7 @@
         vm.meetingLocation = [shop.meetingLocation[0], shop.meetingLocation[1]];
         requesterFactory.setOrder({
           vendor: vm.vendor,
-          meetingLocation: vm.meetingLocation, 
+          meetingLocation: vm.meetingLocation,
           vendorYelpId: vm.vendorYelpId
         });
         console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingLocation);
