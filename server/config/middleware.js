@@ -1,8 +1,19 @@
 var bodyParser = require('body-parser');
 var cors = require('cors');
 var fbSessions = require('./fbSessions.js');
+var twilioNotifications = require('../Twilio/twilioNotifications.js');
+var accountSid = 'AC09e0bdb9b277603f113a06390620196a';
+var authToken = "{{ fe1aba99308ed506d126b80310f92f55 }}";
+var client = require('twilio')(accountSid, authToken);
 
-
+client.messages.create({
+    body: "Jenny please?! I love you <3",
+    to: "+16692269013",
+    from: "+12057917998",
+    mediaUrl: "http://www.example.com/hearts.png"
+}, function(err, message) {
+    process.stdout.write(message.sid);
+});
 
 module.exports = function(app, express) {
   var authRouter = express.Router();
@@ -17,6 +28,9 @@ module.exports = function(app, express) {
   }));
   app.use(bodyParser.json());
   app.use(cors());
+
+  // Mount middleware to notify Twilio of errors
+  app.use(twilioNotifications.notifyOnError);
 
   //initializes client sessions and facebook login config
   fbSessions.initialize(app);
