@@ -97,15 +97,33 @@
           }
         }
       });
+      $httpProvider.interceptors.push('redirect');
+
+  }])
+  .factory('redirect', ['$q', '$location', '$cookies', function($q, $location, $cookies) {
+    var attach = {
+      response: function(response) {
+        return response || $q.when(response);
+      },
+      responseError: function(rejection) {
+        if (rejection.status === 403) {
+          $cookies.remove('connect.sid');
+          $location.path('/');
+        }
+        return $q.reject(rejection);
+      }
+    };
+    return attach;
   }])
   .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
-      if (!cookie) {
-        if (toState.name !== 'home' && toState.name !== 'signup') {
-          evt.preventDefault();
-          $state.go('home');
-        }
+      if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
+        evt.preventDefault();
+        $state.go('choice');
+      } else if (!cookie && toState.name !== 'home' && toState.name !== 'signup') {
+        evt.preventDefault();
+        $state.go('home');
       }
 
     });
