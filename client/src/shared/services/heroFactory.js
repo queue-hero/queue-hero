@@ -21,7 +21,7 @@
 
       return {
         getOrder: getOrder,
-        setOrder: setOrder,
+        setOrder: setOrder
       };
 
       function getOrder(keys) {

@@ -1,6 +1,5 @@
 (function() {
   'use strict';
-
   angular.module('app', [
     'ui.router',
     'ui.bootstrap',
@@ -161,17 +160,17 @@
       console.log('default req order loaded');
     }
 
-    $rootScope.$watch(function(){
+    $rootScope.$watch(function() {
       return heroFactory.getOrder();
-    }, function watchCallback(newval, oldval){
+    }, function watchCallback (newVal, oldVal){
       var stringObject = $window.JSON.stringify(newval);
       $window.sessionStorage.setItem('heroOrder',stringObject);
       console.log(newval);
     }, true);
 
-    $rootScope.$watch(function(){
+    $rootScope.$watch(function() {
       return requesterFactory.getOrder();
-    }, function watchCallback(newval, oldval){
+    }, function watchCallback (newval, oldval){
       var stringObject = $window.JSON.stringify(newval);
       $window.sessionStorage.setItem('requesterOrder',stringObject);
       console.log(newval);
