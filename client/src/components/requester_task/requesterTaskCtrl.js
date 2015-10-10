@@ -8,41 +8,38 @@
 
       vm.order = requesterFactory.getOrder();
 
-      var defaultArea = requesterFactory.getOrder('currentLocation');
+      var currentLocation = requesterFactory.getOrder('currentLocation');
 
-      vm.loadActiveShops = function() {
-        ajaxFactory.getActiveShops(defaultArea)
-          .then(function successCallback(response) {
-            vm.activeShops = response.data;
-            populatePins();
-
-          }, function errorCallback(response) {
-            var statusCode = response.status;
-          });
-      };
+      ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
+        .then(function(response) {
+          vm.venues = response.data;
+          console.log(vm.venues);
+          populatePins();
+        }, function(err) {
+          console.log(err.status);
+        });
 
       vm.callback = function(map) {
         vm.map = map;
-        map.setView([defaultArea[0], defaultArea[1]], 19);
+        map.setView([currentLocation[0], currentLocation[1]], 20);
       };
 
-      vm.loadActiveShops();
-
-      var heroIcon = L.icon({
-        iconUrl: '/images/hero.png',
-        iconRetinaUrl: '/images/hero.png',
-        iconSize: [30,30]
+      var pinIcon = L.icon({
+        iconUrl: '/images/pin.png',
+        iconRetinaUrl: '/images/pin.png',
+        iconSize: [30,41]
       });
 
       var populatePins = function() {
-        for (var i = 0; i < vm.activeShops.length; i++) {
-        var activeShop = vm.activeShops[i];
-        var activeShopName = activeShop.vendor;
-        var popupContent = '<p><strong>' + activeShopName + '</strong></p>';
-        L.marker([activeShop.meetingLocation[0], activeShop.meetingLocation[1]], {
-          icon: heroIcon
-        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
-      }
+        for (var i = 0; i < vm.venues.length; i++) {
+          var venue = vm.venues[i];
+          var venueName = venue.name;
+          var venueAddress = venue.displayAddress;
+          var popupContent = '<p><strong>' + venueName + '</strong></p>';
+          L.marker([venue.lat, venue.long], {
+            icon: pinIcon
+          }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
+        }
       };
 
       vm.selectLocation = function(shop) {
@@ -54,7 +51,7 @@
           meetingLocation: vm.meetingLocation,
           vendorYelpId: vm.vendorYelpId
         });
-        console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingLocation);
+        console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingvenue);
         vm.currentView = 'item';
       };
 
