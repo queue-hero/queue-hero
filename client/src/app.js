@@ -114,7 +114,7 @@
     };
     return attach;
   }])
-  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window) {
+  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', 'profileFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window, profileFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
       if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
@@ -147,36 +147,49 @@
       console.warn('ERROR(' + err.code + '): ' + err.message);
     }
 
-
+    //Inits factories data for page refresh from SessionStorage:
     var sessionHeroOrder = $window.JSON.parse($window.sessionStorage.getItem('heroOrder'));
-    if( sessionHeroOrder !== null ) {
+    if(sessionReqOrder !== null) {
       heroFactory.setOrder(sessionHeroOrder);
-      console.log('default hero order loaded');
+      // console.log('default hero order loaded');
     }
-
-    var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
-    if( sessionReqOrder !== null ) {
-      requesterFactory.setOrder(sessionReqOrder);
-      console.log('default req order loaded');
-    }
-
     $rootScope.$watch(function() {
       return heroFactory.getOrder();
     }, function watchCallback(newVal, oldVal) {
       var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('heroOrder',stringObject);
-      console.log(newVal);
+      // console.log(newVal);
     }, true);
 
+    var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
+    if(sessionReqOrder !== null) {
+      requesterFactory.setOrder(sessionReqOrder);
+      // console.log('default req order loaded');
+    }
     $rootScope.$watch(function() {
       return requesterFactory.getOrder();
     }, function watchCallback(newVal, oldVal) {
       var stringObject = $window.JSON.stringify(newVal);
       $window.sessionStorage.setItem('requesterOrder',stringObject);
-      console.log(newVal);
+      // console.log(newVal);
     }, true);
 
+    var sessionProfile = $window.JSON.parse($window.sessionStorage.getItem('profile'));
+    if(sessionReqOrder !== null) {
+      profileFactory.setProfile(sessionProfile);
+      // console.log('profile init from sessionStorage', sessionProfile);
+    }
+    $rootScope.$watch(function() {
 
+      return profileFactory.getProfile();
+
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+
+      $window.sessionStorage.setItem('profile', stringObject);
+      // console.log(newVal);
+
+    }, true);
 
   }]);
 

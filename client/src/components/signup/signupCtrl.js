@@ -5,7 +5,7 @@
 
   .controller('SignupCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory) {
     var vm = this;
-    vm.user = {};
+    vm.user =  profileFactory.getProfile() || {};
 
     vm.user.facebookId = profileFactory.getProfile('facebookId') || $cookies.get('com.queuehero');
     profileFactory.setProfile({ facebookId: vm.user.facebookId });
@@ -29,7 +29,7 @@
 
     vm.goToChoice = function() {
       $state.go('choice');
-    }
+    };
 
   }]);
 
