@@ -18,6 +18,7 @@ var jsScripts = [
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
   'client/bower_components/angular-messages/angular-messages.min.js',
   'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+  'client/bower_components/angular-animate/angular-animate.min.js',
   'client/bower_components/ng-file-upload/ng-file-upload.min.js',
   'client/bower_components/angular-cookies/angular-cookies.min.js',
   'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',

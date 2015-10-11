@@ -16,11 +16,14 @@ module.exports = {
       if (err) {
         req.logout();
         res.redirect('/#/');
+        return;
       }
       if (user && user.username !== null) {
         res.redirect('/#/choice');
+        return;
       } else {
         res.redirect('/#/signup');
+        return;
       }
     });
   }
