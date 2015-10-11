@@ -4,7 +4,8 @@
   angular.module('app.requester_task', [])
     .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
       var vm = this;
-      vm.currentView = 'location';
+      vm.itemView = false;
+      var venueCache;
 
       vm.order = requesterFactory.getOrder();
 
@@ -13,10 +14,9 @@
       ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
         .then(function(response) {
           vm.venues = response.data;
-          console.log(vm.venues);
+          venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
-          console.log(err.status);
         });
 
       vm.callback = function(map) {
@@ -31,6 +31,12 @@
       });
 
       var populatePins = function() {
+        vm.map.eachLayer(function(layer) {
+          if (layer instanceof L.Marker) {
+            vm.map.removeLayer(layer);
+          }
+        });
+
         for (var i = 0; i < vm.venues.length; i++) {
           var venue = vm.venues[i];
           var venueName = venue.name;
@@ -42,7 +48,7 @@
         }
       };
 
-      vm.selectLocation = function(venue) {
+      vm.selectLocation = function(venue, index) {
         vm.vendor = venue.name;
         vm.vendorYelpId = venue.yelpId;
         vm.meetingLocation = [venue.lat, venue.long];
@@ -51,8 +57,9 @@
           meetingLocation: vm.meetingLocation,
           vendorYelpId: vm.vendorYelpId
         });
-        console.log('set requester factory to have vendor and meetingloc' + vm.vendor + vm.meetingvenue);
-        vm.currentView = 'item';
+        vm.venues = vm.venues.splice(index, 1);
+        vm.itemView = 'item';
+        populatePins();
       };
 
       vm.setItem = function() {
@@ -60,7 +67,6 @@
           item: vm.item,
           additionalRequests: vm.details
         });
-        vm.currentView = 'time_price';
       };
 
       vm.pickTimePrice = function() {
@@ -71,7 +77,6 @@
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
-        vm.currentView = 'confirm';
       };
 
       vm.confirmOrder = function() {
@@ -88,6 +93,12 @@
 
           }, function errorCallback(response) {
           });
+      };
+
+      vm.showList = function(){
+        vm.venues = venueCache.slice();
+        vm.itemView = false;
+        populatePins();
       };
 
 

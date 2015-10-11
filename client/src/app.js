@@ -66,17 +66,8 @@
           '': {
             templateUrl: 'src/components/requester_task/task.html'
           },
-          'location@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-location.html'
-          },
           'item@requester_task': {
             templateUrl: 'src/components/requester_task/partial-item.html'
-          },
-          'time_price@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-time_price.html'
-          },
-          'confirm@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-confirm.html'
           }
         }
       })

@@ -6,4 +6,26 @@
     Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.details"> <br/>
     <button type="submit" ng-click="ctrl.setItem()">Confirm item</button>
   </form>
+
+  <div id="requester-task-time_price">
+    <h1> Pick Time and Price </h1>
+    Location: <span> {{ ctrl.vendor }}</span> <br/>
+    Item: <span> {{ ctrl.item }} </span>
+    <form>
+      Time: In <input type="number" placeholder="20" ng-model="ctrl.time" /> minutes
+      <br/>
+      Price
+      $<input type="number" placeholder="7" ng-model="ctrl.price"> <br/>
+      <button ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
+    </form>
+  </div>
+  <br/>
+  <button type="button" ng-click="ctrl.showList()">Back</button>
+
+
 </div>
+
+
+
+
+
