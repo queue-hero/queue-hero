@@ -3,7 +3,7 @@ var formidable = require('formidable');
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
-var sendSms = require('../twilio/twilioApi.js');
+var twilio = require('../twilio/twilioApi.js');
 
 module.exports = {
   getUserData: function(req, res, next) {
@@ -35,9 +35,11 @@ module.exports = {
     });
     newUser.save(function(err) {
       if (err) {
+        twilio.sendSms(newUser.phoneNumber, twilio.message.welcome);
         console.log(err);
       }
     }).then(function() {
+      sendSms(newUser.phoneNumber, message.welcome);
       console.log('DB:', 'saved');
       res.status(201).send();
     });
@@ -50,6 +52,7 @@ module.exports = {
     };
     User.update(query, reqUser)
       .then(function(rowsAffected) {
+        twilio.sendSms(reqUser.phoneNumber, twilio.messages.profile);
         if(rowsAffected.ok !== 1){
           return res.status(500).send();
         }
