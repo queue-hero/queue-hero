@@ -3,6 +3,7 @@ var formidable = require('formidable');
 var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
+var sendSms = require('../twilio/twilioApi.js');
 
 module.exports = {
   getUserData: function(req, res, next) {

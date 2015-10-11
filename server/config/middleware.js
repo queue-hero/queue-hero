@@ -19,9 +19,6 @@ module.exports = function(app, express) {
   app.use(bodyParser.json());
   app.use(cors());
 
-  // Mount middleware to notify Twilio of errors
-  app.use(twilioNotifications.notifyOnError);
-
   //initializes client sessions and facebook login config
   fbSessions.initialize(app);
 
