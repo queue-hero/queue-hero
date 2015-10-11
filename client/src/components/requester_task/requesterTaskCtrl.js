@@ -95,7 +95,7 @@
           });
       };
 
-      vm.showList = function(){
+      vm.showList = function() {
         vm.venues = venueCache.slice();
         vm.itemView = false;
         populatePins();
