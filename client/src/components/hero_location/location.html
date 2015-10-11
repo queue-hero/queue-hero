@@ -1,27 +1,22 @@
 <div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
   <nav-bar></nav-bar>
-  <mapbox id="map" callback="ctrl.callback"></mapbox>
-  <style>
-  #map {
-    width: 600px;
-    height: 700px;
-    /*left: 750px;*/
-    float: right;
-  }
-  </style>
+  <div class="hero-location container">
+  <h1> Pick location </h1>
+    <div class="row">
+      <div class="col-shops col-md-6 col-sm-5 col-xs-12 list-group">
+        <button type="button" id="shop" class="list-group-item" ng-repeat="location in ctrl.locations">
+          <div value="$index" ng-click="ctrl.confirm($index)">
+            <span class="badge pull-right">{{ location.requests }}</span>
+            <div class="vendor">{{ location.name }}</div>
+            <div class="meeting-address">{{ location.displayAddress }}</div>
+          </div>
+        </button>
+      </div>
 
-  <div ng-repeat="location in ctrl.locations">
-    <div class="radio">
-      <label>
-      </label>
-      <ul>
-        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> {{ location.displayAddress }}</li>
-      </ul>
+      <div class="col-map col-md-6 col-sm-7 col-xs-0">
+        <mapbox id="map" callback="ctrl.callback"></mapbox>
+      </div>
+
     </div>
-  </div>
-
-
-  <button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
-    <pre> Possible Locations = {{ ctrl.locations | json }}</pre>
   </div>
 </div>

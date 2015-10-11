@@ -20,13 +20,9 @@
         populatePins();
     });
 
-    vm.select = function(index) {
-      vm.selection = index;
-    };
-
-    vm.confirm = function() {
+    vm.confirm = function(index) {
       var queueHero = profileFactory.getProfile('username');
-      var venue = vm.locations[vm.selection];
+      var venue = vm.locations[index];
 
       //set location of hero to selected venue
       ajaxFactory.setHeroLocation(queueHero, venue)
