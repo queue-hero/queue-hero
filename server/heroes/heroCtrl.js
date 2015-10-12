@@ -3,6 +3,8 @@ var Checkin = require('../checkins/checkinModel.js');
 var Yelp = require("yelp");
 var Q = require('q');
 var User = require('./../users/userModel.js');
+var twilio = require('../twilio/twilioApi.js');
+
 
 var Auth;
 
@@ -11,8 +13,9 @@ if (!process.env.DEPLOYED) {
   Auth = require('../config/api_keys.js');
 }
 
-module.exports = {
+//twilio.smsRequestAccepted("561c057a4fcd9bb87709935d");
 
+module.exports = {
   /*
    * @param {Object} on req.query {lat: lat, long: long}
    * @return {Array} Array with map and location options
@@ -140,6 +143,7 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
+    console.log(transactionId);
     var queueHero = req.body.queueHero;
     var update = {
       queueHero: queueHero,
@@ -154,6 +158,10 @@ module.exports = {
         return;
       }
       if (rowsAffected.ok === 1) {
+        //run here the funtion smsRequestAccepted
+        //send sms with Request info to the Requester
+        twilio.smsRequestAccepted(transactionId);
+
         Checkin.remove({
           username: queueHero
         }, function(err) {
