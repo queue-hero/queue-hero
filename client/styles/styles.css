@@ -39,6 +39,35 @@ body > div:first-of-type {
 }
 */
 
+.navbar {
+  background-color: #3e454b;
+  border-bottom: 0px;
+  box-shadow: 0 2px 5px #3e454b;
+}
+
+.queuehero {
+  font-weight: 300;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+.navbar .btn-clear {
+  margin-right: 5px;
+  background-color: #1784c7;
+  font-weight: 100;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 0 2px 5px #333333;
+}
+
+@media (min-width:768px) {
+  .queuehero {
+    font-weight: 300;
+    font-size: 1.25em;
+  }
+}
 /*----------------- home -----------------*/
 
 .main {
