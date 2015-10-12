@@ -83,6 +83,18 @@
         });
     }
 
+    /*Gets directions for requester once order has been accepted*/
+    function getDirections() {
+      var currentLocation = requesterFactory.getOrder('currentLocation');
+      var meetingLocation = requesterFactory.getOrder('meetingLocation');
+      ajaxFactory.getDirections(currentLocation, meetingLocation)
+        .then(function(response) {
+          //plot this geojson on a map on the page
+        }, function(error) {
+          console.log(error.status);
+        });
+    }
+
 
   }]);
 

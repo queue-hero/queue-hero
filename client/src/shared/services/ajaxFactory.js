@@ -177,6 +177,14 @@
       });
     };
 
+    ajaxObj.getDirections = function(currentLocation, meetingLocation) {
+      return $http({
+        method: 'GET', 
+        url: serverUrl + '/requester/order/directions',
+        params: { source: currentLocation, destination: meetingLocation }
+      });
+    };
+
 
     return ajaxObj;
 

@@ -217,5 +217,12 @@ module.exports = {
       }
       res.status(204).send();
     });
+  },
+
+  getDirections: function(req, res) {
+    var source = req.query.source;
+    var destination = req.query.destination;
+
+    //make mapbox API call
   }
 };
