@@ -42,7 +42,6 @@ body > div:first-of-type {
 .navbar {
   background-color: #3e454b;
   border-bottom: 0px;
-  box-shadow: 0 2px 5px #3e454b;
 }
 
 .queuehero {
@@ -51,15 +50,29 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
-.navbar .btn-clear {
+.btn-blue {
   margin-right: 5px;
-  background-color: #1784c7;
-  font-weight: 100;
+  background-color: #2e79b9;
+  font-weight: 400;
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
   border-radius: 1px;
-  box-shadow: 0 2px 5px #333333;
+  box-shadow: 1px 1px 5px #333333;
+}
+
+.btn-green {
+  margin-right: 5px;
+  background-color: #58b957;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+}
+
+.btn-back {
+  margin: 15px;
 }
 
 @media (min-width:768px) {
@@ -144,62 +157,77 @@ body > div:first-of-type {
 /*----------------- requester task panel -----------------*/
 
 .vendor {
+  font-size: 1.3em;
 }
 
 .meeting-address {
-  font-size: 0.8em;
+  font-size: 1.1em;
 }
 
 .col-shops {
-  padding: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
   box-shadow: 2px 2px 10px #3e454b;
+  float: left;
 }
 
 .col-shops .title {
-  background-color: #1784c7;
+  background-color: #2e79b9;
   color: #ffffff;
   font-weight: 100;
-  font-size: 1.25em;
-  border-color: #1784c7;
+  font-size: 1.4em;
+  border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 0px;
 }
 
-button#shop {
+.list-group-item {
   background-color: #fffcf7;
+}
+
+.list-group-item:first-child {
+    border-radius: 0px;
 }
 
 .view-container {
   position: absolute;
-  top: 50px;
+  margin-bottom: -55px;
   left: 0px;
   height: 100%;
   width: 100%;
 }
 
-@media (min-width: 768px) {
-.col-shops {
-  position: absolute;
-  bottom: 5%;
-  left: 2%;
-  width: 365px;
+.view-container .row {
+  margin: 0px;
+  width: 100%;
+  height: 100%;
 }
+
+@media (min-width: 768px) {
+  .col-shops {
+    width: 35%;
+  }
 }
 
 @media (min-width: 1200px) {
-  .col-shops {
-    width: 425px;
-  }
 }
 
 /*----------------- requester task map -----------------*/
 
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.col-map {
+  padding-right: 15px;
+  width: 65%;
+  height: 100%;
+  float: right;
+}
 #map {
   display: none;
-  position: relative;
-  margin: 0 auto;
-  width: 300px;
-  height: 300px;
 }
 
 @media (min-width: 768px) {
