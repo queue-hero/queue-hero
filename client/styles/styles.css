@@ -1,4 +1,6 @@
-html, body {
+html,
+body,
+#home {
   width: 100%;
   height: 100%;
   font-family: 'helvetica neue', sans-serif;
@@ -6,10 +8,14 @@ html, body {
 }
 
 body > div:first-of-type {
+  width: 100%;
+  height: 100%;
   padding-top: 60px;
 }
 
-/* show bootstrap grids */
+/*---------------------------- bootstrap -----------------------------*/
+/*----------------- uncomment to show bootstrap boxes-----------------*/
+
 /*
 .container {
   background-color: rgba(173, 200, 121, 0.1);
@@ -33,10 +39,11 @@ body > div:first-of-type {
 }
 */
 
+/*----------------- home -----------------*/
+
 .main {
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
+  background-color: #fafafa;
+  border: none;
 }
 
 .continue-fb.row {
@@ -48,6 +55,17 @@ body > div:first-of-type {
   background-color: #3b5998;
   color: #ffffff;
 }
+
+/* bootstrap's xs is 768px or less */
+@media (min-width:768px) {
+  .main {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+  }
+}
+
+/*----------------- choice -----------------*/
 
 .choice-hero {
   padding: 20px;
@@ -65,10 +83,14 @@ body > div:first-of-type {
   height: 200px;
 }
 
+/*----------------- profile -----------------*/
+
 .profile-pic {
   height: 200px;
   width: 100px;
 }
+
+/*----------------- signup -----------------*/
 
 .select-state,
 .select-country,
@@ -91,6 +113,8 @@ body > div:first-of-type {
   color: #689f38;
 }
 
+/*----------------- requester partial-location -----------------*/
+
 .vendor {
   font-weight: bold;
 }
@@ -105,6 +129,10 @@ body > div:first-of-type {
   height: 100%;
 }
 
+.col-map {
+  display: none;
+}
+
 #map {
   position: relative;
   margin: 0 auto;
@@ -112,27 +140,17 @@ body > div:first-of-type {
   height: 400px;
 }
 
-/* bootstrap's xs is 768px or less */
-@media (max-width:768px) {
-  .main {
-    background-color: #fafafa;
-    border: none;
-  }
 
-  .col-map {
-    display: none;
-  }
-}
-
-/* bootstrap sm = 768px or more */
 @media (min-width: 768px) {
   #map {
     width: 400px;
     height: 450px;
   }
+  .col-map {
+    display: block;
+  }
 }
 
-/* bootstrap md = 992px or more */
 @media (min-width: 992px) {
   #map {
     width: 455px;
@@ -140,7 +158,6 @@ body > div:first-of-type {
   }
 }
 
-/* bootstrap lg = everything 1200px or more */
 @media (min-width: 1200px) {
   #map {
     width: 540px;
