@@ -177,16 +177,6 @@
       });
     };
 
-    ajaxObj.twilio = function(AccountSid, msg, to) {
-      return $http({
-        method: 'POST',
-        url:'https://api.twilio.com//2010-04-01/Accounts/{'+ AccountSid + '}/Messages',
-        body: msg,
-        params:''
-      });
-    };
-
-
     return ajaxObj;
 
   }]);
