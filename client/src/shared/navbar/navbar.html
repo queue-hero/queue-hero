@@ -1,11 +1,11 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container-fluid">
+    <p class="queuehero navbar-text pull-left">Queue Hero</p>
     <div class="pull-right">
-      <a ui-sref="profile" type="button" class="btn btn-default navbar-btn" ng-show="isLoggedIn() && !isCurrentState('profile')">Profile</a>
-      <a href="/auth/facebook" type="button" class="btn btn-default navbar-btn" ng-show="isCurrentState('home')">Log In</a>
-      <button type="button" class="btn btn-default navbar-btn" ng-show="isLoggedIn() && !isCurrentState('choice')" ng-click="goToState('choice')">Choice</button>
-      <button type="button" class="btn btn-default navbar-btn" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
+      <a ui-sref="profile" type="button" class="btn btn-clear navbar-btn" ng-show="isLoggedIn() && !isCurrentState('profile')">Profile</a>
+      <a href="/auth/facebook" type="button" class="btn btn-clear navbar-btn" ng-show="isCurrentState('home')">Log In</a>
+      <button type="button" class="btn btn-clear navbar-btn" ng-show="isLoggedIn() && !isCurrentState('choice')" ng-click="goToState('choice')">Choice</button>
+      <button type="button" class="btn btn-clear navbar-btn" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
     </div>
 
   </div>
