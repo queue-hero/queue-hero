@@ -1,6 +1,6 @@
 <div id="requester-task" ng-controller="RequesterTaskCtrl as ctrl">
   <nav-bar></nav-bar>
-<!--   <div ui-view="location" ng-show="true">location div</div>
+  <!--   <div ui-view="location" ng-show="true">location div</div>
   <div ui-view="item" ng-show="true">item div</div>
   <div ui-view="time_price" ng-show="true">time & price div</div>
   <div ui-view="confirm" ng-show="true">confirm button</div> -->
@@ -10,23 +10,23 @@
   <div id="requester-task-location">
 
 
-    <div class="requester-location container">
-    <h1> Pick Shop to make a request </h1>
-      <div class="row">
-        <div class="col-shops col-md-6 col-sm-5 col-xs-12 list-group">
-          <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
-            <div ng-click="ctrl.selectLocation(venue, $index)">
-              <span class="badge pull-right">{{ venue.heroes }}</span>
-              <div class="vendor">{{ venue.name }}</div>
-              <div class="meeting-address">{{ venue.displayAddress }}</div>
-            </div>
+    <div class="requester-location container-fluid">
+      <div class="view-container">
+        <mapbox id="map" callback="ctrl.callback"></mapbox>
+        <div class="row">
+          <div class="col-shops col-md-4 col-sm-4 col-xs-12 list-group">
+            <div class="title list-group-item">Pick a Location</div>
+            <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
+              <div ng-click="ctrl.selectLocation(venue, $index)">
+                <span class="badge pull-right">{{ venue.heroes }}</span>
+                <div class="vendor">{{ venue.name }}</div>
+                <div class="meeting-address">{{ venue.displayAddress }}</div>
+              </div>
+            </button>
             <div ui-view="item" ng-show="ctrl.itemView"></div>
-          </button>
-        </div> <!-- /col-shops -->
-
-        <div class="col-map col-md-6 col-sm-7 col-xs-0">
-          <mapbox id="map" callback="ctrl.callback"></mapbox>
+          </div> <!-- /col-shops -->
         </div>
+
 
       </div> <!-- /row -->
     </div> <!-- /requester-location container -->
