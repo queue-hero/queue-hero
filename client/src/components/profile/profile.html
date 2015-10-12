@@ -1,25 +1,34 @@
 <div id="profile" ng-controller="ProfileCtrl as ctrl">
   <nav-bar></nav-bar>
-  Profile
+  <div class="container">
   <div ng-hide="ctrl.isEdit">
-    <img class="col-md-4 profile-pic" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}">
+  <div class="panel panel-primary">
+    <div class="panel-heading">Profile
+      <div class="edit-profile pull-right" ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
+        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;Edit Profile
+        </div>
+    </div>
 
-    <img class="col-md-4" ng-show="ctrl.f" ngf-src="ctrl.f">
-    Username: <span> {{ ctrl.user.username }} </span> <br/>
-    First Name: <span> {{ ctrl.user.firstName }} </span>
-    Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
-    Phone Number: <span> {{ ctrl.user.phoneNumber }} </span><br/>
-    Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
-    CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
-    Expiration Date: <span> {{ ctrl.user.expirationDate }} </span><br/>
-    Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
-    City: <span> {{ ctrl.user.city }} </span><br/>
-    State: <span> {{ ctrl.user.state }} </span> <br/>
-    Country: <span> {{ ctrl.user.country }} </span> <br/>
-    <button ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
-      Edit Profile
-    </button>
+    <div class="profile-row row">
+      <img class="col-md-2 profile-pic" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}">
+      <img class="col-md-2" ng-show="ctrl.f" ngf-src="ctrl.f">
+
+      <div class="col-md-10">
+        Username: <span> {{ ctrl.user.username }} </span> <br/>
+        First Name: <span> {{ ctrl.user.firstName }} </span>
+        Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
+        Phone Number: <span> {{ ctrl.user.phoneNumber }} </span><br/>
+        Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
+        CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
+            Expiration Date: <span> {{ ctrl.user.expirationDate }} </span><br/>
+            Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
+            City: <span> {{ ctrl.user.city }} </span><br/>
+            State: <span> {{ ctrl.user.state }} </span> <br/>
+            Country: <span> {{ ctrl.user.country }} </span> <br/>
+          </div> <!-- /col-md-10 -->
+        </div> <!-- /row profile -->
   </div>
+</div>
   <div ng-show="ctrl.isEdit">
     <span>Edit Profile</span>
     <img class="col-md-4 profile-pic" ng-show="ctrl.f" ngf-src="ctrl.f">

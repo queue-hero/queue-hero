@@ -126,9 +126,26 @@ body > div:first-of-type {
 
 /*----------------- profile -----------------*/
 
+.panel {
+  border-radius: 0px;
+  border: 0px;
+}
+
+.profile-row {
+  margin: 0;
+}
+
+.edit-profile {
+  cursor: pointer;
+}
+
+.edit-profile:hover {
+  color: black;
+}
 .profile-pic {
-  height: 200px;
-  width: 100px;
+  padding: 15px;
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
 }
 
 /*----------------- signup -----------------*/
