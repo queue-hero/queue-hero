@@ -50,14 +50,29 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
-.navbar .btn-clear {
+.btn-blue {
   margin-right: 5px;
-  background-color: #1784c7;
-  font-weight: 100;
+  background-color: #2e79b9;
+  font-weight: 400;
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
   border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+}
+
+.btn-green {
+  margin-right: 5px;
+  background-color: #58b957;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+}
+
+.btn-back {
+  margin: 15px;
 }
 
 @media (min-width:768px) {
@@ -167,8 +182,12 @@ body > div:first-of-type {
   border-radius: 0px;
 }
 
-button#shop {
+.list-group-item {
   background-color: #fffcf7;
+}
+
+.list-group-item:first-child {
+    border-radius: 0px;
 }
 
 .view-container {
