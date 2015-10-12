@@ -59,14 +59,20 @@
       <input type="submit" ng-click="ctrl.update()" value="Save" />
     </form>
   </div>
-  Transaction history
-  <ul>
-    <li ng-repeat="transaction in ctrl.userTransactions">
-      Requester: {{ transaction.requester }} | Queue Hero: {{ transaction.queueHero }} <br/>
-      Vendor {{ transaction.vendor }} | Item: {{ transaction.item }} <br/>
-      Meeting time: {{ transaction.meetingTime }} | Money exchanged: {{ transaction.moneyExchanged }} <br/>
-      Status: {{ transaction.status }} <br/>
-    </li>
-  </ul>
+
+  <div class="panel panel-primary">
+    <div class="panel-heading">Transaction History</div>
+
+    <ul class=list-group>
+      <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions">
+        Requester: {{ transaction.requester }} | Queue Hero: {{ transaction.queueHero }} <br/>
+        Vendor {{ transaction.vendor }} | Item: {{ transaction.item }} <br/>
+        Meeting time: {{ transaction.meetingTime }} | Money exchanged: {{ transaction.moneyExchanged }} <br/>
+        Status: {{ transaction.status }} <br/>
+      </li>
+    </ul>
+  </div>
+</div>
   <!-- <pre>user = {{ ctrl.user | json }}</pre> -->
+  </div>
 </div>
