@@ -1,10 +1,10 @@
 <div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
   <nav-bar></nav-bar>
 
-
   <div class="hero-location container-fluid">
     <div class="view-container">
       <div class="row">
+
         <div class="col-left list-group">
           <div class="title list-group-item">Pick a Location</div>
           <button type="button" id="shop" class="list-group-item" ng-repeat="location in ctrl.locations">
@@ -15,6 +15,7 @@
             </div>
           </button>
         </div> <!-- /col-left -->
+
         <div class="map-container">
           <div class="col-map">
             <mapbox id="map" callback="ctrl.callback"></mapbox>
