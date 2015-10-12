@@ -12,9 +12,8 @@
 
     <div class="requester-location container-fluid">
       <div class="view-container">
-        <mapbox id="map" callback="ctrl.callback"></mapbox>
         <div class="row">
-          <div class="col-shops col-md-4 col-sm-4 col-xs-12 list-group">
+          <div class="col-shops list-group">
             <div class="title list-group-item">Pick a Location</div>
             <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
               <div ng-click="ctrl.selectLocation(venue, $index)">
@@ -25,6 +24,11 @@
             </button>
             <div ui-view="item" ng-show="ctrl.itemView"></div>
           </div> <!-- /col-shops -->
+          <div class="map-container">
+            <div class="col-map">
+              <mapbox id="map" callback="ctrl.callback"></mapbox>
+            </div>
+          </div>
         </div>
 
 
