@@ -176,7 +176,7 @@
         params: { username: username }
       });
     };
-
+    
     ajaxObj.getDirections = function(currentLocation, meetingLocation) {
       return $http({
         method: 'GET', 

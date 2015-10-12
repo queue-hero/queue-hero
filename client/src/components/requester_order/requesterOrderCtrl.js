@@ -77,6 +77,9 @@
             //cancel polling
             $interval.cancel(checkOrder);
 
+            //call getDirections
+            getDirections();
+
           }
         }, function(response) {
             console.log(response.status);
@@ -90,6 +93,7 @@
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
           //plot this geojson on a map on the page
+          console.log(response.data);
         }, function(error) {
           console.log(error.status);
         });
