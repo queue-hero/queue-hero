@@ -56,7 +56,6 @@ body > div:first-of-type {
   color: #ffffff;
 }
 
-/* bootstrap's xs is 768px or less */
 @media (min-width:768px) {
   .main {
     background-color: #ffffff;
