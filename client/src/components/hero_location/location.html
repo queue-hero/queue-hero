@@ -8,7 +8,7 @@
         <div class="col-left list-group">
           <div class="title list-group-item">Pick a Location</div>
           <button type="button" id="shop" class="list-group-item" ng-repeat="location in ctrl.locations">
-            <div value="$index" ng-click="ctr.confirm($index)">
+            <div value="$index" ng-click="ctrl.confirm($index)">
               <span class="badge pull-right">{{ location.requests }}</span>
               <div class="vendor">{{ location.name }}</div>
               <div class="meeting-address">{{ location.displayAddress }}</div>
