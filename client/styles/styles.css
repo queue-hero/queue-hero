@@ -1,15 +1,21 @@
-html, body {
+html,
+body,
+#home {
   width: 100%;
   height: 100%;
-  font-family: 'helvetica neue', sans-serif;
-  background-color: #fafafa;
+  font-family: 'Lato', sans-serif;
+  background-color: #3e454b;
 }
 
 body > div:first-of-type {
-  padding-top: 60px;
+  width: 100%;
+  height: 100%;
+  padding-top: 55px;
 }
 
-/* show bootstrap grids */
+/*---------------------------- bootstrap -----------------------------*/
+/*----------------- uncomment to show bootstrap boxes-----------------*/
+
 /*
 .container {
   background-color: rgba(173, 200, 121, 0.1);
@@ -33,10 +39,53 @@ body > div:first-of-type {
 }
 */
 
+.navbar {
+  background-color: #3e454b;
+  border-bottom: 0px;
+}
+
+.queuehero {
+  font-weight: 300;
+  font-size: 1em;
+  color: #ffffff;
+}
+
+.btn-blue {
+  margin-right: 5px;
+  background-color: #2e79b9;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+}
+
+.btn-green {
+  margin-right: 5px;
+  background-color: #58b957;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+}
+
+.btn-back {
+  margin: 15px;
+}
+
+@media (min-width:768px) {
+  .queuehero {
+    font-weight: 300;
+    font-size: 1.25em;
+  }
+}
+/*----------------- home -----------------*/
+
 .main {
-  background-color: #ffffff;
-  border: 1px solid #dddddd;
-  border-radius: 10px;
+  background-color: #fafafa;
+  border: none;
 }
 
 .continue-fb.row {
@@ -48,6 +97,16 @@ body > div:first-of-type {
   background-color: #3b5998;
   color: #ffffff;
 }
+
+@media (min-width:768px) {
+  .main {
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
+  }
+}
+
+/*----------------- choice -----------------*/
 
 .choice-hero {
   padding: 20px;
@@ -65,10 +124,14 @@ body > div:first-of-type {
   height: 200px;
 }
 
+/*----------------- profile -----------------*/
+
 .profile-pic {
   height: 200px;
   width: 100px;
 }
+
+/*----------------- signup -----------------*/
 
 .select-state,
 .select-country,
@@ -78,7 +141,7 @@ body > div:first-of-type {
 }
 
 .validation-alert {
-  font-weight: bold;
+  font-weight: 300;
   color: red;
 }
 
@@ -87,63 +150,91 @@ body > div:first-of-type {
 }
 
 .status-good {
-  font-weight: bold;
+  font-weight: 300;
   color: #689f38;
 }
 
+/*----------------- requester task panel -----------------*/
+
 .vendor {
-  font-weight: bold;
+  font-size: 1.3em;
 }
 
 .meeting-address {
-  font-size: 0.8em;
+  font-size: 1.1em;
 }
 
-.col-shops,
-.col-map {
-  padding: 15px;
+.col-shops {
+  width: 100%;
+  height: 100%;
+  padding: 0 15px;
+  box-shadow: 2px 2px 10px #3e454b;
+  float: left;
+}
+
+.col-shops .title {
+  background-color: #2e79b9;
+  color: #ffffff;
+  font-weight: 100;
+  font-size: 1.4em;
+  border-color: #2e79b9;
+  border-bottom: 1px solid #3e454c;
+  border-radius: 0px;
+}
+
+.list-group-item {
+  background-color: #fffcf7;
+}
+
+.list-group-item:first-child {
+    border-radius: 0px;
+}
+
+.view-container {
+  position: absolute;
+  margin-bottom: -55px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+}
+
+.view-container .row {
+  margin: 0px;
+  width: 100%;
   height: 100%;
 }
 
+@media (min-width: 768px) {
+  .col-shops {
+    width: 35%;
+  }
+}
+
+@media (min-width: 1200px) {
+}
+
+/*----------------- requester task map -----------------*/
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+.col-map {
+  padding-right: 15px;
+  width: 65%;
+  height: 100%;
+  float: right;
+}
 #map {
-  position: relative;
-  margin: 0 auto;
-  width: 400px;
-  height: 400px;
+  display: none;
 }
 
-/* bootstrap's xs is 768px or less */
-@media (max-width:768px) {
-  .main {
-    background-color: #fafafa;
-    border: none;
-  }
-
-  .col-map {
-    display: none;
-  }
-}
-
-/* bootstrap sm = 768px or more */
 @media (min-width: 768px) {
   #map {
-    width: 400px;
-    height: 450px;
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 
-/* bootstrap md = 992px or more */
-@media (min-width: 992px) {
-  #map {
-    width: 455px;
-    height: 455px;
-  }
-}
-
-/* bootstrap lg = everything 1200px or more */
-@media (min-width: 1200px) {
-  #map {
-    width: 540px;
-    height: 540px;
-  }
-}

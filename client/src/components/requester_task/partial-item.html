@@ -1,9 +1,43 @@
 <div id="requester-task-item">
-  <h1> Pick item </h1>
-  Location:<span> {{ ctrl.vendor }}</span>
+  <div class="title list-group-item">Pick item</div>
   <form>
-    I want:<input type="text" placeholder="Product name" ng-model="ctrl.item"> <br/>
-    Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.details"> <br/>
-    <button type="submit" ng-click="ctrl.setItem()">Confirm item</button>
+    <div class="list-group-item">
+      <div class="form-group">
+        <label for="product-name">I want</label>
+        <input type="text" class="form-control" id="product-name" placeholder="Product name" ng-model="ctrl.item">
+      </div>
+      <div class="form-group">
+        <label for="additional-details">Details</label>
+        <input type="text" class="form-control" id="additional-details" placeholder="Additional details if necessary..." ng-model="ctrl.details">
+      </div>
+      <button class="btn btn-green" type="submit" ng-click="ctrl.setItem()">Confirm item</button>
+    </div>
   </form>
+  <div class="title list-group-item">Pick Time and Price</div>
+  <form>
+    <div class="list-group-item">
+      <div class="form-group">
+        <label for="time">Time</label>
+        <div class="input-group">
+          <div class="input-group-addon">In</div>
+          <input type="number" class="form-control" id="time" placeholder="20">
+          <div class="input-group-addon">minutes</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input type="number" class="form-control" id="price" placeholder="6">
+        </div>
+      </div>
+      <button class="btn btn-green" ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
+    </div>
+  </form>
+  <button type="button" class="btn-back btn btn-green" ng-click="ctrl.showList()"><< Back</button>
 </div>
+
+
+
+
+
