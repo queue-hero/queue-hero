@@ -6,6 +6,7 @@
     var vm = this;
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
+    var currentLocation = requesterFactory.getOrder('currentLocation');
 
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
 
@@ -88,7 +89,6 @@
 
     /*Gets directions for requester once order has been accepted*/
     function getDirections() {
-      var currentLocation = requesterFactory.getOrder('currentLocation');
       var meetingLocation = requesterFactory.getOrder('meetingLocation');
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
@@ -98,6 +98,11 @@
           console.log(error.status);
         });
     }
+
+    vm.callback = function(map) {
+      vm.map = map;
+      map.setView([currentLocation[0], currentLocation[1]], 20);
+    };
 
 
   }]);
