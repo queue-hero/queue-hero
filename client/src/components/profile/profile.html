@@ -9,13 +9,13 @@
     First Name: <span> {{ ctrl.user.firstName }} </span>
     Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
     Phone Number: <span> {{ ctrl.user.phoneNumber }} </span><br/>
-    Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
+    <!-- Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span><br/>
     CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
     Expiration Date: <span> {{ ctrl.user.expirationDate }} </span><br/>
     Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
     City: <span> {{ ctrl.user.city }} </span><br/>
     State: <span> {{ ctrl.user.state }} </span> <br/>
-    Country: <span> {{ ctrl.user.country }} </span> <br/>
+    Country: <span> {{ ctrl.user.country }} </span> <br/> -->
     <button ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
       Edit Profile
     </button>
@@ -41,7 +41,8 @@
       </div>
 
       Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
-      Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
+      
+     <!--  Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
       CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>
       Expiration Date: <input type="text" ng-model="ctrl.user.expDate" /><br/>
       Billing Address: <input type="text" ng-model="ctrl.user.billingAddress" /><br/>
@@ -55,7 +56,7 @@
         <option selected="selected" value="">Select Country</option>
         <option  value="USA">USA</option>
         <option  value="Mexico">Mexico</option>
-      </select><br/>
+      </select><br/> -->
       <input type="submit" ng-click="ctrl.update()" value="Save" />
     </form>
   </div>
