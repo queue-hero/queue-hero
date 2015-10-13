@@ -7,6 +7,7 @@
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
     var currentLocation = requesterFactory.getOrder('currentLocation');
+    var meetingLocation = requesterFactory.getOrder('meetingLocation');
 
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
 
@@ -80,20 +81,32 @@
 
             //call getDirections
             getDirections();
-
           }
         }, function(response) {
             console.log(response.status);
         });
     }
 
+    var pinIcon = L.icon({
+      iconUrl: '/images/pin.png',
+      iconRetinaUrl: '/images/pin.png',
+      iconSize: [30,41]
+    });
+
     /*Gets directions for requester once order has been accepted*/
     function getDirections() {
-      var meetingLocation = requesterFactory.getOrder('meetingLocation');
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
-          //plot this geojson on a map on the page
-          console.log(response.data);
+
+          //add marker for source
+          L.marker([currentLocation[0], currentLocation[1]], {icon: pinIcon}).addTo(vm.map);
+          //add marker for destination
+          L.marker([meetingLocation[0], meetingLocation[1]], {icon: pinIcon}).addTo(vm.map);
+
+          //plot the route on the map
+          var directionsObject = response.data;
+          L.geoJson(directionsObject.routes[0].geometry, {}).addTo(vm.map);
+
         }, function(error) {
           console.log(error.status);
         });
