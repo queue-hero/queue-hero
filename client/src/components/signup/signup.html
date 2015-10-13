@@ -42,12 +42,18 @@
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-phonenumber" name="phone" ng-model="ctrl.user.phoneNumber" required>
         </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.phone.$error" ng-show="signup.phone.$error && signup.phone.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="input-creditcard" class="col-sm-2 col-sm-offset-3 control-label">Credit/Debit Card</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-creditcard" name="card" ng-model="ctrl.user.creditCard" required>
+        </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.card.$error" ng-show="signup.card.$error && signup.card.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
         </div>
       </div>
 
@@ -56,12 +62,18 @@
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-cvc" name="cvc" ng-model="ctrl.user.cvc" required>
         </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.cvc.$error" ng-show="signup.cvc.$error && signup.cvc.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="input-exp" class="col-sm-2 col-sm-offset-3 control-label">Expiration Date</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-exp" name="exp" ng-model="ctrl.user.expDate" required>
+        </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.exp.$error" ng-show="signup.exp.$error && signup.exp.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
         </div>
       </div>
 
@@ -70,12 +82,18 @@
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-address" name="address" ng-model="ctrl.user.billingAddress" required>
         </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.address.$error" ng-show="signup.address.$error && signup.address.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="input-city" class="col-sm-2 col-sm-offset-3 control-label">City</label>
         <div class="col-sm-4">
           <input type="text" class="form-control" id="input-city" name="city" ng-model="ctrl.user.city" required>
+        </div>
+        <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.city.$error" ng-show="signup.city.$error && signup.city.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
         </div>
       </div>
 
@@ -392,7 +410,7 @@
       </div>
 
       <div class="submit-button col-sm-4 col-sm-offset-5">
-        <input class="btn btn-default" type="submit" value="Save" ng-click="ctrl.update()" ng-disabled="signup.$invalid">
+        <input class="btn btn-default" ng-hide="ctrl.welcomeView" type="submit" value="Save" ng-click="ctrl.update()" ng-disabled="signup.$invalid">
         <button class="btn btn-default" ng-show="ctrl.welcomeView" ng-click="ctrl.goToChoice()"> Click here to continue </button>
       </div>
 
