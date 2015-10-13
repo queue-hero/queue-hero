@@ -52,7 +52,8 @@ module.exports = {
 
     //find transactions within a 1 mile radius
     Transaction.find({
-      status: "unfulfilled"
+      status: "unfulfilled",
+      meetingTime: { $gte: Date.now() }
     }, function(err, transactions) {
       transactions = transactions.filter(function(transaction) {
         var coords = transaction.meetingLocation;
@@ -195,7 +196,6 @@ module.exports = {
       if (rowsAffected.ok === 1) {
         //run here the funtion smsRequestAccepted
         //send sms with Request info to the Requester
-        // twilio.smsRequestAccepted(transactionId);
 
         Checkin.remove({
           username: queueHero
@@ -204,8 +204,12 @@ module.exports = {
             res.status(500).send();
             return;
           }
-          res.status(204).send();
         });
+
+        res.status(204).send();
+        setTimeout(function() {
+          twilio.smsRequestAccepted(transactionId);
+        }, 0);
 
       } else {
         res.status(500).send();
@@ -238,7 +242,9 @@ module.exports = {
     //currently this query just gets all transactions that are not complete
     Transaction.find({
       status: 'unfulfilled',
-      vendorYelpId: vendorYelpId
+      vendorYelpId: vendorYelpId,
+      meetingTime: { $gte: Date.now() }
+
     }, function(err, transactions) {
       if (err) {
         res.status(500).send();
@@ -257,7 +263,8 @@ module.exports = {
 
     Transaction.count({
       vendorYelpId: yelpId,
-      status: 'unfulfilled'
+      status: 'unfulfilled',
+      meetingTime: { $gte: Date.now() }
     }, function(err, num) {
       if (err) {
         console.log(err);
