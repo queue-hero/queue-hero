@@ -4,6 +4,7 @@ var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var twilio = require('../twilio/twilioApi.js');
+console.log(twilio.sendSms, twilio.messages.welcome);
 
 module.exports = {
   getUserData: function(req, res, next) {
@@ -38,8 +39,9 @@ module.exports = {
         console.log(err);
       }
     }).then(function() {
+      console.log('userSaved');
+      setTimeout(twilio.sendSms, 0, newUser.phoneNumber, twilio.messages.welcome);
       res.status(201).send();
-      // twilio.sendSms(newUser.phoneNumber, message.welcome);
       console.log('DB:', 'saved');
     });
   },
@@ -52,6 +54,7 @@ module.exports = {
     User.update(query, reqUser)
       .then(function(rowsAffected) {
         //twilio.sendSms(reqUser.phoneNumber, twilio.messages.profile);
+        setTimeout(twilio.sendSms, 0, reqUser.phoneNumber, twilio.messages.profile);
         if(rowsAffected.ok !== 1){
           return res.status(500).send();
         }

@@ -21,7 +21,11 @@ module.exports= {
       from: "+12057917998",
       body: text,
     }, function(err, message) {
-      console.log(err, message.sid);
+      if (err) {
+        console.log('twilio Error:', err);
+      } else {
+        console.log('twilioId:', message.sid);
+      }
       //process.stdout.write(message.sid);
     });
   },
@@ -47,7 +51,6 @@ module.exports= {
         User.findOne({
           username: requesterUsername
         }, function(err, user) {
-          // console.log('database requester ', user, 'request:', request);
           if (err) {
             console.log('err',err);
             res.status(500).send();
