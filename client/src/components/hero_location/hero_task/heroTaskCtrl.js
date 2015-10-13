@@ -23,10 +23,10 @@
       function getRequests() {
         ajaxFactory.getOpenRequests(vm.vendorYelpId)
           .then(function(response) {
-            if(!vm.confirmView){
+            if (!vm.confirmView) {
               vm.orders = response.data;
               OrderCache = vm.orders.slice();
-            }else{
+            } else {
               OrderCache = response.data;
             }
             if (vm.orders.length === 0) {
