@@ -2,15 +2,20 @@
   'use strict';
 
   angular.module('app.hero_task', [])
-    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', function(ajaxFactory, $state, heroFactory, $interval) {
+    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', '$scope', function(ajaxFactory, $state, heroFactory, $interval, $scope) {
       var vm = this;
       vm.displayId = 0;
       vm.confirmView = false;
       vm.noOrdersView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
+      vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
       vm.vendor = heroFactory.getOrder('vendor');
 
       var refreshTasks = $interval(getRequests, 1000, 0, false);
+
+      $scope.$on("$destroy", function() {
+          $interval.cancel(refreshTasks);
+      });
 
       function getRequests() {
         ajaxFactory.getOpenRequests(vm.vendorYelpId)
@@ -24,11 +29,13 @@
           }, function(response) {
             console.log(response.status);
           });
-      };
+      }
+
+      getRequests();
 
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests
-        $interval.cancel(refreshTasks);
+        // $interval.cancel(refreshTasks);
         ajaxFactory.removeFromQueue(heroFactory.getOrder('username'))
           .then(function(response) {
             heroFactory.setOrder({
@@ -38,7 +45,7 @@
               vendor: undefined,
               vendorYelpId: undefined
             });
-            $state.go('hero_location');
+            $scope.$parent.main.showList();
           }, function(response) {
             console.log(response.status);
           });

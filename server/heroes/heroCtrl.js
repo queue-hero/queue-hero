@@ -51,7 +51,9 @@ module.exports = {
     var transactions = [];
 
     //find transactions within a 1 mile radius
-    Transaction.find({ status: "unfulfilled" }, function(err, transactions) {
+    Transaction.find({
+      status: "unfulfilled"
+    }, function(err, transactions) {
       transactions = transactions.filter(function(transaction) {
         var coords = transaction.meetingLocation;
         return distanceMiles(lat, long, coords[0], coords[1]) < 1;
@@ -244,6 +246,25 @@ module.exports = {
       }
       res.status(200).send(transactions);
 
+    });
+
+  },
+
+  getOpenLocationCount: function(req, res, next) {
+    var yelpId = req.query.yelpId;
+    var openCount = [yelpId];
+
+
+    Transaction.count({
+      vendorYelpId: yelpId,
+      status: 'unfulfilled'
+    }, function(err, num) {
+      if (err) {
+        console.log(err);
+        return res.status(500).send();
+      }
+      openCount.push(num);
+      res.status(200).send(openCount);
     });
 
   },
