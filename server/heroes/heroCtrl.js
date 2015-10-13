@@ -195,7 +195,7 @@ module.exports = {
       if (rowsAffected.ok === 1) {
         //run here the funtion smsRequestAccepted
         //send sms with Request info to the Requester
-        twilio.smsRequestAccepted(transactionId);
+        // twilio.smsRequestAccepted(transactionId);
 
         Checkin.remove({
           username: queueHero
