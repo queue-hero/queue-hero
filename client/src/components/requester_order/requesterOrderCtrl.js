@@ -23,6 +23,7 @@
             item: undefined,
             meetingTime: undefined,
             meetingLocation: undefined,
+            meetingLocationLatLong: undefined,
             moneyExchanged: undefined,
             status: undefined,
             transactionId: undefined,
@@ -56,7 +57,19 @@
       ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
-          requesterFactory.setOrder();
+          requesterFactory.setOrder({
+            queueHero: undefined,
+            additionalRequests: undefined,
+            item: undefined,
+            meetingTime: undefined,
+            meetingLocation: undefined,
+            meetingLocationLatLong: undefined,
+            moneyExchanged: undefined,
+            status: undefined,
+            transactionId: undefined,
+            vendor: undefined,
+            vendorYelpId: undefined
+          });
 
           //circle back to choice
           $state.go('choice');
@@ -72,7 +85,7 @@
     function isOrderAccepted() {
       ajaxFactory.isOrderAccepted(vm.order.transactionId)
         .then(function(response) {
-          if (response.data) {
+          if (response.data !== false) {
 
             vm.order.queueHero = response.data;
             requesterFactory.setOrder({ queueHero: response.data });
@@ -80,11 +93,26 @@
             //order is accepted, switch ui-views
             vm.complete = 'complete';
 
-            //cancel polling
-            $interval.cancel(checkOrder);
-
             //call getDirections
             getDirections();
+          } else if (Date.now() > vm.order.meetingTime) {
+            ajaxFactory.cancelOrder(vm.order.transactionId)
+              .then(function(response) {
+                requesterFactory.setOrder({
+                  additionalRequests: undefined,
+                  item: undefined,
+                  meetingTime: undefined,
+                  meetingLocation: undefined,
+                  meetingLocationLatLong: undefined,
+                  moneyExchanged: undefined,
+                  status: undefined,
+                  transactionId: undefined,
+                  vendor: undefined,
+                  vendorYelpId: undefined
+                });
+
+                $state.go('requester_task');
+              });
           }
         }, function(response) {
             console.log(response.status);

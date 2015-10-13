@@ -150,19 +150,19 @@ module.exports = {
         radius_filter: 1610, //1 mile
         limit: 10
       }, function(error, data) {
-          var venuesFromYelp = data.businesses;
-          venuesFromYelp.forEach(function(venue) {
-            //check whether a checkin exists with this venue's yelpID, and how many are there
-            var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
-            venues.push({
-              yelpId: venue.id,
-              name: venue.name,
-              displayAddress: venue.location.display_address.join(' '),
-              lat: venue.location.coordinate.latitude,
-              long: venue.location.coordinate.longitude,
-              heroes: noOfHeroes
-            });
+        var venuesFromYelp = data.businesses;
+        venuesFromYelp.forEach(function(venue) {
+          //check whether a checkin exists with this venue's yelpID, and how many are there
+          var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
+          venues.push({
+            yelpId: venue.id,
+            name: venue.name,
+            displayAddress: venue.location.display_address.join(' '),
+            lat: venue.location.coordinate.latitude,
+            long: venue.location.coordinate.longitude,
+            heroes: noOfHeroes
           });
+        });
         res.status(200).send(venues);
       });
     });
@@ -228,10 +228,13 @@ module.exports = {
     var destination = req.query.destination;
 
     //make mapbox API call
-    mapboxClient.getDirections([
-      { latitude: Number(source[0]), longitude: Number(source[1])},
-      { latitude: Number(destination[0]), longitude: Number(destination[1])}
-    ], {
+    mapboxClient.getDirections([{
+      latitude: Number(source[0]),
+      longitude: Number(source[1])
+    }, {
+      latitude: Number(destination[0]),
+      longitude: Number(destination[1])
+    }], {
       profile: 'mapbox.walking'
     }, function(err, response) {
       if (err) {
