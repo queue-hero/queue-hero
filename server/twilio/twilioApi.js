@@ -59,7 +59,7 @@ module.exports= {
           requester = user;
           phoneNumber = requester.phoneNumber;
           message = 'Good news '+ requester.firstName + '! We found a QueueHero for the request: ' +
-           request.item +', ' + request.additionalRequests + ', ' + request.vendor +'@' + request.meetingAddress + ', Time: ' + request.meetingTime + '. ' +
+           request.item +', ' + request.additionalRequests + ', ' + request.vendor +' @ ' + request.meetingAddress + ', Time: ' + request.meetingTime + '. ' +
             'Meet '+ request.queueHero + ' and pay him: ' +' $' + request.moneyExchanged + '.';
           bindedSms(phoneNumber, message, obj);
         });

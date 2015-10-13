@@ -43,6 +43,7 @@ module.exports = {
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
+    var meetingAddress = req.body.order.meetingAddress;
     var meetingTime = req.body.order.meetingTime;
     var status = 'unfulfilled';
     var vendorYelpId = req.body.order.vendorYelpId;
@@ -53,6 +54,7 @@ module.exports = {
       additionalRequests: additionalRequests,
       moneyExchanged: moneyExchanged,
       meetingLocation: meetingLocation,
+      meetingAddress: meetingAddress,
       meetingTime: meetingTime,
       status: status,
       vendor: vendor,
