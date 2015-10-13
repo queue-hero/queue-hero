@@ -38,8 +38,10 @@ module.exports = {
         console.log(err);
       }
     }).then(function() {
+
+      console.log('hello',newUser.phoneNumber, twilio.message.welcome);
+      //twilio.sendSms(newUser.phoneNumber, twilio.message.welcome);
       res.status(201).send();
-      // twilio.sendSms(newUser.phoneNumber, message.welcome);
       console.log('DB:', 'saved');
     });
   },
