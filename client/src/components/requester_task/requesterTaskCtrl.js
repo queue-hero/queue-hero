@@ -50,7 +50,8 @@
               "title": '<p><strong>' + venueChosen.name + '</p></strong>',
               "description": venueChosen.displayAddress,
               "marker-color": "#DC3C05", 
-              "marker-size": "large"
+              "marker-size": "large", 
+              "marker-symbol": "star"
             }
           });
         } else {
