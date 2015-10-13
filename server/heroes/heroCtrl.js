@@ -178,7 +178,6 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
-    console.log(transactionId);
     var queueHero = req.body.queueHero;
     var update = {
       queueHero: queueHero,
