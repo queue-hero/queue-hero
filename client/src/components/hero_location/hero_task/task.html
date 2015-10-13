@@ -1,0 +1,32 @@
+<div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
+  <div>
+    <button ng-click="ctrl.removeFromQueue()">Leave Queue</button>
+  </div>
+
+  <div>
+    <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
+      <div  ng-click="ctrl.confirm($index)">
+        <div>item: {{ order.item }}</div>
+        <div>price: {{ order.moneyExchanged | currency }}</div>
+        <img src="" alt="{{ order.requester }}">
+
+        <div>
+          <span>time: {{ order.meetingTime | date : 'h:mm a' }} </span>
+        </div>
+      </div>
+    </button>
+
+    <div ng-show="ctrl.confirmView">
+      Are you sure you want to take this mission?
+      <button ng-click="ctrl.cancel()">Cancel</button>
+      <button ng-click="ctrl.accept()">Submit</button>
+    </div>
+
+    <div ng-show="ctrl.noOrdersView">
+      Sorry, there are no orders for this location right now!
+    </div>
+
+  </div>
+
+
+</div>

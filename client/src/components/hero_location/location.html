@@ -1,4 +1,4 @@
-<div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
+<div id="hero-location" ng-controller="HeroLocationCtrl as main">
   <nav-bar></nav-bar>
 
   <div class="hero-location container-fluid">
@@ -7,18 +7,19 @@
 
         <div class="col-left list-group">
           <div class="title list-group-item">Pick a Location</div>
-          <button type="button" id="shop" class="list-group-item" ng-repeat="location in ctrl.locations">
-            <div value="$index" ng-click="ctrl.confirm($index)">
+          <button type="button" id="shop" class="list-group-item" ng-repeat="location in main.locations">
+            <div value="$index" ng-click="main.confirm($index)">
               <span class="badge pull-right">{{ location.requests }}</span>
               <div class="vendor">{{ location.name }}</div>
               <div class="meeting-address">{{ location.displayAddress }}</div>
             </div>
           </button>
+          <div ui-view="task" ng-if="main.taskView"></div>
         </div> <!-- /col-left -->
 
         <div class="map-container">
           <div class="col-map">
-            <mapbox id="map" callback="ctrl.callback"></mapbox>
+            <mapbox id="map" callback="main.callback"></mapbox>
           </div>
         </div>
 

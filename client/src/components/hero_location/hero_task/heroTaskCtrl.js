@@ -2,20 +2,33 @@
   'use strict';
 
   angular.module('app.hero_task', [])
-    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', function(ajaxFactory, $state, heroFactory, $interval) {
+    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', '$scope', function(ajaxFactory, $state, heroFactory, $interval, $scope) {
       var vm = this;
-      vm.displayId = 0;
       vm.confirmView = false;
       vm.noOrdersView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
+      var OrderCache;
+      var orderSelected;
+      //test to see if there is lag when open requests are initially shown
+      // if it is laggy, we can use the below line as a starting point
+      // vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
       vm.vendor = heroFactory.getOrder('vendor');
 
       var refreshTasks = $interval(getRequests, 1000, 0, false);
 
+      $scope.$on("$destroy", function() {
+          $interval.cancel(refreshTasks);
+      });
+
       function getRequests() {
         ajaxFactory.getOpenRequests(vm.vendorYelpId)
           .then(function(response) {
-            vm.orders = response.data;
+            if (!vm.confirmView) {
+              vm.orders = response.data;
+              OrderCache = vm.orders.slice();
+            } else {
+              OrderCache = response.data;
+            }
             if (vm.orders.length === 0) {
               vm.noOrdersView = true;
             } else {
@@ -24,11 +37,13 @@
           }, function(response) {
             console.log(response.status);
           });
-      };
+      }
+
+      getRequests();
 
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests
-        $interval.cancel(refreshTasks);
+        // $interval.cancel(refreshTasks);
         ajaxFactory.removeFromQueue(heroFactory.getOrder('username'))
           .then(function(response) {
             heroFactory.setOrder({
@@ -38,40 +53,31 @@
               vendor: undefined,
               vendorYelpId: undefined
             });
-            $state.go('hero_location');
+            $scope.$parent.main.showList();
           }, function(response) {
             console.log(response.status);
           });
       };
 
-      //show previous order in orders array
-      vm.previous = function() {
-        vm.displayId--;
+      vm.confirm = function(index) {
+        vm.orders = vm.orders.splice(index, 1);
+        vm.confirmView = true;
+        orderSelected = index;
+      };
+
+      vm.cancel = function(){
+        vm.orders = OrderCache.slice();
         vm.confirmView = false;
       };
 
-      //show previous order in orders array
-      vm.next = function() {
-        vm.displayId++;
-        vm.confirmView = false;
-      };
-
-      //remove order from orders array, and decrement displayId unless there is only one order left
-      vm.remove = function(id) {
-        if(vm.displayId === vm.orders.length - 1 && vm.orders.length !== 1){
-          vm.displayId--;
-        }
-        vm.orders.splice(id, 1);
-      };
-
-      vm.accept = function(id) {
-        ajaxFactory.confirmRequest(vm.orders[id]._id, heroFactory.getOrder('queueHero'))
+      vm.accept = function() {
+        ajaxFactory.confirmRequest(vm.orders[orderSelected]._id, heroFactory.getOrder('queueHero'))
           .then(function(response) {
             //stop refreshing the page for new requests
             $interval.cancel(refreshTasks);
             //save current transaction to heroFactory
-            heroFactory.setOrder(vm.orders[id]);
-            heroFactory.setOrder({ transactionId: vm.orders[id]._id });
+            heroFactory.setOrder(vm.orders[orderSelected]);
+            heroFactory.setOrder({ transactionId: vm.orders[orderSelected]._id });
             $state.go('hero_order');
           }, function(response) {
             console.log(response.status);

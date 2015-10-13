@@ -4,7 +4,7 @@
     <div class="pull-right">
       <a ui-sref="profile" type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn() && !isCurrentState('profile')">Profile</a>
       <a href="/auth/facebook" type="button" class="btn btn-blue navbar-btn" ng-show="isCurrentState('home')">Log In</a>
-      <button type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn() && !isCurrentState('choice')" ng-click="goToState('choice')">Choice</button>
+      <button type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn() && !isCurrentState('choice') && !inTransaction()" ng-click="goToState('choice')">Choice</button>
       <button type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
     </div>
 
