@@ -3,6 +3,8 @@ var Checkin = require('../checkins/checkinModel.js');
 var Yelp = require("yelp");
 var Q = require('q');
 var User = require('./../users/userModel.js');
+var twilio = require('../twilio/twilioApi.js');
+
 
 var Auth;
 
@@ -10,6 +12,7 @@ var Auth;
 if (!process.env.DEPLOYED) {
   Auth = require('../config/api_keys.js');
 }
+
 
 function distanceMiles(lat1, long1, lat2, long2) {
   var p = 0.017453292519943295; // Math.PI / 180
@@ -31,8 +34,8 @@ function findOccurenceInTransactions(yelpID, transactions) {
   return occurence;
 }
 
-module.exports = {
 
+module.exports = {
   /*
    * @param {Object} on req.query {lat: lat, long: long}
    * @return {Array} Array with map and location options
@@ -112,7 +115,7 @@ module.exports = {
         });
         res.status(200).send(venues);
       });
-    });   
+    });
   },
 
   /*
@@ -173,6 +176,7 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
+    console.log(transactionId);
     var queueHero = req.body.queueHero;
     var update = {
       queueHero: queueHero,
@@ -187,6 +191,10 @@ module.exports = {
         return;
       }
       if (rowsAffected.ok === 1) {
+        //run here the funtion smsRequestAccepted
+        //send sms with Request info to the Requester
+        twilio.smsRequestAccepted(transactionId);
+
         Checkin.remove({
           username: queueHero
         }, function(err) {
