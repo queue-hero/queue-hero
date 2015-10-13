@@ -10,6 +10,10 @@
 
     var checkOrder = $interval(isOrderComplete, 5000, 0, false);
 
+    $scope.on("$destroy", function() {
+      $interval.cancel(checkOrder);
+    });
+
 
     function isOrderComplete() {
       ajaxFactory.isOrderComplete(vm.order.transactionId)
@@ -20,7 +24,6 @@
             vm.complete = true;
 
             //stop in recurring ajax request from occuring
-            $interval.cancel(checkOrder);
 
           }
         }, function(response) {
@@ -33,7 +36,19 @@
       ajaxFactory.rateRequester(rating, vm.order.requester, vm.order.transactionId)
         .then(function(response) {
           //clear the factory containing transaction details
-          heroFactory.setOrder();
+          heroFactory.setOrder({
+            requester: undefined,
+            additionalRequests: undefined,
+            item: undefined,
+            meetingTime: undefined,
+            meetingLocation: undefined,
+            meetingLocationLatLong: undefined,
+            moneyExchanged: undefined,
+            status: undefined,
+            transactionId: undefined,
+            vendor: undefined,
+            vendorYelpId: undefined
+          });
 
           //circle back to choice
           $state.go('choice');

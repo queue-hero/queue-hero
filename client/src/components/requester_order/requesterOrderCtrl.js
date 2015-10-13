@@ -23,6 +23,7 @@
             item: undefined,
             meetingTime: undefined,
             meetingLocation: undefined,
+            meetingLocationLatLong: undefined,
             moneyExchanged: undefined,
             status: undefined,
             transactionId: undefined,
@@ -56,7 +57,19 @@
       ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
-          requesterFactory.setOrder();
+          requesterFactory.setOrder({
+            queueHero: undefined,
+            additionalRequests: undefined,
+            item: undefined,
+            meetingTime: undefined,
+            meetingLocation: undefined,
+            meetingLocationLatLong: undefined,
+            moneyExchanged: undefined,
+            status: undefined,
+            transactionId: undefined,
+            vendor: undefined,
+            vendorYelpId: undefined
+          });
 
           //circle back to choice
           $state.go('choice');
@@ -79,9 +92,6 @@
 
             //order is accepted, switch ui-views
             vm.complete = 'complete';
-
-            //cancel polling
-            $interval.cancel(checkOrder);
 
             //call getDirections
             getDirections();
