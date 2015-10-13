@@ -85,7 +85,7 @@
 
     vm.callback = function(map) {
       vm.map = map;
-      map.setView([lat, long], 20);
+      map.setView([lat, long], 16);
     };
 
     vm.showList = function() {
@@ -100,16 +100,44 @@
     });
 
     var populatePins = function(locations) {
-      for (var i = 0; i < vm.locations.length; i++) {
-        var location = vm.locations[i];
-        var locationName = location.name;
-        var locationAddress = location.displayAddress;
-        var popupContent = '<p><strong>' + locationName + '</strong></p>' +
-          '<p>' + locationAddress + '</p>';
-        L.marker([location.lat, location.long], {
-          icon: pinIcon
-        }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
+
+      var locationsGeojson = [];
+      if (vm.locations.length === 1) {
+        var locationChosen = vm.locations[0];
+        locationsGeojson.push({
+          "type": "Feature", 
+          "geometry": {
+            "type": "Point", 
+            "coordinates": [locationChosen.long, locationChosen.lat]
+          },
+          "properties": {
+            "title": '<p><strong>' + locationChosen.name + '</p></strong>',
+            "description": locationChosen.displayAddress,
+            "marker-color": "#DC3C05", 
+            "marker-size": "large",
+            "marker-symbol": "star"
+          }
+        });
+      } else {
+        for (var i = 0; i < vm.locations.length; i++) {
+          var location = vm.locations[i];
+          locationsGeojson.push({
+            "type": "Feature", 
+            "geometry": {
+              "type": "Point", 
+              "coordinates": [location.long, location.lat]
+            },
+            "properties": {
+              "title": '<p><strong>' + location.name + '</p></strong>',
+              "description": location.displayAddress, 
+              "marker-color": "#3ca0d3",
+              "marker-size": "large", 
+              "marker-symbol": i + 1
+            }
+          });
+        }
       }
+      L.mapbox.featureLayer(locationsGeojson).addTo(vm.map);
     };
 
   }]);

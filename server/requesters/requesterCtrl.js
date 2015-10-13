@@ -43,6 +43,7 @@ module.exports = {
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
+    var meetingAddress = req.body.order.meetingAddress;
     var meetingTime = req.body.order.meetingTime;
     var status = 'unfulfilled';
     var vendorYelpId = req.body.order.vendorYelpId;
@@ -53,6 +54,7 @@ module.exports = {
       additionalRequests: additionalRequests,
       moneyExchanged: moneyExchanged,
       meetingLocation: meetingLocation,
+      meetingAddress: meetingAddress,
       meetingTime: meetingTime,
       status: status,
       vendor: vendor,
@@ -144,7 +146,7 @@ module.exports = {
       yelp.search({
         ll: location,
         sort: 1,
-        category_filter: 'food', 
+        category_filter: 'food',
         radius_filter: 1610, //1 mile
         limit: 10
       }, function(error, data) {
@@ -153,8 +155,8 @@ module.exports = {
             //check whether a checkin exists with this venue's yelpID, and how many are there
             var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
             venues.push({
-              yelpId: venue.id, 
-              name: venue.name, 
+              yelpId: venue.id,
+              name: venue.name,
               displayAddress: venue.location.display_address.join(' '),
               lat: venue.location.coordinate.latitude,
               long: venue.location.coordinate.longitude,
