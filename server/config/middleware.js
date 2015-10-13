@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var fbSessions = require('./fbSessions.js');
 
+//var client = require('twilio')(accountSid, authToken);
 
 
 module.exports = function(app, express) {
