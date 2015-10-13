@@ -4,7 +4,6 @@ var path = require('path');
 var fs = require('fs');
 var mkdirp = require('mkdirp');
 var twilio = require('../twilio/twilioApi.js');
-console.log(twilio.sendSms, twilio.messages.welcome);
 
 module.exports = {
   getUserData: function(req, res, next) {

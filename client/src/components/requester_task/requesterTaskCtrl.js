@@ -52,6 +52,8 @@
         vm.vendor = venue.name;
         vm.vendorYelpId = venue.yelpId;
         vm.meetingLocation = [venue.lat, venue.long];
+        vm.meetingAddress = venue.displayAddress;
+        console.log(vm.meetingAddress);
         requesterFactory.setOrder({
           vendor: vm.vendor,
           meetingLocation: vm.meetingLocation,
