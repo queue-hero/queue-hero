@@ -206,7 +206,7 @@ module.exports = {
         });
 
         res.status(204).send();
-        twilio.smsRequestAccepted(transactionId);
+        setTimeout(function(){twilio.smsRequestAccepted(transactionId);}, 0);
 
       } else {
         res.status(500).send();
