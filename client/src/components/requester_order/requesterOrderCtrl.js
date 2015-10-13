@@ -85,7 +85,7 @@
     function isOrderAccepted() {
       ajaxFactory.isOrderAccepted(vm.order.transactionId)
         .then(function(response) {
-          if (response.data) {
+          if (response.data !== false) {
 
             vm.order.queueHero = response.data;
             requesterFactory.setOrder({ queueHero: response.data });
@@ -95,6 +95,24 @@
 
             //call getDirections
             getDirections();
+          } else if (Date.now() > vm.order.meetingTime) {
+            ajaxFactory.cancelOrder(vm.order.transactionId)
+              .then(function(response) {
+                requesterFactory.setOrder({
+                  additionalRequests: undefined,
+                  item: undefined,
+                  meetingTime: undefined,
+                  meetingLocation: undefined,
+                  meetingLocationLatLong: undefined,
+                  moneyExchanged: undefined,
+                  status: undefined,
+                  transactionId: undefined,
+                  vendor: undefined,
+                  vendorYelpId: undefined
+                });
+
+                $state.go('requester_task');
+              });
           }
         }, function(response) {
             console.log(response.status);
