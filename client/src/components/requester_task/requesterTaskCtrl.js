@@ -52,9 +52,11 @@
         vm.vendor = venue.name;
         vm.vendorYelpId = venue.yelpId;
         vm.meetingLocation = [venue.lat, venue.long];
+        vm.meetingAddress = venue.displayAddress;
         requesterFactory.setOrder({
           vendor: vm.vendor,
           meetingLocation: vm.meetingLocation,
+          meetingAddress: vm.meetingAddress,
           vendorYelpId: vm.vendorYelpId
         });
         vm.venues = vm.venues.splice(index, 1);

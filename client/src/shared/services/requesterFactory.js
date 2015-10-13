@@ -14,6 +14,7 @@
         vendorYelpId: undefined,
         currentLocation: undefined,
         meetingLocation: undefined,
+        meetingAddress: undefined,
         meetingTime: undefined,
         status: undefined
       };
