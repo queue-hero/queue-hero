@@ -59,6 +59,7 @@
           });
       };
 
+      //*TODO change to select for better naming
       vm.confirm = function(index) {
         vm.orders = vm.orders.splice(index, 1);
         vm.confirmView = true;

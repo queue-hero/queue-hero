@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', '$interval', function($state, ajaxFactory, heroFactory, profileFactory, $interval) {
+  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', '$interval', '$scope', function($state, ajaxFactory, heroFactory, profileFactory, $interval, $scope) {
 
     var vm = this;
     vm.selection = undefined;
@@ -25,6 +25,9 @@
       }).then(function() {
         getAllRequests(vm.locations);
         requestCounts = $interval(getRequestCounts, 1000, 0, false);
+        $scope.$on("$destroy", function() {
+            $interval.cancel(requestCounts);
+        });
       });
 
 
