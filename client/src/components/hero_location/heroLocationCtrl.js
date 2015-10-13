@@ -41,15 +41,15 @@
 
     }
 
-    var getRequestCounts = function(){
+    var getRequestCounts = function() {
       var yelpIds = [];
-      for(var i = 0; i < vm.locations.length; i++){
+      for (var i = 0; i < vm.locations.length; i++) {
         yelpIds.push(vm.locations[i].yelpId);
 
         ajaxFactory.getOpenRequestCount(vm.locations[i].yelpId)
           .then(function(response) {
             var data = response.data;
-            if(vm.locations[yelpIds.indexOf(data[0])] !== undefined){
+            if (vm.locations[yelpIds.indexOf(data[0])] !== undefined) {
               vm.locations[yelpIds.indexOf(data[0])].requests = data[1];
             }
           }, function(response) {
