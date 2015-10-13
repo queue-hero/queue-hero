@@ -35,13 +35,12 @@ module.exports = {
     });
     newUser.save(function(err) {
       if (err) {
-        twilio.sendSms(newUser.phoneNumber, twilio.message.welcome);
         console.log(err);
       }
     }).then(function() {
-      sendSms(newUser.phoneNumber, message.welcome);
-      console.log('DB:', 'saved');
       res.status(201).send();
+      // twilio.sendSms(newUser.phoneNumber, message.welcome);
+      console.log('DB:', 'saved');
     });
   },
   postUserUpdate: function(req, res, next) {
