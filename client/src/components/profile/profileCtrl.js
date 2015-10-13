@@ -18,6 +18,9 @@
       ajaxFactory.getTransactionHistory(username)
         .then(function(response) {
           vm.userTransactions = response.data;
+          for (var i = 0; i < vm.userTransactions.length; i++) {
+            vm.userTransactions[i].meetingTime = moment(vm.userTransactions[i].meetingTime).format("MMM DD YYYY, hh:mmA");   
+          }
         }, function(response) {
           console.log(response.status);
         });
