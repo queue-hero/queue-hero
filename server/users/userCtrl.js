@@ -51,7 +51,7 @@ module.exports = {
     };
     User.update(query, reqUser)
       .then(function(rowsAffected) {
-        twilio.sendSms(reqUser.phoneNumber, twilio.messages.profile);
+        //twilio.sendSms(reqUser.phoneNumber, twilio.messages.profile);
         if(rowsAffected.ok !== 1){
           return res.status(500).send();
         }
