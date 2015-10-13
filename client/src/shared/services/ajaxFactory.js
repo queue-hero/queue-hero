@@ -185,7 +185,6 @@
       });
     };
 
-
     return ajaxObj;
 
   }]);
