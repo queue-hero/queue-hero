@@ -176,15 +176,22 @@
         params: { username: username }
       });
     };
-    
+
     ajaxObj.getDirections = function(currentLocation, meetingLocation) {
       return $http({
-        method: 'GET', 
+        method: 'GET',
         url: serverUrl + '/requester/order/directions',
         params: { source: currentLocation, destination: meetingLocation }
       });
     };
 
+    ajaxObj.getOpenRequestCount = function(yelpId) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/hero/location/count',
+        params: { yelpId: yelpId }
+      });
+    };
     return ajaxObj;
 
   }]);

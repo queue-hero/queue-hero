@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_order', [])
-  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', function($interval, ajaxFactory, requesterFactory, $state) {
+  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', '$scope', function($interval, ajaxFactory, requesterFactory, $state, $scope) {
     var vm = this;
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
@@ -10,6 +10,10 @@
     var meetingLocation = requesterFactory.getOrder('meetingLocation');
 
     var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
+
+    $scope.$on("$destroy", function() {
+        $interval.cancel(checkOrder);
+    });
 
     vm.cancelOrder = function() {
       ajaxFactory.cancelOrder(vm.order.transactionId)
@@ -26,7 +30,7 @@
             vendorYelpId: undefined
           });
           //cancel interval:
-          $interval.cancel(checkOrder);
+          // $interval.cancel(checkOrder);
           //the user may want to put a new order after cancelling
           $state.go('requester_task');
           }, function(response) {

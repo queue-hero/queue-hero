@@ -63,17 +63,16 @@
       };
 
       vm.confirmOrder = function() {
-        vm.time = Date.now() + vm.time*60000;
         requesterFactory.setOrder({
           item: vm.item,
           additionalRequests: vm.details,
-          meetingTime: vm.time,
+          meetingTime: Date.now() + vm.time * 60000,
           moneyExchanged: vm.price,
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
         ajaxFactory.sendOrder(vm.order)
-          .then(function successCallback(response) {
+          .then(function(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({
               transactionId: response.data
@@ -82,7 +81,7 @@
             //move to next state
             $state.go('requester_order');
 
-          }, function errorCallback(response) {
+          }, function(response) {
           });
       };
 
