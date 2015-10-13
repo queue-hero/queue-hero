@@ -4,6 +4,8 @@ var User = require('./../users/userModel.js');
 var Checkin = require('./../checkins/checkinModel.js');
 var Q = require('q');
 var Yelp = require("yelp");
+var MapboxClient = require('mapbox');
+var mapboxClient = new MapboxClient('pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ');
 
 var Auth;
 
@@ -216,6 +218,24 @@ module.exports = {
         return;
       }
       res.status(204).send();
+    });
+  },
+
+  getDirections: function(req, res) {
+    var source = req.query.source;
+    var destination = req.query.destination;
+
+    //make mapbox API call
+    mapboxClient.getDirections([
+      { latitude: Number(source[0]), longitude: Number(source[1])},
+      { latitude: Number(destination[0]), longitude: Number(destination[1])}
+    ], {
+      profile: 'mapbox.walking'
+    }, function(err, response) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(response);
     });
   }
 };

@@ -58,34 +58,25 @@
           vendorYelpId: vm.vendorYelpId
         });
         vm.venues = vm.venues.splice(index, 1);
-        vm.itemView = 'item';
+        vm.itemView = true;
         populatePins();
       };
 
-      vm.setItem = function() {
-        requesterFactory.setOrder({
-          item: vm.item,
-          additionalRequests: vm.details
-        });
-      };
-
-      vm.pickTimePrice = function() {
+      vm.confirmOrder = function() {
         vm.time = Date.now() + vm.time*60000;
         requesterFactory.setOrder({
+          item: vm.item,
+          additionalRequests: vm.details,
           meetingTime: vm.time,
           moneyExchanged: vm.price,
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
-      };
-
-      vm.confirmOrder = function() {
         ajaxFactory.sendOrder(vm.order)
           .then(function successCallback(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({
-              transactionId: response.data,
-              status: 'complete'
+              transactionId: response.data
             });
 
             //move to next state

@@ -10,7 +10,7 @@
         <label for="additional-details">Details</label>
         <input type="text" class="form-control" id="additional-details" placeholder="Additional details if necessary..." ng-model="ctrl.details">
       </div>
-      <button class="btn btn-green" type="submit" ng-click="ctrl.setItem()">Confirm item</button>
+      <!-- <button class="btn btn-green" type="submit" ng-click="ctrl.setItem()">Confirm item</button> -->
     </div>
   </form>
   <div class="title list-group-item">Pick Time and Price</div>
@@ -20,7 +20,7 @@
         <label for="time">Time</label>
         <div class="input-group">
           <div class="input-group-addon">In</div>
-          <input type="number" class="form-control" id="time" placeholder="20">
+          <input type="number" class="form-control" id="time" placeholder="20" ng-model="ctrl.time">
           <div class="input-group-addon">minutes</div>
         </div>
       </div>
@@ -28,13 +28,13 @@
         <label for="price">Price</label>
         <div class="input-group">
           <div class="input-group-addon">$</div>
-          <input type="number" class="form-control" id="price" placeholder="6">
+          <input type="number" class="form-control" id="price" placeholder="6" ng-model="ctrl.price">
         </div>
       </div>
-      <button class="btn btn-green" ng-click="ctrl.pickTimePrice()"> Confirm time and price </button>
+      <button type="button" class="btn-back btn btn-green" ng-click="ctrl.showList()"><< Back</button> <button class="btn btn-green" ng-click="ctrl.confirmOrder()"> Confirm order </button> 
     </div>
   </form>
-  <button type="button" class="btn-back btn btn-green" ng-click="ctrl.showList()"><< Back</button>
+  
 </div>
 
 

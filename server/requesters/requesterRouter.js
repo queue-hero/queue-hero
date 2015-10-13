@@ -19,6 +19,10 @@ module.exports = function(app) {
 
   app.post('/order/details/cancel', requesterCtrl.cancelTransaction);
 
+  // req: obj with source and destination
+  // res: geojson object with directions information 
+  app.get('/order/directions', requesterCtrl.getDirections);
+
   // req: order received
   // res: 201 or error
   app.post('/order/complete', requesterCtrl.fulfillTransaction);

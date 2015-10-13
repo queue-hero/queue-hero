@@ -1,6 +1,7 @@
 <div id="requester-order-complete">
   <h1> Queue hero to the rescue! </h1>
 
+  <mapbox id="map" callback="ctrl.callback"></mapbox>
   <div>
     <div>Meet {{ ctrl.order.queueHero }}</div>
     <img src="" alt="Queue Hero Pic">
@@ -14,3 +15,11 @@
   <button ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
 
 </div>
+
+<style>
+#map {
+  height: 600px;
+  width: 600px;
+  float: right;
+}
+</style>
