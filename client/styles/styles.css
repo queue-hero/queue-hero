@@ -5,17 +5,18 @@ body,
   height: 100%;
   font-family: 'Lato', sans-serif;
   background-color: #eeeeee;
+  min-width: 320px;
 }
 
 body > div:first-of-type {
   width: 100%;
   height: 100%;
-  padding-top: 55px;
+  padding-top: 45px;
 }
 
-@media (max-width:768px) {
+@media (min-width:768px) {
   body > div:first-of-type {
-    padding-top: 52px;
+    padding-top: 55px;
   }
 }
 body > div:first-of-type > div:first-of-type {
@@ -87,6 +88,11 @@ body > div:first-of-type > div:first-of-type {
 .navbar {
   background-color: #3e454b;
   border-bottom: 0px;
+  height: 45px;
+}
+
+.navbar .btn-blue {
+  padding: 3px 10px;
 }
 
 .queuehero {
@@ -96,6 +102,13 @@ body > div:first-of-type > div:first-of-type {
 }
 
 @media (min-width:768px) {
+  .navbar {
+    height: 55px;
+  }
+
+  .navbar .btn-blue {
+    padding: 6px 12px;
+  }
   .queuehero {
     font-weight: 300;
     font-size: 1.25em;
