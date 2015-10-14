@@ -21,6 +21,7 @@
           console.log('Server said', response.data);
           if (response.data === true){
             //if order is complete, switch ui-views
+            $interval.cancel(checkOrder);
             vm.complete = true;
 
             //stop in recurring ajax request from occuring
