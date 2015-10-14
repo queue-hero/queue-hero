@@ -109,21 +109,69 @@ body > div:first-of-type > div:first-of-type {
   background-position: center;
 }
 
-.continue-fb.row {
-  margin-top: 15px;
-  margin-bottom: 15px;
+#home > .container {
+  width: 100%;
+  height: 100%;
 }
 
-.btn.continue-fb {
-  background-color: #3b5998;
+.landing-page {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.landing-page-body {
+  width: 100%;
+  height:100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.landing-page-intro {
+  background-color: rgba(0,0,0,0.25);
+  border-width: 10px;
+  width: fit-content;
+  margin-top: -25%;
+  color: #ffffff
+}
+
+.slogan {
+  font-size: 1.5em;
+  font-family: 'Playfair Display', serif;
   color: #ffffff;
 }
 
+.btn-fb {
+  background-color: #3b5998;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+}
+
+.learn-how {
+  width: 80%;
+  background-color: rgba(62, 69, 75, 0.75);
+  color: #ffffff;
+}
+
+@media (max-width:414px) {
+  .landing-page-box {
+    text-align: center;
+    width: 95%;
+    display: block;
+    margin: 0 auto;
+  }
+}
 @media (min-width:768px) {
-  .main {
-    background-color: #ffffff;
-    border: 1px solid #dddddd;
-    border-radius: 10px;
+  .slogan {
+    font-size: 2.75em;
+  }
+
+  .landing-page-box {
+    margin-top: -20%;
   }
 }
 
