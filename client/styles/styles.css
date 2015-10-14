@@ -281,7 +281,7 @@ body > div:first-of-type > div:first-of-type {
   color: #689f38;
 }
 
-/*----------------- requester task panel -----------------*/
+/*----------------- requester and hero task panel -----------------*/
 
 .vendor {
   font-size: 1.3em;
@@ -293,12 +293,14 @@ body > div:first-of-type > div:first-of-type {
 
 .col-left {
   width: 100%;
-  height: 100%;
+  height: 92%;
   padding: 0 15px;
   float: left;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
-.col-left .title {
+.title {
   background-color: #2e79b9;
   color: #ffffff;
   font-weight: 100;
@@ -306,6 +308,11 @@ body > div:first-of-type > div:first-of-type {
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 0px;
+  position: relative;
+  display: block;
+  padding: 10px 15px;
+  margin-bottom: -1px;
+  border: 1px solid #ddd;
 }
 
 .list-group-item:first-child {
