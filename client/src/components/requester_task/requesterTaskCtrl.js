@@ -6,24 +6,42 @@
       var vm = this;
       vm.itemView = false;
       var venueCache;
+      vm.result1 = '';
+      vm.options1 = null;
+      vm.details1 = '';
 
       vm.order = requesterFactory.getOrder();
 
-      var currentLocation = requesterFactory.getOrder('currentLocation');
+      var currentLocation = requesterFactory.getOrder('currentLocation').slice();
       var heroCounts;
 
-      ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
+      vm.getMyLocation = function() {
+        currentLocation = requesterFactory.getOrder('currentLocation').slice();
+        getVenues(currentLocation[0], currentLocation[1]);
+      };
+
+      vm.searchLocation = function() {
+        currentLocation[0] = vm.details1.geometry.location.lat();
+        currentLocation[1] = vm.details1.geometry.location.lng();
+        getVenues(currentLocation[0], currentLocation[1]);
+      };
+
+      function getVenues(lat, long){
+      ajaxFactory.getVenuesAtRequesterLocation(lat, long)
         .then(function(response) {
           vm.venues = response.data;
           venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
-        }).then(function(){
+        }).then(function() {
           heroCounts = $interval(getHeroCounts, 1000, 0, false);
           $scope.$on("$destroy", function() {
               $interval.cancel(heroCounts);
           });
         });
+      }
+
+      getVenues(currentLocation[0], currentLocation[1]);
 
       var getHeroCounts = function() {
         var yelpIds = [];

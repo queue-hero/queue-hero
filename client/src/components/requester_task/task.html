@@ -8,7 +8,11 @@
 
 
   <div id="requester-task-location">
-
+    <div class="form-group move-down">
+        <input type="text" id="Autocomplete" class="form-control" ng-autocomplete="ctrl.result1" details="ctrl.details1" options="ctrl.options1"/>
+        <input type="submit" ng-click="ctrl.searchLocation()"></input>
+        <button ng-click="ctrl.getMyLocation()">Find Me</button>
+    </div>
 
     <div class="requester-location container-fluid">
       <div class="view-container">
