@@ -27,6 +27,10 @@
           $state.go(state);
         };
 
+        scope.inTransaction = function() {
+          return $state.is('requester_order') || $state.is('requester_order');
+        };
+
         var removeSessionStorage = function() {
           var items = Object.keys(sessionStorage);
           items.forEach(function(item) {

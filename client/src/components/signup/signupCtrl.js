@@ -10,6 +10,7 @@
     vm.user.facebookId = profileFactory.getProfile('facebookId') || $cookies.get('com.queuehero');
     profileFactory.setProfile({ facebookId: vm.user.facebookId });
     vm.welcomeView = false;
+    vm.user.country = 'US';
 
 
     vm.update = function() {

@@ -51,7 +51,10 @@ module.exports = {
     var transactions = [];
 
     //find transactions within a 1 mile radius
-    Transaction.find({ status: "unfulfilled" }, function(err, transactions) {
+    Transaction.find({
+      status: "unfulfilled",
+      meetingTime: { $gte: Date.now() }
+    }, function(err, transactions) {
       transactions = transactions.filter(function(transaction) {
         var coords = transaction.meetingLocation;
         return distanceMiles(lat, long, coords[0], coords[1]) < 1;
@@ -176,7 +179,6 @@ module.exports = {
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;
-    console.log(transactionId);
     var queueHero = req.body.queueHero;
     var update = {
       queueHero: queueHero,
@@ -193,7 +195,6 @@ module.exports = {
       if (rowsAffected.ok === 1) {
         //run here the funtion smsRequestAccepted
         //send sms with Request info to the Requester
-        twilio.smsRequestAccepted(transactionId);
 
         Checkin.remove({
           username: queueHero
@@ -202,8 +203,12 @@ module.exports = {
             res.status(500).send();
             return;
           }
-          res.status(204).send();
         });
+
+        res.status(204).send();
+        // setTimeout(function() {
+        //    twilio.smsRequestAccepted(transactionId);
+        // }, 0);
 
       } else {
         res.status(500).send();
@@ -236,7 +241,9 @@ module.exports = {
     //currently this query just gets all transactions that are not complete
     Transaction.find({
       status: 'unfulfilled',
-      vendorYelpId: vendorYelpId
+      vendorYelpId: vendorYelpId,
+      meetingTime: { $gte: Date.now() }
+
     }, function(err, transactions) {
       if (err) {
         res.status(500).send();
@@ -244,6 +251,26 @@ module.exports = {
       }
       res.status(200).send(transactions);
 
+    });
+
+  },
+
+  getOpenLocationCount: function(req, res, next) {
+    var yelpId = req.query.yelpId;
+    var openCount = [yelpId];
+
+
+    Transaction.count({
+      vendorYelpId: yelpId,
+      status: 'unfulfilled',
+      meetingTime: { $gte: Date.now() }
+    }, function(err, num) {
+      if (err) {
+        console.log(err);
+        return res.status(500).send();
+      }
+      openCount.push(num);
+      res.status(200).send(openCount);
     });
 
   },

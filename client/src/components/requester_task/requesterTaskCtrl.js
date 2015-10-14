@@ -21,7 +21,7 @@
 
       vm.callback = function(map) {
         vm.map = map;
-        map.setView([currentLocation[0], currentLocation[1]], 20);
+        map.setView([currentLocation[0], currentLocation[1]], 16);
       };
 
       var pinIcon = L.icon({
@@ -37,61 +37,82 @@
           }
         });
 
-        for (var i = 0; i < vm.venues.length; i++) {
-          var venue = vm.venues[i];
-          var venueName = venue.name;
-          var venueAddress = venue.displayAddress;
-          var popupContent = '<p><strong>' + venueName + '</strong></p>';
-          L.marker([venue.lat, venue.long], {
-            icon: pinIcon
-          }).bindPopup(popupContent, { offset: L.point(0, -20) }).openPopup().addTo(vm.map);
+        var venuesGeojson = [];
+        if (vm.venues.length === 1) {
+          var venueChosen = vm.venues[0];
+          venuesGeojson.push({
+            "type": "Feature", 
+            "geometry": {
+              "type": "Point", 
+              "coordinates": [venueChosen.long, venueChosen.lat]
+            },
+            "properties": {
+              "title": '<p><strong>' + venueChosen.name + '</p></strong>',
+              "description": venueChosen.displayAddress,
+              "marker-color": "#DC3C05", 
+              "marker-size": "large", 
+              "marker-symbol": "star"
+            }
+          });
+        } else {
+          for (var i = 0; i < vm.venues.length; i++) {
+            var venue = vm.venues[i];
+            venuesGeojson.push({
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [venue.long, venue.lat]
+              },
+              "properties": {
+                "title": '<p><strong>' + venue.name + '</p></strong>', 
+                "description": venue.displayAddress,
+                "marker-color": "#3ca0d3",
+                "marker-size": "large",
+                "marker-symbol": i + 1
+              }
+            });
+          }
         }
+        L.mapbox.featureLayer(venuesGeojson).addTo(vm.map);
+        
       };
 
       vm.selectLocation = function(venue, index) {
         vm.vendor = venue.name;
         vm.vendorYelpId = venue.yelpId;
         vm.meetingLocation = [venue.lat, venue.long];
+        vm.meetingAddress = venue.displayAddress;
         requesterFactory.setOrder({
           vendor: vm.vendor,
           meetingLocation: vm.meetingLocation,
+          meetingAddress: vm.meetingAddress,
           vendorYelpId: vm.vendorYelpId
         });
         vm.venues = vm.venues.splice(index, 1);
-        vm.itemView = 'item';
+        vm.itemView = true;
         populatePins();
       };
 
-      vm.setItem = function() {
+      vm.confirmOrder = function() {
         requesterFactory.setOrder({
           item: vm.item,
-          additionalRequests: vm.details
-        });
-      };
-
-      vm.pickTimePrice = function() {
-        vm.time = Date.now() + vm.time*60000;
-        requesterFactory.setOrder({
-          meetingTime: vm.time,
+          additionalRequests: vm.details,
+          meetingTime: Date.now() + vm.time * 60000,
           moneyExchanged: vm.price,
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
-      };
-
-      vm.confirmOrder = function() {
         ajaxFactory.sendOrder(vm.order)
-          .then(function successCallback(response) {
+          .then(function(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({
-              transactionId: response.data,
-              status: 'complete'
+              transactionId: response.data
             });
 
             //move to next state
             $state.go('requester_order');
 
-          }, function errorCallback(response) {
+          }, function(response) {
           });
       };
 

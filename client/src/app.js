@@ -39,12 +39,15 @@
         url:'/choice',
       })
       .state('hero_location', {
-        templateUrl: 'src/components/hero_location/location.html',
         url:'/hero/location',
-      })
-      .state('hero_task', {
-        templateUrl: 'src/components/hero_task/task.html',
-        url: '/hero/task',
+        views: {
+          '': {
+            templateUrl: 'src/components/hero_location/location.html'
+          },
+          'task@hero_location': {
+            templateUrl: 'src/components/hero_location/hero_task/task.html'
+          }
+        }
       })
       .state('hero_order', {
         url: '/hero/order',

@@ -4,6 +4,8 @@ var User = require('./../users/userModel.js');
 var Checkin = require('./../checkins/checkinModel.js');
 var Q = require('q');
 var Yelp = require("yelp");
+var MapboxClient = require('mapbox');
+var mapboxClient = new MapboxClient('pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ');
 
 var Auth;
 
@@ -41,6 +43,7 @@ module.exports = {
     var moneyExchanged = req.body.order.moneyExchanged;
     var vendor = req.body.order.vendor;
     var meetingLocation = req.body.order.meetingLocation;
+    var meetingAddress = req.body.order.meetingAddress;
     var meetingTime = req.body.order.meetingTime;
     var status = 'unfulfilled';
     var vendorYelpId = req.body.order.vendorYelpId;
@@ -51,6 +54,7 @@ module.exports = {
       additionalRequests: additionalRequests,
       moneyExchanged: moneyExchanged,
       meetingLocation: meetingLocation,
+      meetingAddress: meetingAddress,
       meetingTime: meetingTime,
       status: status,
       vendor: vendor,
@@ -142,23 +146,23 @@ module.exports = {
       yelp.search({
         ll: location,
         sort: 1,
-        category_filter: 'food', 
+        category_filter: 'food',
         radius_filter: 1610, //1 mile
         limit: 10
       }, function(error, data) {
-          var venuesFromYelp = data.businesses;
-          venuesFromYelp.forEach(function(venue) {
-            //check whether a checkin exists with this venue's yelpID, and how many are there
-            var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
-            venues.push({
-              yelpId: venue.id, 
-              name: venue.name, 
-              displayAddress: venue.location.display_address.join(' '),
-              lat: venue.location.coordinate.latitude,
-              long: venue.location.coordinate.longitude,
-              heroes: noOfHeroes
-            });
+        var venuesFromYelp = data.businesses;
+        venuesFromYelp.forEach(function(venue) {
+          //check whether a checkin exists with this venue's yelpID, and how many are there
+          var noOfHeroes = findOccurenceInCheckins(venue.id, checkins);
+          venues.push({
+            yelpId: venue.id,
+            name: venue.name,
+            displayAddress: venue.location.display_address.join(' '),
+            lat: venue.location.coordinate.latitude,
+            long: venue.location.coordinate.longitude,
+            heroes: noOfHeroes
           });
+        });
         res.status(200).send(venues);
       });
     });
@@ -216,6 +220,27 @@ module.exports = {
         return;
       }
       res.status(204).send();
+    });
+  },
+
+  getDirections: function(req, res) {
+    var source = req.query.source;
+    var destination = req.query.destination;
+
+    //make mapbox API call
+    mapboxClient.getDirections([{
+      latitude: Number(source[0]),
+      longitude: Number(source[1])
+    }, {
+      latitude: Number(destination[0]),
+      longitude: Number(destination[1])
+    }], {
+      profile: 'mapbox.walking'
+    }, function(err, response) {
+      if (err) {
+        console.log(err);
+      }
+      res.send(response);
     });
   }
 };

@@ -35,13 +35,12 @@ module.exports = {
     });
     newUser.save(function(err) {
       if (err) {
-        twilio.sendSms(newUser.phoneNumber, twilio.message.welcome);
         console.log(err);
       }
     }).then(function() {
-      sendSms(newUser.phoneNumber, message.welcome);
-      console.log('DB:', 'saved');
+      // setTimeout(twilio.sendSms, 0, newUser.phoneNumber, twilio.messages.welcome);
       res.status(201).send();
+      console.log('DB:', 'saved');
     });
   },
   postUserUpdate: function(req, res, next) {
@@ -52,7 +51,7 @@ module.exports = {
     };
     User.update(query, reqUser)
       .then(function(rowsAffected) {
-        twilio.sendSms(reqUser.phoneNumber, twilio.messages.profile);
+       // setTimeout(twilio.sendSms, 0, reqUser.phoneNumber, twilio.messages.profile);
         if(rowsAffected.ok !== 1){
           return res.status(500).send();
         }
