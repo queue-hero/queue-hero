@@ -10,7 +10,7 @@
 
     var checkOrder = $interval(isOrderComplete, 5000, 0, false);
 
-    $scope.on("$destroy", function() {
+    $scope.$on("$destroy", function() {
       $interval.cancel(checkOrder);
     });
 
