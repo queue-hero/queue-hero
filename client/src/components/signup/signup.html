@@ -40,9 +40,12 @@
       <div class="form-group">
         <label for="input-phonenumber" class="col-sm-2 col-sm-offset-3 control-label">Phone Number</label>
         <div class="col-sm-4">
-          <input type="text" class="form-control" id="input-phonenumber" name="phone" ng-model="ctrl.user.phoneNumber" required>
+          <input type="text" class="form-control" id="input-phonenumber" name="phone" ng-model="ctrl.user.phoneNumber" required ng-pattern="/^[0-9]*$/" minlength="10" maxlength="10">
         </div>
         <div class="validation-alert col-sm-4 col-sm-offset-5" ng-messages="signup.phone.$error" ng-show="signup.phone.$error && signup.phone.$touched">
+          <p ng-message="pattern">Must contain only digits 0-9</p>
+          <p ng-message="maxlength">Your phone number should be 10 digits long</p>
+          <p ng-message="minlength">Your phone number should be 10 digits long</p>
           <div ng-messages-include="./src/shared/validation/messages.html"></div>
         </div>
       </div>
