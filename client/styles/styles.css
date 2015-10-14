@@ -131,6 +131,8 @@ body > div:first-of-type > div:first-of-type {
   background-color: rgba(0,0,0,0.25);
   border-width: 10px;
   width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
   margin-top: -25%;
   color: #ffffff
 }
