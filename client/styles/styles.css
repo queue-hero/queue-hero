@@ -372,3 +372,27 @@ body > div:first-of-type > div:first-of-type {
   }
 }
 
+/*----------------- requester order -----------------*/
+
+#requester-order-details, #requester-order-complete, #requester-order-rate {
+  margin-left: 10px;
+}
+
+.order-details {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 15px;
+  border-color: white;
+  background: white;
+  width: 550px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.order-line {
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.your-order {
+  margin-top: 0px;
+}

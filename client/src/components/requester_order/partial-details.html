@@ -1,13 +1,13 @@
 <div id="requester-order-details">
   <h1> Sit tight, you will have a queue hero soon! </h1>
-
-  <h3> Your order </h3>
-  Meeting location: <span> {{ ctrl.order.vendor }}</span> <br/>
-  Item: <span> {{ ctrl.order.item }}</span> <br/>
-  Additional Requests: <span> {{ ctrl.order.additionalRequests }} </span> <br/>
-  Meeting time: <span> {{ ctrl.order.meetingTime | date : 'EEE d MMM h:mm a' }} </span> <br/>
-  Price: <span> {{ ctrl.order.moneyExchanged | currency }} </span> <br/>
-
+  <div class="order-details">
+    <h3 class="your-order"> Your order </h3>
+    <div class="order-line"> Meeting location: {{ ctrl.order.vendor }} </div>
+    <div class="order-line"> Item: {{ ctrl.order.item }} </div>
+    <div class="order-line"> Additional Requests: {{ ctrl.order.additionalRequests }} </div>
+    <div class="order-line"> Meeting time: {{ ctrl.order.meetingTime | date : 'EEE d MMM h:mm a' }} </div>
+    <div class="order-line"> Price: {{ ctrl.order.moneyExchanged | currency }} </div>
+  </div>
   <button type="button" class="btn btn-danger" ng-click="ctrl.cancelOrder()">Cancel Order</button>
 
 </div>
