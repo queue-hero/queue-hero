@@ -79,6 +79,7 @@
             status: 'checked in'
           });
           vm.locations = vm.locations.splice(index, 1);
+          populatePins();
           vm.taskView = true;
       });
     };
@@ -91,6 +92,7 @@
     vm.showList = function() {
       vm.locations = taskCache.slice();
       vm.taskView = false;
+      populatePins();
     };
 
     var pinIcon = L.icon({
@@ -101,19 +103,25 @@
 
     var populatePins = function(locations) {
 
+      vm.map.eachLayer(function(layer) {
+        if (layer instanceof L.Marker) {
+          vm.map.removeLayer(layer);
+        }
+      });
+
       var locationsGeojson = [];
       if (vm.locations.length === 1) {
         var locationChosen = vm.locations[0];
         locationsGeojson.push({
-          "type": "Feature", 
+          "type": "Feature",
           "geometry": {
-            "type": "Point", 
+            "type": "Point",
             "coordinates": [locationChosen.long, locationChosen.lat]
           },
           "properties": {
             "title": '<p><strong>' + locationChosen.name + '</p></strong>',
             "description": locationChosen.displayAddress,
-            "marker-color": "#DC3C05", 
+            "marker-color": "#DC3C05",
             "marker-size": "large",
             "marker-symbol": "star"
           }
@@ -122,16 +130,16 @@
         for (var i = 0; i < vm.locations.length; i++) {
           var location = vm.locations[i];
           locationsGeojson.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [location.long, location.lat]
             },
             "properties": {
               "title": '<p><strong>' + location.name + '</p></strong>',
-              "description": location.displayAddress, 
+              "description": location.displayAddress,
               "marker-color": "#3ca0d3",
-              "marker-size": "large", 
+              "marker-size": "large",
               "marker-symbol": i + 1
             }
           });
