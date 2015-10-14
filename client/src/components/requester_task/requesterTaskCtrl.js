@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', "$scope", "$interval", function(profileFactory, requesterFactory, ajaxFactory, $state, $scope, $interval) {
       var vm = this;
       vm.itemView = false;
       var venueCache;
@@ -13,6 +13,7 @@
       vm.order = requesterFactory.getOrder();
 
       var currentLocation = requesterFactory.getOrder('currentLocation').slice();
+      var heroCounts;
 
       vm.getMyLocation = function() {
         currentLocation = requesterFactory.getOrder('currentLocation').slice();
@@ -32,10 +33,32 @@
           venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
+        }).then(function(){
+          heroCounts = $interval(getHeroCounts, 1000, 0, false);
+          $scope.$on("$destroy", function() {
+              $interval.cancel(heroCounts);
+          });
         });
       }
 
       getVenues(currentLocation[0], currentLocation[1]);
+
+      var getHeroCounts = function() {
+        var yelpIds = [];
+        for (var i = 0; i < vm.venues.length; i++) {
+          yelpIds.push(vm.venues[i].yelpId);
+
+          ajaxFactory.getOpenHeroCount(vm.venues[i].yelpId)
+            .then(function(response) {
+              var data = response.data;
+              if (vm.venues[yelpIds.indexOf(data[0])] !== undefined) {
+                vm.venues[yelpIds.indexOf(data[0])].heroes = data[1];
+              }
+            }, function(response) {
+              console.log(response.status);
+            });
+        }
+      };
 
       vm.callback = function(map) {
         vm.map = map;

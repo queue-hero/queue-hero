@@ -167,6 +167,21 @@ module.exports = {
       });
     });
   },
+  getOpenHeroCount: function(req, res) {
+    var yelpId = req.query.yelpId;
+    var openCount = [yelpId];
+
+    Checkin.count({
+      vendorYelpId: yelpId
+    }, function(err, num) {
+      if (err) {
+        console.log(err);
+        return res.status(500).send();
+      }
+      openCount.push(num);
+      res.status(200).send(openCount);
+    });
+  },
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
