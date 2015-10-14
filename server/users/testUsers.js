@@ -50,7 +50,7 @@ exports.createTestUsers = function() {
     }
   });
 
-  setInterval(simulate, 4000);
+  setInterval(simulate, 1000);
 };
 
 function simulate() {
@@ -81,7 +81,7 @@ function simulate() {
   });
 
   _.each(tests.testTransactions, function(transaction) {
-    if (Math.random() > 0.89) {
+    if (Math.random() > 0.85) {
       transaction.status = 'unfulfilled';
       var newTransaction = new Transaction(transaction);
       newTransaction.save(function(err) {
@@ -93,7 +93,7 @@ function simulate() {
   });
 
   _.each(tests.testCheckins, function(checkin) {
-    if (Math.random() > 0.89) {
+    if (Math.random() > 0.85) {
       var newCheckin = new Checkin(checkin);
       newCheckin.save(function(err) {
         if (err) {
