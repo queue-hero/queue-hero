@@ -9,7 +9,8 @@
       <span>at {{ ctrl.order.meetingTime | date : 'h:mm a' }}</span>
     </div>
     <div>
-      <span>at {{ ctrl.order.meetingLocation }} location</span>
+      <span>{{ ctrl.order.vendor }}</span></br>
+      <span>at {{ meetingAddress }}</span>
     </div>
   </div>
   <button ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
