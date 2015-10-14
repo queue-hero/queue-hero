@@ -130,10 +130,8 @@
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
 
-          //add marker for source
-          L.marker([currentLocation[0], currentLocation[1]], { icon: pinIcon} ).addTo(vm.map);
           //add marker for destination
-          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon} ).addTo(vm.map);
+          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon } ).addTo(vm.map);
 
           //plot the route on the map
           var directionsObject = response.data;
