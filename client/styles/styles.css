@@ -379,11 +379,9 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .order-details {
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid #ffffff;
   border-radius: 15px;
-  border-color: white;
-  background: white;
+  background: #ffffff;
   width: 550px;
   margin-bottom: 10px;
   padding: 10px;
