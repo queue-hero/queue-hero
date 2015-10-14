@@ -10,9 +10,17 @@ body,
 body > div:first-of-type {
   width: 100%;
   height: 100%;
-  padding-top: 70px;
+  padding-top: 55px;
 }
 
+@media (max-width:768px) {
+  body > div:first-of-type {
+    padding-top: 52px;
+  }
+}
+body > div:first-of-type > div:first-of-type {
+  padding-top: 15px;
+}
 /*---------------------------- bootstrap -----------------------------*/
 /*----------------- uncomment to show bootstrap boxes-----------------*/
 /*
@@ -95,9 +103,10 @@ body > div:first-of-type {
 }
 /*----------------- home -----------------*/
 
-.main {
-  background-color: #fafafa;
-  border: none;
+#home {
+  background-image: url(../images/queue-hero.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
 .continue-fb.row {
