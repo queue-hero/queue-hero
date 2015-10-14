@@ -3,8 +3,8 @@ var _ = require('underscore');
 var User = require('./userModel.js');
 var Transaction = require('../transactions/transactionModel.js');
 var Checkin = require('../checkins/checkinModel.js');
-var testUsersRandomize = require('./testUsersRandomize.js');
-var tests = testUsersRandomize.randomize();
+var testsRandomize = require('./testUsersRandomize.js');
+var tests = testsRandomize.randomize();
 var testUsers = tests.testUsers;
 var testTransactions = tests.testTransactions;
 var testCheckins = tests.testCheckins;
@@ -58,8 +58,7 @@ function simulate() {
   need to refactor, should be using tests.transactions
   and tests.checkins, not pool in the _.each
   */
-  var tests = testUsersRandomize.randomize();
-  var count = 0;
+  var tests = testsRandomize.randomize();
   _.each(pool, function(user, key, list) {
     if (Math.random() < 0.20) {
       Checkin.remove({
@@ -79,27 +78,28 @@ function simulate() {
         }
       });
     }
+  });
 
-    if (Math.random() > 0.95) {
-      testTransactions[count].status = 'unfulfilled';
-      var newTransaction = new Transaction(testTransactions[count]);
+  _.each(tests.testTransactions, function(transaction) {
+    if (Math.random() > 0.89) {
+      transaction.status = 'unfulfilled';
+      var newTransaction = new Transaction(transaction);
       newTransaction.save(function(err) {
         if (err) {
           console.log(err);
         }
       });
     }
-    if (Math.random() > 0.80) {
-      var newCheckin = new Checkin(testCheckins[count]);
+  });
+
+  _.each(tests.testCheckins, function(checkin) {
+    if (Math.random() > 0.89) {
+      var newCheckin = new Checkin(checkin);
       newCheckin.save(function(err) {
         if (err) {
           console.log(err);
         }
       });
     }
-    count++;
   });
-
-
-
 }
