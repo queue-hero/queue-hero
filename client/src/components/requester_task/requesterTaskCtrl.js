@@ -6,18 +6,36 @@
       var vm = this;
       vm.itemView = false;
       var venueCache;
+      vm.result1 = '';
+      vm.options1 = null;
+      vm.details1 = '';
 
       vm.order = requesterFactory.getOrder();
 
-      var currentLocation = requesterFactory.getOrder('currentLocation');
+      var currentLocation = requesterFactory.getOrder('currentLocation').slice();
 
-      ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
+      vm.getMyLocation = function() {
+        currentLocation = requesterFactory.getOrder('currentLocation').slice();
+        getVenues(currentLocation[0], currentLocation[1]);
+      };
+
+      vm.searchLocation = function() {
+        currentLocation[0] = vm.details1.geometry.location.lat();
+        currentLocation[1] = vm.details1.geometry.location.lng();
+        getVenues(currentLocation[0], currentLocation[1]);
+      };
+
+      function getVenues(lat, long){
+      ajaxFactory.getVenuesAtRequesterLocation(lat, long)
         .then(function(response) {
           vm.venues = response.data;
           venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
         });
+      }
+
+      getVenues(currentLocation[0], currentLocation[1]);
 
       vm.callback = function(map) {
         vm.map = map;
@@ -41,16 +59,16 @@
         if (vm.venues.length === 1) {
           var venueChosen = vm.venues[0];
           venuesGeojson.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [venueChosen.long, venueChosen.lat]
             },
             "properties": {
               "title": '<p><strong>' + venueChosen.name + '</p></strong>',
               "description": venueChosen.displayAddress,
-              "marker-color": "#DC3C05", 
-              "marker-size": "large", 
+              "marker-color": "#DC3C05",
+              "marker-size": "large",
               "marker-symbol": "star"
             }
           });
@@ -64,7 +82,7 @@
                 "coordinates": [venue.long, venue.lat]
               },
               "properties": {
-                "title": '<p><strong>' + venue.name + '</p></strong>', 
+                "title": '<p><strong>' + venue.name + '</p></strong>',
                 "description": venue.displayAddress,
                 "marker-color": "#3ca0d3",
                 "marker-size": "large",
@@ -74,7 +92,7 @@
           }
         }
         L.mapbox.featureLayer(venuesGeojson).addTo(vm.map);
-        
+
       };
 
       vm.selectLocation = function(venue, index) {
