@@ -31,15 +31,15 @@
                 <span><strong>{{ ctrl.user.lastName }}</strong></span>
                 <p>({{ ctrl.user.username }})</p>
               </div>
+              <div class="">
+                Phone Number: <span>{{ ctrl.user.phoneNumber }}</span>
+              </div>
               <!--
               <div class="">
                 <span>{{ ctrl.user.billingAddress }}</span>
               </div>
               <div class="">
                 <span>{{ ctrl.user.city }}</span>
-              </div>
-              <div class="">
-                Phone Number: <span>{{ ctrl.user.phoneNumber }}</span>
               </div>
               <div class="">
                 Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span>
@@ -70,15 +70,15 @@
                 <span><strong><input name="last" type="text" ng-model="ctrl.user.lastName" required></strong></span>
                 <p>({{ ctrl.user.username }})</p>
               </div>
+              <div class="">
+                Phone Number: <span><input type="text" ng-model="ctrl.user.phoneNumber"></span>
+              </div>
               <!--
               <div class="">
                 <span><input type="text" ng-model="ctrl.user.billingAddress"></span>
               </div>
               <div class="">
                 <span><input type="text" ng-model="ctrl.user.city"></span>
-              </div>
-              <div class="">
-                Phone Number: <span><input type="text" ng-model="ctrl.user.phoneNumber"></span>
               </div>
               <div class="">
                 Credit/Debit Card Number: <span><input type="text" ng-model="ctrl.user.creditCard"></span>
