@@ -1,5 +1,7 @@
 var _ = require('underscore');
 
+exports.randomize = function() {
+
 //things to export
 var checkins = [];
 var transactions = [];
@@ -118,8 +120,9 @@ var meetingLocationExamples = {
 
 var status = ['unfulfilled', 'unfulfilled', 'unfulfilled', 'inprogress', 'complete', 'closed'];
 var assigned = [true, false, false, false];
-
+var random;
 //look through each user listed in "pool" object
+
 for (var key in pool) {
   var username = key;
   var facebookId = pool[key];
@@ -177,10 +180,10 @@ for (var key in pool) {
   checkins.push(checkin);
 
 }
-
-
-module.exports = {
-  testUsers: users,
-  testTransactions: transactions,
-  testCheckins: checkins
+  return {
+    testUsers: users,
+    testTransactions: transactions,
+    testCheckins: checkins,
+    pool: pool
+  };
 };
