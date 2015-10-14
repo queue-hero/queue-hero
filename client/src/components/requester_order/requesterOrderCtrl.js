@@ -131,7 +131,7 @@
         .then(function(response) {
 
           //add marker for destination
-          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon} ).addTo(vm.map);
+          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon } ).addTo(vm.map);
 
           //plot the route on the map
           var directionsObject = response.data;
