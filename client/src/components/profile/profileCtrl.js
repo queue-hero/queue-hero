@@ -9,7 +9,7 @@
     vm.hideProfilePic = false;
 
     if (vm.user.profilePhoto === 'placeholder/image' || vm.user.profilePhoto === undefined) {
-      vm.user.myProfilePhoto = 'http://lorempixel.com/100/200/';
+      vm.user.myProfilePhoto = 'http://lorempixel.com/250/250/';
     } else {
       vm.user.myProfilePhoto = vm.user.profilePhoto;
     }
