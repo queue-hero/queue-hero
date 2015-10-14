@@ -54,6 +54,10 @@ exports.createTestUsers = function() {
 };
 
 function simulate() {
+  /*
+  need to refactor, should be using tests.transactions
+  and tests.checkins, not pool in the _.each
+  */
   var tests = testUsersRandomize.randomize();
   var count = 0;
   _.each(pool, function(user, key, list) {
