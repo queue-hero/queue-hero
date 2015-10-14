@@ -1,14 +1,25 @@
 <div id="hero-order-complete">
-  <div>Order complete</div>
-  <div>Please rate {{ ctrl.order.requester }}</div>
-  <select name="rating" ng-model="ctrl.rating">
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-  </select>
-  <br/>
-  <button ng-click="ctrl.rateRequester()">Rate</button>
+  <h1>Order complete</h1>
+  <div class="order-details">
+    <div class="order-line">On a scale of 1 to 5, with 5 being the highest, how pleasant was your interaction with {{ ctrl.order.requester }}? (Please rate your requester on punctuality, friendliness, etc.)</div>
+    <div class="form-group">
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="1"> 1
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="2"> 2
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="3"> 3
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="4"> 4
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="5"> 5
+      </label>
+    </div>
+  </div>
+  <button type="button" class="btn btn-success" ng-click="ctrl.rateRequester()">Rate</button>
 
 </div>

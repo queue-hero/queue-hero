@@ -374,7 +374,7 @@ body > div:first-of-type > div:first-of-type {
 
 /*----------------- requester order -----------------*/
 
-#requester-order-details, #requester-order-complete, #requester-order-rate {
+#requester-order-details, #requester-order-complete, #requester-order-rate, #hero-order-details, #hero-order-complete {
   margin-left: 10px;
 }
 
