@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', "$scope", "$interval", function(profileFactory, requesterFactory, ajaxFactory, $state, $scope, $interval) {
       var vm = this;
       vm.itemView = false;
       var venueCache;
@@ -10,6 +10,7 @@
       vm.order = requesterFactory.getOrder();
 
       var currentLocation = requesterFactory.getOrder('currentLocation');
+      var heroCounts;
 
       ajaxFactory.getVenuesAtRequesterLocation(currentLocation[0], currentLocation[1])
         .then(function(response) {
@@ -17,7 +18,29 @@
           venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
+        }).then(function(){
+          heroCounts = $interval(getHeroCounts, 1000, 0, false);
+          $scope.$on("$destroy", function() {
+              $interval.cancel(heroCounts);
+          });
         });
+
+      var getHeroCounts = function() {
+        var yelpIds = [];
+        for (var i = 0; i < vm.venues.length; i++) {
+          yelpIds.push(vm.venues[i].yelpId);
+
+          ajaxFactory.getOpenHeroCount(vm.venues[i].yelpId)
+            .then(function(response) {
+              var data = response.data;
+              if (vm.venues[yelpIds.indexOf(data[0])] !== undefined) {
+                vm.venues[yelpIds.indexOf(data[0])].heroes = data[1];
+              }
+            }, function(response) {
+              console.log(response.status);
+            });
+        }
+      };
 
       vm.callback = function(map) {
         vm.map = map;
@@ -41,16 +64,16 @@
         if (vm.venues.length === 1) {
           var venueChosen = vm.venues[0];
           venuesGeojson.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [venueChosen.long, venueChosen.lat]
             },
             "properties": {
               "title": '<p><strong>' + venueChosen.name + '</p></strong>',
               "description": venueChosen.displayAddress,
-              "marker-color": "#DC3C05", 
-              "marker-size": "large", 
+              "marker-color": "#DC3C05",
+              "marker-size": "large",
               "marker-symbol": "star"
             }
           });
@@ -64,7 +87,7 @@
                 "coordinates": [venue.long, venue.lat]
               },
               "properties": {
-                "title": '<p><strong>' + venue.name + '</p></strong>', 
+                "title": '<p><strong>' + venue.name + '</p></strong>',
                 "description": venue.displayAddress,
                 "marker-color": "#3ca0d3",
                 "marker-size": "large",
@@ -74,7 +97,7 @@
           }
         }
         L.mapbox.featureLayer(venuesGeojson).addTo(vm.map);
-        
+
       };
 
       vm.selectLocation = function(venue, index) {
