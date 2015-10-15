@@ -6,11 +6,11 @@ var User = require('./../users/userModel.js');
 var twilio = require('../twilio/twilioApi.js');
 
 
-var Auth;
+var api_keys;
 
 // load apikeys if localhost. process.env.DEPLOYED set in heroku
 if (!process.env.DEPLOYED) {
-  Auth = require('../config/api_keys.js');
+  api_keys = require('../config/api_keys.js').yelp;
 }
 
 
@@ -62,10 +62,10 @@ module.exports = {
 
       // use environment variable in heroku if deployed, api_keys.js if local
       var yelp = Yelp.createClient({
-        consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
-        consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
-        token: process.env.YELP_TOKEN || Auth.yelp.token,
-        token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
+        consumer_key: process.env.YELP_CONSUMER_KEY || api_keys.consumer_key,
+        consumer_secret: process.env.YELP_CONSUMER_SECRET || api_keys.consumer_secret,
+        token: process.env.YELP_TOKEN || api_keys.token,
+        token_secret: process.env.YELP_TOKEN_SECRET || api_keys.token_secret
       });
 
       /*
