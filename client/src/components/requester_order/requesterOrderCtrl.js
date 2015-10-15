@@ -130,8 +130,34 @@
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
 
-          //add marker for destination
-          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon } ).addTo(vm.map);
+          var pins = [];
+          //add marker for current location
+          pins.push({
+            "type": "Feature", 
+            "geometry": {
+              "type": "Point", 
+              "coordinates": [currentLocation[1], currentLocation[0]]
+            },
+            "properties": {
+              "marker-color": "#D46A6A", 
+              "marker-size": "large",
+              "marker-symbol": "circle"
+            }
+          });
+          //add marker for meeting location
+          pins.push({
+            "type": "Feature", 
+            "geometry": {
+              "type": "Point", 
+              "coordinates": [meetingLocation[1], meetingLocation[0]]
+            },
+            "properties": {
+              "marker-color": "#DC3C05", 
+              "marker-size": "large",
+              "marker-symbol": "star"
+            }
+          });
+          L.mapbox.featureLayer(pins).addTo(vm.map);
 
           //plot the route on the map
           var directionsObject = response.data;
