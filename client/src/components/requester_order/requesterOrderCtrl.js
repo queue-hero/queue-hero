@@ -31,7 +31,6 @@
             vendorYelpId: undefined
           });
           //cancel interval:
-          // $interval.cancel(checkOrder);
           //the user may want to put a new order after cancelling
           $state.go('requester_task');
           }, function(response) {
@@ -71,7 +70,6 @@
             vendorYelpId: undefined
           });
 
-          //circle back to choice
           $state.go('choice');
 
         }, function(response) {
@@ -86,6 +84,8 @@
       ajaxFactory.isOrderAccepted(vm.order.transactionId)
         .then(function(response) {
           if (response.data !== false) {
+
+            $interval.cancel(checkOrder);
 
             vm.order.queueHero = response.data;
             requesterFactory.setOrder({ queueHero: response.data });
@@ -130,10 +130,8 @@
       ajaxFactory.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
 
-          //add marker for source
-          L.marker([currentLocation[0], currentLocation[1]], {icon: pinIcon}).addTo(vm.map);
           //add marker for destination
-          L.marker([meetingLocation[0], meetingLocation[1]], {icon: pinIcon}).addTo(vm.map);
+          L.marker([meetingLocation[0], meetingLocation[1]], { icon: pinIcon } ).addTo(vm.map);
 
           //plot the route on the map
           var directionsObject = response.data;

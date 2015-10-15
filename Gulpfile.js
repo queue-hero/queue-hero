@@ -22,7 +22,8 @@ var jsScripts = [
   'client/bower_components/ng-file-upload/ng-file-upload.min.js',
   'client/bower_components/angular-cookies/angular-cookies.min.js',
   'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',
-  'client/bower_components/moment/min/moment-with-locales.min.js'
+  'client/bower_components/moment/min/moment-with-locales.min.js',
+  'client/bower_components/mapbox.js/mapbox.js',
   'client/src/app.js',
   'client/src/**/*.js'
 ];

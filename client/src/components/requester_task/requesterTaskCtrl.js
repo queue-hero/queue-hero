@@ -24,6 +24,7 @@
         currentLocation[0] = vm.details1.geometry.location.lat();
         currentLocation[1] = vm.details1.geometry.location.lng();
         getVenues(currentLocation[0], currentLocation[1]);
+        vm.map.setView([currentLocation[0], currentLocation[1], 16]);
       };
 
       function getVenues(lat, long){
@@ -33,7 +34,7 @@
           venueCache = vm.venues.slice();
           populatePins();
         }, function(err) {
-        }).then(function(){
+        }).then(function() {
           heroCounts = $interval(getHeroCounts, 1000, 0, false);
           $scope.$on("$destroy", function() {
               $interval.cancel(heroCounts);
