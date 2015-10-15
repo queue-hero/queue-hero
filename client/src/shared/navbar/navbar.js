@@ -8,7 +8,7 @@
         templateUrl: 'src/shared/navbar/navbar.html',
         link: function(scope, elem, attrs) {
 
-          scope.name = profileFactory.getProfile('firstName') + profileFactory.getProfile('lastName');
+          scope.name = profileFactory.getProfile('firstName') + " " + profileFactory.getProfile('lastName');
 
           scope.isLoggedIn = function() {
             return ($state.is('home') || $state.is('signup')) ? false : true;
