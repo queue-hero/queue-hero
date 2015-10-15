@@ -33,14 +33,6 @@
       });
     };
 
-    ajaxObj.isOrderAccepted = function(transactionId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/requester/order/details',
-        params: { transactionId: transactionId }
-      });
-    };
-
     ajaxObj.postSignUp = function(user) {
       return $http({
         method: 'POST',

@@ -10,9 +10,6 @@ module.exports = function(server) {
 
   io.on('connection', function(socket) {
     console.log('socket connected');
-    // socket.on('createSocketUser', function(data) {
-    //   users[data] = socket;
-    // });
 
     //from requesterTaskCtrl
     socket.on('getHeroCount', function(yelpId) {
@@ -39,6 +36,13 @@ module.exports = function(server) {
     socket.on('isOrderComplete', function(transactionId) {
       checkOrderComplete(transactionId, function(bool) {
         socket.emit('checkOrderComplete', bool);
+      });
+    });
+
+    //from reqeusterOrderCtrl
+    socket.on('isOrderAccepted', function(transactionId) {
+      checkOrderAccepted(transactionId, function(queueHero) {
+        socket.emit('checkOrderAccepted', queueHero);
       });
     });
 
@@ -95,6 +99,15 @@ module.exports = function(server) {
       .then(function(count) {
         count === 1 ? callback(true) : callback(false);
       });
+  }
+
+  //from reqeusterOrderCtrl
+  function checkOrderAccepted(transactionId, callback) {
+    Transaction.findOne({
+      _id: transactionId
+    }, function(err, transaction) {
+        transaction.queueHero ? callback(transaction.queueHero) : callback(false);
+    });
   }
 
 };

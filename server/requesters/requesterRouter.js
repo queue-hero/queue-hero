@@ -12,10 +12,6 @@ module.exports = function(app) {
   // res: 201 or error
   app.post('/task', requesterCtrl.createTransaction);
 
-  // req: Polling. setInterval poll to server until match found
-  // res: Polling. return false until match found
-  app.get('/order/details', requesterCtrl.checkOrderAccepted);
-
 
   app.post('/order/details/cancel', requesterCtrl.cancelTransaction);
 

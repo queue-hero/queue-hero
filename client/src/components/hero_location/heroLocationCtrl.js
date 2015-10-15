@@ -70,7 +70,7 @@
       //set location of hero to selected venue
       ajaxFactory.setHeroLocation(queueHero, venue)
         //will be executed if status code is 200-299,
-        .then(function successCallback(response) {
+        .then(function(response) {
           heroFactory.setOrder({
             queueHero: queueHero,
             vendor: venue.name,
