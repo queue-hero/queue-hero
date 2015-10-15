@@ -67,12 +67,6 @@
         map.setView([currentLocation[0], currentLocation[1]], 16);
       };
 
-      var pinIcon = L.icon({
-        iconUrl: '/images/pin.png',
-        iconRetinaUrl: '/images/pin.png',
-        iconSize: [30,41]
-      });
-
       var populatePins = function() {
         vm.map.eachLayer(function(layer) {
           if (layer instanceof L.Marker) {
@@ -116,8 +110,21 @@
             });
           }
         }
+        var youAreHere = [];
+        youAreHere.push({
+          "type": "Feature", 
+          "geometry": {
+            "type": "Point", 
+            "coordinates": [currentLocation[1], currentLocation[0]]
+          },
+          "properties": {
+            "marker-color": "#D46A6A", 
+            "marker-size": "large",
+            "marker-symbol": "circle"
+          }
+        });
         L.mapbox.featureLayer(venuesGeojson).addTo(vm.map);
-
+        L.mapbox.featureLayer(youAreHere).addTo(vm.map);
       };
 
       vm.selectLocation = function(venue, index) {
