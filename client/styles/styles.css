@@ -323,6 +323,7 @@ body > div:first-of-type > div:first-of-type {
   float: left;
   overflow: hidden;
   overflow-y: scroll;
+  height: 100%;
 }
 
 .title {
