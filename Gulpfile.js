@@ -16,6 +16,7 @@ var bower = require('gulp-bower');
 var jsScripts = [
   'client/bower_components/angular/angular.min.js',
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+  'client/bower_components/socket.io-client/socket.io.js',
   'client/bower_components/angular-messages/angular-messages.min.js',
   'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
   'client/bower_components/angular-animate/angular-animate.min.js',

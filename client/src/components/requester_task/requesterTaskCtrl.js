@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', "$scope", "$interval", function(profileFactory, requesterFactory, ajaxFactory, $state, $scope, $interval) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', '$scope', '$interval', 'socketFactory', function(profileFactory, requesterFactory, ajaxFactory, $state, $scope, $interval, socketFactory) {
       var vm = this;
       vm.itemView = false;
       var venueCache;
