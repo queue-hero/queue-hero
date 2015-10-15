@@ -1,9 +1,17 @@
 var twilio = require('twilio');
 var Transaction = require('../transactions/transactionModel.js');
 var User = require('./../users/userModel.js');
-var accountSid = require('../config/api_keys.js').twilio.accountSid;
-var authToken = require('../config/api_keys.js').twilio.authToken;
-var sendingNumber = require('../config/api_keys.js').twilio.sendingNumber;
+
+var api_keys;
+
+if (!process.env.DEPLOYED) {
+  api_keys = require('../config/api_keys.js').twilio;
+}
+
+var accountSid = process.env.TWILIO_ACCOUNT_SID || api_keys.accountSid;
+var authToken = process.env.TWILIO_AUTH_TOKEN || api_keys.authToken;
+var sendingNumber = process.env.TWILIO_NUMBER || api_keys.sendingNumber;
+
 var client = new twilio.RestClient(accountSid, authToken);
 
 // Export configuration object
