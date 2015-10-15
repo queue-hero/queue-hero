@@ -10,7 +10,6 @@
     var taskCache;
     vm.orders = {};
     var requestCounts;
-    vm.initCounts = true;
 
     // currentLocation: [lat, long]
     var location = heroFactory.getOrder('currentLocation');
