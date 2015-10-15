@@ -7,11 +7,11 @@ var Yelp = require("yelp");
 var MapboxClient = require('mapbox');
 var mapboxClient = new MapboxClient('pk.eyJ1Ijoic2hyZWV5YWdvZWwiLCJhIjoiY2lmN2NzcmtrMGU5a3M2bHpubXlyaDlkNiJ9.U7xOePZsA83ysE6ZE9P1oQ');
 
-var Auth;
+var api_keys;
 
 //load apikeys if local host. process.env.DEPLOYED set in heroku
 if (!process.env.DEPLOYED) {
-  Auth = require('../config/api_keys.js');
+  api_keys = require('../config/api_keys.js').yelp;
 }
 
 function distanceMiles(lat1, long1, lat2, long2) {
@@ -136,10 +136,10 @@ module.exports = {
       });
 
       var yelp = Yelp.createClient({
-        consumer_key: process.env.YELP_CONSUMER_KEY || Auth.yelp.consumer_key,
-        consumer_secret: process.env.YELP_CONSUMER_SECRET || Auth.yelp.consumer_secret,
-        token: process.env.YELP_TOKEN || Auth.yelp.token,
-        token_secret: process.env.YELP_TOKEN_SECRET || Auth.yelp.token_secret
+        consumer_key: process.env.YELP_CONSUMER_KEY || api_keys.consumer_key,
+        consumer_secret: process.env.YELP_CONSUMER_SECRET || api_keys.consumer_secret,
+        token: process.env.YELP_TOKEN || api_keys.token,
+        token_secret: process.env.YELP_TOKEN_SECRET || api_keys.token_secret
       });
 
       //find venues within a 1 mile radius
