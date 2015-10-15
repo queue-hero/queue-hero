@@ -23,10 +23,6 @@ module.exports = function(app) {
 
   app.post('/task/removal', heroCtrl.removeFromCheckin);
 
-  // req: Polling. setInterval poll server to check if order complete
-  // res: Polling. return false until order complete
-  app.get('/order/details', heroCtrl.checkOrderComplete);
-
   // req: rating, requester, transactionId
   // res: 201 or error
   app.post('/order/rate', heroCtrl.rateRequester);

@@ -148,34 +148,6 @@ module.exports = {
       }
     });
   },
-
-  checkOrderComplete: function(req, res, next) {
-    //get transaction id from request
-    var transactionId = req.query.transactionId;
-
-    // find transaction, and then check if status is complete
-    var findTransaction = Q.nbind(Transaction.findOne, Transaction);
-    findTransaction({
-      _id: transactionId
-    })
-      .then(function(transaction) {
-        if (!transaction) {
-          console.log('transaction does not exist');
-          res.status(400).send();
-        } else {
-          if (transaction.status === 'complete') {
-            res.status(200).send(true);
-          } else {
-            res.status(200).send(false);
-          }
-        }
-      })
-      .fail(function(error) {
-        res.status(401).send();
-      });
-
-  },
-
   acceptRequest: function(req, res, next) {
     //get transaction id from request
     var transactionId = req.body.transactionId;

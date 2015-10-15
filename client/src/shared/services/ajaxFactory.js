@@ -33,14 +33,6 @@
       });
     };
 
-    ajaxObj.isOrderComplete = function(transactionId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/hero/order/details',
-        params: { transactionId: transactionId }
-      });
-    };
-
     ajaxObj.isOrderAccepted = function(transactionId) {
       return $http({
         method: 'GET',

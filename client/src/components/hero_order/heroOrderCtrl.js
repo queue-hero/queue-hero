@@ -2,34 +2,29 @@
   'use strict';
 
   angular.module('app.hero_order', [])
-  .controller('HeroOrderCtrl', ['ajaxFactory', '$scope', '$interval', 'heroFactory', '$state', function(ajaxFactory, $scope, $interval, heroFactory, $state) {
+  .controller('HeroOrderCtrl', ['ajaxFactory', '$scope', '$interval', 'heroFactory', '$state', 'socketFactory', function(ajaxFactory, $scope, $interval, heroFactory, $state, socketFactory) {
     var vm = this;
     vm.complete = false;
 
     vm.order = heroFactory.getOrder();
 
-    var checkOrder = $interval(isOrderComplete, 5000, 0, false);
+    socketFactory.on('checkOrderComplete', function(bool) {
+      if (bool === true) {
+        //if order is complete, switch ui-views
+        $interval.cancel(checkOrder);
+        vm.complete = true;
+      }
+    });
 
-    $scope.$on("$destroy", function() {
+    var checkOrder = $interval(isOrderComplete, 1000, 0, false);
+
+    $scope.$on('$destroy', function() {
       $interval.cancel(checkOrder);
     });
 
 
     function isOrderComplete() {
-      ajaxFactory.isOrderComplete(vm.order.transactionId)
-        .then(function(response) {
-          console.log('Server said', response.data);
-          if (response.data === true){
-            //if order is complete, switch ui-views
-            $interval.cancel(checkOrder);
-            vm.complete = true;
-
-            //stop in recurring ajax request from occuring
-
-          }
-        }, function(response) {
-          console.log(response.status);
-        });
+      socketFactory.emit('isOrderComplete', vm.order.transactionId);
     }
 
     vm.rateRequester = function() {

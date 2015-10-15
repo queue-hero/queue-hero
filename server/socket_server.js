@@ -1,5 +1,6 @@
 var Checkin = require('./checkins/checkinModel.js');
 var Transaction = require('./transactions/transactionModel.js');
+var Q = require('q');
 
 module.exports = function(server) {
 
@@ -31,6 +32,13 @@ module.exports = function(server) {
     socket.on('getOpenRequests', function(yelpId) {
       getOpenRequests(yelpId, function(transactions) {
         socket.emit('newOpenRequests', transactions);
+      });
+    });
+
+    //from heroOrderCtrl
+    socket.on('isOrderComplete', function(transactionId) {
+      checkOrderComplete(transactionId, function(bool) {
+        socket.emit('checkOrderComplete', bool);
       });
     });
 
@@ -74,6 +82,19 @@ module.exports = function(server) {
     }, function(err, transactions) {
       callback(transactions);
     });
+  }
+
+  //from heroOrderCtrl
+  function checkOrderComplete(transactionId, callback) {
+    // find transaction, and then check if status is complete
+    var findTransaction = Q.nbind(Transaction.count, Transaction);
+    findTransaction({
+      _id: transactionId,
+      status: 'complete'
+    })
+      .then(function(count) {
+        count === 1 ? callback(true) : callback(false);
+      });
   }
 
 };
