@@ -531,3 +531,7 @@ body > div:first-of-type > div:first-of-type {
 .your-order {
   margin-top: 0px;
 }
+
+.updated {
+  background-color: #2CD814;
+}
