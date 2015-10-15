@@ -185,14 +185,6 @@
       });
     };
 
-    ajaxObj.getOpenRequestCount = function(yelpId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/hero/location/count',
-        params: { yelpId: yelpId }
-      });
-    };
-
     return ajaxObj;
 
   }]);

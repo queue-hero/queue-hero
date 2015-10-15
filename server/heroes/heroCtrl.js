@@ -254,27 +254,6 @@ module.exports = {
     });
 
   },
-
-  getOpenLocationCount: function(req, res, next) {
-    var yelpId = req.query.yelpId;
-    var openCount = [yelpId];
-
-
-    Transaction.count({
-      vendorYelpId: yelpId,
-      status: 'unfulfilled',
-      meetingTime: { $gte: Date.now() }
-    }, function(err, num) {
-      if (err) {
-        console.log(err);
-        return res.status(500).send();
-      }
-      openCount.push(num);
-      res.status(200).send(openCount);
-    });
-
-  },
-
   rateRequester: function(req, res, next) {
     //get rating and requester from request
     var rating = req.body.rating;

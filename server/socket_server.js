@@ -19,6 +19,12 @@ module.exports = function(server) {
       });
     });
 
+    socket.on('getRequestCount', function(yelpId) {
+      getOpenRequestCount(yelpId, function(num) {
+        socket.emit('newRequestCount', [yelpId, num]);
+      });
+    });
+
 
     socket.on('disconnect', function() {
       console.log('user disconnected');
@@ -30,6 +36,16 @@ module.exports = function(server) {
   function getOpenHeroCount(yelpId, callback) {
     Checkin.count({
       vendorYelpId: yelpId
+    }, function(err, num) {
+      callback(num);
+    });
+  }
+
+  function getOpenRequestCount(yelpId, callback) {
+    Transaction.count({
+      vendorYelpId: yelpId,
+      status: 'unfulfilled',
+      meetingTime: { $gte: Date.now() }
     }, function(err, num) {
       callback(num);
     });

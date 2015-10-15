@@ -33,6 +33,7 @@
         .then(function(response) {
           vm.venues = response.data;
           venueCache = vm.venues.slice();
+          populatePins();
 
           socketFactory.on('newHeroCount', function(data) {
             //listen for changes in queueHero counts
@@ -46,13 +47,12 @@
 
           });
 
-          var heroCount = $interval(sendYelpIds, 1000, 0, false);
+          var heroCount = $interval(getHeroCount, 1000, 0, false);
 
           $scope.$on('$destroy', function() {
             $interval.cancel(heroCount);
           });
 
-          populatePins();
         }, function(err) {
           console.log(err);
         });
@@ -60,7 +60,7 @@
 
       getVenues(currentLocation[0], currentLocation[1]);
 
-      function sendYelpIds() {
+      function getHeroCount() {
         for (var i = 0; i < vm.venues.length; i++) {
           socketFactory.emit('getHeroCount', vm.venues[i].yelpId);
         }

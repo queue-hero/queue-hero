@@ -8,9 +8,6 @@ module.exports = function(app) {
   // res: map and location options
   app.get('/location', heroCtrl.getLocationOptions);
 
-
-  app.get('/location/count', heroCtrl.getOpenLocationCount);
-
   // req: option chosen / location of hero
   // res: 201 or error
   app.post('/location', heroCtrl.setLocation);
