@@ -110,9 +110,8 @@
           <ul class=list-group>
             <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions">
               <div class="transaction-hero padding" ng-show="transaction.queueHero === ctrl.user.username">
-                <p class="font-large">You
-                  <span ng-show="transaction.status === 'complete' || transaction.status === 'closed'"> were</span>
-                  <span ng-hide="transaction.status === 'complete' || transaction.status === 'closed'"> are</span> the Queue-Hero for {{ transaction.requester }}</p>
+                <p class="font-large" ng-show="transaction.status === 'complete' || transaction.status === 'closed'">You were the Queue-Hero for {{ transaction.requester }}</p>
+                <p class="font-large" ng-hide="transaction.status === 'complete' || transaction.status === 'closed'">You are the Queue-Hero for {{ transaction.requester }}</p>
                 <div class="row">
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Vendor</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.vendor }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Item</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.item }}</span>
@@ -127,7 +126,8 @@
               </div>
 
               <div class="transaction-requester padding" ng-show="transaction.requester === ctrl.user.username">
-                <p class="font-large">Your request assigned to {{ transaction.queueHero }}</p>
+                <p class="font-large" ng-show="transaction.queueHero === ctrl.user.username">The following request assigned to {{ transaction.queueHero }}</p>
+                <p class="font-large" ng-show="transaction.status === 'closed' || transaction.status ==='unfulfilled'">The following request is {{ transaction.status }}</p>
                 <div class="row">
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Vendor</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.vendor }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Item</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.item }}</span>
