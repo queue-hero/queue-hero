@@ -8,42 +8,47 @@
 
 
   <div id="requester-task-location">
-    <div class="form-group move-down">
-        <input type="text" id="Autocomplete" class="form-control" ng-autocomplete="ctrl.result1" details="ctrl.details1" options="ctrl.options1"/>
-        <input type="submit" ng-click="ctrl.searchLocation()"></input>
-        <button ng-click="ctrl.getMyLocation()">Find Me</button>
-    </div>
-
     <div class="requester-location container-fluid">
       <div class="view-container">
-        <div class="row">
+        <div class="row-fluid">
           <div class="col-left list-group">
-            <div class="title list-group-item">Pick a Location</div>
-            <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
-              <div ng-click="ctrl.selectLocation(venue, $index)">
-                <span class="badge pull-right">{{ venue.heroes }}</span>
-                <div class="vendor"><strong>{{ $index+1 }}</strong> {{ venue.name }}</div>
-                <div class="meeting-address">{{ venue.displayAddress }}</div>
+
+            <div class="search-bar row-fluid">
+              <div class="input-group move-down">
+                <input type="text" id="Autocomplete" class="search-box form-control" ng-autocomplete="ctrl.result1" details="ctrl.details1" options="ctrl.options1" placeholder="Search for a location...">
+                <span class="input-group-btn">
+                  <button class="search-box btn btn-primary" ng-click="ctrl.searchLocation()" type="button">Go!</button>
+                </span>
+              </div><!-- /input-group move-down-->
+            </div> <!-- /search-bar row-fluid -->
+
+            <div class="vendor-list row-fluid">
+              <div class="title list-group-item">
+                Pick a Location
+                <i class="center-loc pointer fa fa-location-arrow pull-right" ng-click="ctrl.getMyLocation()"><span>Center Map at your Location</span></i>
               </div>
-            </button>
-            <div ui-view="item" ng-show="ctrl.itemView"></div>
-          </div> <!-- /col-shops -->
+              <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
+                <div ng-click="ctrl.selectLocation(venue, $index)">
+                  <span class="badge pull-right">{{ venue.heroes }}</span>
+                  <div class="vendor"><strong>{{ $index+1 }}</strong> {{ venue.name }}</div>
+                  <div class="meeting-address">{{ venue.displayAddress }}</div>
+                </div>
+              </button>
+              <div ui-view="item" ng-show="ctrl.itemView">
+              </div> <!-- /ui-view -->
+            </div> <!-- /vendor-list row-fluid -->
+
+          </div> <!-- /col-left list-group -->
+
           <div class="map-container">
             <div class="col-map">
               <mapbox id="map" callback="ctrl.callback"></mapbox>
-            </div>
-          </div>
-        </div>
+            </div> <!-- /col-map -->
+          </div> <!-- /map-container -->
 
-
-      </div> <!-- /row -->
-    </div> <!-- /requester-location container -->
+        </div> <!-- /col-left list-group -->
+      </div> <!-- /view-container -->
+    </div> <!-- /requester-location container-fluid -->
   </div> <!-- /requester-task-location -->
+</div> <!-- /requester-task controller -->
 
-  <!--This styling portion below will not stay here - it's just here for prototyping purposes-->
-
-
-  <!-- <div ui-view="location" ng-show="ctrl.currentView === 'location'">location div</div> -->
-
-</div>
-<!-- Save for later -->

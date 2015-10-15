@@ -14,6 +14,20 @@
       vm.user.myProfilePhoto = vm.user.profilePhoto;
     }
 
+    function calculateAverageRating() {
+      var total = 0;
+      var count = 0;
+      var ratings = profileFactory.getProfile('ratings');
+      for (var key in ratings) {
+        total += Number(ratings[key]);
+        count += 1;
+      }
+      var averageRating = total/count;
+      profileFactory.setProfile({'averageRating': averageRating});
+      vm.rating = averageRating.toString().slice(0, 3);
+    }
+    calculateAverageRating();
+
     var getTransactionHistory = function(username) {
       ajaxFactory.getTransactionHistory(username)
         .then(function(response) {

@@ -90,6 +90,10 @@ body > div:first-of-type > div:first-of-type {
   margin: 15px;
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .font-large {
   font-size: 1.25em
 }
@@ -324,9 +328,28 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .title {
+.search-bar > .input-group {
+  margin-bottom: 15px;
+}
+
+.search-box {
+  border-radius: 0px;
+}
+
+.center-loc {
+  position: relative;
+}
+.center-loc span {
+  display: none;
+}
+.center-loc:hover {
+  color: #3e454b;
+}
+
+.col-left .title {
   background-color: #2e79b9;
   color: #ffffff;
-  font-weight: 100;
+  font-weight: 300;
   font-size: 1.4em;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
@@ -349,10 +372,9 @@ body > div:first-of-type > div:first-of-type {
   width: 100%;
 }
 
-.view-container .row {
-  margin: 0px;
-  width: 100%;
+.view-container .row-fluid:first-of-type {
   height: 100%;
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -404,3 +426,25 @@ body > div:first-of-type > div:first-of-type {
   }
 }
 
+/*----------------- requester order -----------------*/
+
+#requester-order-details, #requester-order-complete, #requester-order-rate, #hero-order-details, #hero-order-complete {
+  margin-left: 10px;
+}
+
+.order-details {
+  border: 1px solid #ffffff;
+  border-radius: 15px;
+  background: #ffffff;
+  width: 550px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.order-line {
+  font-size: 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.your-order {
+  margin-top: 0px;
+}
