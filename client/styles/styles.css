@@ -277,6 +277,10 @@ body > div:first-of-type > div:first-of-type {
   border-radius: 10px;
 }
 
+.transaction-header {
+  display: inline-block;
+  width: 50%;
+}
 .transaction-hero {
   background-color: #d8edf8;
 }
@@ -285,6 +289,20 @@ body > div:first-of-type > div:first-of-type {
   background-color: #fcf8e2;
 }
 
+.transaction-list-item {
+  margin: 5px 0;
+}
+
+.transaction-list-item > strong {
+  width: 22.5%;
+  display: inline-block;
+}
+
+@media (min-width: 768px) {
+  .transaction-list-item > strong {
+    width: 25%;
+  }
+}
 /*----------------- signup -----------------*/
 
 .select-state,
