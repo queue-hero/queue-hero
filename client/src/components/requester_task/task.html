@@ -27,7 +27,7 @@
               </div>
               <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
                 <div ng-click="ctrl.selectLocation(venue, $index)">
-                  <update-Change type="hero" content="{{ venue.heroes }}"></update-Change>
+                  <update-Change init="ctrl.initCounts" type="hero" content="{{ venue.heroes }}"></update-Change>
                   <div class="vendor"><strong>{{ $index+1 }}</strong> {{ venue.name }}</div>
                   <div class="meeting-address">{{ venue.displayAddress }}</div>
                 </div>

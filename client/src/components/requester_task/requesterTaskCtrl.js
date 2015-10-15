@@ -9,6 +9,7 @@
       vm.result1 = '';
       vm.options1 = null;
       vm.details1 = '';
+      vm.initCounts = true;
 
       vm.order = requesterFactory.getOrder();
 

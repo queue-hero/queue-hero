@@ -6,12 +6,14 @@
       return {
         scope: {
           content: '@',
-          type: '@'
+          type: '@',
+          init: '@'
         },
-        template: '<span ng-class="updated" class="badge pull-right {{ updated }}">{{ message }}</span>',
+        template: '<span ng-class="updated" class="badge pull-right {{ updated }}">{{ content }} &nbsp; {{ category }}</span>',
         link: function(scope, element, attrs) {
           var plural = '';
           scope.updated = '';
+          scope.category = '';
 
           if (scope.type === 'hero') {
             plural = 'es';
@@ -19,21 +21,25 @@
             plural = 's';
           }
 
-          createMessage(scope.content);
+          createCategory(scope.content);
 
           scope.$watch('content', function() {
-            scope.updated = 'updated';
-            createMessage(scope.content);
-            $timeout(function(){
-              scope.updated = '';
-            }, 500, true);
+            if(Boolean(scope.init) !== true){
+              scope.updated = 'updated';
+              createCategory(scope.content);
+              $timeout(function(){
+                scope.updated = '';
+              }, 500, true);
+            } else {
+              scope.init = false;
+            }
           });
 
-          function createMessage(count){
+          function createCategory(count){
             if (count === '1') {
-              scope.message = scope.content + '    ' + scope.type;
+              scope.category = scope.type;
             } else {
-              scope.message = scope.content + '    ' + scope.type + plural;
+              scope.category = scope.type + plural;
             }
           }
         }
