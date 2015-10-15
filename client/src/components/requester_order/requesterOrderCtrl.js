@@ -2,14 +2,16 @@
   'use strict';
 
   angular.module('app.requester_order', [])
-  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', '$scope', function($interval, ajaxFactory, requesterFactory, $state, $scope) {
+  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', '$scope', 'socketFactory', function($interval, ajaxFactory, requesterFactory, $state, $scope, socketFactory) {
     var vm = this;
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
     var currentLocation = requesterFactory.getOrder('currentLocation');
     var meetingLocation = requesterFactory.getOrder('meetingLocation');
 
-    var checkOrder = $interval(isOrderAccepted, 5000, 0, false);
+    checkOrderAccepted();
+
+    var checkOrder = $interval(isOrderAccepted, 1000, 0, false);
 
     $scope.$on("$destroy", function() {
         $interval.cancel(checkOrder);
@@ -30,7 +32,6 @@
             vendor: undefined,
             vendorYelpId: undefined
           });
-          //cancel interval:
           //the user may want to put a new order after cancelling
           $state.go('requester_task');
           }, function(response) {
@@ -81,21 +82,23 @@
     /*Continuously polls server asking whether requester's
     /order has been accepted yet.*/
     function isOrderAccepted() {
-      ajaxFactory.isOrderAccepted(vm.order.transactionId)
-        .then(function(response) {
-          if (response.data !== false) {
+      socketFactory.emit('isOrderAccepted', vm.order.transactionId);
+    }
 
-            $interval.cancel(checkOrder);
+    function checkOrderAccepted() {
+      socketFactory.on('checkOrderAccepted', function(queueHero) {
+        if (queueHero !== false) {
+          $interval.cancel(checkOrder);
 
-            vm.order.queueHero = response.data;
-            requesterFactory.setOrder({ queueHero: response.data });
+          vm.order.queueHero = queueHero;
+          requesterFactory.setOrder({ queueHero: queueHero });
 
-            //order is accepted, switch ui-views
-            vm.complete = 'complete';
+          //order is accepted, switch ui-views
+          vm.complete = 'complete';
 
-            //call getDirections
-            getDirections();
-          } else if (Date.now() > vm.order.meetingTime) {
+          //call getDirections
+          getDirections();
+        } else if (Date.now() > vm.order.meetingTime) {
             ajaxFactory.cancelOrder(vm.order.transactionId)
               .then(function(response) {
                 requesterFactory.setOrder({
@@ -112,11 +115,10 @@
                 });
 
                 $state.go('requester_task');
-              });
-          }
-        }, function(response) {
-            console.log(response.status);
-        });
+            });
+        }
+      });
+
     }
 
     var pinIcon = L.icon({
