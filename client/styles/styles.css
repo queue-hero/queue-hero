@@ -57,6 +57,16 @@ body > div:first-of-type > div:first-of-type {
   border-radius: 1px;
   box-shadow: 1px 1px 5px #333333;
 }
+.btn-leaveQ {
+  margin-right: 5px;
+  background-color: #2e79b9;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+}
 
 .btn-green {
   margin-right: 5px;
@@ -352,6 +362,21 @@ body > div:first-of-type > div:first-of-type {
 }
 
 @media (min-width: 1200px) {
+}
+
+.confirm-mission {
+  float: right;
+}
+
+.btn-confirm-mission {
+  margin-right: 5px;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+  background-color: #58b957;
 }
 
 /*----------------- requester task map -----------------*/

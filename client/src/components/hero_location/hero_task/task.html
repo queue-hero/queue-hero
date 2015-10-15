@@ -1,26 +1,32 @@
 <div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
-  <div>
-    <button ng-click="ctrl.removeFromQueue()">Leave Queue</button>
-  </div>
 
   <div>
     <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
       <div  ng-click="ctrl.select($index)">
-        <div>item: {{ order.item }}</div>
-        <div>details: {{ order.additionalRequests }}</div>
-        <div>price: {{ order.moneyExchanged | currency }}</div>
-        <img src="" alt="{{ order.requester }}">
-
+        <div><p>&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-apple"></span> &nbsp;&nbsp;Item: &nbsp; {{ order.item }}</div>
+        <div><p>&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-zoom-in"></span> &nbsp;&nbsp;Details: &nbsp;  {{ order.additionalRequests }} </div>
+        <div><p>&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-piggy-bank"></span>&nbsp;&nbsp;Price: &nbsp;{{ order.moneyExchanged | currency }}</div>
         <div>
-          <span>time: {{ order.meetingTime | date : 'h:mm a' }} </span>
+          <span><p>&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-time"></span> &nbsp;&nbsp;Time:&nbsp;{{ order.meetingTime | date : 'h:mm a' }} </span>
         </div>
+        <div><p>&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-user"></span> &nbsp;&nbsp;Requester: &nbsp;{{ order.requester }}</div>
+        <div><p>&nbsp;&nbsp;&nbsp;&nbsp; <span class="glyphicon glyphicon-star"></span> &nbsp;&nbsp;Requester Score: &nbsp;4.5</div>
+        <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>
-
-    <div ng-show="ctrl.confirmView">
-      Are you sure you want to take this mission?
-      <button ng-click="ctrl.cancel()">Cancel</button>
-      <button ng-click="ctrl.accept()">Submit</button>
+    <p>
+    <div>
+      <button class="btn-leaveQ" ng-click="ctrl.removeFromQueue()"> << Back</button>
+    </div>
+    <p>
+    <div class="list-group-item" ng-show="ctrl.confirmView">
+      <div>Are you sure you want to take this mission?</div>
+      <div class="confirm-mission">
+        <button class="btn-leaveQ" ng-click="ctrl.cancel()"> << Back</button>
+        <button class="btn-confirm-mission" ng-click="ctrl.accept()">Confirm</button>
+      </div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
+      <div>&nbsp;&nbsp;&nbsp;&nbsp;</div>
     </div>
 
     <div ng-show="ctrl.noOrdersView">
