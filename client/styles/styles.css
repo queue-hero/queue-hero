@@ -326,10 +326,6 @@ body > div:first-of-type > div:first-of-type {
   height: 100%;
 }
 
-.title {
-
-}
-
 .search-bar > .input-group {
   margin-bottom: 15px;
 }
@@ -380,7 +376,12 @@ body > div:first-of-type > div:first-of-type {
   }
 }
 
-@media (min-width: 1200px) {
+.request-list-item {
+  margin: 5px 10px 10px 5px;
+}
+
+.item-icon {
+  margin-right: 10px;
 }
 
 .confirm-mission {
@@ -425,7 +426,11 @@ body > div:first-of-type > div:first-of-type {
 
 /*----------------- requester order -----------------*/
 
-#requester-order-details, #requester-order-complete, #requester-order-rate, #hero-order-details, #hero-order-complete {
+#requester-order-details,
+#requester-order-complete,
+#requester-order-rate,
+#hero-order-details,
+#hero-order-complete {
   margin-left: 10px;
 }
 
