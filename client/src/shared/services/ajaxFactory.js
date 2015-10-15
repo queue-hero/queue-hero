@@ -193,14 +193,6 @@
       });
     };
 
-    ajaxObj.getOpenHeroCount = function(yelpId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/requester/task/count',
-        params: { yelpId: yelpId }
-      });
-    };
-
     return ajaxObj;
 
   }]);

@@ -28,39 +28,43 @@
         vm.map.setView([currentLocation[0], currentLocation[1], 16]);
       };
 
-      function getVenues(lat, long){
+      function getVenues(lat, long) {
       ajaxFactory.getVenuesAtRequesterLocation(lat, long)
         .then(function(response) {
           vm.venues = response.data;
           venueCache = vm.venues.slice();
+
+          socketFactory.on('newHeroCount', function(data) {
+            //listen for changes in queueHero counts
+            var yelpId = data[0];
+            var heroCount = data[1];
+
+            var vendor = _.findWhere(vm.venues, { yelpId: data[0] });
+            if (vendor !== undefined) {
+              vendor.heroes = data[1];
+            }
+
+          });
+
+          var heroCount = $interval(sendYelpIds, 1000, 0, false);
+
+          $scope.$on('$destroy', function() {
+            $interval.cancel(heroCount);
+          });
+
           populatePins();
         }, function(err) {
-        }).then(function() {
-          heroCounts = $interval(getHeroCounts, 1000, 0, false);
-          $scope.$on("$destroy", function() {
-              $interval.cancel(heroCounts);
-          });
+          console.log(err);
         });
       }
 
       getVenues(currentLocation[0], currentLocation[1]);
 
-      var getHeroCounts = function() {
-        var yelpIds = [];
+      function sendYelpIds() {
         for (var i = 0; i < vm.venues.length; i++) {
-          yelpIds.push(vm.venues[i].yelpId);
-
-          ajaxFactory.getOpenHeroCount(vm.venues[i].yelpId)
-            .then(function(response) {
-              var data = response.data;
-              if (vm.venues[yelpIds.indexOf(data[0])] !== undefined) {
-                vm.venues[yelpIds.indexOf(data[0])].heroes = data[1];
-              }
-            }, function(response) {
-              console.log(response.status);
-            });
+          socketFactory.emit('getHeroCount', vm.venues[i].yelpId);
         }
-      };
+      }
 
       vm.callback = function(map) {
         vm.map = map;

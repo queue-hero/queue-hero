@@ -8,9 +8,6 @@ module.exports = function(app) {
   // res: map and location options)
   app.get('/task', requesterCtrl.getLocationOptions);
 
-
-  app.get('/task/count', requesterCtrl.getOpenHeroCount);
-
   // req: obj with order details
   // res: 201 or error
   app.post('/task', requesterCtrl.createTransaction);
