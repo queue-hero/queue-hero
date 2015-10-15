@@ -2,11 +2,13 @@
   'use strict';
 
   angular.module('app')
-    .directive('navBar', ['$window', '$state', '$cookies', function($window, $state, $cookies) {
+    .directive('navBar', ['$window', '$state', '$cookies', 'profileFactory', function($window, $state, $cookies, profileFactory) {
       return {
         restrict: 'E',
         templateUrl: 'src/shared/navbar/navbar.html',
         link: function(scope, elem, attrs) {
+
+          scope.name = profileFactory.getProfile('firstName') + profileFactory.getProfile('lastName');
 
           scope.isLoggedIn = function() {
             return ($state.is('home') || $state.is('signup')) ? false : true;
