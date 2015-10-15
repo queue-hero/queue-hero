@@ -23,8 +23,14 @@
         count += 1;
       }
       var averageRating = total/count;
+      
+      if (averageRating === null || averageRating === undefined) {
+        averageRating = 'n/a';
+      } else {
+        averageRating = averageRating.toString().slice(0, 3);
+      }
       profileFactory.setProfile({'averageRating': averageRating});
-      vm.rating = averageRating.toString().slice(0, 3);
+      vm.rating = averageRating;
     }
     calculateAverageRating();
 

@@ -18,6 +18,7 @@
       vm.getMyLocation = function() {
         currentLocation = requesterFactory.getOrder('currentLocation').slice();
         getVenues(currentLocation[0], currentLocation[1]);
+        vm.map.setView([currentLocation[0], currentLocation[1], 16]);
       };
 
       vm.searchLocation = function() {
