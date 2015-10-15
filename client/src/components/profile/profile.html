@@ -110,34 +110,38 @@
           <ul class=list-group>
             <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions">
               <div class="transaction-hero padding" ng-show="transaction.queueHero === ctrl.user.username">
-                <p class="font-large" ng-show="transaction.status === 'complete' || transaction.status === 'closed'">You were the Queue-Hero for {{ transaction.requester }}</p>
-                <p class="font-large" ng-hide="transaction.status === 'complete' || transaction.status === 'closed'">You are the Queue-Hero for {{ transaction.requester }}</p>
+                <p class="font-large">Role: Queue Hero</p>
                 <div class="row">
+                  <span class="col-sm-2 col-xs-4 text-right"><strong>Requester</strong></span>
+                  <span class="col-sm-4 col-xs-8" ng-show="transaction.requester == null">unassigned</span>
+                  <span class="col-sm-4 col-xs-8" ng-show="transaction.requester != null">{{ transaction.requester }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Vendor</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.vendor }}</span>
+                </div>
+                <div class="row">
+                  <span class="col-sm-2 col-xs-4 text-right"><strong>Status</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.status }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Item</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.item }}</span>
                 </div>
                 <div class="row">
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Time</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.meetingTime }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Value</strong></span><span class="col-sm-4 col-xs-8">${{ transaction.moneyExchanged }}</span>
-                </div>
-                <div class="row">
-                  <span class="col-sm-2 col-xs-4 text-right"><strong>Status</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.status }}</span>
                 </div>
               </div>
 
               <div class="transaction-requester padding" ng-show="transaction.requester === ctrl.user.username">
-                <p class="font-large" ng-show="transaction.queueHero === ctrl.user.username">The following request assigned to {{ transaction.queueHero }}</p>
-                <p class="font-large" ng-show="transaction.status === 'closed' || transaction.status ==='unfulfilled'">The following request is {{ transaction.status }}</p>
+                <p class="font-large">Role: Requester</p>
                 <div class="row">
+                  <span class="col-sm-2 col-xs-4 text-right"><strong>Queue Hero</strong></span>
+                  <span class="col-sm-4 col-xs-8" ng-show="transaction.queueHero == null">Unassigned</span>
+                  <span class="col-sm-4 col-xs-8" ng-show="transaction.queueHero != null">{{ transaction.queueHero }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Vendor</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.vendor }}</span>
+                </div>
+                <div class="row">
+                  <span class="col-sm-2 col-xs-4 text-right"><strong>Status</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.status }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Item</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.item }}</span>
                 </div>
                 <div class="row">
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Time</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.meetingTime }}</span>
                   <span class="col-sm-2 col-xs-4 text-right"><strong>Value</strong></span><span class="col-sm-4 col-xs-8">${{ transaction.moneyExchanged }}</span>
-                </div>
-                <div class="row">
-                  <span class="col-sm-2 col-xs-4 text-right"><strong>Status</strong></span><span class="col-sm-4 col-xs-8">{{ transaction.status }}</span>
                 </div>
 
               </div>
