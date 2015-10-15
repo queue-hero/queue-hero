@@ -4,7 +4,6 @@
   angular.module('app.choice', ['ngCookies'])
   .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$scope', function(ajaxFactory, profileFactory, $state, $cookies, heroFactory, requesterFactory, $scope) {
     var vm = this;
-    vm.tests = true;
 
     if (!profileFactory.getProfile('facebookId')) {
       vm.facebookId = $cookies.get('com.queuehero');
