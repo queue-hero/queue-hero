@@ -57,6 +57,16 @@ body > div:first-of-type > div:first-of-type {
   border-radius: 1px;
   box-shadow: 1px 1px 5px #333333;
 }
+.btn-leaveQ {
+  margin-right: 5px;
+  background-color: #2e79b9;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+}
 
 .btn-green {
   margin-right: 5px;
@@ -298,7 +308,7 @@ body > div:first-of-type > div:first-of-type {
   color: #689f38;
 }
 
-/*----------------- requester task panel -----------------*/
+/*----------------- requester and hero task panel -----------------*/
 
 .vendor {
   font-size: 1.3em;
@@ -311,6 +321,13 @@ body > div:first-of-type > div:first-of-type {
 .col-left {
   padding: 0 15px;
   float: left;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.title {
+
 }
 
 .search-bar > .input-group {
@@ -364,6 +381,21 @@ body > div:first-of-type > div:first-of-type {
 }
 
 @media (min-width: 1200px) {
+}
+
+.confirm-mission {
+  float: right;
+}
+
+.btn-confirm-mission {
+  margin-right: 5px;
+  font-weight: 400;
+  font-size: 1em;
+  color: #ffffff;
+  border: 2px solid transparent;
+  border-radius: 1px;
+  box-shadow: 1px 1px 5px #333333;
+  background-color: #58b957;
 }
 
 /*----------------- requester task map -----------------*/
