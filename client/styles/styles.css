@@ -321,9 +321,6 @@ body > div:first-of-type > div:first-of-type {
 .col-left {
   padding: 0 15px;
   float: left;
-  overflow: hidden;
-  overflow-y: scroll;
-  height: 100%;
 }
 
 .search-bar > .input-group {
