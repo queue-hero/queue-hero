@@ -24,10 +24,10 @@
           createCategory(scope.content);
 
           scope.$watch('content', function() {
-            if(Boolean(scope.init) !== true){
+            if (Boolean(scope.init) !== true) {
               scope.updated = 'updated';
               createCategory(scope.content);
-              $timeout(function(){
+              $timeout(function() {
                 scope.updated = '';
               }, 500, true);
             } else {
