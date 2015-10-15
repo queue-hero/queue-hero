@@ -35,7 +35,7 @@
             }
           });
 
-          function createCategory(count){
+          function createCategory(count) {
             if (count === '1') {
               scope.category = scope.type;
             } else {
