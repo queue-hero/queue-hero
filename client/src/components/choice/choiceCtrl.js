@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.choice', ['ngCookies'])
-  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', function(ajaxFactory, profileFactory, $state, $cookies, heroFactory, requesterFactory) {
+  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$scope', function(ajaxFactory, profileFactory, $state, $cookies, heroFactory, requesterFactory, $scope) {
     var vm = this;
 
     if (!profileFactory.getProfile('facebookId')) {
@@ -26,6 +26,8 @@
           profileFactory.setProfile(data);
           heroFactory.setOrder({ queueHero: data.username });
           requesterFactory.setOrder({ requester: data.username });
+
+          $scope.$broadcast('gotname');
 
 
         }, function errorCallback(response) {
