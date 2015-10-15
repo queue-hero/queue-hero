@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', '$interval', '$scope', function($state, ajaxFactory, heroFactory, profileFactory, $interval, $scope) {
+  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', '$interval', '$scope', 'socketFactory', function($state, ajaxFactory, heroFactory, profileFactory, $interval, $scope, socketFactory) {
 
     var vm = this;
     vm.selection = undefined;
@@ -22,11 +22,24 @@
         vm.locations = response.data;
         taskCache = vm.locations.slice();
         populatePins();
-      }).then(function() {
         getAllRequests(vm.locations);
-        requestCounts = $interval(getRequestCounts, 1000, 0, false);
-        $scope.$on("$destroy", function() {
-            $interval.cancel(requestCounts);
+
+        socketFactory.on('newRequestCount', function(data) {
+          //listen for changes in queueHero counts
+          var yelpId = data[0];
+          var heroCount = data[1];
+
+          var vendor = _.findWhere(vm.locations, { yelpId: data[0] });
+          if (vendor !== undefined) {
+            vendor.requests = data[1];
+          }
+
+        });
+
+        var requestCount = $interval(getRequestCount, 1000, 0, false);
+
+        $scope.$on('$destroy', function() {
+            $interval.cancel(requestCount);
         });
       });
 
@@ -44,23 +57,11 @@
 
     }
 
-    var getRequestCounts = function() {
-      var yelpIds = [];
+    function getRequestCount() {
       for (var i = 0; i < vm.locations.length; i++) {
-        yelpIds.push(vm.locations[i].yelpId);
-
-        ajaxFactory.getOpenRequestCount(vm.locations[i].yelpId)
-          .then(function(response) {
-            var data = response.data;
-            if (vm.locations[yelpIds.indexOf(data[0])] !== undefined) {
-              vm.locations[yelpIds.indexOf(data[0])].requests = data[1];
-            }
-          }, function(response) {
-            console.log(response.status);
-          });
+       socketFactory.emit('getRequestCount', vm.locations[i].yelpId);
       }
-
-    };
+    }
 
     vm.confirm = function(index) {
       var queueHero = profileFactory.getProfile('username');
@@ -69,7 +70,7 @@
       //set location of hero to selected venue
       ajaxFactory.setHeroLocation(queueHero, venue)
         //will be executed if status code is 200-299,
-        .then(function successCallback(response) {
+        .then(function(response) {
           heroFactory.setOrder({
             queueHero: queueHero,
             vendor: venue.name,

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_task', [])
-    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', '$scope', function(ajaxFactory, $state, heroFactory, $interval, $scope) {
+    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', '$scope', 'socketFactory', function(ajaxFactory, $state, heroFactory, $interval, $scope, socketFactory) {
       var vm = this;
       vm.confirmView = false;
       vm.noOrdersView = false;
@@ -14,32 +14,30 @@
       // vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
       vm.vendor = heroFactory.getOrder('vendor');
 
-      var refreshTasks = $interval(getRequests, 1000, 0, false);
+      socketFactory.on('newOpenRequests', function(requests) {
+        if (!vm.confirmView) {
+          vm.orders = requests;
+          OrderCache = vm.orders.slice();
+        } else {
+          OrderCache = requests;
+        }
+        if (vm.orders.length === 0) {
+          vm.noOrdersView = true;
+        } else {
+          vm.noOrdersView = false;
+        }
+      });
+      var refreshTasks = $interval(getOpenRequests, 1000, 0, false);
 
-      $scope.$on("$destroy", function() {
+      $scope.$on('$destroy', function() {
           $interval.cancel(refreshTasks);
       });
 
-      function getRequests() {
-        ajaxFactory.getOpenRequests(vm.vendorYelpId)
-          .then(function(response) {
-            if (!vm.confirmView) {
-              vm.orders = response.data;
-              OrderCache = vm.orders.slice();
-            } else {
-              OrderCache = response.data;
-            }
-            if (vm.orders.length === 0) {
-              vm.noOrdersView = true;
-            } else {
-              vm.noOrdersView = false;
-            }
-          }, function(response) {
-            console.log(response.status);
-          });
+      function getOpenRequests() {
+        socketFactory.emit('getOpenRequests', vm.vendorYelpId);
       }
 
-      getRequests();
+      getOpenRequests();
 
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests

@@ -91,28 +91,6 @@ module.exports = {
       res.status(500).send();
     });
 
-    //TODO: (db) update the transaction status of above transaction to 'fulfilled'
-
-  },
-  checkOrderAccepted: function(req, res, next) {
-    //extract transaction id from req
-    var transactionId = req.query.transactionId;
-
-    Transaction.findOne({
-      _id: transactionId
-    }, function(err, transaction) {
-      if (err) {
-        res.status(500).send();
-        return;
-      }
-      if (!transaction) {
-        res.status(401).send();
-      } else if (transaction.queueHero) {
-        res.status(200).send(transaction.queueHero);
-      } else {
-        res.status(200).send(false);
-      }
-    });
 
   },
   getLocationOptions: function(req, res, next) {
@@ -165,21 +143,6 @@ module.exports = {
         });
         res.status(200).send(venues);
       });
-    });
-  },
-  getOpenHeroCount: function(req, res) {
-    var yelpId = req.query.yelpId;
-    var openCount = [yelpId];
-
-    Checkin.count({
-      vendorYelpId: yelpId
-    }, function(err, num) {
-      if (err) {
-        console.log(err);
-        return res.status(500).send();
-      }
-      openCount.push(num);
-      res.status(200).send(openCount);
     });
   },
   rateHero: function(req, res, next) {

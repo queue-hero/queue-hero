@@ -33,22 +33,6 @@
       });
     };
 
-    ajaxObj.isOrderComplete = function(transactionId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/hero/order/details',
-        params: { transactionId: transactionId }
-      });
-    };
-
-    ajaxObj.isOrderAccepted = function(transactionId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/requester/order/details',
-        params: { transactionId: transactionId }
-      });
-    };
-
     ajaxObj.postSignUp = function(user) {
       return $http({
         method: 'POST',
@@ -182,22 +166,6 @@
         method: 'GET',
         url: serverUrl + '/requester/order/directions',
         params: { source: currentLocation, destination: meetingLocation }
-      });
-    };
-
-    ajaxObj.getOpenRequestCount = function(yelpId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/hero/location/count',
-        params: { yelpId: yelpId }
-      });
-    };
-
-    ajaxObj.getOpenHeroCount = function(yelpId) {
-      return $http({
-        method: 'GET',
-        url: serverUrl + '/requester/task/count',
-        params: { yelpId: yelpId }
       });
     };
 

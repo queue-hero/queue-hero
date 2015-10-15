@@ -2,8 +2,12 @@ var http = require('http');
 var express = require('express');
 var mongoose = require('mongoose');
 var middleware = require('./config/middleware.js');
+var sockets = require('./socket_server.js');
 var app = express();
+var server = http.createServer(app);
 var port = 3000;
+
+sockets(server);
 
 // create test user
 var createTestUsers = require('./users/testUsers.js').createTestUsers;
@@ -29,7 +33,7 @@ middleware(app, express);
 
 var port = process.env.PORT || 3000;
 
-app.listen(port, function() {
+server.listen(port, function() {
   console.log('Listening on port', port);
 });
 
