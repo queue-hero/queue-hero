@@ -3,14 +3,14 @@
   <div>
     <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
       <div ng-click="ctrl.select($index)">
-        <div class="request-list-item"><span class="item-icon glyphicon glyphicon-apple"></span>Item: {{ order.item }}</div>
-        <div class="request-list-item"><span class="item-icon glyphicon glyphicon-zoom-in"></span>Details: {{ order.additionalRequests }} </div>
-        <div class="request-list-item"><span class="item-icon glyphicon glyphicon-piggy-bank"></span>Price: {{ order.moneyExchanged | currency }}</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-apple"></span>Item: {{ order.item }}</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-zoom-in"></span>Details: {{ order.additionalRequests }} </div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-piggy-bank"></span>Price: {{ order.moneyExchanged | currency }}</div>
         <div class="request-list-item">
-          <span><span class="item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'h:mm a' }} </span>
+          <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'h:mm a' }} </span>
         </div>
-        <div class="request-list-item"><span class="item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
-        <div class="request-list-item"><span class="item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
         <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>
