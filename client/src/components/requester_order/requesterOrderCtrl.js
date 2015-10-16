@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_order', [])
-  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', '$scope', 'socketFactory', function($interval, ajaxFactory, requesterFactory, $state, $scope, socketFactory) {
+  .controller('RequesterOrderCtrl', ['$interval', 'requesterOrderModel', 'requesterFactory', '$state', '$scope', 'socketFactory', function($interval, requesterOrderModel, requesterFactory, $state, $scope, socketFactory) {
     var vm = this;
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
@@ -18,7 +18,7 @@
     });
 
     vm.cancelOrder = function() {
-      ajaxFactory.cancelOrder(vm.order.transactionId)
+      requesterOrderModel.cancelOrder(vm.order.transactionId)
         .then(function(response) {
           requesterFactory.setOrder({
             additionalRequests: undefined,
@@ -42,7 +42,7 @@
 
     /*Sends notice to server that exchange occurred*/
     vm.confirmReceipt = function() {
-      ajaxFactory.orderFulfilled(vm.order.transactionId)
+      requesterOrderModel.orderFulfilled(vm.order.transactionId)
         .then(function(response) {
 
           //order is confirmed, switch ui-view to rate hero
@@ -55,7 +55,7 @@
 
     vm.rateHero = function() {
       var rating = parseInt(vm.rating, 10);
-      ajaxFactory.rateHero(rating, vm.order.queueHero, vm.order.transactionId)
+      requesterOrderModel.rateHero(rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
           requesterFactory.setOrder({
@@ -100,7 +100,7 @@
           //call getDirections
           getDirections();
         } else if (Date.now() > vm.order.meetingTime) {
-            ajaxFactory.cancelOrder(vm.order.transactionId)
+            requesterOrderModel.cancelOrder(vm.order.transactionId)
               .then(function(response) {
                 requesterFactory.setOrder({
                   additionalRequests: undefined,
@@ -130,7 +130,7 @@
 
     /*Gets directions for requester once order has been accepted*/
     function getDirections() {
-      ajaxFactory.getDirections(currentLocation, meetingLocation)
+      requesterOrderModel.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
 
           var pins = [];

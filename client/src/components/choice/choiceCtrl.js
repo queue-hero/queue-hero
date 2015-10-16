@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.choice', ['ngCookies'])
-  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$scope', function(ajaxFactory, profileFactory, $state, $cookies, heroFactory, requesterFactory, $scope) {
+  .controller('ChoiceCtrl', ['choiceModel', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$scope', function(choiceModel, profileFactory, $state, $cookies, heroFactory, requesterFactory, $scope) {
     var vm = this;
 
     if (!profileFactory.getProfile('facebookId')) {
@@ -17,7 +17,7 @@
     //when controller loads, fire GET request for user info if
     //there is a facebookId in the scope
     if(vm.facebookId) {
-      ajaxFactory.getProfileData(vm.facebookId)
+      choiceModel.getProfileData(vm.facebookId)
         .then(function successCallback(response) {
           //will be executed if status code is 200-299
           var data = response.data;
