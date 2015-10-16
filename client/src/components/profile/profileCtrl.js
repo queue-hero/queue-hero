@@ -23,18 +23,18 @@
       var count = 0;
       var ratings = profileFactory.getProfile('ratings');
       for (var key in ratings) {
-        total += Number(ratings[key]);
-        count += 1;
+        if (ratings[key] !== undefined) {
+          total += Number(ratings[key]);
+          count += 1;
+        }
       }
-      var averageRating = total/count;
-
-      if (averageRating === null || averageRating === undefined) {
-        averageRating = 'n/a';
+      if (count === 0) {
+        vm.rating = 'n/a';
       } else {
-        averageRating = averageRating.toString().slice(0, 3);
+        vm.rating = total / count;
+        profileFactory.setProfile({ 'averageRating': vm.rating });
       }
-      profileFactory.setProfile({'averageRating': averageRating});
-      vm.rating = averageRating;
+
     }
     calculateAverageRating();
 
