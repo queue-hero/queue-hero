@@ -2,13 +2,13 @@
   'use strict';
 
   angular.module('app.requester_order', [])
-  .controller('RequesterOrderCtrl', ['$interval', 'ajaxFactory', 'requesterFactory', '$state', '$scope', 'socketFactory', function($interval, ajaxFactory, requesterFactory, $state, $scope, socketFactory) {
+  .controller('RequesterOrderCtrl', ['$interval', 'requesterOrderModel', 'requesterFactory', '$state', '$scope', 'socketFactory', function($interval, requesterOrderModel, requesterFactory, $state, $scope, socketFactory) {
     var vm = this;
     vm.order = requesterFactory.getOrder();
     vm.complete = 'details';
     var currentLocation = requesterFactory.getOrder('currentLocation');
     var meetingLocation = requesterFactory.getOrder('meetingLocation');
-
+    vm.rating = '5';
     checkOrderAccepted();
 
     var checkOrder = $interval(isOrderAccepted, 1000, 0, false);
@@ -18,7 +18,7 @@
     });
 
     vm.cancelOrder = function() {
-      ajaxFactory.cancelOrder(vm.order.transactionId)
+      requesterOrderModel.cancelOrder(vm.order.transactionId)
         .then(function(response) {
           requesterFactory.setOrder({
             additionalRequests: undefined,
@@ -42,7 +42,7 @@
 
     /*Sends notice to server that exchange occurred*/
     vm.confirmReceipt = function() {
-      ajaxFactory.orderFulfilled(vm.order.transactionId)
+      requesterOrderModel.orderFulfilled(vm.order.transactionId)
         .then(function(response) {
 
           //order is confirmed, switch ui-view to rate hero
@@ -54,7 +54,8 @@
     };
 
     vm.rateHero = function() {
-      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
+      var rating = parseInt(vm.rating, 10);
+      requesterOrderModel.rateHero(rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
           requesterFactory.setOrder({
@@ -99,7 +100,7 @@
           //call getDirections
           getDirections();
         } else if (Date.now() > vm.order.meetingTime) {
-            ajaxFactory.cancelOrder(vm.order.transactionId)
+            requesterOrderModel.cancelOrder(vm.order.transactionId)
               .then(function(response) {
                 requesterFactory.setOrder({
                   additionalRequests: undefined,
@@ -129,32 +130,32 @@
 
     /*Gets directions for requester once order has been accepted*/
     function getDirections() {
-      ajaxFactory.getDirections(currentLocation, meetingLocation)
+      requesterOrderModel.getDirections(currentLocation, meetingLocation)
         .then(function(response) {
 
           var pins = [];
           //add marker for current location
           pins.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [currentLocation[1], currentLocation[0]]
             },
             "properties": {
-              "marker-color": "#D46A6A", 
+              "marker-color": "#D46A6A",
               "marker-size": "large",
               "marker-symbol": "circle"
             }
           });
           //add marker for meeting location
           pins.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [meetingLocation[1], meetingLocation[0]]
             },
             "properties": {
-              "marker-color": "#DC3C05", 
+              "marker-color": "#DC3C05",
               "marker-size": "large",
               "marker-symbol": "star"
             }

@@ -3,7 +3,7 @@
 
   angular.module('app.signup', [])
 
-  .controller('SignupCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory) {
+  .controller('SignupCtrl', ['$state', 'signupModel', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', function($state, signupModel, $cookies, profileFactory, heroFactory, requesterFactory) {
     var vm = this;
     vm.user =  profileFactory.getProfile() || {};
 
@@ -15,7 +15,7 @@
 
     vm.update = function() {
       $cookies.remove('com.queuehero');
-      ajaxFactory.postSignUp(vm.user)
+      signupModel.postSignUp(vm.user)
         //will be executed if status code is 200-299
         .then(function successCallback(response) {
           profileFactory.setProfile(vm.user);

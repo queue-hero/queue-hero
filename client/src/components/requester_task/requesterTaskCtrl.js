@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', '$scope', '$interval', 'socketFactory', function(profileFactory, requesterFactory, ajaxFactory, $state, $scope, $interval, socketFactory) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'requesterTaskModel', '$state', '$scope', '$interval', 'socketFactory', function(profileFactory, requesterFactory, requesterTaskModel, $state, $scope, $interval, socketFactory) {
       var vm = this;
       vm.itemView = false;
       var venueCache;
@@ -29,7 +29,7 @@
       };
 
       function getVenues(lat, long) {
-      ajaxFactory.getVenuesAtRequesterLocation(lat, long)
+      requesterTaskModel.getVenuesAtRequesterLocation(lat, long)
         .then(function(response) {
           vm.venues = response.data;
           venueCache = vm.venues.slice();
@@ -116,13 +116,13 @@
         }
         var youAreHere = [];
         youAreHere.push({
-          "type": "Feature", 
+          "type": "Feature",
           "geometry": {
-            "type": "Point", 
+            "type": "Point",
             "coordinates": [currentLocation[1], currentLocation[0]]
           },
           "properties": {
-            "marker-color": "#D46A6A", 
+            "marker-color": "#D46A6A",
             "marker-size": "large",
             "marker-symbol": "circle"
           }
@@ -156,7 +156,7 @@
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
-        ajaxFactory.sendOrder(vm.order)
+        requesterTaskModel.sendOrder(vm.order)
           .then(function(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({

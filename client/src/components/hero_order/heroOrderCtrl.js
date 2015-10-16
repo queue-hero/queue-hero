@@ -2,9 +2,10 @@
   'use strict';
 
   angular.module('app.hero_order', [])
-  .controller('HeroOrderCtrl', ['ajaxFactory', '$scope', '$interval', 'heroFactory', '$state', 'socketFactory', function(ajaxFactory, $scope, $interval, heroFactory, $state, socketFactory) {
+  .controller('HeroOrderCtrl', ['heroOrderModel', '$scope', '$interval', 'heroFactory', '$state', 'socketFactory', function(heroOrderModel, $scope, $interval, heroFactory, $state, socketFactory) {
     var vm = this;
     vm.complete = false;
+    vm.rating = '5';
 
     vm.order = heroFactory.getOrder();
 
@@ -29,7 +30,7 @@
 
     vm.rateRequester = function() {
       var rating = parseInt(vm.rating, 10);
-      ajaxFactory.rateRequester(rating, vm.order.requester, vm.order.transactionId)
+      heroOrderModel.rateRequester(rating, vm.order.requester, vm.order.transactionId)
         .then(function(response) {
           //clear the factory containing transaction details
           heroFactory.setOrder({

@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_task', [])
-    .controller('HeroTaskCtrl', ['ajaxFactory', '$state', 'heroFactory', '$interval', '$scope', 'socketFactory', function(ajaxFactory, $state, heroFactory, $interval, $scope, socketFactory) {
+    .controller('HeroTaskCtrl', ['heroTaskModel', '$state', 'heroFactory', '$interval', '$scope', 'socketFactory', function(heroTaskModel, $state, heroFactory, $interval, $scope, socketFactory) {
       var vm = this;
       vm.confirmView = false;
       vm.noOrdersView = false;
@@ -42,7 +42,7 @@
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests
         // $interval.cancel(refreshTasks);
-        ajaxFactory.removeFromQueue(heroFactory.getOrder('username'))
+        heroTaskModel.removeFromQueue(heroFactory.getOrder('username'))
           .then(function(response) {
             heroFactory.setOrder({
               meetingLocation: undefined,
@@ -69,7 +69,7 @@
       };
 
       vm.accept = function() {
-        ajaxFactory.confirmRequest(vm.orders[orderSelected]._id, heroFactory.getOrder('queueHero'))
+        heroTaskModel.confirmRequest(vm.orders[orderSelected]._id, heroFactory.getOrder('queueHero'))
           .then(function(response) {
             //stop refreshing the page for new requests
             $interval.cancel(refreshTasks);
