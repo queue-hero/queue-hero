@@ -8,10 +8,12 @@
           content: '@',
           type: '@'
         },
-        template: '<span ng-class="updated" class="badge pull-right {{ updated }}">{{ message }}</span>',
+        template: '<span ng-class="updated" class="badge pull-right {{ updated }}">{{ content }} &nbsp; {{ category }}</span>',
         link: function(scope, element, attrs) {
           var plural = '';
           scope.updated = '';
+          scope.category = '';
+          var count = 0;
 
           if (scope.type === 'hero') {
             plural = 'es';
@@ -19,21 +21,25 @@
             plural = 's';
           }
 
-          createMessage(scope.content);
+          createCategory(scope.content);
 
           scope.$watch('content', function() {
-            scope.updated = 'updated';
-            createMessage(scope.content);
-            $timeout(function(){
-              scope.updated = '';
-            }, 500, true);
+            if (count === 1) {
+              scope.updated = 'updated';
+              createCategory(scope.content);
+              $timeout(function() {
+                scope.updated = '';
+              }, 500, true);
+            } else {
+              count++;
+            }
           });
 
-          function createMessage(count){
+          function createCategory(count) {
             if (count === '1') {
-              scope.message = scope.content + '    ' + scope.type;
+              scope.category = scope.type;
             } else {
-              scope.message = scope.content + '    ' + scope.type + plural;
+              scope.category = scope.type + plural;
             }
           }
         }

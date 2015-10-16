@@ -22,12 +22,12 @@
 
             <div class="vendor-list row-fluid">
               <div class="title list-group-item">
-                Pick a Location
+                What is your Request?
                 <i class="center-loc pointer fa fa-location-arrow pull-right" ng-click="ctrl.getMyLocation()"><span>Center Map at your Location</span></i>
               </div>
               <button type="button" id="shop" class="list-group-item" ng-repeat="venue in ctrl.venues">
                 <div ng-click="ctrl.selectLocation(venue, $index)">
-                  <update-Change type="hero" content="{{ venue.heroes }}"></update-Change>
+                  <update-change type="hero" content="{{ venue.heroes }}"></update-change>
                   <div class="vendor"><strong>{{ $index+1 }}</strong> {{ venue.name }}</div>
                   <div class="meeting-address">{{ venue.displayAddress }}</div>
                 </div>
