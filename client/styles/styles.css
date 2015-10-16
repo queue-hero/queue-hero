@@ -468,6 +468,11 @@ body > div:first-of-type > div:first-of-type {
   height: calc((100vh - (75px + 4.7vh)) / 10);
 }
 
+#hero-task button.list-group-item {
+  font-size: unset;
+  height: unset;
+}
+
 .col-left .badge {
   font-size: 1.25vh
 }
