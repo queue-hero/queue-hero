@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.profile', [])
-  .controller('ProfileCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', 'Upload', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory, Upload) {
+  .controller('ProfileCtrl', ['$state', 'profileModel', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', 'Upload', function($state, profileModel, $cookies, profileFactory, heroFactory, requesterFactory, Upload) {
     var vm = this;
     vm.user = profileFactory.getProfile();
     vm.isEdit = false;
@@ -13,34 +13,39 @@
     } else {
       vm.user.myProfilePhoto = vm.user.profilePhoto;
     }
+    vm.removeClosed = function(transaction) {
+      var now = Date.now();
+      return (transaction.meetingTimeValid < now && transaction.status === 'unfulfilled') ? false : true;
+    };
 
     function calculateAverageRating() {
       var total = 0;
       var count = 0;
       var ratings = profileFactory.getProfile('ratings');
       for (var key in ratings) {
-        total += Number(ratings[key]);
-        count += 1;
+        if (ratings[key] !== undefined) {
+          total += Number(ratings[key]);
+          count += 1;
+        }
       }
-      var averageRating = total/count;
-      
-      if (averageRating === null || averageRating === undefined) {
-        averageRating = 'n/a';
+      if (count === 0) {
+        vm.rating = 'n/a';
       } else {
-        averageRating = averageRating.toString().slice(0, 3);
+        vm.rating = total / count;
+        profileFactory.setProfile({ 'averageRating': vm.rating });
       }
-      profileFactory.setProfile({'averageRating': averageRating});
-      vm.rating = averageRating;
+
     }
     calculateAverageRating();
 
     var getTransactionHistory = function(username) {
-      ajaxFactory.getTransactionHistory(username)
+      profileModel.getTransactionHistory(username)
         .then(function(response) {
-          vm.userTransactions = response.data;
-          for (var i = 0; i < vm.userTransactions.length; i++) {
-            vm.userTransactions[i].meetingTime = moment(vm.userTransactions[i].meetingTime).format("MMM DD YYYY, hh:mmA");   
+          for (var i = 0; i < response.data.length; i++) {
+            response.data[i].meetingTimeValid = Date.parse(response.data[i].meetingTime);
+            response.data[i].meetingTime = moment(response.data[i].meetingTime).format("MMM DD YYYY, hh:mmA");
           }
+          vm.userTransactions = response.data;
         }, function(response) {
           console.log(response.status);
         });
@@ -53,7 +58,7 @@
     };
 
     vm.update = function() {
-      ajaxFactory.postUpdatedProfile(vm.user)
+      profileModel.postUpdatedProfile(vm.user)
         //will be executed if status code is 200-299
         .then(function(response) {
           profileFactory.setProfile(vm.user);

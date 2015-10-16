@@ -33,7 +33,7 @@
               </div>
               <div class="">
                 Phone Number: <span>{{ ctrl.user.phoneNumber }}</span> <br/>
-                Rating: <span>{{ ctrl.rating }}</span>
+                Rating: <span>{{ ctrl.rating | number:2 }}</span>
               </div>
               <!--
               <div class="">
@@ -109,7 +109,7 @@
           </div> <!-- /panel-heading -->
 
           <ul class=list-group>
-            <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions">
+            <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions | filter:ctrl.removeClosed">
               <div class="transaction-hero padding" ng-show="transaction.queueHero === ctrl.user.username">
                 <p class="font-large"><span class="transaction-header">Role: Queue Hero</span><span class="transaction-header"><strong>Current Status: </strong>{{ transaction.status }}</span></p>
                 <div class="row">

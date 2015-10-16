@@ -7,7 +7,7 @@
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-zoom-in"></span>Details: {{ order.additionalRequests }} </div>
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-piggy-bank"></span>Price: {{ order.moneyExchanged | currency }}</div>
         <div class="request-list-item">
-          <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'h:mm a' }} </span>
+          <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'EEE. MMM d, h:mm a' }} </span>
         </div>
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
