@@ -397,7 +397,16 @@ body > div:first-of-type > div:first-of-type {
 .vendor {
   font-size: 1.3em;
 }
-
+.vendor-index {
+    display: inline-block;
+    height: 1.25em;
+    width: 1.25em;
+    line-height: 1.2em;
+    border-bottom: 2px solid #9bcfe9;
+    color: #555555;
+    text-align: center;
+    font-size: 1.1em;
+}
 .meeting-address {
   font-size: 1.1em;
 }
@@ -417,6 +426,7 @@ body > div:first-of-type > div:first-of-type {
 
 .col-left {
   padding: 0 15px;
+  width: 100%;
   float: left;
 }
 
@@ -427,16 +437,11 @@ body > div:first-of-type > div:first-of-type {
 .search-box {
   border-radius: 0px;
 }
+
 .fa-location-arrow:before {
-  vertical-align: middle;
-}
-
-.center-loc {
-  position: relative;
-}
-
-.center-loc span {
-  display: none;
+  height: 4.7vh;
+  line-height: 4.7vh;
+  margin-right: 15px;ertical-align: middle;
 }
 
 .center-loc:hover {
@@ -449,6 +454,8 @@ body > div:first-of-type > div:first-of-type {
   font-weight: 300;
   font-size: 2vh;
   height: 4.7vh;
+  line-height: 4.7vh;
+  padding: 0 0 0 15px;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 0px;
@@ -458,14 +465,22 @@ body > div:first-of-type > div:first-of-type {
     border-radius: 0px;
 }
 
+.list-group-item:last-child {
+    border-radius: 0px;
+}
+
 .vendor-list button.list-group-item {
-  font-size: 1.5vh;
+  font-size: 1.6vh;
   height: calc((100vh - (124px + 4.7vh)) / 10);
+  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2);
+  padding: 0 15px 0 15px;
 }
 
 .hero-location button.list-group-item {
-  font-size: 1.5vh;
+  font-size: 1.6vh;
   height: calc((100vh - (75px + 4.7vh)) / 10);
+  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2);
+  padding: 0 15px;
 }
 
 #hero-task button.list-group-item {
@@ -474,7 +489,8 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .col-left .badge {
-  font-size: 1.5vh
+  font-size: 1.6vh;
+  margin-top: 10px;
 }
 .request-list-item {
   margin: 5px 10px 5px 5px;
@@ -510,6 +526,14 @@ body > div:first-of-type > div:first-of-type {
     height: calc(100% - 85px);
     width: 100%;
   }
+
+  .vendor-list button.list-group-item {
+    font-size: 1.6vmin;
+  }
+
+  .hero-location button.list-group-item {
+    font-size: 1.6vmin;
+  }
 }
 
 
@@ -538,12 +562,21 @@ body > div:first-of-type > div:first-of-type {
   float: right;
 }
 
+#map {
+  display: none;
+}
+
 @media (min-width: 768px) {
   .col-map {
     display: block;
     padding-right: 15px;
     width: 55%;
+  }
 
+  #map {
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 
@@ -556,18 +589,6 @@ body > div:first-of-type > div:first-of-type {
 @media (min-width: 1200px) {
   .col-map {
     width: 65%;
-  }
-}
-
-#map {
-  display: none;
-}
-
-@media (min-width: 768px) {
-  #map {
-    display: block;
-    width: 100%;
-    height: 100%;
   }
 }
 
