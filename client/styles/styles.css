@@ -447,7 +447,7 @@ body > div:first-of-type > div:first-of-type {
   background-color: #2e79b9;
   color: #ffffff;
   font-weight: 300;
-  font-size: 1.75vh;
+  font-size: 2vh;
   height: 4.7vh;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
@@ -459,12 +459,12 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .vendor-list button.list-group-item {
-  font-size: 1.25vh;
+  font-size: 1.5vh;
   height: calc((100vh - (124px + 4.7vh)) / 10);
 }
 
 .hero-location button.list-group-item {
-  font-size: 1.25vh;
+  font-size: 1.5vh;
   height: calc((100vh - (75px + 4.7vh)) / 10);
 }
 
@@ -474,7 +474,7 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .col-left .badge {
-  font-size: 1.25vh
+  font-size: 1.5vh
 }
 .request-list-item {
   margin: 5px 10px 5px 5px;
