@@ -10,7 +10,7 @@
           <button type="button" id="shop" class="list-group-item" ng-repeat="location in main.locations">
             <div value="$index" ng-click="main.confirm($index)">
               <update-change type="request" content="{{ location.requests }}"></update-change>
-              <div class="vendor"><strong>{{ $index+1 }}</strong> {{ location.name }}</div>
+              <div class="vendor"><strong class="vendor-index">{{ $index+1 }}</strong> {{ location.name }}</div>
               <div class="meeting-address">{{ location.displayAddress }}</div>
             </div>
           </button>
