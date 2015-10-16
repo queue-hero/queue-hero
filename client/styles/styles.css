@@ -130,7 +130,39 @@ body > div:first-of-type > div:first-of-type {
 }
 /*----------------- home -----------------*/
 
+/* different navbar at home */
+#home .navbar {
+  background-color: transparent;
+}
+
+#home .queuehero {
+  display: none;
+}
+
+#home .container-fluid {
+  min-width: 320px;
+  width: 100%;
+}
+
+.navbar .btn-home {
+  margin-right: 15px;
+  padding: 10px 10px;
+  border-radius: 0;
+  color: #ffffff;
+  font-size: 1.3em;
+  border-top: 3px solid #ffffff;
+  border-bottom: 3px solid #ffffff;
+}
+
+.navbar .btn-home:hover {
+  border-top: 3px solid #dddddd;
+  border-bottom: 3px solid #dddddd;
+}
+
 #home {
+  position: absolute;
+  top: 0;
+  left: 0;
   background-image: url(../images/queue-hero.jpg);
   background-size: cover;
   background-position: center;
@@ -155,19 +187,28 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .landing-page-intro {
-  background-color: rgba(0,0,0,0.25);
+  background-color: rgba(0,0,0,0.4);
   border-width: 10px;
   width: fit-content;
   width: -moz-fit-content;
   width: -webkit-fit-content;
-  margin-top: -25%;
-  color: #ffffff
+  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 15%;
 }
 
 .slogan {
-  font-size: 2em;
+  font-size: 3em;
   font-family: 'Playfair Display', serif;
   color: #ffffff;
+}
+
+.subheader {
+  font-size: 1.5em;
+  font-family: 'Playfair Display', serif;
+  color: #ffffff;
+  margin-bottom: 30px;
 }
 
 .btn-fb {
@@ -197,17 +238,42 @@ body > div:first-of-type > div:first-of-type {
   .slogan {
     font-size: 1.5em;
   }
+
+  .subheader {
+    font-size: 1em;
+  }
+
+  .navbar .btn-home {
+    font-size: 1em;
+  }
 }
+
 @media (min-width:768px) {
+  .landing-page-intro {
+    margin-bottom: 15%;
+  }
+
+  #home .container-fluid {
+    width: 750px;
+  }
+
   .slogan {
     font-size: 2.75em;
   }
 
-  .landing-page-intro {
-    margin-top: -20%;
+}
+
+@media (min-width:992px) {
+  #home .container-fluid {
+    width: 970px
   }
 }
 
+@media (min-width:1200px) {
+  #home .container-fluid {
+    width: 1170px
+  }
+}
 /*----------------- choice -----------------*/
 
 .choice-hero {
@@ -479,4 +545,18 @@ body > div:first-of-type > div:first-of-type {
 }
 .your-order {
   margin-top: 0px;
+}
+
+.updated {
+  background-color: #2CD814;
+}
+
+.no-orders {
+  margin: 10px 0px 10px 0px;
+  font-size: 16px;
+  width: 380px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+  padding: 5px;
 }

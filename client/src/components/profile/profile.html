@@ -109,7 +109,7 @@
           </div> <!-- /panel-heading -->
 
           <ul class=list-group>
-            <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions">
+            <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions | filter:ctrl.removeClosed">
               <div class="transaction-hero padding" ng-show="transaction.queueHero === ctrl.user.username">
                 <p class="font-large"><span class="transaction-header">Role: Queue Hero</span><span class="transaction-header"><strong>Current Status: </strong>{{ transaction.status }}</span></p>
                 <div class="row">
