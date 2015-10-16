@@ -1,33 +1,32 @@
 <div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
-  <div>
-    <button ng-click="ctrl.removeFromQueue()">Leave Queue</button>
-  </div>
 
   <div>
     <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
-      <div  ng-click="ctrl.select($index)">
-        <div>item: {{ order.item }}</div>
-        <div>details: {{ order.additionalRequests }}</div>
-        <div>price: {{ order.moneyExchanged | currency }}</div>
-        <img src="" alt="{{ order.requester }}">
-
-        <div>
-          <span>time: {{ order.meetingTime | date : 'h:mm a' }} </span>
+      <div ng-click="ctrl.select($index)">
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-apple"></span>Item: {{ order.item }}</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-zoom-in"></span>Details: {{ order.additionalRequests }} </div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-piggy-bank"></span>Price: {{ order.moneyExchanged | currency }}</div>
+        <div class="request-list-item">
+          <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'h:mm a' }} </span>
         </div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
+        <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>
-
-    <div ng-show="ctrl.confirmView">
-      Are you sure you want to take this mission?
-      <button ng-click="ctrl.cancel()">Cancel</button>
-      <button ng-click="ctrl.accept()">Submit</button>
+    <div class="no-orders" ng-show="ctrl.noOrdersView">
+      (︶︹︶) Sorry, but there are no open requests for this location at the moment.
     </div>
-
-    <div ng-show="ctrl.noOrdersView">
-      Sorry, there are no orders for this location right now!
+    <div>
+      <button class="btn btn-danger" ng-click="ctrl.removeFromQueue()">Leave Queue</button>
     </div>
-
+    <div class="list-group-item" ng-show="ctrl.confirmView">
+      <div>Are you sure you want to take this mission?</div>
+      <div class="confirm-mission">
+        <button class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
+        <button class="btn-confirm-mission" ng-click="ctrl.accept()">Confirm</button>
+      </div>
+    </div>    
   </div>
-
 
 </div>

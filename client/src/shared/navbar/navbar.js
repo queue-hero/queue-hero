@@ -7,8 +7,13 @@
         restrict: 'E',
         templateUrl: 'src/shared/navbar/navbar.html',
         link: function(scope, elem, attrs) {
+          if (profileFactory.getProfile('firstName') !== undefined) {
+            scope.name = profileFactory.getProfile('firstName') + " " + profileFactory.getProfile('lastName');
+          }
 
-          scope.name = profileFactory.getProfile('firstName') + " " + profileFactory.getProfile('lastName');
+          scope.$on('gotname', function() {
+            scope.name = profileFactory.getProfile('firstName') + " " + profileFactory.getProfile('lastName');
+          });
 
           scope.isLoggedIn = function() {
             return ($state.is('home') || $state.is('signup')) ? false : true;
