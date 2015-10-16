@@ -14,22 +14,19 @@
         <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>
+    <div class="no-orders" ng-show="ctrl.noOrdersView">
+      (︶︹︶) Sorry, but there are no open requests for this location at the moment.
+    </div>
     <div>
-      <button class="btn-leaveQ" ng-click="ctrl.removeFromQueue()"> << Back</button>
+      <button class="btn-leaveQ" ng-click="ctrl.removeFromQueue()">Back</button>
     </div>
     <div class="list-group-item" ng-show="ctrl.confirmView">
       <div>Are you sure you want to take this mission?</div>
       <div class="confirm-mission">
-        <button class="btn-leaveQ" ng-click="ctrl.cancel()"> << Back</button>
+        <button class="btn-leaveQ" ng-click="ctrl.cancel()"> Back</button>
         <button class="btn-confirm-mission" ng-click="ctrl.accept()">Confirm</button>
       </div>
-    </div>
-
-    <div ng-show="ctrl.noOrdersView">
-      Sorry, there are no orders for this location right now!
-    </div>
-
+    </div>    
   </div>
-
-
+  
 </div>
