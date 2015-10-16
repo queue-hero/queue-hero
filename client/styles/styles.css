@@ -428,21 +428,6 @@ body > div:first-of-type > div:first-of-type {
   padding: 0 15px;
   width: 100%;
   float: left;
-<<<<<<< HEAD
-}
-
-.col-left-hero {
-  padding: 0 15px;
-  float: left;
-  overflow: hidden;
-  overflow-y: scroll;
-  height: 100%;
-}
-
-.title {
-
-=======
->>>>>>> 7fc32cdeb01987d593929c5d80638ba8d206d5f0
 }
 
 .search-bar > .input-group {
