@@ -8,7 +8,7 @@
     vm.complete = 'details';
     var currentLocation = requesterFactory.getOrder('currentLocation');
     var meetingLocation = requesterFactory.getOrder('meetingLocation');
-
+    vm.rating = '5';
     checkOrderAccepted();
 
     var checkOrder = $interval(isOrderAccepted, 1000, 0, false);
@@ -54,7 +54,8 @@
     };
 
     vm.rateHero = function() {
-      ajaxFactory.rateHero(vm.rating, vm.order.queueHero, vm.order.transactionId)
+      var rating = parseInt(vm.rating, 10);
+      ajaxFactory.rateHero(rating, vm.order.queueHero, vm.order.transactionId)
         .then(function(response) {
 
           requesterFactory.setOrder({
@@ -135,26 +136,26 @@
           var pins = [];
           //add marker for current location
           pins.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [currentLocation[1], currentLocation[0]]
             },
             "properties": {
-              "marker-color": "#D46A6A", 
+              "marker-color": "#D46A6A",
               "marker-size": "large",
               "marker-symbol": "circle"
             }
           });
           //add marker for meeting location
           pins.push({
-            "type": "Feature", 
+            "type": "Feature",
             "geometry": {
-              "type": "Point", 
+              "type": "Point",
               "coordinates": [meetingLocation[1], meetingLocation[0]]
             },
             "properties": {
-              "marker-color": "#DC3C05", 
+              "marker-color": "#DC3C05",
               "marker-size": "large",
               "marker-symbol": "star"
             }
