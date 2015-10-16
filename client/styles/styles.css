@@ -102,7 +102,7 @@ body > div:first-of-type > div:first-of-type {
 .navbar {
   background-color: #3e454b;
   border-bottom: 0px;
-  height: 45px;
+  height: 50px;
 }
 
 .navbar .btn-blue {
@@ -336,6 +336,19 @@ body > div:first-of-type > div:first-of-type {
   font-size: 1.1em;
 }
 
+.view-container {
+  position: absolute;
+  left: 0px;
+  height: calc(100% - 80px);
+  width: 100%;
+  overflow: hidden;
+}
+
+.view-container .row-fluid:first-of-type {
+  height: 100%;
+  width: 100%;
+}
+
 .col-left {
   padding: 0 15px;
   float: left;
@@ -348,13 +361,18 @@ body > div:first-of-type > div:first-of-type {
 .search-box {
   border-radius: 0px;
 }
+.fa-location-arrow:before {
+  vertical-align: middle;
+}
 
 .center-loc {
   position: relative;
 }
+
 .center-loc span {
   display: none;
 }
+
 .center-loc:hover {
   color: #3e454b;
 }
@@ -363,7 +381,8 @@ body > div:first-of-type > div:first-of-type {
   background-color: #2e79b9;
   color: #ffffff;
   font-weight: 300;
-  font-size: 1.4em;
+  font-size: 1.75vh;
+  height: 4.7vh;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 0px;
@@ -373,30 +392,25 @@ body > div:first-of-type > div:first-of-type {
     border-radius: 0px;
 }
 
-.view-container {
-  position: absolute;
-  left: 0px;
-  height: 93%;
-  width: 100%;
+.vendor-list button.list-group-item {
+  font-size: 1.25vh;
+  height: calc((100vh - (124px + 4.7vh)) / 10);
 }
 
-.view-container .row-fluid:first-of-type {
-  height: 100%;
-  width: 100%;
+.hero-location button.list-group-item {
+  font-size: 1.25vh;
+  height: calc((100vh - (75px + 4.7vh)) / 10);
 }
 
-@media (min-width: 768px) {
-  .col-left {
-    width: 35%;
-  }
+.col-left .badge {
+  font-size: 1.25vh
 }
-
 .request-list-item {
   margin: 5px 10px 5px 5px;
 }
 
 .request-item-icon {
-  margin-right: 10px;
+  margin: 0 15px 0 10px;
 }
 
 .confirm-mission {
@@ -414,6 +428,31 @@ body > div:first-of-type > div:first-of-type {
   background-color: #58b957;
 }
 
+@media (min-width: 768px) {
+  .col-left {
+    width: 45%;
+  }
+
+  .view-container {
+    position: absolute;
+    left: 0px;
+    height: calc(100% - 85px);
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 992px) {
+  .col-left {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-left {
+    width: 35%;
+  }
+}
 /*----------------- requester task map -----------------*/
 
 .map-container {
@@ -422,11 +461,33 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .col-map {
-  padding-right: 15px;
-  width: 65%;
+  display: none;
   height: 100%;
+  width: 100%;
   float: right;
 }
+
+@media (min-width: 768px) {
+  .col-map {
+    display: block;
+    padding-right: 15px;
+    width: 55%;
+
+  }
+}
+
+@media (min-width: 992px) {
+  .col-map {
+    width: 60%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-map {
+    width: 65%;
+  }
+}
+
 #map {
   display: none;
 }
