@@ -3,7 +3,8 @@
     <p class="queuehero navbar-text pull-left">Queue Hero</p>
     <div class="pull-right">
       <a ui-sref="profile" type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn() && !isCurrentState('profile')">{{ name }}</a>
-      <a href="/auth/facebook" type="button" class="btn btn-blue navbar-btn" ng-show="isCurrentState('home')">Log In</a>
+      <a href="#" type="button" class="btn btn-home navbar-btn" ng-show="isCurrentState('home')">Discover Queue Hero</a>
+      <a href="#" type="button" class="btn btn-home navbar-btn" ng-show="isCurrentState('home')">About Us</a>
       <button type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn() && !isCurrentState('choice') && !inTransaction()" ng-click="goToState('choice')">Choice</button>
       <button type="button" class="btn btn-blue navbar-btn" ng-show="isLoggedIn()" ng-click="logout()">Sign Out</button>
     </div>
