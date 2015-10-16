@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'ajaxFactory', 'heroFactory', 'profileFactory', '$interval', '$scope', 'socketFactory', function($state, ajaxFactory, heroFactory, profileFactory, $interval, $scope, socketFactory) {
+  .controller('HeroLocationCtrl', ['$state', 'heroLocationModel', 'heroFactory', 'profileFactory', '$interval', '$scope', 'socketFactory', function($state, heroLocationModel, heroFactory, profileFactory, $interval, $scope, socketFactory) {
 
     var vm = this;
     vm.selection = undefined;
@@ -16,7 +16,7 @@
     var lat = location[0];
     var long = location[1];
 
-    ajaxFactory.getVenuesAtHeroLocation(lat, long)
+    heroLocationModel.getVenuesAtHeroLocation(lat, long)
       //will be executed if status code is 200-299
       .then(function(response) {
         vm.locations = response.data;
@@ -46,7 +46,7 @@
 
     function getAllRequests(locations) {
       locations.forEach(function(location) {
-        ajaxFactory.getOpenRequests(location.yelpId)
+        heroLocationModel.getOpenRequests(location.yelpId)
           .then(function(response) {
             vm.orders[location.yelpId] = response.data;
 
@@ -68,7 +68,7 @@
       var venue = vm.locations[index];
 
       //set location of hero to selected venue
-      ajaxFactory.setHeroLocation(queueHero, venue)
+      heroLocationModel.setHeroLocation(queueHero, venue)
         //will be executed if status code is 200-299,
         .then(function(response) {
           heroFactory.setOrder({

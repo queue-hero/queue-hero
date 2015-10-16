@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.profile', [])
-  .controller('ProfileCtrl', ['$state', 'ajaxFactory', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', 'Upload', function($state, ajaxFactory, $cookies, profileFactory, heroFactory, requesterFactory, Upload) {
+  .controller('ProfileCtrl', ['$state', 'profileModel', '$cookies', 'profileFactory', 'heroFactory', 'requesterFactory', 'Upload', function($state, profileModel, $cookies, profileFactory, heroFactory, requesterFactory, Upload) {
     var vm = this;
     vm.user = profileFactory.getProfile();
     vm.isEdit = false;
@@ -39,7 +39,7 @@
     calculateAverageRating();
 
     var getTransactionHistory = function(username) {
-      ajaxFactory.getTransactionHistory(username)
+      profileModel.getTransactionHistory(username)
         .then(function(response) {
           for (var i = 0; i < response.data.length; i++) {
             response.data[i].meetingTimeValid = Date.parse(response.data[i].meetingTime);
@@ -58,7 +58,7 @@
     };
 
     vm.update = function() {
-      ajaxFactory.postUpdatedProfile(vm.user)
+      profileModel.postUpdatedProfile(vm.user)
         //will be executed if status code is 200-299
         .then(function(response) {
           profileFactory.setProfile(vm.user);

@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+
   angular.module('app', [
     'ui.router',
     'ui.bootstrap',
@@ -17,6 +18,8 @@
     'app.requester_task',
     'app.requester_order',
   ])
+  .constant('herokuUrl', 'https://queue-hero.herokuapp.com')
+  .constant('serverUrl', document.location.hostname === 'localhost' ? 'http://localhost:3000' : herokuUrl)
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');
