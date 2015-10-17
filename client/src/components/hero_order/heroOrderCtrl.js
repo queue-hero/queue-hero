@@ -5,7 +5,6 @@
   .controller('HeroOrderCtrl', ['heroOrderModel', '$scope', '$interval', 'heroFactory', '$state', 'socketFactory', function(heroOrderModel, $scope, $interval, heroFactory, $state, socketFactory) {
     var vm = this;
     vm.complete = false;
-    vm.rating = '5';
 
     vm.order = heroFactory.getOrder();
 
