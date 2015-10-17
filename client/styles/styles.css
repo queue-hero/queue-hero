@@ -419,7 +419,7 @@ body > div:first-of-type > div:first-of-type {
   overflow: hidden;
 }
 
-.view-container .row-fluid:first-of-type {
+.view-container > .row-fluid {
   height: 100%;
   width: 100%;
 }
@@ -428,20 +428,23 @@ body > div:first-of-type > div:first-of-type {
   padding: 0 15px;
   width: 100%;
   float: left;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .search-bar > .input-group {
   margin-bottom: 15px;
 }
 
+.search-bar,
 .search-box {
-  border-radius: 0px;
+  border-radius: 0;
 }
 
 .fa-location-arrow:before {
-  height: 4.7vh;
-  line-height: 4.7vh;
-  margin-right: 15px;ertical-align: middle;
+  margin-right: 15px;
+  vertical-align: middle;
 }
 
 .center-loc:hover {
@@ -452,10 +455,7 @@ body > div:first-of-type > div:first-of-type {
   background-color: #2e79b9;
   color: #ffffff;
   font-weight: 300;
-  font-size: 2vh;
-  height: 4.7vh;
-  line-height: 4.7vh;
-  padding: 0 0 0 15px;
+  font-size: 1.3em;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 0px;
@@ -469,29 +469,11 @@ body > div:first-of-type > div:first-of-type {
     border-radius: 0px;
 }
 
-.vendor-list button.list-group-item {
-  font-size: 1.6vh;
-  height: calc((100vh - (124px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2);
-  padding: 0 15px 0 15px;
-}
-
-.hero-location button.list-group-item {
-  font-size: 1.6vh;
-  height: calc((100vh - (75px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2);
-  padding: 0 15px;
-}
-
 #hero-task button.list-group-item {
   font-size: unset;
   height: unset;
 }
 
-.col-left .badge {
-  font-size: 1.6vh;
-  margin-top: 10px;
-}
 .request-list-item {
   margin: 5px 10px 5px 5px;
 }
@@ -526,16 +508,7 @@ body > div:first-of-type > div:first-of-type {
     height: calc(100% - 85px);
     width: 100%;
   }
-
-  .vendor-list button.list-group-item {
-    font-size: 1.6vmin;
-  }
-
-  .hero-location button.list-group-item {
-    font-size: 1.6vmin;
-  }
 }
-
 
 @media (min-width: 992px) {
   .col-left {
