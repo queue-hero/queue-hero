@@ -35,13 +35,7 @@ var paths = {
   // all our client app js files, not including 3rd party js files
   scripts: ['client/src/**/*.js'],
   html: ['client/src/**/*.html'],
-  styles: [
-    'client/styles/*.css',
-    'client/bower_components/normalize-css/normalize.css',
-    'client/bower_components/bootstrap/dist/css/bootstrap.min.css',
-    'client/bower_components/mapbox.js/mapbox.css',
-    'client/bower_components/font-awesome-bower/css/font-awesome.css'
-  ],
+  styles: ['client/styles/*.css'],
   test: ['specs/**/*.js'],
   images: ['client/images/*']
 };
@@ -90,10 +84,15 @@ gulp.task('copy-html', function() {
     .pipe(gulp.dest('./build/'));
 });
 
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('build/bower_components'));
+});
+
 gulp.task('move-index', function() {
   gulp.src('client/index_gulp.html')
     .pipe(rename('index.html'))
     .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index']);
+gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index','bower']);
