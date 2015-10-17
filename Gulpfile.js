@@ -26,8 +26,8 @@ var jsScripts = [
   'client/bower_components/moment/min/moment-with-locales.min.js',
   'client/bower_components/underscore/underscore-min.js',
   'client/bower_components/mapbox.js/mapbox.js',
-  'client/src/app.js',
-  'client/src/**/*.js'
+  'client/src/**/*.js',
+  'client/src/app.js'
 ];
 
 // the paths to our app files
@@ -35,7 +35,13 @@ var paths = {
   // all our client app js files, not including 3rd party js files
   scripts: ['client/src/**/*.js'],
   html: ['client/src/**/*.html'],
-  styles: ['client/styles/*.css'],
+  styles: [
+    'client/styles/*.css',
+    'client/bower_components/normalize-css/normalize.css',
+    'client/bower_components/bootstrap/dist/css/bootstrap.min.css',
+    'client/bower_components/mapbox.js/mapbox.css',
+    'client/bower_components/font-awesome-bower/css/font-awesome.css'
+  ],
   test: ['specs/**/*.js'],
   images: ['client/images/*']
 };
@@ -57,6 +63,7 @@ gulp.task('convert-js', function() {
     .pipe(concat('queueHero.min.js', {
       newLine: '\n'
     }))
+    .pipe(gulp.dest('build/reg/'))
     .pipe(uglify())
     .pipe(gulp.dest('build/'))
     .pipe(filesize())
@@ -90,18 +97,4 @@ gulp.task('move-index', function() {
     .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('bower', function() {
-  return bower()
-    .pipe(gulp.dest('build/bower_components'));
-});
-
-gulp.task('serve', function() {
-  nodemon({
-    script: 'index.js',
-    ignore: 'node_modules/**/*.js'
-  });
-});
-
 gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index']);
-gulp.task('deploy', ['bower']);
-// gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);

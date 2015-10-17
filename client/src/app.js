@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app', [
@@ -16,7 +16,7 @@
     'app.hero_task',
     'app.hero_order',
     'app.requester_task',
-    'app.requester_order',
+    'app.requester_order'
   ])
   .constant('herokuUrl', 'https://queue-hero.herokuapp.com')
   .constant('serverUrl', document.location.hostname === 'localhost' ? 'http://localhost:3000' : herokuUrl)
