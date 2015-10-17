@@ -63,7 +63,6 @@ gulp.task('convert-js', function() {
     .pipe(concat('queueHero.min.js', {
       newLine: '\n'
     }))
-    .pipe(gulp.dest('build/reg/'))
     .pipe(uglify())
     .pipe(gulp.dest('build/'))
     .pipe(filesize())

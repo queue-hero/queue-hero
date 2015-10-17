@@ -19,7 +19,7 @@
     'app.requester_order'
   ])
   .constant('herokuUrl', 'https://queue-hero.herokuapp.com')
-  .constant('serverUrl', document.location.hostname === 'localhost' ? 'http://localhost:3000' : herokuUrl)
+  .constant('serverUrl', document.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://queue-hero.herokuapp.com')
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');
