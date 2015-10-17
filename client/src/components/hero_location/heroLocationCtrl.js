@@ -26,8 +26,6 @@
 
         socketFactory.on('newRequestCount', function(data) {
           //listen for changes in queueHero counts
-          var yelpId = data[0];
-          var heroCount = data[1];
 
           var vendor = _.findWhere(vm.locations, { yelpId: data[0] });
           if (vendor !== undefined) {

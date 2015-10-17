@@ -16,6 +16,7 @@
         currentLocation: undefined,
         meetingTime: undefined,
         status: undefined,
+        averageRating: undefined,
         additionalRequests: undefined
       };
 

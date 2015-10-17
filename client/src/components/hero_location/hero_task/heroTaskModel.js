@@ -24,6 +24,14 @@
       });
     };
 
+    model.getRequesterRating = function(requester) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/hero/task/rating',
+        params: { username: requester }
+      });
+    };
+
     return model;
 
   }]);
