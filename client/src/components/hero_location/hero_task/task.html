@@ -10,7 +10,7 @@
           <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'EEE. MMM d, h:mm a' }} </span>
         </div>
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: {{ ctrl.ratings[$index] }}</div>
         <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>

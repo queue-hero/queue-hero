@@ -9,10 +9,25 @@
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
       var OrderCache;
       var orderSelected;
+      vm.ratings = [];
       //test to see if there is lag when open requests are initially shown
       // if it is laggy, we can use the below line as a starting point
-      // vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
+      vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
       vm.vendor = heroFactory.getOrder('vendor');
+
+      _.each(vm.orders, function(item) {
+        heroTaskModel.getRequesterRating(item.requester)
+          .then(function(response) {
+            for (var i = 0; i < vm.orders.length; i++) {
+              if (vm.orders[i].requester === response.data.username) {
+                vm.ratings[i] = response.data.averageRating;
+                heroFactory.setOrder('averageRating');
+
+                break;
+              }
+            }
+          });
+      });
 
       socketFactory.on('newOpenRequests', function(requests) {
         if (!vm.confirmView) {

@@ -34,6 +34,23 @@ function findOccurenceInCheckins(yelpID, checkins) {
   return occurence;
 }
 
+function calculateAverageRating(ratings) {
+  var total = 0;
+  var count = 0;
+  for (var key in ratings) {
+    if (ratings[key] !== undefined) {
+      total += Number(ratings[key]);
+      count += 1;
+    }
+  }
+  if (count === 0) {
+    return undefined;
+  } else {
+    return total / count;
+  }
+}
+
+
 module.exports = {
   createTransaction: function(req, res, next) {
     //extract order details from req
@@ -150,7 +167,6 @@ module.exports = {
     var rating = req.body.rating;
     var queueHero = req.body.queueHero;
     var transactionId = req.body.transactionId;
-    console.log('rating hero for transaction ', transactionId);
 
     User.findOne({
       username: queueHero
@@ -165,10 +181,12 @@ module.exports = {
       }
       var ratings = user.ratings;
       ratings[transactionId] = rating;
+      var averageRating = calculateAverageRating(ratings);
       User.update({
         username: queueHero
       }, {
-        ratings: ratings
+        ratings: ratings,
+        averageRating: averageRating
       }, function(err, rowsAffected) {
         if (err) {
           res.status(500).send();

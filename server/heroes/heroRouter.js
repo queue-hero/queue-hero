@@ -23,6 +23,10 @@ module.exports = function(app) {
 
   app.post('/task/removal', heroCtrl.removeFromCheckin);
 
+
+  app.get('/task/rating', heroCtrl.getRequesterRating);
+
+
   // req: rating, requester, transactionId
   // res: 201 or error
   app.post('/order/rate', heroCtrl.rateRequester);

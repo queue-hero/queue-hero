@@ -44,7 +44,8 @@
             status: undefined,
             transactionId: undefined,
             vendor: undefined,
-            vendorYelpId: undefined
+            vendorYelpId: undefined,
+            averageRating: undefined
           });
 
           //circle back to choice
