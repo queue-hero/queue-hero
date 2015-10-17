@@ -98,6 +98,12 @@ body > div:first-of-type > div:first-of-type {
   font-size: 1.25em
 }
 
+button,
+.button,
+.btn {
+  outline: none;
+}
+
 /*----------------- navbar -----------------*/
 .navbar {
   background-color: #3e454b;
