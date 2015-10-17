@@ -18,7 +18,7 @@
       (︶︹︶) Sorry, but there are no open requests for this location at the moment.
     </div>
     <div>
-      <button class="btn-leave btn btn-danger" ng-click="ctrl.removeFromQueue()">Leave Queue</button>
+      <button class="btn-leave btn btn-danger" ng-click="ctrl.removeFromQueue()" ng-hide="ctrl.confirmView">Leave Queue</button>
     </div>
     <div class="list-group-item" ng-show="ctrl.confirmView">
       <p>Are you sure you want to take this mission?</p>
