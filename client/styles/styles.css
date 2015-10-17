@@ -104,6 +104,10 @@ button,
   outline: none;
 }
 
+.radius-one {
+  border-radius: 1px;
+}
+
 /*----------------- navbar -----------------*/
 .navbar {
   background-color: #3e454b;
@@ -153,7 +157,7 @@ button,
 .navbar .btn-home {
   margin-right: 15px;
   padding: 10px 10px;
-  border-radius: 0;
+  border-radius: 1px;
   color: #ffffff;
   font-size: 1.3em;
   border-top: 3px solid #ffffff;
@@ -302,13 +306,13 @@ button,
 
 .panel {
   border: 0px transparent;
-  border-radius: 0px;
+  border-radius: 1px;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 .panel-heading {
-  border-radius: 0px;
+  border-radius: 1px;
 }
 
 .edit-profile {
@@ -445,7 +449,7 @@ button,
 
 .search-bar,
 .search-box {
-  border-radius: 0;
+  border-radius: 1px;
 }
 
 .fa-location-arrow:before {
@@ -464,15 +468,15 @@ button,
   font-size: 1.3em;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
-  border-radius: 0px;
+  border-radius: 1px;
 }
 
 .list-group-item:first-child {
-    border-radius: 0px;
+    border-radius: 1px;
 }
 
 .list-group-item:last-child {
-    border-radius: 0px;
+    border-radius: 1px;
 }
 
 #hero-task button.list-group-item {
@@ -498,8 +502,6 @@ button,
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
-  border-radius: 1px;
-  box-shadow: 1px 1px 5px #333333;
   background-color: #58b957;
 }
 
@@ -608,6 +610,5 @@ button,
   width: 380px;
   background-color: #ffffff;
   border: 1px solid #ffffff;
-  border-radius: 10px;
   padding: 5px;
 }
