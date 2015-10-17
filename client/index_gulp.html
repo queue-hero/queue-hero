@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en' ng-app="app">
+<html lang='en'>
   <head>
     <meta charset="UTF-8">
     <title>Queue-Hero</title>
@@ -13,12 +13,13 @@
     <link href='https://fonts.googleapis.com/css?family=Lato:100,300,400' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display' rel='stylesheet' type='text/css'>
   </head>
-  <body>
+  <script src="queueHero.min.js"></script>
+
+  <body  ng-app="app">
 
     <div ui-view></div>
 
-    <script src="queueHero.min.js"></script>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
 
   </body>
 </html>

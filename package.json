@@ -2,10 +2,10 @@
   "name": "queue-hero",
   "version": "1.0.0",
   "description": "Find your hero",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "gulp clean && gulp",
-    "postinstall": "bower install && gulp clean && gulp deploy && gulp default"
+    "postinstall": "bower install && gulp clean && gulp default"
   },
   "repository": {
     "type": "git",
