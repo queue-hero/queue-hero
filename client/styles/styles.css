@@ -532,7 +532,7 @@ input {
 
 @media (min-width: 768px) {
   .col-left {
-    width: 45%;
+    width: 50%;
   }
 
   .view-container {
@@ -545,13 +545,13 @@ input {
 
 @media (min-width: 992px) {
   .col-left {
-    width: 40%;
+    width: 45%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-left {
-    width: 35%;
+    width: 40%;
   }
 }
 /*----------------- requester task map -----------------*/
@@ -576,7 +576,7 @@ input {
   .col-map {
     display: block;
     padding-right: 15px;
-    width: 55%;
+    width: 50%;
   }
 
   #map {
@@ -588,13 +588,13 @@ input {
 
 @media (min-width: 992px) {
   .col-map {
-    width: 60%;
+    width: 55%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-map {
-    width: 65%;
+    width: 60%;
   }
 }
 
