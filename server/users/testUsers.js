@@ -81,19 +81,21 @@ function simulate() {
   });
 
   _.each(tests.testTransactions, function(transaction) {
-    if (Math.random() > 0.85) {
-      transaction.status = 'unfulfilled';
-      var newTransaction = new Transaction(transaction);
-      newTransaction.save(function(err) {
-        if (err) {
-          console.log(err);
-        }
-      });
+    if (Math.random() > 0.9) {
+      if (transaction.vendorYelpId !== 'specialtys-cafe-and-bakery-san-francisco-12') {
+        transaction.status = 'unfulfilled';
+        var newTransaction = new Transaction(transaction);
+        newTransaction.save(function(err) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
     }
   });
 
   _.each(tests.testCheckins, function(checkin) {
-    if (Math.random() > 0.85) {
+    if (Math.random() > 0.9) {
       var newCheckin = new Checkin(checkin);
       newCheckin.save(function(err) {
         if (err) {
