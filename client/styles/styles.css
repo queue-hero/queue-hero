@@ -479,22 +479,36 @@ input {
   height: unset;
 }
 
+.hero-task-list {
+  width: 100%;
+}
+
+.meeting-time,
+.money-exchanged {
+  border-bottom: 2px solid #eeeeee;
+}
+
 .request-list-item {
-  margin: 5px 10px 5px 5px;
+  margin-bottom: 10px;
 }
 
+.order-additional-detail {
+  margin-bottom: 0;
+}
 .request-item-icon {
-  margin: 0 15px 0 10px;
+  padding: 0 10px 0 0;
 }
-
 .btn-leave {
   margin: 15px 0;
 }
 
 .confirm-mission {
+  -webkit-display: flex;
   display: flex;
+  -webkit-justify-content: center;
   justify-content: center;
-  align-items: center
+  -webkit-align-items: center;
+  align-items: center;
   width: 100%;
 }
 

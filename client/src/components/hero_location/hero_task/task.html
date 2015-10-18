@@ -2,23 +2,42 @@
 
   <div>
     <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
-      <div ng-click="ctrl.select($index)">
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-apple"></span>Item: {{ order.item }}</div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-zoom-in"></span>Details: {{ order.additionalRequests }} </div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-piggy-bank"></span>Price: {{ order.moneyExchanged | currency }}</div>
-        <div class="request-list-item">
-          <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'EEE. MMM d, h:mm a' }} </span>
+      <div class="hero-task-list" ng-click="ctrl.select($index)">
+        <div class="row-fluid">
+          <div class="col-sm-6 request-list-item font-large meeting-time">
+            <span class="request-item-icon"></span>{{ order.meetingTime | date : ' M/d, h:mm a' }}
+          </div>
+          <div class="col-sm-6 request-list-item font-large money-exchanged">
+            <span class="request-item-icon"></span>{{ order.moneyExchanged | currency }}
+          </div>
         </div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: {{ ctrl.ratings[$index] }}</div>
-        <!-- <img src="" alt="{{ order.requester }}"> -->
+        <div class="row-fluid">
+          <div class="col-sm-6 request-list-item order-requester">
+            <span class="request-item-icon glyphicon glyphicon-user"></span>{{ order.requester }}
+          </div>
+          <div class="col-sm-6 request-list-item requester-rating">
+            <span class="request-item-icon glyphicon glyphicon-star"></span>{{ ctrl.ratings[$index] }}
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="col-sm-12 request-list-item order-item">
+            <span class="request-item-icon glyphicon glyphicon-apple"></span>{{ order.item }}
+          </div>
+        </div>
+        <div class="row-fluid">
+          <div class="col-sm-12 request-list-item order-additional-detail">
+            <span class="request-item-icon glyphicon glyphicon-zoom-in"></span>{{ order.additionalRequests }}
+          </div>
+        </div>
       </div>
     </button>
+
     <div class="no-orders" ng-show="ctrl.noOrdersView">
       (︶︹︶) Sorry, but there are no open requests for this location at the moment.
     </div>
+
     <div>
-      <button class="btn-leave btn btn-danger" ng-click="ctrl.removeFromQueue()">Leave Queue</button>
+      <button class="btn-leave btn btn-danger" ng-click="ctrl.removeFromQueue()" ng-hide="ctrl.confirmView">Leave Queue</button>
     </div>
     <div class="list-group-item" ng-show="ctrl.confirmView">
       <p>Are you sure you want to take this mission?</p>
@@ -27,6 +46,6 @@
         <button class="btn btn-confirm-mission" ng-click="ctrl.accept()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Confirm</button>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
