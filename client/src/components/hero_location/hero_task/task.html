@@ -10,7 +10,7 @@
           <span><span class="request-item-icon glyphicon glyphicon-time"></span>Time: {{ order.meetingTime | date : 'EEE. MMM d, h:mm a' }} </span>
         </div>
         <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-user"></span>Requester: {{ order.requester }}</div>
-        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: 4.5</div>
+        <div class="request-list-item"><span class="request-item-icon glyphicon glyphicon-star"></span>Requester Score: {{ ctrl.ratings[$index] }}</div>
         <!-- <img src="" alt="{{ order.requester }}"> -->
       </div>
     </button>
@@ -18,15 +18,15 @@
       (︶︹︶) Sorry, but there are no open requests for this location at the moment.
     </div>
     <div>
-      <button class="btn btn-danger" ng-click="ctrl.removeFromQueue()">Leave Queue</button>
+      <button class="btn-leave btn btn-danger" ng-click="ctrl.removeFromQueue()">Leave Queue</button>
     </div>
     <div class="list-group-item" ng-show="ctrl.confirmView">
-      <div>Are you sure you want to take this mission?</div>
+      <p>Are you sure you want to take this mission?</p>
       <div class="confirm-mission">
-        <button class="btn btn-danger" ng-click="ctrl.cancel()">Cancel</button>
-        <button class="btn-confirm-mission" ng-click="ctrl.accept()">Confirm</button>
+        <button class="btn btn-danger" ng-click="ctrl.cancel()"><span class="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>Cancel</button>
+        <button class="btn btn-confirm-mission" ng-click="ctrl.accept()"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span>Confirm</button>
       </div>
-    </div>    
+    </div>
   </div>
 
 </div>

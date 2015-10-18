@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app.hero_task')
@@ -21,6 +21,14 @@
         method: 'POST',
         url: serverUrl + '/hero/task/removal',
         data: { username: username }
+      });
+    };
+
+    model.getRequesterRating = function(requester) {
+      return $http({
+        method: 'GET',
+        url: serverUrl + '/hero/task/rating',
+        params: { username: requester }
       });
     };
 

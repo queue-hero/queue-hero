@@ -1,4 +1,4 @@
-(function(){
+;(function(){
   'use strict';
 
   angular.module('app').factory('socketFactory', ['$rootScope', function($rootScope) {

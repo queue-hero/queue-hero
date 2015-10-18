@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app')
@@ -16,6 +16,7 @@
         currentLocation: undefined,
         meetingTime: undefined,
         status: undefined,
+        averageRating: undefined,
         additionalRequests: undefined
       };
 

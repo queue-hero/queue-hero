@@ -111,7 +111,7 @@ function pickRandomUser(username) {
 
 var item = ['coffee', 'sandwich', 'taco', 'bread', 'frappe', 'milkshake', 'chips'];
 var additionalRequests = ['napkins', 'i need it now', 'mmm hungry', 'hold the sauce', 'extra tip if you get there on time'];
-
+var averageRating = [3, 3.5, 4, 4.5, 3.6666];
 //not being used, purely for reference
 var meetingLocationExamples = {
   mks: [37.787518, -122.399868],
@@ -133,12 +133,13 @@ for (var key in pool) {
   user.lastName = 'smith';
   user.password = 'password';
   user.facebookId = facebookId;
+  user.averageRating = averageRating[_.random(0, averageRating.length - 1)];
   users.push(user);
 
   var transaction = {};
   var checkin = {};
   transaction.requester = username;
-  transaction.meetingTime = Date.now() + 60000 * _.random(10, 15);
+  transaction.meetingTime = Date.now() + 60000 * _.random(30, 45);
   transaction.moneyExchanged = _.random(1, 15);
   transaction.additionalRequests = additionalRequests[_.random(0, additionalRequests.length - 1)];
   checkin.queueHero = username;
