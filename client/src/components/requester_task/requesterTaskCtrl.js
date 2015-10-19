@@ -9,7 +9,10 @@
       vm.result1 = '';
       vm.options1 = null;
       vm.details1 = '';
+
+    // check if map view iew on mobile
       vm.isMapView = false;
+    // check if width of window is not mobile (768px)
       vm.isNotMobileWidth = $window.innerWidth <= 768;
 
       vm.order = requesterFactory.getOrder();
@@ -17,7 +20,8 @@
       var currentLocation = requesterFactory.getOrder('currentLocation').slice();
       var heroCounts;
 
-      // check window width to toggle back from mobile map view
+      // check window width when it is changed
+      // Used to turn off mobile map view when user increases window
       $scope.$watch(function() {
         return $window.innerWidth;
       }, function(value) {
@@ -30,7 +34,7 @@
          }
       });
 
-      // switch to map view in mobile
+      // switch between map view and list view on mobile
       vm.toggleMapView = function() {
         vm.isMapView = !vm.isMapView;
         vm.isNotMobileWidth = false;
