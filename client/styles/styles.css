@@ -619,6 +619,18 @@ input {
   height: 100%;
 }
 
+#requester-order-complete,
+#requester-order-complete .container-fluid,
+#requester-order-complete .container-fluid .complete-map,
+#requester-order-complete .container-fluid .complete-map .col-xs-12 {
+  width: 100%;
+  height: 100%;
+}
+
+#requester-order-complete #map {
+  margin: 15px 0;
+  height: 50vh
+}
 @media (min-width: 768px) {
   .col-map {
     display: block;
@@ -637,6 +649,12 @@ input {
   .col-map {
     width: 55%;
   }
+
+  #requester-order-complete #map {
+    margin: unset;
+    width: 100%;
+    height: 50vh;
+  }
 }
 
 @media (min-width: 1200px) {
@@ -647,27 +665,15 @@ input {
 
 /*----------------- requester order -----------------*/
 
-#requester-order-details,
-#requester-order-complete,
-#requester-order-rate,
-#hero-order-details,
-#hero-order-complete {
-  margin-left: 10px;
-}
-
 .order-details {
   border: 1px solid #ffffff;
   border-radius: 1px;
   background: #ffffff;
-  width: 550px;
-  margin: 15px 0;
   padding: 15px;
 }
 
 .order-line {
   font-size: 1.2em;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 
 .your-order {
@@ -675,10 +681,12 @@ input {
 }
 
 .no-orders {
-  margin: 10px 0 0 0;
   font-size: 16px;
-  width: 100%;
   background-color: #ffffff;
   border: 1px solid #ffffff;
-  padding: 5px;
+}
+
+.btn-met-hero,
+.cancel, .rate {
+  margin-top: 15px;
 }
