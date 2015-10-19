@@ -7,6 +7,7 @@
       vm.confirmView = false;
       vm.noOrdersView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
+      vm.listStartIndex = 0;
       var OrderCache;
       var orderSelected;
       vm.ratings = [];
@@ -43,6 +44,7 @@
           vm.noOrdersView = false;
         }
       });
+
       var refreshTasks = $interval(getOpenRequests, 1000, 0, false);
 
       $scope.$on('$destroy', function() {
@@ -55,6 +57,13 @@
 
       getOpenRequests();
 
+      vm.nextFive = function() {
+        vm.listStartIndex += 5;
+      };
+
+      vm.previousFive = function() {
+        vm.listStartIndex = Math.max(vm.listStartIndex - 5, 0);
+      };
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests
         // $interval.cancel(refreshTasks);

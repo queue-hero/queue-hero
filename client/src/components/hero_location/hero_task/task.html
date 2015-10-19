@@ -1,7 +1,7 @@
 <div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
 
   <div>
-    <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders">
+    <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders | limitTo:5:ctrl.listStartIndex">
       <div class="hero-task-list" ng-click="ctrl.select($index)">
         <div class="row-fluid">
           <div class="col-md-6 request-list-item font-large meeting-time">
@@ -31,7 +31,10 @@
         </div>
       </div>
     </button>
-
+  <ul class="pager">
+    <li><span class="pointer" ng-click="ctrl.previousFive()">Previous</span></li>
+    <li><span class="pointer" ng-click="ctrl.nextFive()">Next</span></li>
+  </ul>
     <div class="no-orders" ng-show="ctrl.noOrdersView">
       (︶︹︶) Sorry, but there are no open requests for this location at the moment.
     </div>

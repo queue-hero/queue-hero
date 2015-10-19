@@ -481,15 +481,13 @@ input {
 .vendor-list button.list-group-item {
   font-size: 1.6vh;
   height: calc((100vh - (124px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2);
-  padding: 0 15px 0 15px;
+  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2.2);
 }
 
 .hero-location button.list-group-item {
   font-size: 1.6vh;
   height: calc((100vh - (75px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2);
-  padding: 0 15px;
+  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2.2);
 }
 
 #hero-task button.list-group-item {
@@ -512,6 +510,14 @@ input {
 
 .order-additional-detail {
   margin-bottom: 0;
+}
+
+.request-list {
+  height: calc((100vh - (181px + 4.7vh)) / 10);
+  line-height: calc(((100vh - (181px + 4.7vh)) / 10) / 7);
+}
+
+.request-list-item {
 }
 
 .request-item-icon {
