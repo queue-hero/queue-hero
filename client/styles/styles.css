@@ -4,7 +4,6 @@ body,
   width: 100%;
   height: 100%;
   font-family: 'Lato', sans-serif;
-  font-size: 1.3vh;
   background-color: #eeeeee;
   min-width: 320px;
 }
@@ -12,7 +11,7 @@ body,
 body > div:first-of-type {
   width: 100%;
   height: 100%;
-  padding-top: 45px;
+  padding-top: 50px;
 }
 
 @media (min-width:768px) {
@@ -49,7 +48,6 @@ body > div:first-of-type > div:first-of-type {
 */
 
 .btn-blue {
-  margin-right: 5px;
   background-color: #2e79b9;
   font-weight: 400;
   font-size: 1em;
@@ -58,7 +56,6 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .btn-green {
-  margin-right: 5px;
   background-color: #58b957;
   font-weight: 400;
   font-size: 1em;
@@ -105,16 +102,33 @@ input {
 .input-group-addon {
   border-radius: 1px !important;
 }
+#choice,
+#hero-task,
+#hero-location,
+#hero-order,
+#profile,
+#requester-order,
+#requester-task,
+#signup {
+  font-size: 1.3vh;
+}
+
+#home {
+  font-size: 2vh;
+}
 
 /*----------------- navbar -----------------*/
+
 .navbar {
   background-color: #3e454b;
   border-bottom: 0px;
   height: 50px;
+  font-size: 14px;
 }
 
 .navbar .btn-blue {
   padding: 3px 10px;
+  margin-right: 5px;
 }
 
 .queuehero {
@@ -136,7 +150,6 @@ input {
     font-size: 1.25em;
   }
 }
-/*----------------- home -----------------*/
 
 /* different navbar at home */
 #home .navbar {
@@ -165,6 +178,8 @@ input {
   border-top: 3px solid #dddddd;
   border-bottom: 3px solid #dddddd;
 }
+
+/*----------------- home -----------------*/
 
 #home {
   position: absolute;
@@ -206,7 +221,7 @@ input {
 }
 
 .slogan {
-  font-size: 3em;
+  font-size: 2em;
   font-family: 'Playfair Display', serif;
   color: #ffffff;
 }
@@ -221,7 +236,7 @@ input {
 .btn-fb {
   background-color: #3b5998;
   font-weight: 400;
-  font-size: 1em;
+  font-size: 0.75em;
   color: #ffffff;
   border: 2px solid transparent;
   box-shadow: 1px 1px 5px #333333;
@@ -262,11 +277,6 @@ input {
   #home .container-fluid {
     width: 750px;
   }
-
-  .slogan {
-    font-size: 2.75em;
-  }
-
 }
 
 @media (min-width:992px) {
@@ -282,20 +292,73 @@ input {
 }
 /*----------------- choice -----------------*/
 
-.choice-hero {
-  padding: 20px;
+#choice {
+  height: 100%;
 }
 
-.choice-requester {
-  padding: 20px;
+.blur {
+  content: '';
+  position: relative;
+  height: 100%;
+  z-index: 1;
 }
 
-.button-hero {
-  height: 200px;
+.blur:before {
+  content: '';
+  display: block;
+  position: absolute;
+  height: calc(100% - 50px);
+  width: 100%;
+  background-image: url(../images/local.png);
+  background-size: cover;
+  background-position: center;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px)
+  filter: blur(5px);
+  z-index: -1;
 }
 
-.button-requester {
-  height: 200px;
+.blur > .container {
+  height: 100%;
+}
+
+.choice {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.choice-select {
+  width: 100%;
+  height:100%;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.choice-select-body {
+  background-color: rgba(0,0,0,0.4);
+  border-width: 10px;
+  width: fit-content;
+  width: -moz-fit-content;
+  width: -webkit-fit-content;
+  color: #ffffff;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 15%;
+}
+
+.choice-select-body .select {
+  font-size: 3.5vh;
+}
+
+.choice-select-body .or {
+  margin: 15px;
+  font-size: 2vh;
+}
+.choice-select-body > button {
+  font-size: 2.5vh;
 }
 
 /*----------------- profile -----------------*/
