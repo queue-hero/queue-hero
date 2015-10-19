@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app.requester_order', [])
@@ -8,7 +8,6 @@
     vm.complete = 'details';
     var currentLocation = requesterFactory.getOrder('currentLocation');
     var meetingLocation = requesterFactory.getOrder('meetingLocation');
-    vm.rating = '5';
     checkOrderAccepted();
 
     var checkOrder = $interval(isOrderAccepted, 1000, 0, false);

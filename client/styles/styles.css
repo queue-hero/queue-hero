@@ -54,18 +54,6 @@ body > div:first-of-type > div:first-of-type {
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
-  border-radius: 1px;
-  box-shadow: 1px 1px 5px #333333;
-}
-.btn-leaveQ {
-  margin-right: 5px;
-  background-color: #2e79b9;
-  font-weight: 400;
-  font-size: 1em;
-  color: #ffffff;
-  border: 2px solid transparent;
-  border-radius: 1px;
-  box-shadow: 1px 1px 5px #333333;
 }
 
 .btn-green {
@@ -75,7 +63,6 @@ body > div:first-of-type > div:first-of-type {
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
-  border-radius: 1px;
 }
 
 .btn-back {
@@ -96,6 +83,26 @@ body > div:first-of-type > div:first-of-type {
 
 .font-large {
   font-size: 1.25em
+}
+
+button,
+.button,
+.btn {
+  border-radius: 1px !important;
+}
+
+button:focus,
+.button:focus,
+.btn:focus {
+  outline: 0 !important;
+}
+
+input {
+  border-radius: 1px !important;
+}
+
+.input-group-addon {
+  border-radius: 1px !important;
 }
 
 /*----------------- navbar -----------------*/
@@ -147,7 +154,6 @@ body > div:first-of-type > div:first-of-type {
 .navbar .btn-home {
   margin-right: 15px;
   padding: 10px 10px;
-  border-radius: 0;
   color: #ffffff;
   font-size: 1.3em;
   border-top: 3px solid #ffffff;
@@ -217,7 +223,6 @@ body > div:first-of-type > div:first-of-type {
   font-size: 1em;
   color: #ffffff;
   border: 2px solid transparent;
-  border-radius: 1px;
   box-shadow: 1px 1px 5px #333333;
 }
 
@@ -296,13 +301,13 @@ body > div:first-of-type > div:first-of-type {
 
 .panel {
   border: 0px transparent;
-  border-radius: 0px;
+  border-radius: 1px;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
 
 .panel-heading {
-  border-radius: 0px;
+  border-radius: 1px;
 }
 
 .edit-profile {
@@ -419,7 +424,7 @@ body > div:first-of-type > div:first-of-type {
   overflow: hidden;
 }
 
-.view-container .row-fluid:first-of-type {
+.view-container > .row-fluid {
   height: 100%;
   width: 100%;
 }
@@ -428,20 +433,23 @@ body > div:first-of-type > div:first-of-type {
   padding: 0 15px;
   width: 100%;
   float: left;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 100%;
 }
 
 .search-bar > .input-group {
   margin-bottom: 15px;
 }
 
+.search-bar,
 .search-box {
-  border-radius: 0px;
+  border-radius: 1px;
 }
 
 .fa-location-arrow:before {
-  height: 4.7vh;
-  line-height: 4.7vh;
-  margin-right: 15px;ertical-align: middle;
+  margin-right: 15px;
+  vertical-align: middle;
 }
 
 .center-loc:hover {
@@ -452,35 +460,18 @@ body > div:first-of-type > div:first-of-type {
   background-color: #2e79b9;
   color: #ffffff;
   font-weight: 300;
-  font-size: 2vh;
-  height: 4.7vh;
-  line-height: 4.7vh;
-  padding: 0 0 0 15px;
+  font-size: 1.3em;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
-  border-radius: 0px;
+  border-radius: 1px;
 }
 
 .list-group-item:first-child {
-    border-radius: 0px;
+    border-radius: 1px;
 }
 
 .list-group-item:last-child {
-    border-radius: 0px;
-}
-
-.vendor-list button.list-group-item {
-  font-size: 1.6vh;
-  height: calc((100vh - (124px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2);
-  padding: 0 15px 0 15px;
-}
-
-.hero-location button.list-group-item {
-  font-size: 1.6vh;
-  height: calc((100vh - (75px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2);
-  padding: 0 15px;
+    border-radius: 1px;
 }
 
 #hero-task button.list-group-item {
@@ -488,36 +479,60 @@ body > div:first-of-type > div:first-of-type {
   height: unset;
 }
 
-.col-left .badge {
-  font-size: 1.6vh;
-  margin-top: 10px;
-}
-.request-list-item {
-  margin: 5px 10px 5px 5px;
+.hero-task-list {
+  width: 100%;
 }
 
+.meeting-time,
+.money-exchanged {
+  border-bottom: 2px solid #eeeeee;
+}
+
+.request-list-item {
+  margin-bottom: 10px;
+}
+
+.order-additional-detail {
+  margin-bottom: 0;
+}
 .request-item-icon {
-  margin: 0 15px 0 10px;
+  padding: 0 10px 0 0;
+}
+.btn-leave {
+  margin: 15px 0;
 }
 
 .confirm-mission {
-  float: right;
+  -webkit-display: flex;
+  display: flex;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  align-items: center;
+  width: 100%;
+}
+
+.confirm-mission .btn {
+  width: 45%;
+}
+
+.confirm-mission .btn-danger {
+  margin-right: 2.5%;
 }
 
 .btn-confirm-mission {
-  margin-right: 5px;
-  font-weight: 400;
-  font-size: 1em;
+  margin-left: 2.5%;
   color: #ffffff;
-  border: 2px solid transparent;
-  border-radius: 1px;
-  box-shadow: 1px 1px 5px #333333;
   background-color: #58b957;
+}
+
+.confirm-mission .glyphicon {
+  padding-right: 10px;
 }
 
 @media (min-width: 768px) {
   .col-left {
-    width: 45%;
+    width: 50%;
   }
 
   .view-container {
@@ -526,26 +541,17 @@ body > div:first-of-type > div:first-of-type {
     height: calc(100% - 85px);
     width: 100%;
   }
-
-  .vendor-list button.list-group-item {
-    font-size: 1.6vmin;
-  }
-
-  .hero-location button.list-group-item {
-    font-size: 1.6vmin;
-  }
 }
-
 
 @media (min-width: 992px) {
   .col-left {
-    width: 40%;
+    width: 45%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-left {
-    width: 35%;
+    width: 40%;
   }
 }
 /*----------------- requester task map -----------------*/
@@ -570,7 +576,7 @@ body > div:first-of-type > div:first-of-type {
   .col-map {
     display: block;
     padding-right: 15px;
-    width: 55%;
+    width: 50%;
   }
 
   #map {
@@ -582,13 +588,13 @@ body > div:first-of-type > div:first-of-type {
 
 @media (min-width: 992px) {
   .col-map {
-    width: 60%;
+    width: 55%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-map {
-    width: 65%;
+    width: 60%;
   }
 }
 
@@ -604,17 +610,19 @@ body > div:first-of-type > div:first-of-type {
 
 .order-details {
   border: 1px solid #ffffff;
-  border-radius: 15px;
+  border-radius: 1px;
   background: #ffffff;
   width: 550px;
-  margin-bottom: 10px;
-  padding: 10px;
+  margin: 15px 0;
+  padding: 15px;
 }
+
 .order-line {
-  font-size: 16px;
+  font-size: 1.2em;
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
 .your-order {
   margin-top: 0px;
 }
@@ -624,11 +632,10 @@ body > div:first-of-type > div:first-of-type {
 }
 
 .no-orders {
-  margin: 10px 0px 10px 0px;
+  margin: 10px 0 0 0;
   font-size: 16px;
-  width: 380px;
+  width: 100%;
   background-color: #ffffff;
   border: 1px solid #ffffff;
-  border-radius: 10px;
   padding: 5px;
 }

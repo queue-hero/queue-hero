@@ -2,24 +2,24 @@
   <h1>Order complete</h1>
   <div class="order-details">
     <div class="order-line">On a scale of 1 to 5, with 5 being the highest, how pleasant was your interaction with {{ ctrl.order.requester }}? (Please rate your requester on punctuality, friendliness, etc.)</div>
-    <div class="form-group">
+    <form name="rate" class="form-group" novalidate>
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="1"> 1
+        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="1" required> 1
       </label>
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="2"> 2
+        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="2" required> 2
       </label>
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio3" value="3"> 3
+        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio3" value="3" required> 3
       </label>
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="4"> 4
+        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="4" required> 4
       </label>
       <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="5"> 5
+        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="5" required> 5
       </label>
-    </div>
+      <input type="button" class="btn btn-success" ng-disabled="rate.inlineRadioOptions.$invalid" ng-click="ctrl.rateRequester()" value="Rate"></input>
+    </form>
   </div>
-  <button type="button" class="btn btn-success" ng-click="ctrl.rateRequester()">Rate</button>
 
 </div>
