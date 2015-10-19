@@ -111,7 +111,7 @@ input {
 #requester-order,
 #requester-task,
 #signup {
-  font-size: 1.3vh;
+  font-size: 1.5vh;
 }
 
 #home {
@@ -557,6 +557,7 @@ input {
 #hero-task button.list-group-item {
   height: unset;
   font-size: unset;
+  z-index: 5;
 }
 
 .hero-task-list {
@@ -591,6 +592,10 @@ input {
 
 .updated {
   background-color: #2A7F31;
+}
+
+.pager {
+  margin: 10px 0;
 }
 
 .pager span {
@@ -746,6 +751,8 @@ input {
 }
 
 .no-orders {
+  margin-top: 15px;
+  padding: 15px;
   font-size: 16px;
   background-color: #ffffff;
   border: 1px solid #ffffff;

@@ -63,10 +63,12 @@
 
       getOpenRequests();
 
+      // show next five requests
       vm.nextFive = function() {
         vm.listStartIndex += 5;
       };
 
+      // show previous five requests
       vm.previousFive = function() {
         vm.listStartIndex = Math.max(vm.listStartIndex - 5, 0);
       };
