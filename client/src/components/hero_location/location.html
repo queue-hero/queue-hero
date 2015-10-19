@@ -6,8 +6,11 @@
       <div class="row-fluid">
 
         <div class="col-left list-group">
-          <div class="title list-group-item" >Where are you Queue Hero?</div>
-          <button type="button" id="shop" class="list-group-item" ng-repeat="location in main.locations">
+          <div class="title list-group-item" >Where are you Queue Hero?
+            <i class="center-loc pointer fa fa-map-o pull-right" ng-click="main.toggleMapView()" ng-hide="main.isMapView"></i>
+            <i class="pointer fa fa-list-alt pull-right" ng-click="main.toggleMapView()" ng-show="main.isMapView"></i>
+          </div>
+          <button type="button" id="shop" class="list-group-item" ng-hide="main.isMapView" ng-repeat="location in main.locations">
             <div value="$index" ng-click="main.confirm($index)">
               <update-change type="request" content="{{ location.requests }}"></update-change>
               <div class="vendor"><strong class="vendor-index">{{ $index+1 }}</strong> {{ location.name }}</div>
@@ -17,7 +20,7 @@
           <div ui-view="task" ng-if="main.taskView"></div>
         </div> <!-- /col-left -->
 
-        <div class="map-container">
+        <div class="map-container" ng-show="main.isMapView || main.isNotMobileWidth">
           <div class="col-map">
             <mapbox id="map" callback="main.callback"></mapbox>
           </div>

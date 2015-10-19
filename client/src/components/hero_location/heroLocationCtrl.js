@@ -2,7 +2,7 @@
   'use strict';
 
   angular.module('app.hero_location', [])
-  .controller('HeroLocationCtrl', ['$state', 'heroLocationModel', 'heroFactory', 'profileFactory', '$interval', '$scope', 'socketFactory', function($state, heroLocationModel, heroFactory, profileFactory, $interval, $scope, socketFactory) {
+  .controller('HeroLocationCtrl', ['$state', 'heroLocationModel', 'heroFactory', 'profileFactory', '$interval', '$scope', '$window', 'socketFactory', function($state, heroLocationModel, heroFactory, profileFactory, $interval, $scope, $window, socketFactory) {
 
     var vm = this;
     vm.selection = undefined;
@@ -15,6 +15,28 @@
     var location = heroFactory.getOrder('currentLocation');
     var lat = location[0];
     var long = location[1];
+    vm.isMapView = false;
+    vm.isNotMobileWidth = $window.innerWidth <= 768;
+
+    // check window width to toggle back from mobile map view
+    $scope.$watch(function() {
+      return $window.innerWidth;
+    }, function(value) {
+      console.log("isNotMobileWidth: ", vm.isNotMobileWidth, "width: ", value);
+      if (value >= 768) {
+        vm.isNotMobileWidth = true;
+        vm.isMapView = false;
+      } else {
+        vm.isNotMobileWidth = false;
+      }
+    });
+
+    // switch to map view in mobile
+    vm.toggleMapView = function() {
+      vm.isMapView = !vm.isMapView;
+      vm.isNotMobileWidth = false;
+      console.log(vm.isMapView);
+    };
 
     heroLocationModel.getVenuesAtHeroLocation(lat, long)
       //will be executed if status code is 200-299

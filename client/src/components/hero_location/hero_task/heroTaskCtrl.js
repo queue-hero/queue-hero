@@ -10,6 +10,7 @@
       var OrderCache;
       var orderSelected;
       vm.ratings = [];
+
       //test to see if there is lag when open requests are initially shown
       // if it is laggy, we can use the below line as a starting point
       vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();

@@ -433,9 +433,6 @@ input {
   padding: 0 15px;
   width: 100%;
   float: left;
-  overflow: hidden;
-  overflow-y: scroll;
-  height: 100%;
 }
 
 .search-bar > .input-group {
@@ -447,9 +444,10 @@ input {
   border-radius: 1px;
 }
 
-.fa-location-arrow:before {
-  margin-right: 15px;
-  vertical-align: middle;
+.fa:before {
+  height: 4.7vh;
+  line-height: 4.7vh;
+  font-size: 2vh;
 }
 
 .center-loc:hover {
@@ -457,10 +455,12 @@ input {
 }
 
 .col-left .title {
+  padding: 0px 15px;
+  height: 4.7vh;
+  line-height: 4.7vh;
   background-color: #2e79b9;
   color: #ffffff;
-  font-weight: 300;
-  font-size: 1.3em;
+  font-size: 2vh;
   border-color: #2e79b9;
   border-bottom: 1px solid #3e454c;
   border-radius: 1px;
@@ -472,6 +472,24 @@ input {
 
 .list-group-item:last-child {
     border-radius: 1px;
+}
+
+.list-group {
+  margin-bottom: unset;
+}
+
+.vendor-list button.list-group-item {
+  font-size: 1.6vh;
+  height: calc((100vh - (124px + 4.7vh)) / 10);
+  line-height: calc(((100vh - (124px + 4.7vh)) / 10) / 2);
+  padding: 0 15px 0 15px;
+}
+
+.hero-location button.list-group-item {
+  font-size: 1.6vh;
+  height: calc((100vh - (75px + 4.7vh)) / 10);
+  line-height: calc(((100vh - (75px + 4.7vh)) / 10) / 2);
+  padding: 0 15px;
 }
 
 #hero-task button.list-group-item {
@@ -495,9 +513,20 @@ input {
 .order-additional-detail {
   margin-bottom: 0;
 }
+
 .request-item-icon {
   padding: 0 10px 0 0;
 }
+
+.badge {
+  margin-top: 5px;
+  border-radius: 1px;
+}
+
+.updated {
+  background-color: #2A7F31;
+}
+
 .btn-leave {
   margin: 15px 0;
 }
@@ -531,6 +560,11 @@ input {
 }
 
 @media (min-width: 768px) {
+  .center-loc.fa-map-o,
+  .center-loc.fa-list-alt {
+    display: none;
+  }
+
   .col-left {
     width: 50%;
   }
@@ -554,7 +588,7 @@ input {
     width: 40%;
   }
 }
-/*----------------- requester task map -----------------*/
+/*----------------- map -----------------*/
 
 .map-container {
   width: 100%;
@@ -562,14 +596,17 @@ input {
 }
 
 .col-map {
-  display: none;
   height: 100%;
   width: 100%;
+  padding: 0 15px;
   float: right;
+  position: relative;
 }
 
 #map {
-  display: none;
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -625,10 +662,6 @@ input {
 
 .your-order {
   margin-top: 0px;
-}
-
-.updated {
-  background-color: #2A7F31;
 }
 
 .no-orders {

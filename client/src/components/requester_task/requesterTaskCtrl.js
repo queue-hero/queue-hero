@@ -2,18 +2,40 @@
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'requesterTaskModel', '$state', '$scope', '$interval', 'socketFactory', function(profileFactory, requesterFactory, requesterTaskModel, $state, $scope, $interval, socketFactory) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'requesterTaskModel', '$state', '$scope', '$interval', '$window', 'socketFactory', function(profileFactory, requesterFactory, requesterTaskModel, $state, $scope, $interval, $window, socketFactory) {
       var vm = this;
       vm.itemView = false;
       var venueCache;
       vm.result1 = '';
       vm.options1 = null;
       vm.details1 = '';
+      vm.isMapView = false;
+      vm.isNotMobileWidth = $window.innerWidth <= 768;
 
       vm.order = requesterFactory.getOrder();
 
       var currentLocation = requesterFactory.getOrder('currentLocation').slice();
       var heroCounts;
+
+      // check window width to toggle back from mobile map view
+      $scope.$watch(function() {
+        return $window.innerWidth;
+      }, function(value) {
+        console.log("isNotMobileWidth: ", vm.isNotMobileWidth, "width: ", value);
+         if (value >= 768) {
+           vm.isNotMobileWidth = true;
+           vm.isMapView = false;
+         } else {
+           vm.isNotMobileWidth = false;
+         }
+      });
+
+      // switch to map view in mobile
+      vm.toggleMapView = function() {
+        vm.isMapView = !vm.isMapView;
+        vm.isNotMobileWidth = false;
+        console.log(vm.isMapView);
+      };
 
       vm.getMyLocation = function() {
         currentLocation = requesterFactory.getOrder('currentLocation').slice();
