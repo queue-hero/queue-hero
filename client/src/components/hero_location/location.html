@@ -7,7 +7,7 @@
 
         <div class="col-left list-group">
           <div class="title list-group-item" >Where are you Queue Hero?
-            <i class="toggle-btn pointer fa fa-map-o pull-right" ng-click="main.toggleMapView()" ng-hide="main.isMapView"></i>
+            <i class="toggle-btn pointer fa fa-map-o pull-right" ng-click="main.toggleMapView()" ng-hide="main.isMapView || main.isNotMobileWidth"></i>
             <i class="toggle-btn pointer fa fa-list-alt pull-right" ng-click="main.toggleMapView()" ng-show="main.isMapView"></i>
           </div>
           <button type="button" id="shop" class="list-group-item" ng-hide="main.isMapView" ng-repeat="location in main.locations">

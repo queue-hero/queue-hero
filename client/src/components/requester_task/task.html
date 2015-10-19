@@ -24,8 +24,8 @@
               <div class="title list-group-item">
                 What is your Request?
                 <i class="toggle-btn pointer fa fa-location-arrow pull-right" ng-click="ctrl.getMyLocation()" ng-show=ctrl.isNotMobileWidth></i>
-                <i class="toggle-btn pointer fa fa-map-o pull-right" ng-click="ctrl.toggleMapView()" ng-hide="ctrl.isMapView"></i>
-              <i class="pointer fa fa-list-alt pull-right" ng-click="ctrl.toggleMapView()" ng-show="ctrl.isMapView"></i>
+                <i class="toggle-btn pointer fa fa-map-o pull-right" ng-click="ctrl.toggleMapView()" ng-hide="ctrl.isMapView || ctrl.isNotMobileWidth"></i>
+              <i class="toggle-btn pointer fa fa-list-alt pull-right" ng-click="ctrl.toggleMapView()" ng-show="ctrl.isMapView"></i>
               </div>
               <button type="button" id="shop" class="list-group-item" ng-hide="ctrl.isMapView" ng-repeat="venue in ctrl.venues">
                 <div ng-click="ctrl.selectLocation(venue, $index)">

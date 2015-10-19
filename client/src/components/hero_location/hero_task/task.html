@@ -1,38 +1,38 @@
 <div id="hero-task" ng-controller="HeroTaskCtrl as ctrl">
 
-  <div>
+  <div ng-hide="main.isMapView">
     <button type="button" class="list-group-item" ng-hide="ctrl.noOrdersView" ng-repeat="order in ctrl.orders | limitTo:5:ctrl.listStartIndex">
       <div class="hero-task-list" ng-click="ctrl.select($index)">
         <div class="row-fluid">
-          <div class="col-md-6 request-list-item font-large meeting-time">
+          <div class="col-xs-6 request-list-item meeting-time">
             <span class="request-item-icon glyphicon glyphicon-time"></span>{{ order.meetingTime | date : ' M/d, h:mm a' }}
           </div>
-          <div class="col-md-6 request-list-item font-large money-exchanged">
+          <div class="col-xs-6 request-list-item money-exchanged">
             <i class="request-item-icon fa fa-money"></i>{{ order.moneyExchanged | currency }}
           </div>
         </div>
         <div class="row-fluid">
-          <div class="col-md-6 request-list-item order-requester">
+          <div class="col-xs-6 request-list-item order-requester">
             <span class="request-item-icon glyphicon glyphicon-user"></span>{{ order.requester }}
           </div>
-          <div class="col-md-6 request-list-item requester-rating">
+          <div class="col-xs-6 request-list-item requester-rating">
             <span class="request-item-icon glyphicon glyphicon-star"></span>{{ ctrl.ratings[$index] }}
           </div>
         </div>
         <div class="row-fluid">
-          <div class="col-md-12 request-list-item order-item">
+          <div class="col-xs-12 request-list-item order-item">
             <i class="request-item-icon fa fa-shopping-cart"></i>{{ order.item }}
           </div>
         </div>
         <div class="row-fluid">
-          <div class="col-md-12 request-list-item order-additional-detail">
+          <div class="col-xs-12 request-list-item order-additional-detail">
             <i class="request-item-icon fa fa-info-circle"></i>{{ order.additionalRequests }}
           </div>
         </div>
       </div>
     </button>
-  <ul class="pager">
-    <li><span class="pointer" ng-click="ctrl.previousFive()">Previous</span></li>
+  <ul class="pager" ng-hide="ctrl.noOrdersView || ctrl.confirmView">
+    <li><span class="pointer" ng-hide="ctrl.listStartIndex === 0" ng-click="ctrl.previousFive()">Previous</span></li>
     <li><span class="pointer" ng-click="ctrl.nextFive()">Next</span></li>
   </ul>
     <div class="no-orders" ng-show="ctrl.noOrdersView">

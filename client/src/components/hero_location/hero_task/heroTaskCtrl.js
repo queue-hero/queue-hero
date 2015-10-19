@@ -64,6 +64,7 @@
       vm.previousFive = function() {
         vm.listStartIndex = Math.max(vm.listStartIndex - 5, 0);
       };
+
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests
         // $interval.cancel(refreshTasks);

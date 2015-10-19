@@ -4,6 +4,7 @@ body,
   width: 100%;
   height: 100%;
   font-family: 'Lato', sans-serif;
+  font-size: 1.3vh;
   background-color: #eeeeee;
   min-width: 320px;
 }
@@ -444,7 +445,7 @@ input {
   border-radius: 1px;
 }
 
-.fa:before {
+.toggle-btn.fa:before {
   height: 4.7vh;
   line-height: 4.7vh;
   font-size: 2vh;
@@ -493,6 +494,8 @@ input {
 #hero-task button.list-group-item {
   font-size: unset;
   height: unset;
+  /*height: calc((100vh - (181px + 4.7vh)) / 5);*/
+  /*line-height: calc(((100vh - (181px + 4.7vh)) / 5) / 2.2);*/
 }
 
 .hero-task-list {
@@ -501,7 +504,7 @@ input {
 
 .meeting-time,
 .money-exchanged {
-  border-bottom: 2px solid #eeeeee;
+  font-size: 1.6vh;
 }
 
 .request-list-item {
@@ -512,12 +515,9 @@ input {
   margin-bottom: 0;
 }
 
-.request-list {
-  height: calc((100vh - (181px + 4.7vh)) / 10);
-  line-height: calc(((100vh - (181px + 4.7vh)) / 10) / 7);
-}
-
 .request-list-item {
+  height: calc(((100vh - (75px + 4.7vh + ((100vh - (75px + 4.7vh)) / 10))) / 10) / 4);
+  line-height: calc(((100vh - (75px + 4.7vh + ((100vh - (75px + 4.7vh)) / 10))) / 10) / 4);
 }
 
 .request-item-icon {
@@ -525,12 +525,15 @@ input {
 }
 
 .badge {
-  margin-top: 5px;
   border-radius: 1px;
 }
 
 .updated {
   background-color: #2A7F31;
+}
+
+.pager span {
+  border-radius: 1px !important;
 }
 
 .btn-leave {
@@ -566,20 +569,21 @@ input {
 }
 
 @media (min-width: 768px) {
-  .center-loc.fa-map-o,
-  .center-loc.fa-list-alt {
-    display: none;
-  }
-
-  .col-left {
-    width: 50%;
-  }
-
   .view-container {
     position: absolute;
     left: 0px;
     height: calc(100% - 85px);
     width: 100%;
+  }
+
+  .col-left {
+    width: 50%;
+    padding-right: 0px;
+  }
+
+  .center-loc.fa-map-o,
+  .center-loc.fa-list-alt {
+    display: none;
   }
 }
 
