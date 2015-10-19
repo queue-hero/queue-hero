@@ -164,7 +164,7 @@
                     <span class="request-item-icon glyphicon glyphicon-zoom-in"></span><strong>Details</strong><span>{{ transaction.additionalRequests }}</span>
                   </div>
                   <div class="col-sm-6 transaction-list-item">
-                    <span class="request-item-icon glyphicon glyphicon-piggy-bank"></span><strong>Value</strong><span>{{ transaction.moneyExchanged }}</span>
+                    <span class="request-item-icon glyphicon glyphicon-piggy-bank"></span><strong>Value</strong><span>${{ transaction.moneyExchanged | number:2 }}</span>
                   </div>
                 </div>
               </div>
