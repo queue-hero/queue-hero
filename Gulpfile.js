@@ -24,7 +24,7 @@ var jsScripts = [
   'client/bower_components/angular-cookies/angular-cookies.min.js',
   'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',
   'client/bower_components/moment/min/moment-with-locales.min.js',
-  'client/bower_components/underscore/underscore-min.js',
+  'client/bower_components/lodash/lodash.min.js',
   'client/bower_components/mapbox.js/mapbox.js',
   'client/src/**/*.js',
   'client/src/app.js'

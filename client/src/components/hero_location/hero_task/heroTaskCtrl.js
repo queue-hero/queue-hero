@@ -16,6 +16,7 @@
       vm.vendor = heroFactory.getOrder('vendor');
 
       _.each(vm.orders, function(item) {
+        item.$$hashKey = 1;
         heroTaskModel.getRequesterRating(item.requester)
           .then(function(response) {
             for (var i = 0; i < vm.orders.length; i++) {
@@ -30,9 +31,14 @@
       });
 
       socketFactory.on('newOpenRequests', function(requests) {
+        _.each(requests, function(item) {
+          item.$$hashKey = 1;
+        });
         if (!vm.confirmView) {
-          vm.orders = requests;
-          OrderCache = vm.orders.slice();
+          if (!_.isEqual(vm.orders, requests)) {
+            vm.orders = requests;
+            OrderCache = vm.orders.slice();
+          }
         } else {
           OrderCache = requests;
         }
