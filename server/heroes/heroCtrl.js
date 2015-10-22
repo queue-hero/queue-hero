@@ -14,7 +14,6 @@ if (!process.env.DEPLOYED) {
 }
 
 function distanceMiles(lat1, long1, lat2, long2) {
-
   // Math.PI / 180
   var p = 0.017453292519943295;
   var c = Math.cos;
