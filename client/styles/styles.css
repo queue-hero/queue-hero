@@ -479,22 +479,36 @@ input {
   height: unset;
 }
 
+.hero-task-list {
+  width: 100%;
+}
+
+.meeting-time,
+.money-exchanged {
+  border-bottom: 2px solid #eeeeee;
+}
+
 .request-list-item {
-  margin: 5px 10px 5px 5px;
+  margin-bottom: 10px;
 }
 
+.order-additional-detail {
+  margin-bottom: 0;
+}
 .request-item-icon {
-  margin: 0 15px 0 10px;
+  padding: 0 10px 0 0;
 }
-
 .btn-leave {
   margin: 15px 0;
 }
 
 .confirm-mission {
+  -webkit-display: flex;
   display: flex;
+  -webkit-justify-content: center;
   justify-content: center;
-  align-items: center
+  -webkit-align-items: center;
+  align-items: center;
   width: 100%;
 }
 
@@ -518,7 +532,7 @@ input {
 
 @media (min-width: 768px) {
   .col-left {
-    width: 45%;
+    width: 50%;
   }
 
   .view-container {
@@ -531,13 +545,13 @@ input {
 
 @media (min-width: 992px) {
   .col-left {
-    width: 40%;
+    width: 45%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-left {
-    width: 35%;
+    width: 40%;
   }
 }
 /*----------------- requester task map -----------------*/
@@ -562,7 +576,7 @@ input {
   .col-map {
     display: block;
     padding-right: 15px;
-    width: 55%;
+    width: 50%;
   }
 
   #map {
@@ -574,13 +588,13 @@ input {
 
 @media (min-width: 992px) {
   .col-map {
-    width: 60%;
+    width: 55%;
   }
 }
 
 @media (min-width: 1200px) {
   .col-map {
-    width: 65%;
+    width: 60%;
   }
 }
 
