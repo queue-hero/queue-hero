@@ -34,7 +34,6 @@ module.exports= {
       } else {
         console.log('twilioId:', message.sid);
       }
-      //process.stdout.write(message.sid);
     });
   },
 
