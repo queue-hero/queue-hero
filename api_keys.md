@@ -1,11 +1,16 @@
 #How to configure API keys
 
-Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You must register and obtain API keys for each service to run Queue Hero. Each service is available at:
+Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You must register and obtain API keys for each service to run Queue Hero. 
 
 [Yelp for Developers](https://www.yelp.com/developers)
+
 [Facebook Developers](https://developers.facebook.com/)
+
 [Developers | Mapbox](https://www.mapbox.com/developers/)
+
 [Twilio](https://www.twilio.com/)
+
+###Setting up the Accounts
 
 1. **Facebook:** Once registered, create a new website app. The client ID and Secret can be found at the default dashboard.
 2. **Yelp:** Once registered, navigate to "Manage API Keys" to find your API keys.
