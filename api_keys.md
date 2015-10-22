@@ -32,9 +32,9 @@ Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You m
 4. On the same page set "Valid OAuth redirect URIs" to also "http://localhost:3000/auth/facebook/callback"
 
 ![Facebook-Api-2](./resources/facebook-api-local-3.jpg =700x)
-5. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public API token. Set `L.mapbox.map` to include your Map ID.
+5. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public access token. Set `L.mapbox.map` to include your Map ID. Navigate to `./server/requester/requesterCtrl.js` and change the Mapbox public access token on line 8 to your public access token.
 
-    *Mapbox utilizes public API keys that are sent and visible to all users. The map feature will work without changing any configurations. However, we kindly request you register seperately and use your own API key*
+*Mapbox utilizes public API keys that are sent and visible to all users. The map feature will work without changing any configurations. However, we kindly request you register seperately and use your own API key*
 
 ![Mapbox-Api](./resources/mapbox-api.jpg =700x)
 6. TWILIO INFORMATION
@@ -50,8 +50,8 @@ Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You m
 5. On the same page set "Valid OAuth redirect URIs" to also "website-address.com/auth/facebook/callback"
 
 ![Facebook-Api-2](./resources/facebook-api-heroku-3.jpg =700x)
-6. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public API token. Set `L.mapbox.map` to include your Map ID.
 
+6. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public access token. Set `L.mapbox.map` to include your Map ID. Navigate to `./server/requester/requesterCtrl.js` and change the Mapbox public access token on line 8 to your public access token.
     *Mapbox utilizes public API keys that are sent and visible to all users. The map feature will work without changing any configurations. However, we kindly request you register seperately and use your own API key*
 
 ![Mapbox-Api](./resources/mapbox-api.jpg =700x)
