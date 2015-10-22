@@ -6,6 +6,7 @@ var mkdirp = require('mkdirp');
 var twilio = require('../twilio/twilioApi.js');
 
 module.exports = {
+
   getUserData: function(req, res, next) {
     var facebookId = req.query.facebookId;
     User.findOne({
@@ -17,6 +18,7 @@ module.exports = {
       res.status(201).send(user);
     });
   },
+
   postUserData: function(req, res, next) {
     var reqUser = req.body.user;
     var newUser = new User({
@@ -33,6 +35,7 @@ module.exports = {
       state: reqUser.state,
       country: reqUser.country
     });
+
     newUser.save(function(err) {
       if (err) {
         console.log(err);
@@ -43,18 +46,22 @@ module.exports = {
       console.log('DB:', 'saved');
     });
   },
+
   postUserUpdate: function(req, res, next) {
     var reqUser = req.body.user;
     var facebookId = req.body.user.facebookId;
     var query = {
       facebookId: facebookId
     };
+
     User.update(query, reqUser)
       .then(function(rowsAffected) {
         setTimeout(twilio.sendSms, 0, reqUser.phoneNumber, twilio.messages.profile);
+
         if(rowsAffected.ok !== 1){
           return res.status(500).send();
         }
+
         res.status(201).send();
       });
   },
@@ -72,9 +79,7 @@ module.exports = {
       });
     });
   }
-
 };
-
 
 
 function setProfilePic(params, callback) {
@@ -83,6 +88,7 @@ function setProfilePic(params, callback) {
   var fileExtension = path.extname(file.name);
   var fileName = username + fileExtension;
   var cwd = process.cwd();
+
   // path to directory where profile-pic is saved
   var targetPath = path.resolve(cwd + "/server/assets/profile-pic/");
 
@@ -94,6 +100,7 @@ function setProfilePic(params, callback) {
     if (err) {
       console.error(err);
     }
+
     // move and rename image from temp location to filePathServer
     fs.rename(file.path, filePathServer, function(err) {
       if (err) {
