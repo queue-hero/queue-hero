@@ -1,9 +1,52 @@
 <div id="requester-task-item">
-  <h1> Pick item </h1>
-  Location:<span> {{ ctrl.order.vendor }}</span>
-  <form>
-    I want:<input type="text" placeholder="Product name" ng-model="ctrl.item"> <br/>
-    Details:<input type="textarea" placeholder="Additional details if necessary..." ng-model="ctrl.details"> <br/>
-    <button type="submit" ng-click="ctrl.setItem()">Confirm item</button>
+  <div class="title list-group-item">Pick item</div>
+  <form name="item">
+    <div class="list-group-item">
+      <div class="form-group">
+        <label for="product-name">I want</label>
+        <input name="product" type="text" class="form-control" id="product-name" placeholder="Product name" ng-model="ctrl.item" required>
+      </div>
+      <div class="validation-alert" ng-messages="item.product.$error" ng-show="item.product.$error && item.product.$touched">
+        <div ng-messages-include="./src/shared/validation/messages.html"></div>
+      </div>
+      <div class="form-group">
+        <label for="additional-details">Details</label>
+        <input name="additional-details" type="text" class="form-control" id="additional-details" placeholder="Additional details if necessary..." ng-model="ctrl.details">
+      </div>
+      <!-- <button class="btn btn-green" type="submit" ng-click="ctrl.setItem()">Confirm item</button> -->
+    </div>
   </form>
+  <div class="title list-group-item">Pick Time and Price</div>
+  <form name="request">
+    <div class="list-group-item">
+      <div class="form-group">
+        <label for="time">Time</label>
+        <div class="input-group">
+          <div class="input-group-addon">In</div>
+          <input name="time" type="number" class="form-control" id="time" placeholder="20" ng-model="ctrl.time" required>
+          <div class="input-group-addon">minutes</div>
+        </div>
+        <div class="validation-alert" ng-messages="request.time.$error" ng-show="request.time.$error && request.time.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="price">Price</label>
+        <div class="input-group">
+          <div class="input-group-addon">$</div>
+          <input name="price" type="number" class="form-control" id="price" placeholder="6" ng-model="ctrl.price" min="1" required>
+        </div>
+        <div class="validation-alert" ng-messages="request.price.$error" ng-show="request.price.$error && request.price.$touched">
+          <div ng-messages-include="./src/shared/validation/messages.html"></div>
+        </div>
+      </div>
+      <button type="button" class="btn-back btn btn-danger" ng-click="ctrl.showList()">Cancel</button> <button class="btn btn-success" type="submit" ng-click="ctrl.confirmOrder()" ng-disabled="request.$invalid"> Confirm order </button>
+    </div>
+  </form>
+
 </div>
+
+
+
+
+

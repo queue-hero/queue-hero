@@ -1,8 +1,8 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app.choice', ['ngCookies'])
-  .controller('ChoiceCtrl', ['ajaxFactory', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', function(ajaxFactory, profileFactory, $state, $cookies, heroFactory, requesterFactory) {
+  .controller('ChoiceCtrl', ['choiceModel', 'profileFactory', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$scope', function(choiceModel, profileFactory, $state, $cookies, heroFactory, requesterFactory, $scope) {
     var vm = this;
 
     if (!profileFactory.getProfile('facebookId')) {
@@ -14,23 +14,27 @@
     $cookies.remove('com.queuehero');
 
 
-    //when controller loads, fire GET request for user info
-    ajaxFactory.getProfileData(vm.facebookId)
-      .then(function successCallback(response) {
-        //will be executed if status code is 200-299
-        var data = response.data;
+    //when controller loads, fire GET request for user info if
+    //there is a facebookId in the scope
+    if(vm.facebookId) {
+      choiceModel.getProfileData(vm.facebookId)
+        .then(function successCallback(response) {
+          //will be executed if status code is 200-299
+          var data = response.data;
 
-        //save profile information into factory for future use
-        profileFactory.setProfile(data);
-        heroFactory.setOrder({ queueHero: data.username });
-        requesterFactory.setOrder({ requester: data.username });
+          //save profile information into factory for future use
+          profileFactory.setProfile(data);
+          heroFactory.setOrder({ queueHero: data.username });
+          requesterFactory.setOrder({ requester: data.username });
+
+          $scope.$broadcast('gotname');
 
 
-      }, function errorCallback(response) {
-        //will be exectcuted if status code is 300+
-        var statusCode = response.status;
-
-      });
+        }, function errorCallback(response) {
+          //will be exectcuted if status code is 300+
+          var statusCode = response.status;
+        });
+    }
 
       vm.hero = function() {
         $state.go('hero_location');

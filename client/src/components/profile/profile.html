@@ -1,54 +1,178 @@
 <div id="profile" ng-controller="ProfileCtrl as ctrl">
   <nav-bar></nav-bar>
-  Profile
-  <div ng-hide="ctrl.isEdit">
-    <div>Profile Photo:<img src="ctrl.user.profilePhoto"></div>
-    Username: <span> {{ ctrl.user.username }} </span> <br/>
+  <div class="container">
+    <div class="row">
 
-    First Name: <span> {{ ctrl.user.firstName }} </span>
+      <!-- ============= Profile ============= -->
 
-    Last Name: <span> {{ ctrl.user.lastName }} </span><br/>
+      <div class="profile-container col-lg-4 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Profile
+            <div class="edit-profile pull-right" ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
+              <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>&nbsp;&nbsp;Edit Profile
+            </div> <!-- /edit profile -->
 
-    Phone Number: <span> {{ ctrl.user.lastName }} </span><br/>
-    Credit/Debit Card Number: <span>{{ ctrl.user.creditCard }}</span><br/>
-    CVC Code: <span> {{ ctrl.user.cvc }} <span/><br/>
-    Expiration Date: <span> {{ ctrl.user.expDate }} </span><br/>
-    Billing Address: <span> {{ ctrl.user.billingAddress }} </span><br/>
+            <div class="edit-profile pull-right" ng-show="ctrl.isEdit" ng-click="ctrl.toggleEdit(); ctrl.update()" value="Save">
+              <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;&nbsp;Save Profile
+            </div> <!-- /save profile -->
+          </div> <!-- /panel-heading -->
 
-    City: <span> {{ ctrl.user.city }} </span><br/>
+          <!-- ============= Profile View Mode ============= -->
 
-    State: <span> {{ ctrl.user.state }} </span> <br/>
+          <div class="panel-body" ng-hide="ctrl.isEdit">
+            <div class="picture-container col-lg-12 col-sm-4 col-xs-12 padding">
+              <img class="profile-pic img-responsive center-block" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}" alt="">
+              <img class="profile-pic img-responsive center-block" ng-show="ctrl.f" ngf-src="ctrl.f" alt="">
+            </div>
+            <div class="profile-data padding col-lg-12 col-sm-8 col-xs-12">
+              <div class="font-large">
+                <span><strong>{{ ctrl.user.firstName }}</strong> </span>
+                <span><strong>{{ ctrl.user.lastName }}</strong></span>
+                <p>({{ ctrl.user.username }})</p>
+              </div>
+              <div class="">
+                Phone Number: <span>{{ ctrl.user.phoneNumber }}</span> <br/>
+                Rating: <span>{{ ctrl.rating | number:2 }}</span>
+              </div>
+              <!--
+              <div class="">
+                <span>{{ ctrl.user.billingAddress }}</span>
+              </div>
+              <div class="">
+                <span>{{ ctrl.user.city }}</span>
+              </div>
+              <div class="">
+                Credit/Debit Card Number: <span>{{ ctrl.user.cardNumber }}</span>
+              </div>
+              <div class="">
+                CVC Code: <span>{{ ctrl.user.cvc }}</span>
+              </div>
+              <div class="">
+                Expiration Date: <span>{{ ctrl.user.expirationDate }}</span>
+              </div>
+              -->
+            </div> <!-- /profile-data -->
+          </div> <!-- /panel-body -->
 
-    Country: <span> {{ ctrl.user.state }} </span> <br/>
+          <!-- =============== Profile Edit Mode =============== -->
 
-    <button ng-hide="ctrl.isEdit" ng-click="ctrl.toggleEdit()">
-      Edit Profile
-    </button>
-  </div>
-  <div ng-show="ctrl.isEdit">
-    <span>Edit Profile</span>
-    <form novalidate class="simple-form">
-      Username:  <input type="text" ng-model="ctrl.user.username" /><br/>
-      First Name:<input type="text" ng-model="ctrl.user.firstName" /><br/>
-      Last Name: <input type="text" ng-model="ctrl.user.lastName" /><br/>
-      Phone Number: <input type="text" ng-model="ctrl.user.phoneNumber" /><br/>
-      Credit/Debit Card Number: <input type="text" ng-model="ctrl.user.creditCard" /> <br/>
-      CVC Code: <input type="text" ng-model="ctrl.user.cvc" /><br/>
-      Expiration Date: <input type="text" ng-model="ctrl.user.expDate" /><br/>
-      Billing Address: <input type="text" ng-model="ctrl.user.billingAddress" /><br/>
-      City: <input type="text" ng-model="ctrl.user.city" /><br/>
-      <select name="URL" ng-model="ctrl.user.state">
-        <option selected="selected" value="">Select State</option>
-        <option  value="California">California</option>
-        <option value="Tabasco">Tabasco</option>
-      </select>
-      <select name="URL" ng-model="ctrl.user.country">
-        <option selected="selected" value="">Select Country</option>
-        <option  value="USA">USA</option>
-        <option  value="Mexico">Mexico</option>
-      </select><br/>
-      <input type="submit" ng-click="ctrl.update()" value="Save" />
-    </form>
-  </div>
-  <pre>user = {{ ctrl.user | json }}</pre>
-</div>
+          <div class="panel-body" ng-show="ctrl.isEdit">
+            <div class="picture-container col-lg-12 col-sm-4 col-xs-12 padding">
+              <img class="profile-pic img-responsive center-block" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.user.myProfilePhoto }}" alt="">
+              <img class="profile-pic img-responsive center-block" ng-show="ctrl.f" ngf-src="ctrl.f" alt="">
+              <div class="upload" type="file" ng-model="ctrl.file" ngf-select="ctrl.uploadFiles($file)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB"></div>
+              <span type="file" ng-model="ctrl.file" ngf-select="ctrl.uploadFiles($file)" accept="image/*" ngf-max-height="1000" ngf-max-size="2MB">Click to change profile pic</span>
+            </div>
+            <div class="profile-data padding col-lg-12 col-sm-8 col-xs-12">
+              <form novalidate class="simple-form">
+                <div class="font-large">
+                  <span><strong><input name="first" type="text" ng-model="ctrl.user.firstName" required></strong> </span>
+                  <span><strong><input name="last" type="text" ng-model="ctrl.user.lastName" required></strong></span>
+                  <p>({{ ctrl.user.username }})</p>
+                </div>
+                <div class="">
+                  Phone Number: <span><input type="text" ng-model="ctrl.user.phoneNumber"></span>
+                </div>
+                <!--
+                <div class="">
+                  <span><input type="text" ng-model="ctrl.user.billingAddress"></span>
+                </div>
+                <div class="">
+                  <span><input type="text" ng-model="ctrl.user.city"></span>
+                </div>
+                <div class="">
+                  Credit/Debit Card Number: <span><input type="text" ng-model="ctrl.user.creditCard"></span>
+                </div>
+                <div class="">
+                  CVC Code: <span><input type="text" ng-model="ctrl.user.cvc"></span>
+                </div>
+                <div class="">
+                  Expiration Date: <span><input type="text" ng-model="ctrl.user.expDate"></span>
+                </div>
+                -->
+              </form>
+            </div> <!-- /profile-data -->
+          </div> <!-- /panel-body -->
+
+          <!-- =============== End Profile Edit =============== -->
+
+        </div> <!-- /panel -->
+      </div> <!-- /profile-container -->
+
+      <!-- =============== Transaction History =============== -->
+
+      <div class="transaction-container col-lg-8 col-xs-12">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            Transaction History
+          </div> <!-- /panel-heading -->
+
+          <ul class=list-group>
+            <li class="list-group-item" ng-repeat="transaction in ctrl.userTransactions | filter:ctrl.removeClosed">
+              <div class="transaction-hero padding" ng-show="transaction.queueHero === ctrl.user.username">
+                <p class="font-large"><span class="transaction-header">Role: Queue Hero</span><span class="transaction-header"><strong>Current Status: </strong>{{ transaction.status }}</span></p>
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-user"></span><strong>Requester</strong><span ng-show="transaction.requester == null">unassigned</span><span ng-show="transaction.requester != null">{{ transaction.requester }}</span>
+                  </div>
+
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-gift"></span><strong>Vendor</strong><span>{{ transaction.vendor }}</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                  <span class="request-item-icon glyphicon glyphicon-apple"></span><strong>Item</strong><span>{{ transaction.item }}</span>
+                  </div>
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-time"></span><strong>Time</strong><span>{{ transaction.meetingTime }}</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-zoom-in"></span><strong>Details</strong><span>{{ transaction.additionalRequests }}</span>
+                  </div>
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-piggy-bank"></span><strong>Value</strong><span>{{ transaction.moneyExchanged }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="transaction-requester padding" ng-show="transaction.requester === ctrl.user.username">
+                <p class="font-large"><span class="transaction-header">Role: Requester</span><span class="transaction-header"><strong>Current Status: </strong>{{ transaction.status }}</span></p>
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-user"></span><strong>Queue-Hero</strong><span ng-show="transaction.queueHero == null">unassigned</span><span ng-show="transaction.queueHero != null">{{ transaction.queueHero }}</span>
+                  </div>
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-gift"></span><strong>Vendor</strong><span>{{ transaction.vendor }}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-apple"></span><strong>Item</strong><span>{{ transaction.item }}</span>
+                  </div>
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-time"></span><strong>Time</strong><span>{{ transaction.meetingTime }}</span>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-zoom-in"></span><strong>Details</strong><span>{{ transaction.additionalRequests }}</span>
+                  </div>
+                  <div class="col-sm-6 transaction-list-item">
+                    <span class="request-item-icon glyphicon glyphicon-piggy-bank"></span><strong>Value</strong><span>${{ transaction.moneyExchanged | number:2 }}</span>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+
+        </div> <!-- /panel panel-primary -->
+      </div>  <!-- /transaction container -->
+    </div> <!-- /row -->
+  </div> <!-- /container -->
+</div> <!-- /profile ctrl -->

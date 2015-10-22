@@ -1,27 +1,29 @@
-<div id="hero-location" ng-controller="HeroLocationCtrl as ctrl">
+<div id="hero-location" ng-controller="HeroLocationCtrl as main">
   <nav-bar></nav-bar>
-  <mapbox id="map" callback="ctrl.callback"></mapbox>
-  <style>
-  #map {
-    width: 600px;
-    height: 700px;
-    /*left: 750px;*/
-    float: right;
-  }
-  </style>
 
-  <div ng-repeat="location in ctrl.locations">
-    <div class="radio">
-      <label>
-      </label>
-      <ul>
-        <li class="btn btn-default" name="radioOptions" value="$index" ng-click="ctrl.select($index)"> <strong>{{ location.name }} </strong> {{ location.displayAddress }}</li>
-      </ul>
-    </div>
-  </div>
+  <div class="hero-location container-fluid">
+    <div class="view-container">
+      <div class="row-fluid">
 
+        <div class="col-left list-group">
+          <div class="title list-group-item" >Where are you Queue Hero?</div>
+          <button type="button" id="shop" class="list-group-item" ng-repeat="location in main.locations">
+            <div value="$index" ng-click="main.confirm($index)">
+              <update-change type="request" content="{{ location.requests }}"></update-change>
+              <div class="vendor"><strong class="vendor-index">{{ $index+1 }}</strong> {{ location.name }}</div>
+              <div class="meeting-address">{{ location.displayAddress }}</div>
+            </div>
+          </button>
+          <div ui-view="task" ng-if="main.taskView"></div>
+        </div> <!-- /col-left -->
 
-  <button ng-hide="ctrl.selection === undefined" ng-click="ctrl.confirm()">Confirm</button>
-    <pre> Possible Locations = {{ ctrl.locations | json }}</pre>
-  </div>
+        <div class="map-container">
+          <div class="col-map">
+            <mapbox id="map" callback="main.callback"></mapbox>
+          </div>
+        </div>
+
+      </div> <!-- /row -->
+    </div> <!-- /view-container -->
+  </div> <!-- /hero-location -->
 </div>

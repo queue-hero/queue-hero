@@ -2,10 +2,10 @@
   "name": "queue-hero",
   "version": "1.0.0",
   "description": "Find your hero",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "build": "gulp clean && gulp",
-    "postinstall": "bower install && gulp clean && gulp deploy && gulp default"
+    "postinstall": "bower install && gulp clean && gulp default"
   },
   "repository": {
     "type": "git",
@@ -46,10 +46,15 @@
     "gulp-util": "^3.0.6",
     "jasmine-core": "^2.3.4",
     "karma": "0.13.9",
+    "mapbox": "^0.8.2",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.10.6",
     "mongoose": "^4.1.8",
     "passport": "^0.3.0",
     "passport-facebook": "^2.0.0",
     "q": "^1.4.1",
+    "socket.io": "^1.3.7",
+    "twilio": "^2.5.1",
     "underscore": "^1.8.3",
     "yelp": "^0.2.0"
   }

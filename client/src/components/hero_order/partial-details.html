@@ -1,15 +1,9 @@
 <div id="hero-order-details">
-  <div>
-    You have a new mission, queue hero!
-  </div>
-
-  <div>
-    <div>Meet {{ ctrl.order.requester }}</div>
-    <img src="" alt="Requester Pic">
-    <div>
-      <span>at {{ ctrl.order.meetingTime | date : 'h:mm a' }}</span>
-    </div>
-
-    <div>with a {{ ctrl.order.item }}</div>
+  <h1> You have a new mission, queue hero! </h1>
+  <div class="order-details">
+    <div class="order-line">Meet {{ ctrl.order.requester }}</div>
+    <!-- <img src="" alt="Requester Pic"> -->
+    <div class="order-line"> {{ ctrl.order.meetingTime | date : 'EEE. MMM d, h:mm a' }} </div>
+    <div class="order-line">with a {{ ctrl.order.item }}</div>
   </div>
 </div>

@@ -66,6 +66,9 @@ var UserSchema = new mongoose.Schema({
     type: {},
     default: {}
     //required: true
+  },
+  averageRating: {
+    type: Number
   }
 });
 

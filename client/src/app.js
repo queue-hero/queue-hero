@@ -1,4 +1,4 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app', [
@@ -6,6 +6,8 @@
     'ui.bootstrap',
     'ngFileUpload',
     'ngCookies',
+    'ngAnimate',
+    'ngMessages',
     'app.home',
     'app.profile',
     'app.signup',
@@ -16,6 +18,8 @@
     'app.requester_task',
     'app.requester_order'
   ])
+  .constant('herokuUrl', 'https://queue-hero.herokuapp.com')
+  .constant('serverUrl', document.location.hostname === 'localhost' ? 'http://localhost:3000' : 'https://queue-hero.herokuapp.com')
   .config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
 
     $urlRouterProvider.otherwise('/');
@@ -38,12 +42,15 @@
         url:'/choice',
       })
       .state('hero_location', {
-        templateUrl: 'src/components/hero_location/location.html',
         url:'/hero/location',
-      })
-      .state('hero_task', {
-        templateUrl: 'src/components/hero_task/task.html',
-        url: '/hero/task',
+        views: {
+          '': {
+            templateUrl: 'src/components/hero_location/location.html'
+          },
+          'task@hero_location': {
+            templateUrl: 'src/components/hero_location/hero_task/task.html'
+          }
+        }
       })
       .state('hero_order', {
         url: '/hero/order',
@@ -65,17 +72,8 @@
           '': {
             templateUrl: 'src/components/requester_task/task.html'
           },
-          'location@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-location.html'
-          },
           'item@requester_task': {
             templateUrl: 'src/components/requester_task/partial-item.html'
-          },
-          'time_price@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-time_price.html'
-          },
-          'confirm@requester_task': {
-            templateUrl: 'src/components/requester_task/partial-confirm.html'
           }
         }
       })
@@ -96,15 +94,33 @@
           }
         }
       });
+      $httpProvider.interceptors.push('redirect');
+
   }])
-  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory) {
+  .factory('redirect', ['$q', '$location', '$cookies', function($q, $location, $cookies) {
+    var attach = {
+      response: function(response) {
+        return response || $q.when(response);
+      },
+      responseError: function(rejection) {
+        if (rejection.status === 403) {
+          $cookies.remove('connect.sid');
+          $location.path('/');
+        }
+        return $q.reject(rejection);
+      }
+    };
+    return attach;
+  }])
+  .run(['$rootScope', '$state', '$cookies', 'heroFactory', 'requesterFactory', '$window', 'profileFactory', function($rootScope, $state, $cookies, heroFactory, requesterFactory, $window, profileFactory) {
     $rootScope.$on('$stateChangeStart', function(evt, toState, toParams, fromState, fromParams) {
       var cookie = $cookies.get('connect.sid');
-      if (!cookie) {
-        if (toState.name !== 'home' && toState.name !== 'signup') {
-          evt.preventDefault();
-          $state.go('home');
-        }
+      if (cookie && toState.name === 'home' || (toState.name === 'signup' && fromState.name != '')) {
+        // evt.preventDefault();
+        $state.go('choice');
+      } else if (!cookie && toState.name !== 'home' && toState.name !== 'signup') {
+        evt.preventDefault();
+        $state.go('home');
       }
 
     });
@@ -128,6 +144,50 @@
     function error(err) {
       console.warn('ERROR(' + err.code + '): ' + err.message);
     }
+
+    //Inits factories data for page refresh from SessionStorage:
+    var sessionHeroOrder = $window.JSON.parse($window.sessionStorage.getItem('heroOrder'));
+    if(sessionReqOrder !== null) {
+      heroFactory.setOrder(sessionHeroOrder);
+      // console.log('default hero order loaded');
+    }
+    $rootScope.$watch(function() {
+      return heroFactory.getOrder();
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+      $window.sessionStorage.setItem('heroOrder',stringObject);
+      // console.log(newVal);
+    }, true);
+
+    var sessionReqOrder = $window.JSON.parse($window.sessionStorage.getItem('requesterOrder'));
+    if(sessionReqOrder !== null) {
+      requesterFactory.setOrder(sessionReqOrder);
+      // console.log('default req order loaded');
+    }
+    $rootScope.$watch(function() {
+      return requesterFactory.getOrder();
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+      $window.sessionStorage.setItem('requesterOrder',stringObject);
+      // console.log(newVal);
+    }, true);
+
+    var sessionProfile = $window.JSON.parse($window.sessionStorage.getItem('profile'));
+    if(sessionReqOrder !== null) {
+      profileFactory.setProfile(sessionProfile);
+      // console.log('profile init from sessionStorage', sessionProfile);
+    }
+    $rootScope.$watch(function() {
+
+      return profileFactory.getProfile();
+
+    }, function watchCallback(newVal, oldVal) {
+      var stringObject = $window.JSON.stringify(newVal);
+
+      $window.sessionStorage.setItem('profile', stringObject);
+      // console.log(newVal);
+
+    }, true);
 
   }]);
 

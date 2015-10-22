@@ -2,6 +2,7 @@ var bodyParser = require('body-parser');
 var cors = require('cors');
 var fbSessions = require('./fbSessions.js');
 
+//var client = require('twilio')(accountSid, authToken);
 
 
 module.exports = function(app, express) {
@@ -9,6 +10,7 @@ module.exports = function(app, express) {
   var userRouter = express.Router();
   var heroRouter = express.Router();
   var requesterRouter = express.Router();
+  var transactionRouter = express.Router();
 
   // Middleware to parse request body
   app.use(bodyParser.urlencoded({
@@ -40,8 +42,12 @@ module.exports = function(app, express) {
   // all routes for requester set in requesterRouter
   app.use('/requester', fbSessions.restrict, requesterRouter);
 
+  // all routes for transactions set in transactionRouter
+  app.use('/transactions', transactionRouter);
+
   require('../auth/authRouter.js')(authRouter);
   require('../users/userRouter.js')(userRouter);
   require('../heroes/heroRouter.js')(heroRouter);
   require('../requesters/requesterRouter.js')(requesterRouter);
+  require('../transactions/transactionRouter.js')(transactionRouter);
 };

@@ -15,30 +15,34 @@ exports.createTestUsers = function() {
     username: 'rachel'
   }).then(function(user) {
     if (!user) {
-      _.each(testUsers, function(testUser) {
-        var newUser = new User(testUser);
-        newUser.save(function(err) {
-          if (err) {
-            console.log(err);
-          }
-        });
-      });
+      Checkin.remove({}, function(err) {
+        Transaction.remove({}, function(err) {
+          _.each(testUsers, function(testUser) {
+            var newUser = new User(testUser);
+            newUser.save(function(err) {
+              if (err) {
+                console.log(err);
+              }
+            });
+          });
 
-      _.each(testTransactions, function(testTransaction) {
-        var newTransaction = new Transaction(testTransaction);
-        newTransaction.save(function(err) {
-          if (err) {
-            console.log(err);
-          }
-        });
-      });
+          _.each(testTransactions, function(testTransaction) {
+            var newTransaction = new Transaction(testTransaction);
+            newTransaction.save(function(err) {
+              if (err) {
+                console.log(err);
+              }
+            });
+          });
 
-      _.each(testCheckins, function(testCheckin) {
-        var newCheckin = new Checkin(testCheckin);
-        newCheckin.save(function(err) {
-          if (err) {
-            console.log(err);
-          }
+          _.each(testCheckins, function(testCheckin) {
+            var newCheckin = new Checkin(testCheckin);
+            newCheckin.save(function(err) {
+              if (err) {
+                console.log(err);
+              }
+            });
+          });
         });
       });
     }

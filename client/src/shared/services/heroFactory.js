@@ -1,8 +1,8 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app')
-    .factory('heroFactory', [function() {
+    .factory('heroFactory', ['$window', function($window) {
       var order = {
         transactionId: undefined,
         queueHero: undefined,
@@ -16,6 +16,7 @@
         currentLocation: undefined,
         meetingTime: undefined,
         status: undefined,
+        averageRating: undefined,
         additionalRequests: undefined
       };
 
@@ -49,7 +50,6 @@
 
         return null;
       }
-
 
       function setOrder(obj) {
         if(obj === undefined) {

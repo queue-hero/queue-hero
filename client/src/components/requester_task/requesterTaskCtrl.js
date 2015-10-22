@@ -1,79 +1,177 @@
-(function() {
+;(function() {
   'use strict';
 
   angular.module('app.requester_task', [])
-    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'ajaxFactory', '$state', function(profileFactory, requesterFactory, ajaxFactory, $state) {
+    .controller('RequesterTaskCtrl', ['profileFactory', 'requesterFactory', 'requesterTaskModel', '$state', '$scope', '$interval', 'socketFactory', function(profileFactory, requesterFactory, requesterTaskModel, $state, $scope, $interval, socketFactory) {
       var vm = this;
-      vm.currentView = 'location';
+      vm.itemView = false;
+      var venueCache;
+      vm.result1 = '';
+      vm.options1 = null;
+      vm.details1 = '';
 
       vm.order = requesterFactory.getOrder();
 
-      //**toDo make this take requesters currentView location
-      var defaultArea = [37.7877500,-122.4002400];
+      var currentLocation = requesterFactory.getOrder('currentLocation').slice();
+      var heroCounts;
 
+      vm.getMyLocation = function() {
+        currentLocation = requesterFactory.getOrder('currentLocation').slice();
+        getVenues(currentLocation[0], currentLocation[1]);
+        vm.map.setView([currentLocation[0], currentLocation[1], 16]);
+      };
 
-      vm.loadActiveShops = function() {
+      vm.searchLocation = function() {
+        currentLocation[0] = vm.details1.geometry.location.lat();
+        currentLocation[1] = vm.details1.geometry.location.lng();
+        getVenues(currentLocation[0], currentLocation[1]);
+        vm.map.setView([currentLocation[0], currentLocation[1], 16]);
+      };
 
-        ajaxFactory.getActiveShops(defaultArea)
-          .then(function successCallback(response) {
-            vm.activeShops = response.data;
-            vm.buildMap(defaultArea, vm.activeShops);
+      function getVenues(lat, long) {
+      requesterTaskModel.getVenuesAtRequesterLocation(lat, long)
+        .then(function(response) {
+          vm.venues = response.data;
+          venueCache = vm.venues.slice();
+          populatePins();
 
-          }, function errorCallback(response) {
-            var statusCode = response.status;
+          socketFactory.on('newHeroCount', function(data) {
+            //listen for changes in queueHero counts
+
+            var vendor = _.findWhere(vm.venues, { yelpId: data[0] });
+            if (vendor !== undefined) {
+              vendor.heroes = data[1];
+            }
+
           });
-      };
 
-      vm.loadActiveShops();
+          var heroCount = $interval(getHeroCount, 1000, 0, false);
 
-      vm.buildMap = function(location, activeShops) {
-        //the mapping library function should be call here:
-      };
+          $scope.$on('$destroy', function() {
+            $interval.cancel(heroCount);
+          });
 
-      vm.selectLocation = function(shop) {
-        //FIX: vendor and meetingLocation are hardcoded
-        vm.order.vendor = shop;
-        vm.order.meetingLocation = [1, 1];
-        requesterFactory.setOrder({
-          vendor: vm.order.vendor,
-          meetingLocation: [1, 1]
+        }, function(err) {
+          console.log(err);
         });
-        vm.currentView = 'item';
+      }
+
+      getVenues(currentLocation[0], currentLocation[1]);
+
+      function getHeroCount() {
+        for (var i = 0; i < vm.venues.length; i++) {
+          socketFactory.emit('getHeroCount', vm.venues[i].yelpId);
+        }
+      }
+
+      vm.callback = function(map) {
+        vm.map = map;
+        map.setView([currentLocation[0], currentLocation[1]], 16);
       };
 
-      vm.setItem = function() {
+      var populatePins = function() {
+        vm.map.eachLayer(function(layer) {
+          if (layer instanceof L.Marker) {
+            vm.map.removeLayer(layer);
+          }
+        });
+
+        var venuesGeojson = [];
+        if (vm.venues.length === 1) {
+          var venueChosen = vm.venues[0];
+          venuesGeojson.push({
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [venueChosen.long, venueChosen.lat]
+            },
+            "properties": {
+              "title": '<p><strong>' + venueChosen.name + '</p></strong>',
+              "description": venueChosen.displayAddress,
+              "marker-color": "#DC3C05",
+              "marker-size": "large",
+              "marker-symbol": "star"
+            }
+          });
+        } else {
+          for (var i = 0; i < vm.venues.length; i++) {
+            var venue = vm.venues[i];
+            venuesGeojson.push({
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": [venue.long, venue.lat]
+              },
+              "properties": {
+                "title": '<p><strong>' + venue.name + '</p></strong>',
+                "description": venue.displayAddress,
+                "marker-color": "#3ca0d3",
+                "marker-size": "large",
+                "marker-symbol": i + 1
+              }
+            });
+          }
+        }
+        var youAreHere = [];
+        youAreHere.push({
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [currentLocation[1], currentLocation[0]]
+          },
+          "properties": {
+            "marker-color": "#D46A6A",
+            "marker-size": "large",
+            "marker-symbol": "circle"
+          }
+        });
+        L.mapbox.featureLayer(venuesGeojson).addTo(vm.map);
+        L.mapbox.featureLayer(youAreHere).addTo(vm.map);
+      };
+
+      vm.selectLocation = function(venue, index) {
+        vm.vendor = venue.name;
+        vm.vendorYelpId = venue.yelpId;
+        vm.meetingLocation = [venue.lat, venue.long];
+        vm.meetingAddress = venue.displayAddress;
+        requesterFactory.setOrder({
+          vendor: vm.vendor,
+          meetingLocation: vm.meetingLocation,
+          meetingAddress: vm.meetingAddress,
+          vendorYelpId: vm.vendorYelpId
+        });
+        vm.venues = vm.venues.splice(index, 1);
+        vm.itemView = true;
+        populatePins();
+      };
+
+      vm.confirmOrder = function() {
         requesterFactory.setOrder({
           item: vm.item,
-          additionalRequests: vm.details
-        });
-        vm.currentView = 'time_price';
-      };
-
-      vm.pickTimePrice = function() {
-        vm.time = Date.now() + vm.time*60000;
-        requesterFactory.setOrder({
-          meetingTime: vm.time,
+          additionalRequests: vm.details,
+          meetingTime: Date.now() + vm.time * 60000,
           moneyExchanged: vm.price,
           status: 'unfulfilled'
         });
         vm.order = requesterFactory.getOrder();
-        vm.currentView = 'confirm';
-      };
-
-      vm.confirmOrder = function() {
-        ajaxFactory.sendOrder(vm.order)
-          .then(function successCallback(response) {
+        requesterTaskModel.sendOrder(vm.order)
+          .then(function(response) {
             //save transaction id from server to factory
             requesterFactory.setOrder({
-              transactionId: response.data,
-              status: 'complete'
+              transactionId: response.data
             });
 
             //move to next state
             $state.go('requester_order');
 
-          }, function errorCallback(response) {
+          }, function(response) {
           });
+      };
+
+      vm.showList = function() {
+        vm.venues = venueCache.slice();
+        vm.itemView = false;
+        populatePins();
       };
 
 

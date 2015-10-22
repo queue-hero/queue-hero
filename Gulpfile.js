@@ -16,12 +16,18 @@ var bower = require('gulp-bower');
 var jsScripts = [
   'client/bower_components/angular/angular.min.js',
   'client/bower_components/angular-ui-router/release/angular-ui-router.min.js',
+  'client/bower_components/socket.io-client/socket.io.js',
+  'client/bower_components/angular-messages/angular-messages.min.js',
   'client/bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+  'client/bower_components/angular-animate/angular-animate.min.js',
   'client/bower_components/ng-file-upload/ng-file-upload.min.js',
   'client/bower_components/angular-cookies/angular-cookies.min.js',
   'client/bower_components/angular-mapbox/dist/angular-mapbox.min.js',
-  'client/src/app.js',
-  'client/src/**/*.js'
+  'client/bower_components/moment/min/moment-with-locales.min.js',
+  'client/bower_components/lodash/lodash.min.js',
+  'client/bower_components/mapbox.js/mapbox.js',
+  'client/src/**/*.js',
+  'client/src/app.js'
 ];
 
 // the paths to our app files
@@ -78,24 +84,15 @@ gulp.task('copy-html', function() {
     .pipe(gulp.dest('./build/'));
 });
 
+gulp.task('bower', function() {
+  return bower()
+    .pipe(gulp.dest('build/bower_components'));
+});
+
 gulp.task('move-index', function() {
   gulp.src('client/index_gulp.html')
     .pipe(rename('index.html'))
     .pipe(gulp.dest('./build/'));
 });
 
-gulp.task('bower', function() {
-  return bower()
-    .pipe(gulp.dest('build/bower_components'));
-});
-
-gulp.task('serve', function() {
-  nodemon({
-    script: 'index.js',
-    ignore: 'node_modules/**/*.js'
-  });
-});
-
-gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index']);
-gulp.task('deploy', ['bower']);
-// gulp.task('build', ['karma', 'convert-js', 'copy-html', 'copy-css', 'move-index']);
+gulp.task('default', ['convert-js', 'copy-html', 'copy-css', 'copy-images', 'move-index','bower']);

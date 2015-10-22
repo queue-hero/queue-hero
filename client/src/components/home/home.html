@@ -1,11 +1,25 @@
 <div id="home" ng-controller="HomeCtrl as ctrl">
   <nav-bar></nav-bar>
-  <div class="title">
-    Queue Hero
-  </div>
+  <div class="container">
+    <div class="landing-page">
+      <div class="landing-page-body">
 
-  <div class="containter home">
-  <a class="signup" href="/auth/facebook">Sign up with Facebook</a>
-  <a class="login" href="/auth/facebook">Log in with Facebook</a>
-  </div>
-</div>
+        <div class="landing-page-intro padding" ng-hide="ctrl.next">
+          <div class="slogan margin text-center">Find Your Queue Hero</div>
+          <div class="subheader text-center">Never Wait in Line</div>
+          <a href="/auth/facebook" class="btn btn-fb margin center-block">Continue with Facebook</a>
+        </div> <!-- /kanding-page-box -->
+
+        <div class="learn-how center-block padding" ng-show="ctrl.next">
+          <div class="font-large">
+            About
+          </div>
+          <div class="block-text">
+            Lorem ipsum dolor sit amet, dicta tritani repudiandae ad nec, officiis voluptaria omittantur ei sit. Vidit ipsum interesset at per, his malis ullamcorper no. Mea ad tota decore maiestatis. Id clita facilisi explicari sed, id qui euismod nominati dissentiunt, ei sit eripuit equidem. Altera malorum tincidunt eam id. Ex mea splendide forensibus interpretaris, at nostro reprimique vix, oratio suscipit no his. Usu suas tota omnes in, vim omnium voluptaria ei.
+          </div>
+        </div>
+
+      </div> <!-- /landing-page-body -->
+    </div> <!-- /landing-page -->
+  </div> <!-- /container -->
+</div> <!-- /home -->
