@@ -7,9 +7,11 @@
       vm.confirmView = false;
       vm.noOrdersView = false;
       vm.vendorYelpId = heroFactory.getOrder('vendorYelpId');
+      vm.listStartIndex = 0;
       var OrderCache;
       var orderSelected;
       vm.ratings = [];
+
       //test to see if there is lag when open requests are initially shown
       // if it is laggy, we can use the below line as a starting point
       vm.orders = $scope.$parent.main.orders[vm.vendorYelpId].slice();
@@ -48,6 +50,7 @@
           vm.noOrdersView = false;
         }
       });
+
       var refreshTasks = $interval(getOpenRequests, 1000, 0, false);
 
       $scope.$on('$destroy', function() {
@@ -59,6 +62,16 @@
       }
 
       getOpenRequests();
+
+      // show next five requests
+      vm.nextFive = function() {
+        vm.listStartIndex += 5;
+      };
+
+      // show previous five requests
+      vm.previousFive = function() {
+        vm.listStartIndex = Math.max(vm.listStartIndex - 5, 0);
+      };
 
       vm.removeFromQueue = function() {
         //stop refreshing the page for new requests

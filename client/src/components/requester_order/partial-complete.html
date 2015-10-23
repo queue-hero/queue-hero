@@ -1,26 +1,27 @@
 <div id="requester-order-complete">
-  <h1> Queue hero to the rescue! </h1>
-
-  <mapbox id="map" callback="ctrl.callback"></mapbox>
-  <div class="order-details">
-    <div class="order-line">Meet {{ ctrl.order.queueHero }}</div>
-    <!-- <img src="" alt="Queue Hero Pic"> -->
-    <div class="order-line">
-      at {{ ctrl.order.meetingTime | date : 'EEE. MMM d, h:mm a' }}
-    </div>
-    <div class="order-line">
-      at {{ ctrl.order.vendor }}
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <h1> Queue hero to the rescue! </h1>
     </div>
   </div>
-  <button type="button" class="btn btn-success btn-met-hero" ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
-
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <div class="order-details">
+        <div class="order-line">Meet {{ ctrl.order.queueHero }}</div>
+        <!-- <img src="" alt="Queue Hero Pic"> -->
+        <div class="order-line">
+          at {{ ctrl.order.meetingTime | date : 'EEE. MMM d, h:mm a' }}
+        </div>
+        <div class="order-line">
+          at {{ ctrl.order.vendor }}
+        </div>
+        <div class="">
+          <button type="button" class="btn btn-success btn-met-hero" ng-click="ctrl.confirmReceipt()">I met my Queue Hero! </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 col-md-6">
+      <mapbox id="map" callback="ctrl.callback"></mapbox>
+    </div>
+  </div>
 </div>
-
-<style>
-#map {
-  height: 600px;
-  width: 600px;
-  float: right;
-  margin: 15px;
-}
-</style>

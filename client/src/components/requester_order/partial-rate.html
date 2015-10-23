@@ -1,25 +1,34 @@
 <div id="requester-order-rate">
-  <h1> Order complete </h1>
-  <div class="order-details">
-    <div class="order-line"> On a scale of 1 to 5, with 5 being the highest, how pleasant was your interaction with {{ ctrl.order.queueHero }}? (Please rate your queue hero on punctuality, friendliness, etc.)</div>
-    <form name="rate" class="form-group" novalidate>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="1" required> 1
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="2" required> 2
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio3" value="3" required> 3
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="4" required> 4
-      </label>
-      <label class="radio-inline">
-        <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="5" required> 5
-      </label>
-      <input type="button" class="btn btn-success" ng-click="ctrl.rateHero()" ng-disabled="rate.inlineRadioOptions.$invalid" value="Rate"></input>
-    </form>
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+      <h1> Order complete </h1>
+    </div>
   </div>
-
+  <div class="row">
+    <div class="col-xs-12 col-sm-offset-2 col-sm-8">
+      <div class="order-details">
+        <div class="order-line"> On a scale of 1 to 5, with 5 being the highest, how pleasant was your interaction with {{ ctrl.order.queueHero }}? (Please rate your queue hero on punctuality, friendliness, etc.)</div>
+        <form name="rate" class="form-group" novalidate>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio1" value="1" required> 1
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio2" value="2" required> 2
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio3" value="3" required> 3
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio4" value="4" required> 4
+          </label>
+          <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" ng-model="ctrl.rating" id="inlineRadio5" value="5" required> 5
+          </label>
+          <div class="rate">
+            <input type="button" class="btn btn-success" ng-click="ctrl.rateHero()" ng-disabled="rate.inlineRadioOptions.$invalid" value="Rate">
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

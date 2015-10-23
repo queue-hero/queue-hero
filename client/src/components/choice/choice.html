@@ -1,14 +1,17 @@
-<div id="choice" ng-controller="ChoiceCtrl as ctrl" ng-style="{'height': '100%'}">
-
-  <div class="blur" ng-style="{'background-image': 'url(../images/local.png)', 'background-size': 'cover', 'background-position': 'center', 'height': '100%', '-webkit-filter': 'blur(5px)','-moz-filter': 'blur(5px)', '-o-filter': 'blur(5px)', '-ms-filter': 'blur(5px)',
-  'filter': 'blur(5px)'}"></div>
-  <nav-bar></nav-bar>
-
-    <div class="landing-page-intro padding col-xs-offset-1" ng-style="{ 'position': 'fixed', 'top': '35%  ', 'left': '43%', 'margin-top':'-50px','margin-left': '-100px'}">
-
-      <div class="slogan margin">Select your Adventure:</div><br>
-      <a href="" ng-click="ctrl.hero()" class="btn btn-fb margin center-block" ng-style="{'font-size': '3em'}">Take Request</a>
-      <div class="text-center" ng-style="{'font-size': '2em'}">or</div>
-      <a href="" ng-click="ctrl.requester()" class="btn margin btn-green center-block" ng-style="{'font-size': '3em'}">Create Request</a>
-    </div> <!-- /kanding-page-box -->
+<div id="choice" ng-controller="ChoiceCtrl as ctrl">
+  <div class="blur">
+    <nav-bar></nav-bar>
+    <div class="container">
+      <div class="choice">
+        <div class="choice-select">
+          <div class="padding choice-select-body">
+            <div class="select margin text-center">Select your Adventure</div>
+            <button ng-click="ctrl.hero()" class="btn btn-blue btn-block">Take Request</button>
+            <div class="or text-center">or</div>
+            <button ng-click="ctrl.requester()" class="btn btn-green btn-block">Create Request</button>
+          </div>
+        </div>
+      </div> <!-- /kanding-page-box -->
+    </div>
+  </div>
 </div>
