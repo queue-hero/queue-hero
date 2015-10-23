@@ -1,8 +1,6 @@
 # queue-hero
 
-Queue Hero is an app that facilitates collaboration between people standing in queues already, 
-and people that would otherwise have to stand in long queues. Simply put, it's the sharing economy
-applied to waiting in line. 
+Queue Hero is an app that facilitates collaboration between people standing in queues already, and people that would otherwise have to stand in long queues. Simply put, it's the sharing economy applied to waiting in line.
 
 ##How to configure API keys
 [Please see this page](api_keys.md) for configuration details on third-party APIs and deployment.
