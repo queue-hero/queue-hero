@@ -1,4 +1,4 @@
-## Git Workflow draft
+## Git Workflow
 
 This document describes the git workflow that should be used when contributing to Queue Hero.
 
@@ -94,6 +94,7 @@ There are two main branches in the repo, `master` and `dev`. All pull requests s
   # fix merge conflicts
   $ git status
   $ git add .
+  $ git commit
   ```
 
 ####9. **Push the changes to you github repo**
