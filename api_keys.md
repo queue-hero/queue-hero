@@ -1,6 +1,6 @@
 #How to configure API keys
 
-Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You must register and obtain API keys for each service to run Queue Hero. 
+Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You must register and obtain API keys for each service to run Queue Hero.
 
 [Yelp for Developers](https://www.yelp.com/developers)
 
@@ -28,15 +28,15 @@ Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You m
 2. Rename `template_api_keys.js` to `api_keys.js`. The `api_keys.js` file is in .gitignore to keep it private.
 3. Go to Facebook developer website and navigate to "Settings" -> "Advanced". Set "Deauthorize Callback Url" at the top of the page to "http://localhost:3000/auth/facebook/callback".
 
-![Facebook-Api](./resources/facebook-api-local-2.jpg =700x)
+![Facebook-Api](resources/facebook-api-local-2.jpg =700x)
 4. On the same page set "Valid OAuth redirect URIs" to also "http://localhost:3000/auth/facebook/callback"
 
-![Facebook-Api-2](./resources/facebook-api-local-3.jpg =700x)
+![Facebook-Api-2](resources/facebook-api-local-3.jpg =700x)
 5. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public access token. Set `L.mapbox.map` to include your Map ID. Navigate to `./server/requester/requesterCtrl.js` and change the Mapbox public access token on line 8 to your public access token.
 
 *Mapbox utilizes public API keys that are sent and visible to all users. The map feature will work without changing any configurations. However, we kindly request you register seperately and use your own API key*
 
-![Mapbox-Api](./resources/mapbox-api.jpg =700x)
+![Mapbox-Api](resources/mapbox-api.jpg =700x)
 6. TWILIO INFORMATION
 
 ###Running Queue Hero on a Web Server/Heroku
@@ -46,13 +46,13 @@ Queue Hero relies on four public APIs: Facebook, Yelp, Mapbox, and Twilio. You m
 3. Please see [this documentation](https://www.digitalocean.com/community/tutorials/how-to-read-and-set-environmental-and-shell-variables-on-a-linux-vps) at Digital Ocean on setting environment variables on your web server.
 4. Go to Facebook developer website and navigate to "Settings" -> "Advanced". Set "Deauthorize Callback Url" at the top of the page to be `website-address.com/auth/facebook/callback`. For example in heroku the field should read "yourAppName.herokuapp.com/auth/facebook/callback".
 
-![Facebook-Api](./resources/facebook-api-heroku-2.jpg =700x)
+![Facebook-Api](resources/facebook-api-heroku-2.jpg =700x)
 5. On the same page set "Valid OAuth redirect URIs" to also "website-address.com/auth/facebook/callback"
 
-![Facebook-Api-2](./resources/facebook-api-heroku-3.jpg =700x)
+![Facebook-Api-2](resources/facebook-api-heroku-3.jpg =700x)
 
 6. Navigate to `./client/src/shared/shared/mapbox/mapbox.js` and locate `mapbox.js`. Set `L.mapbox.accessToken` to your public access token. Set `L.mapbox.map` to include your Map ID. Navigate to `./server/requester/requesterCtrl.js` and change the Mapbox public access token on line 8 to your public access token.
     *Mapbox utilizes public API keys that are sent and visible to all users. The map feature will work without changing any configurations. However, we kindly request you register seperately and use your own API key*
 
-![Mapbox-Api](./resources/mapbox-api.jpg =700x)
+![Mapbox-Api](resources/mapbox-api.jpg =700x)
 7. TWILIO INFORMATION
