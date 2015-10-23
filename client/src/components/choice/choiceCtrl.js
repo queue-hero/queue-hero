@@ -36,13 +36,13 @@
         });
     }
 
-      vm.hero = function() {
-        $state.go('hero_location');
-      };
+    vm.hero = function() {
+      $state.go('hero_location');
+    };
 
-      vm.requester = function() {
-        $state.go('requester_task');
-      };
+    vm.requester = function() {
+      $state.go('requester_task');
+    };
 
   }]);
 

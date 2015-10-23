@@ -15,13 +15,15 @@ if (!process.env.DEPLOYED) {
 }
 
 function distanceMiles(lat1, long1, lat2, long2) {
-  var p = 0.017453292519943295; // Math.PI / 180
+  // Math.PI / 180
+  var p = 0.017453292519943295;
   var c = Math.cos;
   var a = 0.5 - c((lat2 - lat1) * p) / 2 +
     c(lat1 * p) * c(lat2 * p) *
     (1 - c((long2 - long1) * p)) / 2;
 
-  return 7917.8788 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  // 2 * R; R = 6371 km
+  return 7917.8788 * Math.asin(Math.sqrt(a));
 }
 
 function findOccurenceInCheckins(yelpID, checkins) {
@@ -86,10 +88,9 @@ module.exports = {
         res.status(201).send(transaction._id);
       }
     });
-
   },
-  fulfillTransaction: function(req, res, next) {
 
+  fulfillTransaction: function(req, res, next) {
     //extract transaction id from req
     var transactionId = req.body.transactionId;
     Transaction.update({
@@ -107,9 +108,8 @@ module.exports = {
       }
       res.status(500).send();
     });
-
-
   },
+
   getLocationOptions: function(req, res, next) {
     if (req.query.lat === undefined || req.query.long === undefined) {
       res.status(400).send();
@@ -119,7 +119,6 @@ module.exports = {
     var long = req.query.long;
     var location = lat + ',' + long;
     var context = this;
-
     var venues = [];
     var checkins = [];
 
@@ -162,6 +161,7 @@ module.exports = {
       });
     });
   },
+
   rateHero: function(req, res, next) {
     //extract rating and queueHero from req
     var rating = req.body.rating;
@@ -175,13 +175,16 @@ module.exports = {
         res.status(500).send();
         return;
       }
+
       if (!user) {
         res.status(401).send();
         return;
       }
+
       var ratings = user.ratings;
       ratings[transactionId] = rating;
       var averageRating = calculateAverageRating(ratings);
+
       User.update({
         username: queueHero
       }, {
@@ -198,9 +201,7 @@ module.exports = {
         }
         res.status(500).send();
       });
-
     });
-
   },
 
   cancelTransaction: function(req, res) {
