@@ -14,7 +14,8 @@ Thank you for taking interest in contributing! Please read our [CONTRIBUTE.md](C
 ![front-end-structure](resources/front-end-application-structure.png)
 ####Component Structure
 ![component-structure](resources/component-structure.png)
-####The Tech Stack
+
+##The Tech Stack
 ![tech-stack](resources/tech-stack.png)
 
 ##Post Mortem
