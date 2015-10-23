@@ -7,18 +7,18 @@ Queue Hero is an app that facilitates collaboration between people standing in q
 
 ##Architecture
 ###Overall Application Architecture
-![overall-application-structure](./resources/overall-application-structure.png =700x)
+![overall-application-structure](resources/overall-application-structure.png)
 ###Front-End Application Structure
-![front-end-structure](./resources/front-end-application-structure.png =700x)
+![front-end-structure](resources/front-end-application-structure.png)
 ###Component Structure
-![component-structure](./resources/component-structure.png =700x)
+![component-structure](resources/component-structure.png)
 ###The Tech Stack
-![tech-stack](./resources/tech-stack.png =700x)
+![tech-stack](./resources/tech-stack.png)
 
 
 ###The Team
-[![shreeya-goel](./resources/shreeya-goel.png =500x)](https://github.com/shreeya)
-[![darrin-nagengast](./resources/darrin-nagengast.png =500x)](https://github.com/darrinmn9)
-[![armin-sebastian](./resources/armin-sebastian.png =500x)](https://github.com/arminsebastian)
-[![tatsumi-tagawa](./resources/tatsumi-tagawa.png =500x)](https://github.com/tatsumitagawa)
+[![shreeya-goel](resources/shreeya-goel.png)](https://github.com/shreeya)
+[![darrin-nagengast](resources/darrin-nagengast.png)](https://github.com/darrinmn9)
+[![armin-sebastian](resources/armin-sebastian.png)](https://github.com/arminsebastian)
+[![tatsumi-tagawa](resources/tatsumi-tagawa.png)](https://github.com/tatsumitagawa)
 
