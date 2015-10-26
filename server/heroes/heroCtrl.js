@@ -13,36 +13,41 @@ if (!process.env.DEPLOYED) {
   api_keys = require('../config/api_keys.js').yelp;
 }
 
-
 function distanceMiles(lat1, long1, lat2, long2) {
-  var p = 0.017453292519943295; // Math.PI / 180
+  // Math.PI / 180
+  var p = 0.017453292519943295;
   var c = Math.cos;
   var a = 0.5 - c((lat2 - lat1) * p) / 2 +
     c(lat1 * p) * c(lat2 * p) *
     (1 - c((long2 - long1) * p)) / 2;
 
-  return 7917.8788 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+  // 2 * R; R = 6371 km
+  return 7917.8788 * Math.asin(Math.sqrt(a));
 }
 
 function findOccurenceInTransactions(yelpID, transactions) {
   var occurence = 0;
+
   for (var i = 0; i < transactions.length; i++) {
     if (transactions[i].vendorYelpId === yelpID) {
       occurence++;
     }
   }
+
   return occurence;
 }
 
 function calculateAverageRating(ratings) {
   var total = 0;
   var count = 0;
+
   for (var key in ratings) {
     if (ratings[key] !== undefined) {
       total += Number(ratings[key]);
       count += 1;
     }
   }
+
   if (count === 0) {
     return undefined;
   } else {
@@ -52,7 +57,10 @@ function calculateAverageRating(ratings) {
 
 
 module.exports = {
-  /*
+
+  /**
+   * get list of venues around hero via Yelp API
+   *
    * @param {Object} on req.query {lat: lat, long: long}
    * @return {Array} Array with map and location options
    */
@@ -66,7 +74,7 @@ module.exports = {
     var venues = [];
     var transactions = [];
 
-    //find transactions within a 1 mile radius
+    // find transactions within a 1 mile radius
     Transaction.find({
       status: "unfulfilled",
       meetingTime: { $gte: Date.now() }
@@ -84,7 +92,7 @@ module.exports = {
         token_secret: process.env.YELP_TOKEN_SECRET || api_keys.token_secret
       });
 
-      /*
+      /**
        * Yelp search parameters
        *
        * search method: ll = search by lat,long | location = search by address
@@ -107,29 +115,16 @@ module.exports = {
           venues.push({
             yelpId: venue.id,
             name: venue.name,
-            //address: venue.location.address,
-            //city: venue.location.city,
-            //state: venue.location.state_code,
-            //zip: venue.location.postal_code,
-
-            // displayAddress in []. May include building name + full address
             displayAddress: venue.location.display_address.join(' '),
-
             lat: venue.location.coordinate.latitude,
             long: venue.location.coordinate.longitude,
             requests: noOfOpenRequests
 
-            // ########## format
-            //phone: venue.phone,
-
-            // +1-###-###-#### format
-            //displayPhone: venue.display_phone,
-
-            // distance from hero in meters
-            //distance: venue.distance,
-
-            //categories: venue.categories,
-            //image_url: venue.image_url
+            /**
+             * partial list of other data available from yelp:
+             * address, city, state, zip, phone, displayPhone, distance,
+             * categories, image_url
+             */
           });
         });
         res.status(200).send(venues);
@@ -137,7 +132,9 @@ module.exports = {
     });
   },
 
-  /*
+  /**
+   * Set meeting location between hero and requester
+   *
    * @param {Object} queuehero: queuehero, location: location
    * @return {String} checkin._id
    */
@@ -164,8 +161,9 @@ module.exports = {
       }
     });
   },
+
+  // get transaction id from request
   acceptRequest: function(req, res, next) {
-    //get transaction id from request
     var transactionId = req.body.transactionId;
     var queueHero = req.body.queueHero;
     var update = {
@@ -206,6 +204,7 @@ module.exports = {
 
   },
 
+  // remove hero from Checkin database
   removeFromCheckin: function(req, res) {
     var queueHero = req.body.username;
 
@@ -221,12 +220,10 @@ module.exports = {
 
   },
 
+  // get location from request
   getOpenRequests: function(req, res, next) {
-    //get location from request
     var vendorYelpId = req.query.vendorYelpId;
 
-    //TODO: (db) find all transactions with yelpId = ^
-    //currently this query just gets all transactions that are not complete
     Transaction.find({
       status: 'unfulfilled',
       vendorYelpId: vendorYelpId,
@@ -238,12 +235,11 @@ module.exports = {
         return;
       }
       res.status(200).send(transactions);
-
     });
-
   },
+
+  // get rating and requester from request
   rateRequester: function(req, res, next) {
-    //get rating and requester from request
     var rating = req.body.rating;
     var requester = req.body.requester;
     var transactionId = req.body.transactionId;
@@ -278,11 +274,10 @@ module.exports = {
         }
         res.status(500).send();
       });
-
-
     });
-
   },
+
+  // get requester's average rating
   getRequesterRating: function(req, res) {
     var username = req.query.username;
 

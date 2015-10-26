@@ -1,65 +1,28 @@
-# queue-hero
 
-Queue Hero is an app that facilitates collaboration between people standing in queues already, 
-and people that would otherwise have to stand in long queues. Simply put, it's the sharing economy
-applied to waiting in line. 
+Queue Hero is an app that facilitates collaboration between people standing in queues already, and people that would otherwise have to stand in long queues. Simply put, it's the sharing economy applied to waiting in line.
 
-This is our app flow:
+##Contribute
+Thank you for taking interest in contributing! Please read our [CONTRIBUTE.md](CONTRIBUTE.md) for specifics on how to contribute.
 
-![Alt text](/screenshots/appflow.png?raw=true "App Flow")
+##How to configure API keys
+[Please see this page](resources/api_keys.md) for configuration details on third-party APIs and deployment.
 
-Here are mockups for the various different views referenced in the above app flow:
+##Architecture
+####Overall Application Architecture
+![overall-application-structure](resources/overall-application-structure.png)
+####Front-End Application Structure
+![front-end-structure](resources/front-end-application-structure.png)
+####Component Structure
+![component-structure](resources/component-structure.png)
 
-home
-![Alt text](/screenshots/home.png?raw=true )
+##The Tech Stack
+![tech-stack](resources/tech-stack.png)
 
-signup
-![Alt text](/screenshots/signup.png?raw=true )
+##Post Mortem
+[Here](resources/Post-Mortem.md) we summarize what we consider to be the key take aways from this project
 
-choice
-![Alt text](/screenshots/choice.png?raw=true )
-
-hero/location
-![Alt text](/screenshots/hero_confirm_location.png?raw=true )
-
-hero/task
-![Alt text](/screenshots/hero_accept_request.png?raw=true )
-
-hero/order/details
-![Alt text](/screenshots/hero_order_details.png?raw=true )
-
-hero/order/complete
-![Alt text](/screenshots/hero_order_complete.png?raw=true )
-
-requester/task/location
-![Alt text](/screenshots/requester_pick_location.png?raw=true )
-
-requester/task/item
-![Alt text](/screenshots/requester_pick_item.png?raw=true )
-
-requester/task/pricetime
-![Alt text](/screenshots/requester_pick_price_time.png?raw=true )
-
-requester/task/confirm
-![Alt text](/screenshots/requester_confirm_order.png?raw=true )
-
-requester/order/details
-![Alt text](/screenshots/requester_order_details.png?raw=true )
-
-requester/order/complete
-![Alt text](/screenshots/requester_order_complete.png?raw=true )
-
-The technologies we are using to implement Queue Hero are:
-- Mongodb / Mongoose
-- Express
-- Angular
-- Node
-- Ionic
-- SASS
-- Foursquare API
-- Mapbox API
-- Stripe API
-- Twilio API
-- Facebook API
-
-
+##The Team
+[![shreeya-goel](resources/shreeya-goel.png)](https://github.com/shreeya)
+[![darrin-nagengast](resources/darrin-nagengast.png)](https://github.com/darrinmn9)
+[![armin-sebastian](resources/armin-sebastian.png)](https://github.com/arminsebastian)
+[![tatsumi-tagawa](resources/tatsumi-tagawa.png)](https://github.com/tatsumitagawa)
