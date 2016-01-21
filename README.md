@@ -5,7 +5,7 @@ Queue Hero is an app that facilitates collaboration between people standing in q
 Thank you for taking interest in contributing! Please read our [CONTRIBUTE.md](CONTRIBUTE.md) for specifics on how to contribute.
 
 ##How to configure API keys
-[Please see this page](resources/api_keys.md) for configuration details on third-party APIs and deployment.
+[Please see this page](api_keys.md) for configuration details on third-party APIs and deployment.
 
 ##Architecture
 ####Overall Application Architecture
